@@ -1,182 +1,311 @@
 <!DOCTYPE html>
+<html class="dark" lang="en">
 
-<html class="dark" lang="en"><head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Image Compressor - ImageMojo Pro</title>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<script id="tailwind-config">
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Image Optimizer - ImageMojo Pro</title>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <!-- Material Symbols -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <!-- Tailwind Config -->
+    <script id="tailwind-config">
         tailwind.config = {
             darkMode: "class",
             theme: {
                 extend: {
                     colors: {
-                        "primary": "#0066cc",
-                        "success": "#00CC66",
-                        "background-light": "#f5f7f8",
-                        "background-dark": "#0f1923",
-                        "surface-dark": "#1a242f",
-                        "surface-light": "#ffffff",
+                        "primary": "#6605c7",
+                        "primary-dark": "#4e0399",
+                        "background-light": "#f7f5f8",
+                        "background-dark": "#190f23",
+                        "surface-dark": "#251b30",
+                        "surface-darker": "#1f1627",
                     },
                     fontFamily: {
-                        "display": ["Inter", "sans-serif"]
+                        "display": ["Inter", "sans-serif"],
+                        "sans": ["Inter", "sans-serif"],
                     },
-                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "2xl": "1rem",
+                        "full": "9999px"
+                    },
                 },
             },
         }
     </script>
-<style>
-        body {
-            font-family: 'Inter', sans-serif;
+    <style>
+        /* Custom Slider Styling */
+        input[type=range] {
+            -webkit-appearance: none;
+            background: transparent;
         }
-        /* Custom slider thumb */
+
         input[type=range]::-webkit-slider-thumb {
             -webkit-appearance: none;
-            height: 24px;
-            width: 24px;
+            height: 20px;
+            width: 20px;
             border-radius: 50%;
             background: #ffffff;
+            border: 2px solid #6605c7;
             cursor: pointer;
-            margin-top: -10px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+            margin-top: -8px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
         }
+
         input[type=range]::-webkit-slider-runnable-track {
             width: 100%;
             height: 4px;
             cursor: pointer;
-            background: #4B5563;
+            background: #4a4a4a;
             border-radius: 2px;
         }
+
+        input[type=range]:focus::-webkit-slider-runnable-track {
+            background: #6605c7;
+        }
+
+        /* Toggle Switch */
+        .toggle-checkbox:checked {
+            right: 0;
+            border-color: #6605c7;
+        }
+
+        .toggle-checkbox:checked+.toggle-label {
+            background-color: #6605c7;
+        }
+
+        /* Hide Scrollbar for horizontal scrolling areas */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
     </style>
-<style>
-    body {
-      min-height: max(884px, 100dvh);
-    }
-  </style>
-  </head>
-<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-white transition-colors duration-200">
-<div class="relative flex min-h-screen w-full flex-col overflow-x-hidden pb-24">
-<!-- Top App Bar -->
-<header class="sticky top-0 z-50 flex items-center bg-surface-light dark:bg-[#101418] border-b border-gray-200 dark:border-gray-800 p-4 justify-between backdrop-blur-md bg-opacity-90 dark:bg-opacity-90">
-<div class="text-slate-900 dark:text-white flex size-10 shrink-0 items-center justify-center rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors cursor-pointer">
-<span class="material-symbols-outlined text-2xl">menu</span>
-</div>
-<h2 class="text-slate-900 dark:text-white text-lg font-bold leading-tight tracking-tight flex-1 text-center">ImageMojo Pro</h2>
-<div class="flex w-10 items-center justify-end">
-<button class="flex size-10 cursor-pointer items-center justify-center overflow-hidden rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
-<span class="material-symbols-outlined text-slate-900 dark:text-white text-2xl">account_circle</span>
-</button>
-</div>
-</header>
-<!-- Main Content -->
-<main class="flex-1 flex flex-col px-4 pt-6 max-w-md mx-auto w-full">
-<!-- Hero Text -->
-<div class="text-center mb-6">
-<h1 class="text-slate-900 dark:text-white tracking-tight text-[28px] font-bold leading-tight mb-2">Image Compressor</h1>
-<p class="text-slate-500 dark:text-gray-400 text-base font-normal leading-normal">Reduce file size without losing quality.</p>
-</div>
-<!-- Upload Area -->
-<div class="mb-8">
-<div class="group flex flex-col items-center gap-6 rounded-xl border-2 border-dashed border-gray-300 dark:border-[#394756] bg-surface-light dark:bg-surface-dark px-6 py-12 transition-colors hover:border-primary/50 hover:bg-gray-50 dark:hover:bg-[#1f2b36]">
-<div class="flex flex-col items-center gap-3">
-<div class="size-16 rounded-full bg-primary/10 flex items-center justify-center mb-2">
-<span class="material-symbols-outlined text-primary text-4xl">cloud_upload</span>
-</div>
-<p class="text-slate-900 dark:text-white text-lg font-bold leading-tight text-center">Upload Image</p>
-<p class="text-slate-500 dark:text-gray-400 text-sm font-normal leading-normal text-center">Tap to select from gallery</p>
-</div>
-<button class="flex w-full max-w-[200px] cursor-pointer items-center justify-center rounded-lg h-12 bg-primary hover:bg-blue-600 text-white text-sm font-bold shadow-lg shadow-blue-500/20 transition-all active:scale-95">
-<span class="truncate">Browse Files</span>
-</button>
-</div>
-</div>
-<!-- Ad Placeholder -->
-<div class="w-full h-24 bg-gray-200 dark:bg-[#1a242f] rounded-lg flex flex-col items-center justify-center mb-8 border border-gray-300 dark:border-gray-700 relative overflow-hidden">
-<span class="text-xs text-gray-500 dark:text-gray-600 uppercase tracking-wider font-bold mb-1">Advertisement</span>
-<div class="w-16 h-1 bg-gray-300 dark:bg-gray-700 rounded-full"></div>
-</div>
-<!-- Compression Settings -->
-<div class="bg-surface-light dark:bg-surface-dark rounded-xl p-5 border border-gray-200 dark:border-gray-800 shadow-sm mb-6">
-<div class="flex items-center gap-2 mb-6 border-b border-gray-200 dark:border-gray-700 pb-4">
-<span class="material-symbols-outlined text-primary">tune</span>
-<h3 class="text-slate-900 dark:text-white text-lg font-bold">Settings</h3>
-</div>
-<!-- Quality Slider -->
-<div class="mb-6">
-<div class="flex justify-between items-center mb-3">
-<label class="text-slate-700 dark:text-gray-300 text-sm font-semibold">Quality</label>
-<span class="text-primary font-bold text-sm">80%</span>
-</div>
-<div class="relative w-full h-6 flex items-center">
-<input class="w-full h-1 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700 accent-primary" max="100" min="1" type="range" value="80"/>
-</div>
-<div class="flex justify-between text-xs text-gray-400 mt-2 font-medium">
-<span>Low</span>
-<span>Medium</span>
-<span>High</span>
-</div>
-</div>
-<!-- Format Selection -->
-<div class="mb-6">
-<label class="text-slate-700 dark:text-gray-300 text-sm font-semibold mb-3 block">Output Format</label>
-<div class="grid grid-cols-3 gap-2">
-<button class="h-10 rounded-lg bg-primary text-white text-sm font-medium border border-transparent shadow-sm">JPG</button>
-<button class="h-10 rounded-lg bg-transparent border border-gray-300 dark:border-gray-600 text-slate-600 dark:text-gray-400 text-sm font-medium hover:bg-gray-100 dark:hover:bg-gray-800">PNG</button>
-<button class="h-10 rounded-lg bg-transparent border border-gray-300 dark:border-gray-600 text-slate-600 dark:text-gray-400 text-sm font-medium hover:bg-gray-100 dark:hover:bg-gray-800">WebP</button>
-</div>
-</div>
-<!-- Mode Toggle -->
-<div class="flex items-center justify-between">
-<div class="flex flex-col">
-<span class="text-slate-700 dark:text-gray-300 text-sm font-semibold">Lossless</span>
-<span class="text-xs text-gray-500 dark:text-gray-500">Best quality preservation</span>
-</div>
-<label class="relative inline-flex items-center cursor-pointer">
-<input class="sr-only peer" type="checkbox" value=""/>
-<div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-primary"></div>
-</label>
-</div>
-</div>
-<!-- Preview Card (Example State) -->
-<div class="bg-surface-light dark:bg-surface-dark rounded-xl overflow-hidden border border-gray-200 dark:border-gray-800 shadow-sm mb-24">
-<div class="relative h-48 w-full bg-gray-100 dark:bg-[#000000] flex items-center justify-center overflow-hidden group">
-<!-- Background Grid Pattern for Transparency -->
-<div class="absolute inset-0 opacity-20" style="background-image: radial-gradient(#4b5563 1px, transparent 1px); background-size: 10px 10px;"></div>
-<img alt="Abstract colorful gradient wave pattern for image compression preview" class="h-full w-full object-cover" data-alt="Abstract colorful gradient wave pattern for image compression preview" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB5cFlXc65Q2IwMXn3-bGnBA92eMphpIBmKBZC3uc3mAfXNrZGB3_m5VEBQCr-sv58keD520cav-KKfP-i6yV7gBwG63Fq6iVqkCIl2da3ymloDTxAMTMf035kGOPz8OfXiMAcvfYxhDkbGn9mhQc-FQyvMYBsEpQ_rabn5hwrfZxi2ZhTGBwtVze611Uot1dJYnB9J-XKByw63KezfJTFte2ApKSy20mnM28ccp6WMYcAy0L55Pix7R1S-hoTpgZW5gTXI3gLmx3i8"/>
-<div class="absolute inset-0 bg-black/50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-<span class="text-white text-sm font-medium flex items-center gap-2">
-<span class="material-symbols-outlined">touch_app</span> Tap &amp; Hold to Compare
-                        </span>
-</div>
-<div class="absolute top-3 right-3 bg-success/90 backdrop-blur-sm text-white text-xs font-bold px-2 py-1 rounded-md shadow-lg">
-                        -54% Saved
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+</head>
+
+<body
+    class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-white font-display min-h-screen flex flex-col overflow-x-hidden selection:bg-primary selection:text-white">
+    <!-- Sticky Header -->
+    <header
+        class="sticky top-0 z-40 w-full backdrop-blur-md bg-background-light/90 dark:bg-background-dark/90 border-b border-gray-200 dark:border-white/5">
+        <div class="flex items-center justify-between px-4 py-3">
+            <div class="flex items-center gap-2">
+                <div
+                    class="flex items-center justify-center w-8 h-8 rounded-lg bg-gradient-to-br from-primary to-purple-400 text-white">
+                    <span class="material-symbols-outlined text-[20px]">photo_camera</span>
+                </div>
+                <h1 class="text-lg font-bold tracking-tight">ImageMojo <span class="text-primary">Pro</span></h1>
+            </div>
+            <button class="p-2 -mr-2 rounded-full hover:bg-black/5 dark:hover:bg-white/5 transition-colors">
+                <span class="material-symbols-outlined text-2xl">menu</span>
+            </button>
+        </div>
+    </header>
+    <!-- Main Content Area -->
+    <main class="flex-1 flex flex-col w-full max-w-lg mx-auto pb-32">
+        <!-- Page Title -->
+        <div class="px-5 pt-6 pb-2">
+            <h2 class="text-3xl font-bold tracking-tight mb-1">Image Optimizer</h2>
+            <p class="text-gray-500 dark:text-gray-400 text-sm">Compress, resize and convert images locally.</p>
+        </div>
+        <!-- Upload Zone -->
+        <div class="px-4 py-4">
+            <div class="relative group cursor-pointer">
+                <div
+                    class="absolute inset-0 bg-gradient-to-br from-primary/20 to-purple-900/10 rounded-2xl blur-sm group-hover:blur-md transition-all duration-300">
+                </div>
+                <div
+                    class="relative flex flex-col items-center justify-center gap-4 rounded-2xl border-2 border-dashed border-primary/30 bg-surface-dark/50 dark:bg-surface-dark px-6 py-10 hover:border-primary/60 transition-colors">
+                    <div
+                        class="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center text-primary mb-2">
+                        <span class="material-symbols-outlined text-[32px]">cloud_upload</span>
                     </div>
-</div>
-<div class="p-4">
-<div class="flex justify-between items-center mb-2">
-<span class="text-slate-500 dark:text-gray-400 text-sm">Original</span>
-<span class="text-slate-900 dark:text-white font-medium">2.4 MB</span>
-</div>
-<div class="flex justify-between items-center">
-<span class="text-success font-medium text-sm flex items-center gap-1">
-<span class="material-symbols-outlined text-base">arrow_downward</span> Compressed
-                        </span>
-<span class="text-success font-bold text-lg">1.1 MB</span>
-</div>
-</div>
-</div>
-</main>
-<!-- Sticky Bottom Action Bar -->
-<div class="fixed bottom-0 left-0 right-0 bg-surface-light dark:bg-[#101418] border-t border-gray-200 dark:border-gray-800 p-4 pb-8 z-40 backdrop-blur-lg bg-opacity-95 dark:bg-opacity-95">
-<div class="max-w-md mx-auto flex gap-3">
-<button class="flex-1 cursor-pointer items-center justify-center rounded-lg h-12 bg-primary hover:bg-blue-600 text-white text-base font-bold shadow-lg shadow-blue-500/25 transition-all active:scale-95 flex gap-2">
-<span class="material-symbols-outlined">compress</span>
-<span>Compress &amp; Download</span>
-</button>
-</div>
-</div>
-</div>
-</body></html>
+                    <div class="text-center">
+                        <p class="text-base font-bold mb-1">Upload Image</p>
+                        <p class="text-xs text-gray-500 dark:text-gray-400 mb-4 max-w-[200px] mx-auto">Tap to browse or
+                            drag &amp; drop. Supports JPG, PNG, WEBP.</p>
+                        <button
+                            class="px-5 py-2.5 bg-primary hover:bg-primary-dark text-white text-sm font-semibold rounded-lg transition-colors shadow-lg shadow-primary/25">
+                            Browse Files
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Ad Placeholder -->
+        <div class="px-4 pb-6">
+            <div
+                class="w-full bg-surface-darker border border-white/5 rounded-xl p-3 flex items-center gap-3 shadow-sm">
+                <div class="bg-gray-700 w-12 h-12 rounded-lg flex-shrink-0 bg-cover bg-center"
+                    data-alt="Abstract gradient placeholder for advertisement icon"
+                    style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuA2uExy9iGBZhsCTfE59ZVVE1N65ppLSJvnoIXYkJ1UeglYN4K5X9G3Uw12NiWmXFhjktW2i8liRn5vhYVj3m3oAZVwc0zFNPOA_Z5_33rJ-suyVC7K9rDzddEWMyhwgPEO0LY0t-MoMZo8W77jqt3MzQUi-NZjemQGk-kl-jy4uptzbi4gw7e7jkCuxAUJ2tDOWvMBZCZ5UqeFL6cYlX-ftDvAPJgzUbNQHasa3SWnrj_nPQ2IKxKHp5d6oQdvOV_-0ivJ4qRAqMLb');">
+                </div>
+                <div class="flex-1 min-w-0">
+                    <p class="text-xs font-bold text-gray-300 uppercase tracking-wider mb-0.5">Sponsored</p>
+                    <p class="text-sm font-medium text-white truncate">Cloud Storage for Designers</p>
+                </div>
+                <span class="material-symbols-outlined text-gray-500 text-sm">open_in_new</span>
+            </div>
+        </div>
+        <!-- Settings Section -->
+        <div class="px-4 space-y-6">
+            <!-- Quality Slider -->
+            <div class="bg-surface-dark rounded-xl p-5 border border-white/5 shadow-sm">
+                <div class="flex justify-between items-center mb-4">
+                    <div class="flex items-center gap-2">
+                        <span class="material-symbols-outlined text-primary text-xl">tune</span>
+                        <h3 class="font-bold text-base">Compression</h3>
+                    </div>
+                    <span class="text-sm font-mono text-primary bg-primary/10 px-2 py-0.5 rounded">80%</span>
+                </div>
+                <input class="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer accent-primary" max="100"
+                    min="0" type="range" value="80" />
+                <div class="flex justify-between mt-2 text-xs text-gray-500">
+                    <span>Smaller Size</span>
+                    <span>Better Quality</span>
+                </div>
+            </div>
+            <!-- Toggles & Formats -->
+            <div class="grid grid-cols-1 gap-4">
+                <!-- Format Selector -->
+                <div class="bg-surface-dark rounded-xl p-5 border border-white/5 shadow-sm">
+                    <h3 class="font-bold text-sm mb-3 text-gray-300">Output Format</h3>
+                    <div class="flex p-1 bg-surface-darker rounded-lg border border-white/5">
+                        <button
+                            class="flex-1 py-2 text-xs font-medium rounded-md bg-primary text-white shadow-sm transition-all">JPG</button>
+                        <button
+                            class="flex-1 py-2 text-xs font-medium rounded-md text-gray-400 hover:text-white transition-all">PNG</button>
+                        <button
+                            class="flex-1 py-2 text-xs font-medium rounded-md text-gray-400 hover:text-white transition-all">WEBP</button>
+                        <button
+                            class="flex-1 py-2 text-xs font-medium rounded-md text-gray-400 hover:text-white transition-all">Original</button>
+                    </div>
+                </div>
+                <!-- Toggle Options -->
+                <div class="bg-surface-dark rounded-xl p-4 border border-white/5 shadow-sm divide-y divide-white/5">
+                    <!-- Lossless Toggle -->
+                    <div class="flex items-center justify-between py-2">
+                        <div class="flex flex-col">
+                            <span class="text-sm font-medium">Lossless Optimization</span>
+                            <span class="text-[10px] text-gray-500">Best quality, larger size</span>
+                        </div>
+                        <label class="flex items-center cursor-pointer relative" for="toggle-lossless">
+                            <input class="sr-only peer" id="toggle-lossless" type="checkbox" />
+                            <div
+                                class="w-11 h-6 bg-gray-700 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary">
+                            </div>
+                        </label>
+                    </div>
+                    <!-- EXIF Toggle -->
+                    <div class="flex items-center justify-between py-2 mt-2 pt-3">
+                        <div class="flex flex-col">
+                            <span class="text-sm font-medium">Remove Metadata (EXIF)</span>
+                            <span class="text-[10px] text-gray-500">Strip GPS &amp; Camera info</span>
+                        </div>
+                        <label class="flex items-center cursor-pointer relative" for="toggle-exif">
+                            <input checked="" class="sr-only peer" id="toggle-exif" type="checkbox" />
+                            <div
+                                class="w-11 h-6 bg-gray-700 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary">
+                            </div>
+                        </label>
+                    </div>
+                </div>
+                <!-- Resize Inputs -->
+                <div class="bg-surface-dark rounded-xl p-5 border border-white/5 shadow-sm">
+                    <div class="flex items-center justify-between mb-3">
+                        <h3 class="font-bold text-sm text-gray-300">Resize Image</h3>
+                        <button class="text-primary hover:text-white transition-colors">
+                            <span class="material-symbols-outlined text-lg">lock</span>
+                        </button>
+                    </div>
+                    <div class="flex gap-3">
+                        <div class="relative flex-1">
+                            <input
+                                class="w-full bg-surface-darker border border-white/10 rounded-lg py-2.5 px-3 text-sm text-white focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all"
+                                placeholder="Width" type="number" />
+                            <span class="absolute right-3 top-2.5 text-xs text-gray-500 font-mono">px</span>
+                        </div>
+                        <div class="relative flex-1">
+                            <input
+                                class="w-full bg-surface-darker border border-white/10 rounded-lg py-2.5 px-3 text-sm text-white focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all"
+                                placeholder="Height" type="number" />
+                            <span class="absolute right-3 top-2.5 text-xs text-gray-500 font-mono">px</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Live Preview Section -->
+        <div class="px-4 mt-8">
+            <h3 class="text-sm font-bold text-gray-400 uppercase tracking-wide mb-3 px-1">Live Preview</h3>
+            <div class="bg-surface-dark rounded-xl overflow-hidden border border-white/5 shadow-lg">
+                <div
+                    class="relative h-48 bg-[url('https://placeholder.pics/svg/600x400/1a1a1a/333333/Transparency%20Grid')] bg-repeat">
+                    <div class="absolute inset-0 flex items-center justify-center">
+                        <img alt="Mountain landscape preview showing optimization quality"
+                            class="max-h-full max-w-full object-contain shadow-2xl"
+                            data-alt="Mountain landscape preview showing optimization quality"
+                            src="preview-image.png" />
+                    </div>
+                    <!-- Before/After Badge -->
+                    <div
+                        class="absolute top-3 left-3 bg-black/60 backdrop-blur-sm text-white text-[10px] font-bold px-2 py-1 rounded border border-white/10">
+                        PREVIEW
+                    </div>
+                </div>
+                <!-- Stats Grid -->
+                <div class="grid grid-cols-3 divide-x divide-white/5 bg-surface-darker p-4">
+                    <div class="flex flex-col items-center gap-1">
+                        <span class="text-[10px] text-gray-500 uppercase font-semibold">Original</span>
+                        <span class="text-sm font-medium text-gray-300">2.4 MB</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-1">
+                        <span class="text-[10px] text-gray-500 uppercase font-semibold">Optimized</span>
+                        <span class="text-sm font-bold text-white">0.6 MB</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-1">
+                        <span class="text-[10px] text-gray-500 uppercase font-semibold">Savings</span>
+                        <span class="text-sm font-bold text-green-400">-75%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <!-- Floating Bottom Action Bar -->
+    <div
+        class="fixed bottom-0 left-0 right-0 z-50 p-4 bg-gradient-to-t from-background-dark via-background-dark to-transparent pt-12">
+        <div class="max-w-lg mx-auto">
+            <button
+                class="group w-full flex items-center justify-center gap-2 bg-primary hover:bg-primary-dark text-white font-bold py-3.5 px-6 rounded-xl shadow-xl shadow-primary/20 transition-all active:scale-[0.98]">
+                <span>Optimize &amp; Download</span>
+                <span
+                    class="material-symbols-outlined text-xl group-hover:translate-y-0.5 transition-transform">download</span>
+            </button>
+        </div>
+    </div>
+</body>
+
+</html>

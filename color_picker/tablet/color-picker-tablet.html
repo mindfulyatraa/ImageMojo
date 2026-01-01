@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>ImageHub Pro - Color Picker</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#0066cc",
+                        "secondary": "#00CC66",
+                        "background-light": "#f5f7f8",
+                        "background-dark": "#0f1923",
+                        "surface-dark": "#1A242D",
+                        "surface-light": "#FFFFFF",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "2xl": "1rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+    <style>
+        /* Custom scrollbar for panel */
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+    </style>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+</head>
+
+<body
+    class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-white transition-colors duration-200">
+    <div class="flex min-h-screen flex-col">
+        <!-- TopAppBar -->
+        <header
+            class="sticky top-0 z-50 flex items-center bg-white dark:bg-[#101418] border-b border-gray-200 dark:border-gray-800 p-4 justify-between h-16 shadow-sm">
+            <div class="flex items-center gap-4">
+                <button
+                    class="text-slate-900 dark:text-white flex size-10 shrink-0 items-center justify-center rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
+                    <span class="material-symbols-outlined text-2xl">menu</span>
+                </button>
+                <div class="flex items-center gap-2">
+                    <div class="size-8 rounded-lg bg-primary flex items-center justify-center text-white font-bold">IH
+                    </div>
+                    <h2
+                        class="text-slate-900 dark:text-white text-lg font-bold leading-tight tracking-[-0.015em] hidden sm:block">
+                        ImageHub Pro</h2>
+                </div>
+            </div>
+            <div class="flex items-center gap-3">
+                <button
+                    class="hidden md:flex items-center gap-2 px-3 py-1.5 rounded-lg bg-primary/10 text-primary hover:bg-primary/20 transition text-sm font-medium">
+                    <span class="material-symbols-outlined text-lg">diamond</span>
+                    <span>Go Pro</span>
+                </button>
+                <div class="size-8 rounded-full bg-gradient-to-br from-primary to-secondary overflow-hidden border-2 border-white dark:border-gray-700"
+                    title="User Profile">
+                    <img alt="User avatar" class="w-full h-full object-cover" data-alt="User profile avatar image"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuA0rwwryIQpjDfxL6V9lTLS8cTnwQ40ARUCOuypjai0QAW2fc1wtgwDvHaVSkOpNRSuq1ok3LHnz3QM0ClzBzVM3v6Mf2gp-BNWlffKf37yUmvsbwNRhRpu5XJH47yE-AVYoi6GrGKsYNx4acZSrk5QUhJj3TcwUiRtPAz1VuEULCjUXRin9Diy2wYdK_hFoZ6F3Z1dxq9KMrzUxxjxPnDmoZSL-kAoJED-6ffRsw37KSJHx9Xhb0FJyrjQbaOX_8zzpDUBZr5AvrnU" />
+                </div>
+            </div>
+        </header>
+        <!-- Main Content -->
+        <main class="flex-1 w-full max-w-[1400px] mx-auto p-4 md:p-6 lg:p-8">
+            <!-- Headline Section -->
+            <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
+                <div>
+                    <h1 class="text-3xl md:text-4xl font-bold tracking-tight text-slate-900 dark:text-white mb-2">Color
+                        Picker Tool</h1>
+                    <p class="text-slate-500 dark:text-slate-400 text-base max-w-2xl">
+                        Upload an image to identify pixel colors or use the palette generator. Get HEX, RGB, and HSL
+                        values instantly.
+                    </p>
+                </div>
+                <!-- Toggle Switch (SegmentedButtons) -->
+                <div class="flex bg-gray-200 dark:bg-[#27303a] p-1 rounded-xl w-full md:w-auto h-12">
+                    <label
+                        class="flex-1 md:flex-none cursor-pointer flex items-center justify-center px-6 rounded-lg bg-white dark:bg-[#101418] shadow-sm text-primary font-semibold transition-all">
+                        <input checked="" class="hidden" name="mode" type="radio" />
+                        <span class="material-symbols-outlined mr-2 text-sm">image</span>
+                        <span class="text-sm">From Image</span>
+                    </label>
+                    <label
+                        class="flex-1 md:flex-none cursor-pointer flex items-center justify-center px-6 rounded-lg text-slate-600 dark:text-[#9aabbc] hover:text-slate-900 dark:hover:text-white font-medium transition-all">
+                        <input class="hidden" name="mode" type="radio" />
+                        <span class="material-symbols-outlined mr-2 text-sm">palette</span>
+                        <span class="text-sm">Palette</span>
+                    </label>
+                </div>
+            </div>
+            <!-- AdSense Placeholder (Top Banner) -->
+            <div
+                class="w-full h-[90px] bg-gray-100 dark:bg-[#1A242D] border border-dashed border-gray-300 dark:border-gray-700 rounded-lg flex items-center justify-center mb-8 overflow-hidden relative">
+                <span class="text-xs text-gray-400 uppercase tracking-widest font-semibold z-10">Advertisement
+                    (Leaderboard)</span>
+                <div
+                    class="absolute inset-0 bg-gradient-to-r from-transparent via-gray-200/10 dark:via-white/5 to-transparent skew-x-12">
+                </div>
+            </div>
+            <!-- Workspace Grid -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 h-auto lg:h-[600px]">
+                <!-- Left Panel: Interactive Canvas (Span 8) -->
+                <div
+                    class="lg:col-span-8 flex flex-col bg-white dark:bg-surface-dark rounded-2xl border border-gray-200 dark:border-gray-800 shadow-sm overflow-hidden relative group">
+                    <!-- Toolbar overlay -->
+                    <div
+                        class="absolute top-4 left-4 z-10 flex flex-col gap-2 bg-black/50 backdrop-blur-md p-1.5 rounded-lg border border-white/10 shadow-lg">
+                        <button class="p-2 text-white hover:bg-white/20 rounded-md transition" title="Zoom In">
+                            <span class="material-symbols-outlined text-xl">add</span>
+                        </button>
+                        <button class="p-2 text-white hover:bg-white/20 rounded-md transition" title="Zoom Out">
+                            <span class="material-symbols-outlined text-xl">remove</span>
+                        </button>
+                        <div class="h-px w-full bg-white/20 my-1"></div>
+                        <button class="p-2 text-white hover:bg-white/20 rounded-md transition" title="Reset View">
+                            <span class="material-symbols-outlined text-xl">center_focus_strong</span>
+                        </button>
+                        <button class="p-2 text-primary bg-white hover:bg-gray-100 rounded-md transition shadow-md"
+                            title="Pick Color">
+                            <span class="material-symbols-outlined text-xl">colorize</span>
+                        </button>
+                    </div>
+                    <!-- Upload Trigger overlay (Hidden if active, visible here for demo of both states or floating) -->
+                    <div class="absolute top-4 right-4 z-10">
+                        <button
+                            class="flex items-center gap-2 px-4 py-2 bg-black/60 hover:bg-black/80 backdrop-blur-md text-white rounded-lg text-sm font-medium transition border border-white/10 shadow-lg">
+                            <span class="material-symbols-outlined text-lg">upload_file</span>
+                            Change Image
+                        </button>
+                    </div>
+                    <!-- Main Image Canvas -->
+                    <div
+                        class="w-full h-full bg-[#101418] relative flex items-center justify-center overflow-hidden cursor-crosshair">
+                        <!-- Pattern background to show transparency -->
+                        <div class="absolute inset-0 opacity-20"
+                            style="background-image: radial-gradient(#444 1px, transparent 1px); background-size: 20px 20px;">
+                        </div>
+                        <!-- The Image -->
+                        <div class="relative shadow-2xl">
+                            <img alt="Source Image" class="max-w-full max-h-[550px] object-contain rounded-md"
+                                data-alt="Abstract colorful neon waves background"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuAGZip5VNhHVlMhVzJ6G5_5ZrKqXIS-CdH_RNo_6m2Hm6YpwQzoGzniX8Y0vsOXjJ6Djs9PIQPvzTr0G48g8t0eO4jnG234nNm36erubndp5DW8rrS_prlLU_SkIRhwaMIDwgU8WfZUoRTwWVCugxu9B1oF7F6NdxUb7lBwQ99KCF57J6nuKwkQDBunBiLV-XaGJ5vJiww6Wfgyp7J4cG4Yd0NIdfKcjqj922hzAqvIRMqlGJXqUZXPprFZlB-AzPGn2efsx7l2DpqO" />
+                            <!-- Magnifier / Picker Indicator -->
+                            <div class="absolute border-2 border-white rounded-full size-24 shadow-[0_0_20px_rgba(0,0,0,0.5)] overflow-hidden z-20 pointer-events-none"
+                                style="top: 30%; left: 45%; transform: translate(-50%, -50%);">
+                                <div class="w-full h-full bg-no-repeat bg-cover relative"
+                                    style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCvbcH2Xive-cyVP109okNYrriQTWEsvYyhZWfOnAQI7jUiLDdM0UqcPsy-KeuGBmtaYzicBYVS1e0kgn6wHiVZ2krdy8o8mibXx8d34J9z7s2GFUP0JdZGUrz2wQIEcjwwD3rOfTMZ0FzL3FLkNGCWvmaIrx86px8oD8FzXe7UWjhml8OCASB8TCY1gJCJ3XeV0aFhw91rcoB0o0UgD4ND424Yv21-RuVThMyuls3NplGL2gb8x0YKlzr9ymrQ6IRVZXlIzXy8l743'); background-position: 45% 30%; transform: scale(2);">
+                                    <!-- Crosshair inside magnifier -->
+                                    <div class="absolute inset-0 flex items-center justify-center">
+                                        <div class="w-2 h-2 border border-black bg-transparent"></div>
+                                        <div class="absolute w-full h-[1px] bg-white/30"></div>
+                                        <div class="absolute h-full w-[1px] bg-white/30"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Click Point -->
+                            <div class="absolute w-4 h-4 rounded-full border-2 border-white bg-transparent shadow-sm z-10"
+                                style="top: 30%; left: 45%; transform: translate(-50%, -50%);"></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Right Panel: Data & Results (Span 4) -->
+                <div class="lg:col-span-4 flex flex-col gap-6 h-full overflow-y-auto custom-scrollbar">
+                    <!-- Selected Color Preview Card -->
+                    <div
+                        class="bg-white dark:bg-surface-dark rounded-2xl border border-gray-200 dark:border-gray-800 p-5 shadow-sm">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3
+                                class="text-sm font-semibold text-slate-500 dark:text-gray-400 uppercase tracking-wider">
+                                Selected Color</h3>
+                            <span
+                                class="text-xs px-2 py-1 rounded bg-green-500/10 text-green-500 font-medium border border-green-500/20">Active</span>
+                        </div>
+                        <div class="flex gap-4">
+                            <!-- Large Swatch -->
+                            <div class="w-24 h-24 rounded-2xl shadow-inner border border-black/5 dark:border-white/5 relative"
+                                style="background-color: #6366F1;">
+                                <div
+                                    class="absolute inset-0 flex items-center justify-center text-white/20 font-bold text-xs opacity-0 hover:opacity-100 transition-opacity">
+                                    Preview
+                                </div>
+                            </div>
+                            <!-- Quick Info -->
+                            <div class="flex-1 flex flex-col justify-center gap-2">
+                                <div
+                                    class="text-slate-900 dark:text-white text-3xl font-display font-bold tracking-tight">
+                                    #6366F1</div>
+                                <div class="text-slate-500 dark:text-slate-400 text-sm">Valid CSS Color</div>
+                                <div class="flex items-center gap-1 mt-1">
+                                    <div class="w-full h-1.5 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
+                                        <div class="h-full bg-red-500 w-[39%]"></div>
+                                    </div>
+                                    <div class="w-full h-1.5 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
+                                        <div class="h-full bg-green-500 w-[40%]"></div>
+                                    </div>
+                                    <div class="w-full h-1.5 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
+                                        <div class="h-full bg-blue-500 w-[94%]"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Values List -->
+                    <div class="flex flex-col gap-3">
+                        <!-- HEX -->
+                        <div
+                            class="group flex items-center justify-between bg-white dark:bg-[#1f2933] hover:bg-gray-50 dark:hover:bg-[#25303b] p-3 rounded-xl border border-gray-200 dark:border-gray-800 transition-colors">
+                            <div class="flex flex-col">
+                                <span class="text-xs text-slate-500 dark:text-slate-400 font-semibold mb-0.5">HEX</span>
+                                <span
+                                    class="text-slate-900 dark:text-white font-mono font-medium text-lg">#6366F1</span>
+                            </div>
+                            <button
+                                class="size-10 flex items-center justify-center rounded-lg bg-primary/10 text-primary hover:bg-primary hover:text-white transition-all active:scale-95"
+                                title="Copy HEX">
+                                <span class="material-symbols-outlined text-xl">content_copy</span>
+                            </button>
+                        </div>
+                        <!-- RGB -->
+                        <div
+                            class="group flex items-center justify-between bg-white dark:bg-[#1f2933] hover:bg-gray-50 dark:hover:bg-[#25303b] p-3 rounded-xl border border-gray-200 dark:border-gray-800 transition-colors">
+                            <div class="flex flex-col">
+                                <span class="text-xs text-slate-500 dark:text-slate-400 font-semibold mb-0.5">RGB</span>
+                                <span class="text-slate-900 dark:text-white font-mono font-medium text-lg">99, 102,
+                                    241</span>
+                            </div>
+                            <button
+                                class="size-10 flex items-center justify-center rounded-lg bg-gray-100 dark:bg-gray-800 text-gray-500 dark:text-gray-400 hover:bg-primary hover:text-white transition-all active:scale-95"
+                                title="Copy RGB">
+                                <span class="material-symbols-outlined text-xl">content_copy</span>
+                            </button>
+                        </div>
+                        <!-- HSL -->
+                        <div
+                            class="group flex items-center justify-between bg-white dark:bg-[#1f2933] hover:bg-gray-50 dark:hover:bg-[#25303b] p-3 rounded-xl border border-gray-200 dark:border-gray-800 transition-colors">
+                            <div class="flex flex-col">
+                                <span class="text-xs text-slate-500 dark:text-slate-400 font-semibold mb-0.5">HSL</span>
+                                <span class="text-slate-900 dark:text-white font-mono font-medium text-lg">239°, 84%,
+                                    67%</span>
+                            </div>
+                            <button
+                                class="size-10 flex items-center justify-center rounded-lg bg-gray-100 dark:bg-gray-800 text-gray-500 dark:text-gray-400 hover:bg-primary hover:text-white transition-all active:scale-95"
+                                title="Copy HSL">
+                                <span class="material-symbols-outlined text-xl">content_copy</span>
+                            </button>
+                        </div>
+                        <!-- CMYK (Tablet Bonus) -->
+                        <div
+                            class="group flex items-center justify-between bg-white dark:bg-[#1f2933] hover:bg-gray-50 dark:hover:bg-[#25303b] p-3 rounded-xl border border-gray-200 dark:border-gray-800 transition-colors">
+                            <div class="flex flex-col">
+                                <span
+                                    class="text-xs text-slate-500 dark:text-slate-400 font-semibold mb-0.5">CMYK</span>
+                                <span class="text-slate-900 dark:text-white font-mono font-medium text-lg">59%, 58%, 0%,
+                                    5%</span>
+                            </div>
+                            <button
+                                class="size-10 flex items-center justify-center rounded-lg bg-gray-100 dark:bg-gray-800 text-gray-500 dark:text-gray-400 hover:bg-primary hover:text-white transition-all active:scale-95"
+                                title="Copy CMYK">
+                                <span class="material-symbols-outlined text-xl">content_copy</span>
+                            </button>
+                        </div>
+                    </div>
+                    <!-- Recent History -->
+                    <div
+                        class="bg-white dark:bg-surface-dark rounded-2xl border border-gray-200 dark:border-gray-800 p-4 shadow-sm flex-1">
+                        <h3
+                            class="text-sm font-semibold text-slate-500 dark:text-gray-400 uppercase tracking-wider mb-3">
+                            Recent Colors</h3>
+                        <div class="flex flex-wrap gap-2">
+                            <div class="size-10 rounded-lg cursor-pointer ring-2 ring-offset-2 ring-offset-[#1A242D] ring-primary"
+                                style="background-color: #6366F1;" title="#6366F1"></div>
+                            <div class="size-10 rounded-lg cursor-pointer hover:ring-2 hover:ring-offset-2 hover:ring-offset-[#1A242D] hover:ring-gray-400 transition"
+                                style="background-color: #0ea5e9;" title="#0ea5e9"></div>
+                            <div class="size-10 rounded-lg cursor-pointer hover:ring-2 hover:ring-offset-2 hover:ring-offset-[#1A242D] hover:ring-gray-400 transition"
+                                style="background-color: #10b981;" title="#10b981"></div>
+                            <div class="size-10 rounded-lg cursor-pointer hover:ring-2 hover:ring-offset-2 hover:ring-offset-[#1A242D] hover:ring-gray-400 transition"
+                                style="background-color: #f59e0b;" title="#f59e0b"></div>
+                            <div class="size-10 rounded-lg cursor-pointer hover:ring-2 hover:ring-offset-2 hover:ring-offset-[#1A242D] hover:ring-gray-400 transition"
+                                style="background-color: #ef4444;" title="#ef4444"></div>
+                            <div class="size-10 rounded-lg cursor-pointer hover:ring-2 hover:ring-offset-2 hover:ring-offset-[#1A242D] hover:ring-gray-400 transition"
+                                style="background-color: #8b5cf6;" title="#8b5cf6"></div>
+                            <button
+                                class="size-10 rounded-lg border border-dashed border-gray-500 flex items-center justify-center text-gray-400 hover:text-white hover:border-white transition">
+                                <span class="material-symbols-outlined text-lg">delete</span>
+                            </button>
+                        </div>
+                    </div>
+                    <!-- AdSense Placeholder (Sidebar) -->
+                    <div
+                        class="w-full h-[250px] bg-gray-100 dark:bg-[#1A242D] border border-dashed border-gray-300 dark:border-gray-700 rounded-lg flex flex-col items-center justify-center relative overflow-hidden shrink-0">
+                        <span
+                            class="material-symbols-outlined text-4xl text-gray-300 dark:text-gray-600 mb-2">ads_click</span>
+                        <span class="text-xs text-gray-400 uppercase tracking-widest font-semibold z-10">Ad Space
+                            (300x250)</span>
+                    </div>
+                </div>
+            </div>
+            <!-- Features / Info Section Below -->
+            <div class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-white dark:bg-[#161e27] p-6 rounded-xl border border-gray-200 dark:border-gray-800">
+                    <div class="size-10 rounded-lg bg-primary/20 flex items-center justify-center text-primary mb-4">
+                        <span class="material-symbols-outlined">bolt</span>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-2">Instant Extraction</h3>
+                    <p class="text-slate-500 dark:text-slate-400 text-sm">Our advanced algorithm processes your image
+                        client-side instantly. No data leaves your device.</p>
+                </div>
+                <div class="bg-white dark:bg-[#161e27] p-6 rounded-xl border border-gray-200 dark:border-gray-800">
+                    <div
+                        class="size-10 rounded-lg bg-secondary/20 flex items-center justify-center text-secondary mb-4">
+                        <span class="material-symbols-outlined">zoom_in</span>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-2">Pixel Precision</h3>
+                    <p class="text-slate-500 dark:text-slate-400 text-sm">Use the built-in loupe magnifier to select the
+                        exact pixel you need, even on high-res photos.</p>
+                </div>
+                <div class="bg-white dark:bg-[#161e27] p-6 rounded-xl border border-gray-200 dark:border-gray-800">
+                    <div
+                        class="size-10 rounded-lg bg-purple-500/20 flex items-center justify-center text-purple-400 mb-4">
+                        <span class="material-symbols-outlined">download</span>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-2">Export Palette</h3>
+                    <p class="text-slate-500 dark:text-slate-400 text-sm">Automatically generate a harmonious color
+                        palette from your image and export it to CSS or JSON.</p>
+                </div>
+            </div>
+        </main>
+        <!-- Footer -->
+        <footer class="mt-12 border-t border-gray-200 dark:border-gray-800 bg-white dark:bg-[#101418] py-8">
+            <div class="w-full max-w-[1400px] mx-auto p-4 flex flex-col md:flex-row items-center justify-between gap-6">
+                <div class="flex flex-col gap-2">
+                    <p class="text-slate-900 dark:text-white font-bold text-lg">ImageHub Pro</p>
+                    <p class="text-slate-500 text-sm">© 2023 ImageHub. All rights reserved.</p>
+                </div>
+                <div class="flex gap-6">
+                    <a class="text-slate-500 hover:text-primary transition" href="#">Privacy Policy</a>
+                    <a class="text-slate-500 hover:text-primary transition" href="#">Terms of Service</a>
+                    <a class="text-slate-500 hover:text-primary transition" href="#">Contact</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+</body>
+
+</html>

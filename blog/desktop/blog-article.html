@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>ImageHub Pro - Mastering Image Compression</title>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <!-- Tailwind Config -->
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#0066cc",
+                        "secondary": "#00CC66",
+                        "background-light": "#f5f7f8",
+                        "background-dark": "#0f1923",
+                        "surface-dark": "#1a242d",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+    <style>
+        /* Hide scrollbar for Chrome, Safari and Opera */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* Hide scrollbar for IE, Edge and Firefox */
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            /* IE and Edge */
+            scrollbar-width: none;
+            /* Firefox */
+        }
+    </style>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+</head>
+
+<body
+    class="font-display bg-background-light dark:bg-background-dark text-slate-900 dark:text-white antialiased selection:bg-primary selection:text-white">
+    <div class="relative flex min-h-screen w-full flex-col overflow-x-hidden pb-20">
+        <!-- Sticky Header -->
+        <header
+            class="sticky top-0 z-50 flex items-center justify-between bg-white/80 dark:bg-background-dark/80 backdrop-blur-md border-b border-gray-200 dark:border-white/10 px-4 py-3 transition-colors duration-200">
+            <button
+                class="flex size-10 items-center justify-center rounded-full hover:bg-black/5 dark:hover:bg-white/10 active:scale-95 transition-all text-slate-700 dark:text-white">
+                <span class="material-symbols-outlined text-[24px]">menu</span>
+            </button>
+            <div class="flex items-center gap-2">
+                <div
+                    class="size-6 rounded bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-white font-bold text-xs">
+                    IH</div>
+                <h1 class="text-lg font-bold tracking-tight text-slate-900 dark:text-white">ImageHub Pro</h1>
+            </div>
+            <button
+                class="flex size-10 items-center justify-center rounded-full hover:bg-black/5 dark:hover:bg-white/10 active:scale-95 transition-all text-slate-700 dark:text-white">
+                <span class="material-symbols-outlined text-[24px]">search</span>
+            </button>
+        </header>
+        <!-- Main Content Area -->
+        <main class="flex-1 w-full max-w-2xl mx-auto">
+            <!-- Hero Image Section -->
+            <div class="px-4 pt-6 pb-2">
+                <div class="aspect-video w-full overflow-hidden rounded-xl bg-surface-dark relative shadow-lg">
+                    <img alt="Abstract visualization of digital data compression with blue and green gradients"
+                        class="h-full w-full object-cover"
+                        data-alt="Abstract visualization of digital data compression with blue and green gradients"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuCz-c1j6OUZGnrPVjCJPev-82CK7AIEnF87RywZuIE-is5mQ4jKPqnUxf4a7K0d8okhEDjHBez-XsQEl3rX-f_LTjC9xcr-5oC7NEdMLgiwJWJ73SvPKbhe4DOOI7bV8655i1iEFevdjeN6jw_HFWMbbu-Hg1wWU4DbvwDaISk_YdkDayeX9YFLuWfZa7fRhB93ho4IZechvnYmN1aytLqpwjsmiJks5rpJj119MzmYkVDGHv69EeV_vWhJhaz7avo4qPfJAhNJuKta" />
+                    <div class="absolute inset-0 bg-gradient-to-t from-background-dark/80 to-transparent"></div>
+                    <div class="absolute bottom-3 left-3">
+                        <span
+                            class="inline-flex items-center rounded-full bg-secondary/90 px-2.5 py-0.5 text-xs font-semibold text-white backdrop-blur-sm">
+                            New Feature
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <!-- Title & Meta -->
+            <div class="px-4 pb-4">
+                <div class="flex items-center gap-2 py-3">
+                    <span
+                        class="inline-flex items-center gap-1 rounded-full bg-primary/10 px-2 py-1 text-xs font-medium text-primary dark:text-blue-400">
+                        <span class="material-symbols-outlined text-[14px]">tag</span>
+                        Optimization
+                    </span>
+                    <span class="text-xs text-slate-500 dark:text-slate-400">•</span>
+                    <span class="text-xs font-medium text-slate-500 dark:text-slate-400">5 min read</span>
+                </div>
+                <h1
+                    class="text-2xl md:text-3xl font-bold leading-tight tracking-tight text-slate-900 dark:text-white mb-4">
+                    Mastering Image Compression: A Guide for Web Developers
+                </h1>
+                <div class="flex items-center justify-between border-b border-gray-200 dark:border-white/10 pb-4">
+                    <div class="flex items-center gap-3">
+                        <img alt="Portrait of Alex Dev"
+                            class="size-10 rounded-full border-2 border-primary object-cover"
+                            data-alt="Portrait of Alex Dev"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuA51tM_kdKVazEOias_NzSkFOhfkVE4tGr2gfiFbQTiGK1UYfrZ0V9ja0OovPmQM_zSN3VusF29PNe9l3UC8pkJFaRHwrgaUoxYxFxDWx5NvPW48PKNRKIkP-CNnPq4PqjaEbZiBu17Aj0y7Tu0SMjxf952v0wf1kAcphcMWFC9wnxQzO_h2X_wkCW-S8tt5GCIFzByLFgki63bltJN11nXV1sMBQceZf_hq7Q2lmwN8h08e4-jBQfrNFhOJeB1gvAjiX0GRbgd83he" />
+                        <div class="flex flex-col">
+                            <span class="text-sm font-semibold text-slate-900 dark:text-white">Alex Dev</span>
+                            <span class="text-xs text-slate-500 dark:text-slate-400">Oct 24, 2023</span>
+                        </div>
+                    </div>
+                    <div class="flex gap-1">
+                        <button
+                            class="flex size-8 items-center justify-center rounded-full text-slate-400 hover:bg-primary/10 hover:text-primary transition-colors">
+                            <span class="material-symbols-outlined text-[20px]">bookmark</span>
+                        </button>
+                        <button
+                            class="flex size-8 items-center justify-center rounded-full text-slate-400 hover:bg-primary/10 hover:text-primary transition-colors">
+                            <span class="material-symbols-outlined text-[20px]">share</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <!-- Ad Placeholder 1 -->
+            <div class="px-4 py-4">
+                <div
+                    class="flex w-full flex-col items-center justify-center gap-2 rounded-lg border border-dashed border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-surface-dark/50 p-6">
+                    <span class="text-xs font-medium uppercase tracking-wider text-slate-400">Advertisement</span>
+                    <div class="h-[100px] w-full max-w-[300px] rounded bg-slate-200 dark:bg-white/5 animate-pulse">
+                    </div>
+                </div>
+            </div>
+            <!-- Article Body -->
+            <article class="px-4 text-base leading-7 text-slate-700 dark:text-slate-300 space-y-6">
+                <p
+                    class="first-letter:text-5xl first-letter:font-bold first-letter:text-primary first-letter:float-left first-letter:mr-3 first-letter:mt-[-4px]">
+                    Optimizing your images is crucial for website performance. In this comprehensive guide, we'll
+                    explore how to reduce file sizes without losing quality using ImageHub Pro tools. Faster websites
+                    not only rank better in search engines but also provide a significantly better user experience.
+                </p>
+                <h2 class="text-xl font-bold text-slate-900 dark:text-white mt-8">Why Compression Matters</h2>
+                <p>
+                    Large image files are the number one culprit for slow page loads. By compressing images properly,
+                    you can reduce their size by up to 80% while maintaining visual fidelity visible to the human eye.
+                </p>
+                <!-- Quote Block -->
+                <blockquote
+                    class="border-l-4 border-secondary pl-4 italic text-slate-600 dark:text-slate-400 my-6 bg-slate-50 dark:bg-surface-dark/30 py-4 pr-4 rounded-r-lg">
+                    "Web performance is user experience. As you improve performance, your user engagement metrics
+                    improve."
+                </blockquote>
+                <h2 class="text-xl font-bold text-slate-900 dark:text-white mt-8">Using the Right Tools</h2>
+                <p>
+                    We've recently updated our compression algorithm. Here is a quick comparison of formats:
+                </p>
+                <!-- Comparison Table (Simulated) -->
+                <div class="overflow-hidden rounded-lg border border-gray-200 dark:border-white/10 my-4">
+                    <table class="min-w-full divide-y divide-gray-200 dark:divide-white/10 text-sm text-left">
+                        <thead class="bg-slate-50 dark:bg-surface-dark">
+                            <tr>
+                                <th class="px-4 py-3 font-semibold text-slate-900 dark:text-white">Format</th>
+                                <th class="px-4 py-3 font-semibold text-slate-900 dark:text-white">Use Case</th>
+                                <th class="px-4 py-3 font-semibold text-slate-900 dark:text-white">Saving</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-200 dark:divide-white/10 bg-white dark:bg-transparent">
+                            <tr>
+                                <td class="px-4 py-3 font-medium text-primary">WebP</td>
+                                <td class="px-4 py-3">Modern Web</td>
+                                <td class="px-4 py-3 text-secondary">~30%</td>
+                            </tr>
+                            <tr>
+                                <td class="px-4 py-3 font-medium text-primary">JPEG</td>
+                                <td class="px-4 py-3">Photos</td>
+                                <td class="px-4 py-3 text-secondary">~15%</td>
+                            </tr>
+                            <tr>
+                                <td class="px-4 py-3 font-medium text-primary">AVIF</td>
+                                <td class="px-4 py-3">Next Gen</td>
+                                <td class="px-4 py-3 text-secondary">~50%</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p>
+                    Ready to start? Use the <a
+                        class="text-primary font-medium hover:underline decoration-secondary decoration-2 underline-offset-2"
+                        href="#">Bulk Compressor</a> tool today to process up to 50 images at once.
+                </p>
+            </article>
+            <!-- Ad Placeholder 2 -->
+            <div class="px-4 py-8">
+                <div
+                    class="flex w-full flex-col items-center justify-center gap-2 rounded-lg border border-dashed border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-surface-dark/50 p-4">
+                    <span class="text-xs font-medium uppercase tracking-wider text-slate-400">Sponsored Content</span>
+                    <div class="flex w-full gap-4 items-center">
+                        <div class="size-16 shrink-0 rounded bg-slate-200 dark:bg-white/5"></div>
+                        <div class="flex flex-col gap-2 w-full">
+                            <div class="h-3 w-3/4 rounded bg-slate-200 dark:bg-white/5"></div>
+                            <div class="h-3 w-1/2 rounded bg-slate-200 dark:bg-white/5"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Tags & Share -->
+            <div class="px-4 mb-8">
+                <div class="flex flex-wrap gap-2 mb-6">
+                    <span
+                        class="rounded-lg bg-surface-dark/50 border border-white/5 px-3 py-1 text-sm text-slate-400">#WebDev</span>
+                    <span
+                        class="rounded-lg bg-surface-dark/50 border border-white/5 px-3 py-1 text-sm text-slate-400">#Performance</span>
+                    <span
+                        class="rounded-lg bg-surface-dark/50 border border-white/5 px-3 py-1 text-sm text-slate-400">#Guide</span>
+                </div>
+                <div class="flex flex-col gap-3 rounded-xl bg-primary/5 p-4 border border-primary/10">
+                    <span class="text-sm font-semibold text-slate-900 dark:text-white text-center">Found this helpful?
+                        Share it!</span>
+                    <div class="flex justify-center gap-4">
+                        <button
+                            class="flex size-10 items-center justify-center rounded-full bg-[#1877F2] text-white hover:opacity-90 transition-opacity">
+                            <!-- Facebook Icon representation using material symbol as placeholder since specific brand icons not requested but keeps style -->
+                            <span class="font-bold text-lg">f</span>
+                        </button>
+                        <button
+                            class="flex size-10 items-center justify-center rounded-full bg-[#1DA1F2] text-white hover:opacity-90 transition-opacity">
+                            <!-- Twitter Icon representation -->
+                            <span class="font-bold text-lg">X</span>
+                        </button>
+                        <button
+                            class="flex size-10 items-center justify-center rounded-full bg-[#0A66C2] text-white hover:opacity-90 transition-opacity">
+                            <!-- LinkedIn Icon representation -->
+                            <span class="font-bold text-lg">in</span>
+                        </button>
+                        <button
+                            class="flex size-10 items-center justify-center rounded-full bg-slate-700 text-white hover:opacity-90 transition-opacity">
+                            <span class="material-symbols-outlined text-[20px]">link</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="h-px w-full bg-gray-200 dark:bg-white/10 my-6"></div>
+            <!-- Related Articles (Scrollable) -->
+            <section class="pb-8">
+                <div class="px-4 mb-4 flex justify-between items-end">
+                    <h3 class="text-lg font-bold text-slate-900 dark:text-white">Related Articles</h3>
+                    <a class="text-sm text-primary font-medium hover:text-primary/80" href="#">View all</a>
+                </div>
+                <div class="flex overflow-x-auto gap-4 px-4 pb-4 no-scrollbar snap-x snap-mandatory">
+                    <!-- Card 1 -->
+                    <a class="snap-start shrink-0 w-[240px] group" href="#">
+                        <div class="aspect-[4/3] w-full rounded-lg overflow-hidden bg-surface-dark mb-3 relative">
+                            <img alt="Computer screen showing code editor with green matrix style text"
+                                class="h-full w-full object-cover group-hover:scale-105 transition-transform duration-300"
+                                data-alt="Computer screen showing code editor with green matrix style text"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCAuppy0VZmDl20QdPq7wYKD2te533vikuUkoxfFqsDuqSZi0L__Q4PnyZB-4fmnssIphod-RT4CfcqBT1tWO9pdd2DL7Y-SiNEA_-128211jKUpIOI1zJAFkNGm9Ep69XK2eFRUqLmKx7tNT8nzRezd_92jVmh-wkwyTeJY6FzNq4fGEROUYRER0nRJ53pA4_49WGejGjAXmXWdcZuPLBozXMerQZ-cD471YYak9jLp5Ju2SbwZZgS3ny4k0V83PM3K-2oMOyZksdS" />
+                            <div
+                                class="absolute top-2 left-2 bg-black/60 backdrop-blur-sm px-2 py-0.5 rounded text-[10px] text-white font-medium">
+                                Tech</div>
+                        </div>
+                        <h4
+                            class="text-base font-bold text-slate-900 dark:text-white leading-tight group-hover:text-primary transition-colors">
+                            How to resize images without losing quality</h4>
+                        <p class="text-xs text-slate-500 mt-1">Oct 20 • 3 min read</p>
+                    </a>
+                    <!-- Card 2 -->
+                    <a class="snap-start shrink-0 w-[240px] group" href="#">
+                        <div class="aspect-[4/3] w-full rounded-lg overflow-hidden bg-surface-dark mb-3 relative">
+                            <img alt="Abstract fluid art background with blue oil paint swirls"
+                                class="h-full w-full object-cover group-hover:scale-105 transition-transform duration-300"
+                                data-alt="Abstract fluid art background with blue oil paint swirls"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuAnB5ZkDT9YpLUnCiF6AauYrNUzpKQH1taaAVwvS8EdJMI2k2iCX3Rlc6rmsFJnLhTZ0_DzlIoE7Rza0OPMKkCzchp3cjpvGSIpXPdozeDHeuMkeP8dkFxmLrdB_JGSHUl2twRhWCR6oBAWpyKfA-w8JEzcY5Ap2iaLnMC8YYNr6bUTXfxtLb1xmcX-hXPfrAg4hMci0GaMYtktXLdEpjtEbWSc-v1nXXrS9q3SqmIBbXpWhKD3etciWrueDhXxbPlvdX86mrGAA3g5" />
+                            <div
+                                class="absolute top-2 left-2 bg-black/60 backdrop-blur-sm px-2 py-0.5 rounded text-[10px] text-white font-medium">
+                                Design</div>
+                        </div>
+                        <h4
+                            class="text-base font-bold text-slate-900 dark:text-white leading-tight group-hover:text-primary transition-colors">
+                            JPG vs PNG: Which one to choose?</h4>
+                        <p class="text-xs text-slate-500 mt-1">Oct 18 • 6 min read</p>
+                    </a>
+                    <!-- Card 3 -->
+                    <a class="snap-start shrink-0 w-[240px] group" href="#">
+                        <div class="aspect-[4/3] w-full rounded-lg overflow-hidden bg-surface-dark mb-3 relative">
+                            <div
+                                class="h-full w-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center">
+                                <span class="material-symbols-outlined text-white text-[48px]">auto_fix_high</span>
+                            </div>
+                        </div>
+                        <h4
+                            class="text-base font-bold text-slate-900 dark:text-white leading-tight group-hover:text-primary transition-colors">
+                            Top 5 Tools for Designers</h4>
+                        <p class="text-xs text-slate-500 mt-1">Oct 15 • 4 min read</p>
+                    </a>
+                </div>
+            </section>
+            <div class="h-px w-full bg-gray-200 dark:bg-white/10 mb-8"></div>
+            <!-- Comments Section -->
+            <section class="px-4 pb-12">
+                <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-6 flex items-center gap-2">
+                    Discussion
+                    <span class="rounded-full bg-surface-dark px-2 py-0.5 text-xs text-slate-400 font-normal">3</span>
+                </h3>
+                <!-- Input -->
+                <div class="flex gap-3 mb-8">
+                    <div
+                        class="size-8 shrink-0 rounded-full bg-gradient-to-br from-primary to-blue-400 flex items-center justify-center text-white text-xs font-bold">
+                        U</div>
+                    <div class="flex-1">
+                        <textarea
+                            class="w-full rounded-lg bg-white dark:bg-surface-dark border border-gray-200 dark:border-white/10 text-slate-900 dark:text-white p-3 text-sm focus:ring-2 focus:ring-primary focus:border-transparent outline-none resize-none placeholder-slate-500"
+                            placeholder="Add to the discussion..." rows="2"></textarea>
+                        <div class="flex justify-end mt-2">
+                            <button
+                                class="bg-primary hover:bg-blue-600 text-white text-sm font-medium py-1.5 px-4 rounded-lg transition-colors">
+                                Post Comment
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Comment List -->
+                <div class="space-y-6">
+                    <!-- Comment 1 -->
+                    <div class="flex gap-3">
+                        <img alt="User avatar for Sarah M"
+                            class="size-8 rounded-full object-cover border border-white/10"
+                            data-alt="User avatar for Sarah M"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuAeF6V1Mzkwp5vS5LExv-js0KZh4NWxoQzb1Zf9zSk2njwdJCLQ4UkdDxwpYIXLQGetqZTBQImy8WHmJF4W81QHVDKmngJ9Qlc2yTAejtMR48Ji7gyfgQvmWJu7RJ1f31xG55YUvPtwVOwDeuTWT2cSdFikyiv9A5frE8kg90rbVTd7P9J0f8WPdRtviX0_lDauTPQ96c-IbIWnBhdk4V0nmB3Up8m4RNy5TDNgaHSDk3GWvdRhUpfa1W_ek_E4I1JwI4c_DkyWXPqE" />
+                        <div class="flex-1 space-y-1">
+                            <div class="flex items-center justify-between">
+                                <span class="text-sm font-semibold text-slate-900 dark:text-white">Sarah M.</span>
+                                <span class="text-xs text-slate-500">2h ago</span>
+                            </div>
+                            <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+                                Great guide! I was struggling with AVIF support, but your workaround helped a lot.
+                            </p>
+                            <button class="flex items-center gap-1 text-xs text-slate-500 hover:text-primary mt-1">
+                                <span class="material-symbols-outlined text-[14px]">thumb_up</span> 12
+                            </button>
+                        </div>
+                    </div>
+                    <!-- Comment 2 -->
+                    <div class="flex gap-3">
+                        <img alt="User avatar for David K"
+                            class="size-8 rounded-full object-cover border border-white/10"
+                            data-alt="User avatar for David K"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuDH3vuCUN8InTcbrRWCKbLhnTS7SlgMw57GXRPhCjewJ_guxw0k3TpNwVNKcW-xPLkjSaHNGMMOOMuNjnYRjGqlNPPI5Etx5jGfT3xlyWPMQC7GnEeUqtf62PfaqkMXZhabIBJwiAaa-wXKjQu56Ps6GnI9jpDY9itA8vQE76KrXlNJ80DdSeGR5GFzoeQM7puNv15pzwXVFCEDOe7CuYgz0UGn3I5i4_50QUH6tWaeLcKiN5rPLSJd71un3XhBHtxoDNaksnAaNCux" />
+                        <div class="flex-1 space-y-1">
+                            <div class="flex items-center justify-between">
+                                <span class="text-sm font-semibold text-slate-900 dark:text-white">David K.</span>
+                                <span class="text-xs text-slate-500">5h ago</span>
+                            </div>
+                            <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+                                Do you recommend any specific tool for bulk processing 1000+ images? The online tool is
+                                great for smaller batches.
+                            </p>
+                            <!-- Reply Indication -->
+                            <div class="mt-3 pl-3 border-l-2 border-primary/30">
+                                <div class="flex gap-2">
+                                    <div
+                                        class="size-6 shrink-0 rounded-full bg-primary/20 flex items-center justify-center text-primary text-[10px] font-bold border border-primary/20">
+                                        A</div>
+                                    <div class="flex-1 space-y-1">
+                                        <div class="flex items-center justify-between">
+                                            <span class="text-xs font-semibold text-primary">Alex Dev <span
+                                                    class="bg-primary/20 text-[9px] px-1 rounded ml-1">Author</span></span>
+                                        </div>
+                                        <p class="text-xs text-slate-600 dark:text-slate-300">
+                                            Hi David! For that volume, check out our API documentation. It's designed
+                                            exactly for that scale.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+        <!-- Mobile Footer -->
+        <footer class="bg-white dark:bg-surface-dark border-t border-gray-200 dark:border-white/5 py-8 px-4 mt-auto">
+            <div class="flex flex-col items-center gap-4">
+                <div class="flex items-center gap-2">
+                    <div
+                        class="size-8 rounded bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-white font-bold text-sm">
+                        IH</div>
+                    <span class="text-lg font-bold text-slate-900 dark:text-white">ImageHub Pro</span>
+                </div>
+                <div class="flex gap-6 text-sm text-slate-500 dark:text-slate-400">
+                    <a class="hover:text-primary" href="#">Tools</a>
+                    <a class="hover:text-primary" href="#">Privacy</a>
+                    <a class="hover:text-primary" href="#">Contact</a>
+                </div>
+                <p class="text-xs text-slate-500 dark:text-slate-600 text-center">
+                    © 2023 ImageHub Pro. All rights reserved.
+                </p>
+            </div>
+        </footer>
+        <!-- Bottom Action Bar (Mobile Sticky) -->
+        <div
+            class="fixed bottom-0 left-0 w-full bg-white/90 dark:bg-background-dark/90 backdrop-blur-lg border-t border-gray-200 dark:border-white/10 p-3 flex justify-around items-center z-40 md:hidden">
+            <button class="flex flex-col items-center gap-1 text-primary">
+                <span class="material-symbols-outlined text-[24px]">article</span>
+                <span class="text-[10px] font-medium">Post</span>
+            </button>
+            <button class="flex flex-col items-center gap-1 text-slate-400 dark:text-slate-500 hover:text-primary">
+                <span class="material-symbols-outlined text-[24px]">format_list_bulleted</span>
+                <span class="text-[10px] font-medium">TOC</span>
+            </button>
+            <button class="flex flex-col items-center gap-1 text-slate-400 dark:text-slate-500 hover:text-primary">
+                <span class="material-symbols-outlined text-[24px]">chat_bubble</span>
+                <span class="text-[10px] font-medium">Comments</span>
+            </button>
+            <button class="flex flex-col items-center gap-1 text-slate-400 dark:text-slate-500 hover:text-primary">
+                <span class="material-symbols-outlined text-[24px]">share</span>
+                <span class="text-[10px] font-medium">Share</span>
+            </button>
+        </div>
+    </div>
+</body>
+
+</html>

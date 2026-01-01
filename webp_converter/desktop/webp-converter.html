@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>WebP Converter - ImageHub Pro</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <!-- Material Symbols -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <!-- Theme Configuration -->
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#0066cc",
+                        "secondary": "#00CC66",
+                        "background-light": "#f5f7f8",
+                        "background-dark": "#0f1923",
+                        "surface-dark": "#18232e",
+                        "surface-highlight": "#202e3b",
+                        "border-dark": "#2d3b4e"
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "2xl": "1rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+    <style>
+        /* Custom range slider styling for WebKit */
+        input[type=range] {
+            -webkit-appearance: none;
+            background: transparent;
+        }
+
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            height: 20px;
+            width: 20px;
+            border-radius: 50%;
+            background: #ffffff;
+            border: 2px solid #0066cc;
+            cursor: pointer;
+            margin-top: -8px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        input[type=range]::-webkit-slider-runnable-track {
+            width: 100%;
+            height: 4px;
+            cursor: pointer;
+            background: #2d3b4e;
+            border-radius: 2px;
+        }
+
+        /* Focus styles */
+        input[type=range]:focus {
+            outline: none;
+        }
+    </style>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+</head>
+
+<body
+    class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-white font-display min-h-screen flex flex-col antialiased selection:bg-primary selection:text-white overflow-x-hidden">
+    <!-- Sticky Header -->
+    <header
+        class="sticky top-0 z-40 bg-background-light/95 dark:bg-background-dark/95 backdrop-blur-md border-b border-gray-200 dark:border-border-dark px-4 h-14 flex items-center justify-between transition-colors duration-200">
+        <div class="flex items-center gap-2">
+            <!-- Brand Icon -->
+            <div class="flex items-center justify-center size-8 rounded-lg bg-primary/20 text-primary">
+                <span class="material-symbols-outlined text-[20px]">photo_library</span>
+            </div>
+            <h1 class="text-lg font-bold tracking-tight">ImageHub Pro</h1>
+        </div>
+        <!-- Navigation Menu Trigger -->
+        <button
+            class="flex items-center justify-center size-10 rounded-full hover:bg-gray-200 dark:hover:bg-surface-highlight transition-colors text-slate-600 dark:text-slate-300">
+            <span class="material-symbols-outlined">menu</span>
+        </button>
+    </header>
+    <!-- Main Content Area -->
+    <main class="flex-1 w-full max-w-lg mx-auto p-4 flex flex-col gap-6 pb-24">
+        <!-- Title Section -->
+        <div>
+            <div class="flex items-center gap-2 mb-1">
+                <span class="text-xs font-semibold uppercase tracking-wider text-primary">Free Tool</span>
+            </div>
+            <h2 class="text-3xl font-bold leading-tight">WebP Converter</h2>
+            <p class="text-slate-500 dark:text-slate-400 mt-2 text-sm">Convert images to WebP format for faster web
+                performance. Supports JPG, PNG, and GIF.</p>
+        </div>
+        <!-- Upload Section -->
+        <section class="relative group cursor-pointer">
+            <input accept="image/*" class="absolute inset-0 w-full h-full opacity-0 z-10 cursor-pointer" type="file" />
+            <div
+                class="flex flex-col items-center justify-center gap-4 rounded-xl border-2 border-dashed border-gray-300 dark:border-border-dark bg-white dark:bg-surface-dark px-6 py-10 transition-all duration-300 group-hover:border-primary group-hover:bg-primary/5">
+                <div class="size-16 rounded-full bg-primary/10 flex items-center justify-center text-primary mb-2">
+                    <span class="material-symbols-outlined text-[32px]">cloud_upload</span>
+                </div>
+                <div class="text-center">
+                    <p class="text-base font-bold dark:text-white">Tap to Select Image</p>
+                    <p class="text-sm text-slate-500 dark:text-slate-400 mt-1">or select from Files</p>
+                </div>
+                <button
+                    class="mt-2 rounded-full h-9 px-5 bg-slate-100 dark:bg-surface-highlight text-sm font-semibold text-slate-700 dark:text-slate-200 flex items-center gap-2">
+                    <span class="material-symbols-outlined text-[18px]">add_photo_alternate</span>
+                    Browse
+                </button>
+            </div>
+        </section>
+        <!-- Configuration Card -->
+        <section
+            class="bg-white dark:bg-surface-dark rounded-xl p-5 shadow-sm border border-gray-100 dark:border-border-dark space-y-6">
+            <div class="flex items-center gap-2 border-b border-gray-100 dark:border-border-dark pb-3 mb-1">
+                <span class="material-symbols-outlined text-slate-400">tune</span>
+                <h3 class="text-base font-bold dark:text-white">Conversion Settings</h3>
+            </div>
+            <!-- Output Format -->
+            <div class="space-y-3">
+                <label class="text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">Output
+                    Format</label>
+                <div class="flex rounded-lg bg-gray-100 dark:bg-surface-highlight p-1">
+                    <button
+                        class="flex-1 rounded-md py-2 text-sm font-semibold shadow-sm bg-white dark:bg-primary text-slate-900 dark:text-white transition-all">WebP</button>
+                    <button
+                        class="flex-1 rounded-md py-2 text-sm font-medium text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-all">JPG</button>
+                    <button
+                        class="flex-1 rounded-md py-2 text-sm font-medium text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-all">PNG</button>
+                </div>
+            </div>
+            <!-- Quality Slider -->
+            <div class="space-y-4">
+                <div class="flex justify-between items-center">
+                    <label
+                        class="text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">Quality</label>
+                    <span
+                        class="text-sm font-mono font-medium text-primary bg-primary/10 px-2 py-0.5 rounded">80%</span>
+                </div>
+                <div class="relative h-6 flex items-center">
+                    <input class="w-full z-20" max="100" min="1" type="range" value="80" />
+                    <div class="absolute w-[80%] h-1 bg-primary rounded-l-full z-10 pointer-events-none"></div>
+                </div>
+                <div class="flex justify-between text-[10px] text-slate-400 font-medium">
+                    <span>Smaller Size</span>
+                    <span>Better Quality</span>
+                </div>
+            </div>
+            <!-- Toggle Option -->
+            <div class="flex items-center justify-between pt-2">
+                <div class="flex flex-col">
+                    <span class="text-sm font-semibold dark:text-white">Preserve Animation</span>
+                    <span class="text-xs text-slate-500 dark:text-slate-400">For GIF inputs</span>
+                </div>
+                <label class="relative inline-flex items-center cursor-pointer">
+                    <input class="sr-only peer" type="checkbox" value="" />
+                    <div
+                        class="w-11 h-6 bg-gray-200 peer-focus:outline-none dark:bg-surface-highlight peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-primary">
+                    </div>
+                </label>
+            </div>
+        </section>
+        <!-- Ad Placeholder -->
+        <div
+            class="w-full h-24 bg-gray-100 dark:bg-surface-highlight/50 rounded-lg flex flex-col items-center justify-center border border-dashed border-gray-300 dark:border-border-dark overflow-hidden relative">
+            <!-- Background pattern for abstract look -->
+            <div class="absolute inset-0 opacity-10"
+                style="background-image: radial-gradient(#64748b 1px, transparent 1px); background-size: 16px 16px;">
+            </div>
+            <span class="text-xs font-bold text-slate-400 uppercase tracking-widest relative z-10">Advertisement</span>
+        </div>
+        <!-- Live Preview (Simulated State) -->
+        <section
+            class="bg-white dark:bg-surface-dark rounded-xl overflow-hidden shadow-sm border border-gray-100 dark:border-border-dark">
+            <div
+                class="p-4 border-b border-gray-100 dark:border-border-dark flex justify-between items-center bg-gray-50/50 dark:bg-surface-highlight/30">
+                <h3 class="text-sm font-bold dark:text-white">Preview</h3>
+                <span
+                    class="flex items-center gap-1.5 text-xs font-bold text-secondary bg-secondary/10 px-2 py-1 rounded-md">
+                    <span class="material-symbols-outlined text-[14px]">trending_down</span>
+                    -78% Saved
+                </span>
+            </div>
+            <div class="flex p-4 gap-4">
+                <!-- Preview Image -->
+                <div class="relative w-24 h-24 shrink-0 rounded-lg overflow-hidden bg-gray-800 ring-1 ring-white/10">
+                    <img alt="Sample abstract gradient image preview showing blue and purple tones"
+                        class="w-full h-full object-cover opacity-80"
+                        data-alt="Abstract gradient waves representing an image preview"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuDJ0OtSpd94Xi3zkglqOCgE0K4VoxspNMmuVt_bNixDqckFLjs2pCU_yMdhde_tyrtT7Nlvgpr5wuK3ksdRIMdoULoNSN_VzimH1P0aO_l5t0b7rHRooyduMrbBj-c_a4QM8fUKH_8uLE6laXU04VZCjkc4vVmZONgWHSzXxZQ0C_LK7Af_UJzHLp31QlSBvFqCMagmn0tHFM5u0G7DVpGrw0GyZ3Zia1627loUOvtIF9IM8foFiGSsgpL6u1Ws6XxyTxsakFlNgmp-" />
+                    <div class="absolute inset-0 flex items-center justify-center bg-black/20">
+                        <span class="material-symbols-outlined text-white text-[28px] drop-shadow-lg">visibility</span>
+                    </div>
+                </div>
+                <!-- Stats -->
+                <div class="flex flex-col justify-center flex-1 gap-3">
+                    <div class="flex justify-between items-center">
+                        <span class="text-xs text-slate-500 dark:text-slate-400">Original</span>
+                        <span class="text-sm font-medium dark:text-white">2.4 MB</span>
+                    </div>
+                    <div class="h-px bg-gray-100 dark:bg-border-dark w-full"></div>
+                    <div class="flex justify-between items-center">
+                        <span class="text-xs text-slate-500 dark:text-slate-400">WebP</span>
+                        <span class="text-sm font-bold text-secondary">540 KB</span>
+                    </div>
+                    <button class="text-xs text-primary font-medium flex items-center gap-1 mt-1 hover:underline">
+                        <span class="material-symbols-outlined text-[14px]">compare</span>
+                        Long press to compare
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+    <!-- Sticky Bottom CTA -->
+    <div
+        class="fixed bottom-0 left-0 right-0 p-4 bg-background-light/95 dark:bg-background-dark/95 backdrop-blur-xl border-t border-gray-200 dark:border-border-dark z-50">
+        <div class="max-w-lg mx-auto flex gap-3">
+            <button
+                class="flex-1 flex items-center justify-center h-14 rounded-xl bg-primary hover:bg-primary/90 text-white font-bold text-base shadow-lg shadow-primary/25 transition-all active:scale-[0.98]">
+                <span class="material-symbols-outlined mr-2">bolt</span>
+                Convert &amp; Download
+            </button>
+            <button
+                class="size-14 flex items-center justify-center rounded-xl bg-gray-200 dark:bg-surface-highlight text-slate-700 dark:text-white hover:bg-gray-300 dark:hover:bg-gray-700 transition-colors">
+                <span class="material-symbols-outlined">share</span>
+            </button>
+        </div>
+        <!-- Safe area for iOS home indicator -->
+        <div class="h-1 w-full"></div>
+    </div>
+    <!-- Navigation Drawer (Hidden by default, structure provided) -->
+    <!-- This simulates the drawer structure requested in "Components list" but adapted for this layout context -->
+    <div class="hidden fixed inset-0 z-[60]">
+        <div class="absolute inset-0 bg-black/60 backdrop-blur-sm"></div>
+        <div class="absolute left-0 top-0 h-full w-3/4 max-w-xs bg-background-dark shadow-2xl p-6 flex flex-col gap-6">
+            <div class="flex items-center gap-2 mb-4">
+                <div class="flex items-center justify-center size-8 rounded-lg bg-primary/20 text-primary">
+                    <span class="material-symbols-outlined text-[20px]">photo_library</span>
+                </div>
+                <h2 class="text-lg font-bold text-white">ImageHub Pro</h2>
+            </div>
+            <nav class="flex flex-col gap-2">
+                <a class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-300 hover:bg-surface-highlight hover:text-white transition-colors"
+                    href="#">
+                    <span class="material-symbols-outlined">home</span>
+                    <span class="font-medium">Home</span>
+                </a>
+                <a class="flex items-center gap-3 px-4 py-3 rounded-lg bg-primary/10 text-primary" href="#">
+                    <span class="material-symbols-outlined">build</span>
+                    <span class="font-bold">Tools</span>
+                </a>
+                <a class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-300 hover:bg-surface-highlight hover:text-white transition-colors"
+                    href="#">
+                    <span class="material-symbols-outlined">article</span>
+                    <span class="font-medium">Blog</span>
+                </a>
+                <a class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-300 hover:bg-surface-highlight hover:text-white transition-colors"
+                    href="#">
+                    <span class="material-symbols-outlined">chat</span>
+                    <span class="font-medium">Feedback</span>
+                </a>
+            </nav>
+        </div>
+    </div>
+</body>
+
+</html>

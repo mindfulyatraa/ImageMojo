@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Pro Image Combiner - ImageHub Pro</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography,container-queries"></script>
+    <!-- Tailwind Config -->
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#0066cc",
+                        "secondary": "#00CC66",
+                        "background-light": "#f5f7f8",
+                        "background-dark": "#0f1923",
+                        "surface-dark": "#1b2128",
+                        "surface-darker": "#151a20",
+                        "surface-border": "#2d3748",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"],
+                        "mono": ["JetBrains Mono", "monospace"],
+                    },
+                },
+            },
+        }
+    </script>
+    <!-- Icons & Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <style>
+        body {
+            height: 100vh;
+            overflow: hidden;
+        }
+    </style>
+</head>
+
+<body
+    class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-white font-display antialiased flex flex-col h-screen">
+    <!-- Top Navigation Bar (Professional) -->
+    <nav
+        class="h-14 border-b border-slate-200 dark:border-surface-border bg-white dark:bg-surface-dark flex items-center justify-between px-4 shrink-0 z-50">
+        <div class="flex items-center gap-3">
+            <div
+                class="size-8 rounded bg-gradient-to-br from-primary to-blue-500 flex items-center justify-center text-white font-bold">
+                IH</div>
+            <span class="font-bold text-lg tracking-tight text-slate-700 dark:text-slate-200">ImageHub Pro</span>
+            <div class="h-5 w-px bg-slate-200 dark:bg-surface-border mx-2"></div>
+            <span class="text-sm font-medium text-slate-500 dark:text-slate-400">Pro Combiner</span>
+        </div>
+        <div class="flex items-center gap-3">
+            <div
+                class="hidden md:flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-100 dark:bg-surface-darker border border-slate-200 dark:border-surface-border text-xs text-slate-500 font-mono">
+                <span class="w-2 h-2 rounded-full bg-green-500"></span>
+                Ready to Process
+            </div>
+            <button
+                class="bg-primary hover:bg-blue-600 text-white px-4 py-1.5 rounded-lg text-sm font-bold transition-colors shadow-lg shadow-blue-500/20 flex items-center gap-2">
+                <span class="material-symbols-outlined text-[18px]">download</span>
+                Export Image
+            </button>
+        </div>
+    </nav>
+    <!-- Main Workspace -->
+    <main class="flex-1 flex overflow-hidden">
+        <!-- LEFT SIDEBAR: Controls & Settings (Fixed Width) -->
+        <aside
+            class="w-[320px] lg:w-[360px] flex flex-col border-r border-slate-200 dark:border-surface-border bg-white dark:bg-surface-dark h-full overflow-y-auto custom-scrollbar">
+            <!-- Image List Section -->
+            <div class="p-5 border-b border-slate-200 dark:border-surface-border">
+                <div class="flex justify-between items-center mb-3">
+                    <h3 class="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">Source
+                        Images</h3>
+                    <span class="text-xs text-primary font-medium cursor-pointer hover:underline">Add Files</span>
+                </div>
+                <div class="flex flex-col gap-2 mb-3">
+                    <!-- Draggable List Items -->
+                    <div
+                        class="group flex items-center gap-3 p-2 rounded-lg border border-slate-200 dark:border-surface-border bg-slate-50 dark:bg-surface-darker hover:border-primary/50 transition-colors cursor-grab active:cursor-grabbing">
+                        <span class="material-symbols-outlined text-slate-400">drag_indicator</span>
+                        <img class="size-10 rounded object-cover bg-slate-200"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuBC-F-07vY6L1f4fE1O79r15l8k1R7O445i-1lV4k1l2x923r48o289-548o56259023_88206145327299388_o" />
+                        <div class="flex-1 min-w-0">
+                            <p class="text-xs font-medium truncate dark:text-slate-200">mountains_01.jpg</p>
+                            <p class="text-[10px] text-slate-500">1.2 MB</p>
+                        </div>
+                        <button class="opacity-0 group-hover:opacity-100 p-1 hover:text-red-500 transition-opacity">
+                            <span class="material-symbols-outlined text-[16px]">close</span>
+                        </button>
+                    </div>
+                    <div
+                        class="group flex items-center gap-3 p-2 rounded-lg border border-slate-200 dark:border-surface-border bg-slate-50 dark:bg-surface-darker hover:border-primary/50 transition-colors cursor-grab active:cursor-grabbing">
+                        <span class="material-symbols-outlined text-slate-400">drag_indicator</span>
+                        <img class="size-10 rounded object-cover bg-slate-200"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuDzz59eGO-UPTgQsnENIcgqe7Wiionxm8t_D-fTIgJqeqptgrWy3a-lavYRPldrEVNa-lPfHKnbkgA8egHmrphVhyKRkJXdnLNrc-xtWm0bMmYD7pwid6txcYhnsbtckzgZ5hqzUGPvDty1ea60cL5iLQPmdu6K6fMq1CRAdTiwr8bniLbY85A8oSFL6uWHasqJk5fgmcvLicEFlav7nVh-azlaivaYtB7E67JKkJJzi94AjLyMbs6jh1Rm7eAtmGoRPdPyQZc0w_oQ" />
+                        <div class="flex-1 min-w-0">
+                            <p class="text-xs font-medium truncate dark:text-slate-200">ocean-view.png</p>
+                            <p class="text-[10px] text-slate-500">3.4 MB</p>
+                        </div>
+                        <button class="opacity-0 group-hover:opacity-100 p-1 hover:text-red-500 transition-opacity">
+                            <span class="material-symbols-outlined text-[16px]">close</span>
+                        </button>
+                    </div>
+                </div>
+                <button
+                    class="w-full py-2 rounded-lg border-2 border-dashed border-slate-300 dark:border-surface-border text-slate-500 dark:text-slate-400 text-sm font-medium hover:border-primary hover:text-primary transition-all">
+                    + Drop Images Here
+                </button>
+            </div>
+            <!-- Layout Controls -->
+            <div class="p-5 border-b border-slate-200 dark:border-surface-border">
+                <h3 class="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-4">Merge
+                    Layout</h3>
+                <div class="grid grid-cols-2 gap-3">
+                    <label class="cursor-pointer relative">
+                        <input checked="" class="peer sr-only" name="layout_mode" type="radio" />
+                        <div
+                            class="p-3 rounded-lg border border-slate-200 dark:border-surface-border bg-slate-50 dark:bg-surface-darker peer-checked:border-primary peer-checked:ring-1 peer-checked:ring-primary transition-all hover:bg-slate-100 dark:hover:bg-white/5 flex flex-col items-center gap-2">
+                            <span class="material-symbols-outlined text-primary">splitscreen_bottom</span>
+                            <span class="text-xs font-medium">Vertical</span>
+                        </div>
+                    </label>
+                    <label class="cursor-pointer relative">
+                        <input class="peer sr-only" name="layout_mode" type="radio" />
+                        <div
+                            class="p-3 rounded-lg border border-slate-200 dark:border-surface-border bg-slate-50 dark:bg-surface-darker peer-checked:border-primary peer-checked:ring-1 peer-checked:ring-primary transition-all hover:bg-slate-100 dark:hover:bg-white/5 flex flex-col items-center gap-2">
+                            <span
+                                class="material-symbols-outlined text-slate-400 peer-checked:text-primary">splitscreen_right</span>
+                            <span class="text-xs font-medium">Horizontal</span>
+                        </div>
+                    </label>
+                    <label class="cursor-pointer relative">
+                        <input class="peer sr-only" name="layout_mode" type="radio" />
+                        <div
+                            class="p-3 rounded-lg border border-slate-200 dark:border-surface-border bg-slate-50 dark:bg-surface-darker peer-checked:border-primary peer-checked:ring-1 peer-checked:ring-primary transition-all hover:bg-slate-100 dark:hover:bg-white/5 flex flex-col items-center gap-2">
+                            <span
+                                class="material-symbols-outlined text-slate-400 peer-checked:text-primary">grid_view</span>
+                            <span class="text-xs font-medium">Grid</span>
+                        </div>
+                    </label>
+                    <label class="cursor-pointer relative">
+                        <input class="peer sr-only" name="layout_mode" type="radio" />
+                        <div
+                            class="p-3 rounded-lg border border-slate-200 dark:border-surface-border bg-slate-50 dark:bg-surface-darker peer-checked:border-primary peer-checked:ring-1 peer-checked:ring-primary transition-all hover:bg-slate-100 dark:hover:bg-white/5 flex flex-col items-center gap-2">
+                            <span
+                                class="material-symbols-outlined text-slate-400 peer-checked:text-primary">view_quilt</span>
+                            <span class="text-xs font-medium">Smart Fit</span>
+                        </div>
+                    </label>
+                </div>
+            </div>
+            <!-- Styling Controls -->
+            <div class="p-5 space-y-6">
+                <div>
+                    <div class="flex justify-between mb-2">
+                        <label class="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Gap
+                            / Spacing</label>
+                        <span class="text-xs font-mono text-primary">12px</span>
+                    </div>
+                    <input
+                        class="w-full h-1.5 bg-slate-200 rounded-lg appearance-none cursor-pointer dark:bg-surface-border accent-primary"
+                        type="range" value="12" />
+                </div>
+                <div>
+                    <div class="flex justify-between mb-2">
+                        <label
+                            class="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Corner
+                            Radius</label>
+                        <span class="text-xs font-mono text-primary">8px</span>
+                    </div>
+                    <input
+                        class="w-full h-1.5 bg-slate-200 rounded-lg appearance-none cursor-pointer dark:bg-surface-border accent-primary"
+                        type="range" value="8" />
+                </div>
+                <div>
+                    <label
+                        class="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider block mb-3">Background</label>
+                    <div class="grid grid-cols-6 gap-2">
+                        <button
+                            class="aspect-square rounded shadow-sm border border-slate-300 dark:border-slate-600 bg-white ring-2 ring-primary ring-offset-2 dark:ring-offset-surface-dark"></button>
+                        <button
+                            class="aspect-square rounded shadow-sm border border-slate-300 dark:border-slate-600 bg-black"></button>
+                        <button
+                            class="aspect-square rounded shadow-sm border border-transparent bg-slate-200 dark:bg-slate-700"></button>
+                        <button
+                            class="aspect-square rounded shadow-sm border border-transparent bg-blue-100 dark:bg-blue-900"></button>
+                        <button
+                            class="aspect-square rounded shadow-sm border-2 border-dashed border-slate-300 dark:border-surface-border flex items-center justify-center text-slate-400 bg-transparent"
+                            title="Transparent">
+                            <span class="material-symbols-outlined text-sm">block</span>
+                        </button>
+                        <button
+                            class="aspect-square rounded shadow-sm border border-slate-300 dark:border-surface-border flex items-center justify-center text-slate-500 hover:bg-slate-100 dark:hover:bg-surface-darker transition-colors bg-white dark:bg-surface-darker">
+                            <span class="material-symbols-outlined text-lg">palette</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <!-- Sidebar Ad -->
+            <div class="mt-auto p-5">
+                <div
+                    class="w-full aspect-[4/3] bg-slate-100 dark:bg-surface-darker rounded-lg border border-slate-200 dark:border-surface-border flex flex-col items-center justify-center relative overflow-hidden group">
+                    <div
+                        class="absolute inset-0 bg-gradient-to-br from-transparent to-black/5 dark:to-white/5 opacity-0 group-hover:opacity-100 transition-opacity">
+                    </div>
+                    <span
+                        class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">Advertisement</span>
+                    <div class="w-12 h-1 bg-slate-300 rounded-full"></div>
+                </div>
+            </div>
+        </aside>
+        <!-- RIGHT WORKSPACE: Canvas (Flexible) -->
+        <section class="flex-1 bg-slate-100 dark:bg-black/50 relative flex flex-col">
+            <!-- Toolbar Overlay -->
+            <div
+                class="absolute top-4 left-1/2 -translate-x-1/2 bg-white/90 dark:bg-surface-dark/90 backdrop-blur border border-slate-200 dark:border-surface-border rounded-full shadow-lg px-4 py-2 flex items-center gap-4 z-10">
+                <button class="text-slate-500 hover:text-primary transition-colors tooltip" title="Zoom Out">
+                    <span class="material-symbols-outlined">remove</span>
+                </button>
+                <span class="text-xs font-mono font-medium w-12 text-center">45%</span>
+                <button class="text-slate-500 hover:text-primary transition-colors tooltip" title="Zoom In">
+                    <span class="material-symbols-outlined">add</span>
+                </button>
+                <div class="w-px h-4 bg-slate-300 dark:bg-surface-border"></div>
+                <button
+                    class="text-slate-500 hover:text-primary transition-colors text-xs font-bold uppercase tracking-wide">Fit</button>
+                <button
+                    class="text-slate-500 hover:text-primary transition-colors text-xs font-bold uppercase tracking-wide">1:1</button>
+            </div>
+            <!-- Canvas Area -->
+            <div class="flex-1 overflow-auto flex items-center justify-center p-12 custom-scrollbar">
+                <!-- Render Container (Simulated Scale) -->
+                <div class="bg-white shadow-2xl relative transition-transform duration-200" id="canvas-root"
+                    style="width: 600px; min-height: 800px; padding: 12px; border-radius: 4px;">
+                    <div class="flex flex-col gap-2 w-full h-full">
+                        <div class="relative w-full aspect-[4/3] rounded overflow-hidden group">
+                            <img class="w-full h-full object-cover"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuBC-F-07vY6L1f4fE1O79r15l8k1R7O445i-1lV4k1l2x923r48o289-548o56259023_88206145327299388_o" />
+                            <div
+                                class="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors border-2 border-transparent group-hover:border-primary cursor-pointer">
+                            </div>
+                        </div>
+                        <div class="relative w-full aspect-[4/3] rounded overflow-hidden group">
+                            <img class="w-full h-full object-cover"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuDzz59eGO-UPTgQsnENIcgqe7Wiionxm8t_D-fTIgJqeqptgrWy3a-lavYRPldrEVNa-lPfHKnbkgA8egHmrphVhyKRkJXdnLNrc-xtWm0bMmYD7pwid6txcYhnsbtckzgZ5hqzUGPvDty1ea60cL5iLQPmdu6K6fMq1CRAdTiwr8bniLbY85A8oSFL6uWHasqJk5fgmcvLicEFlav7nVh-azlaivaYtB7E67JKkJJzi94AjLyMbs6jh1Rm7eAtmGoRPdPyQZc0w_oQ" />
+                            <div
+                                class="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors border-2 border-transparent group-hover:border-primary cursor-pointer">
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Watermark / Footer (Optional) -->
+                    <div
+                        class="absolute bottom-2 right-2 text-[10px] text-black/50 font-bold uppercase tracking-wider pointer-events-none">
+                        ImageHub Pro
+                    </div>
+                </div>
+            </div>
+            <!-- Bottom Info / Format Bar -->
+            <div
+                class="h-12 bg-white dark:bg-surface-dark border-t border-slate-200 dark:border-surface-border px-6 flex items-center justify-between">
+                <div class="text-xs text-slate-500 dark:text-slate-400">
+                    <span class="font-bold">Total Size:</span> ~2400 x 3200px • 4.8MB
+                </div>
+                <div class="flex items-center gap-4">
+                    <label class="flex items-center gap-2 cursor-pointer">
+                        <input
+                            class="form-checkbox rounded text-primary border-slate-300 dark:border-surface-border bg-transparent"
+                            type="checkbox" />
+                        <span class="text-xs text-slate-600 dark:text-slate-300 font-medium">Add Watermark</span>
+                    </label>
+                    <div class="h-4 w-px bg-slate-200 dark:bg-surface-border"></div>
+                    <select
+                        class="bg-transparent border-none text-xs font-bold text-slate-700 dark:text-slate-200 focus:ring-0 cursor-pointer">
+                        <option>JPEG (High)</option>
+                        <option>PNG (Lossless)</option>
+                        <option>WebP (Optimized)</option>
+                    </select>
+                </div>
+            </div>
+        </section>
+    </main>
+    <style>
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: rgba(156, 163, 175, 0.5);
+            border-radius: 3px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: rgba(156, 163, 175, 0.8);
+        }
+    </style>
+</body>
+
+</html>

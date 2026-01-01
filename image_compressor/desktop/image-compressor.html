@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Image Optimizer - ImageHub Pro</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#0066cc",
+                        "secondary": "#00CC66", // Green for success
+                        "background-light": "#f5f7f8",
+                        "background-dark": "#0f1923",
+                        "surface-dark": "#18222d",
+                        "surface-dark-lighter": "#222d3a",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "2xl": "1rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+    <style>
+        /* Custom range slider styling for webkit */
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            height: 24px;
+            width: 24px;
+            border-radius: 50%;
+            background: #ffffff;
+            cursor: pointer;
+            margin-top: -10px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        input[type=range]::-webkit-slider-runnable-track {
+            width: 100%;
+            height: 4px;
+            cursor: pointer;
+            background: #394756;
+            border-radius: 2px;
+        }
+
+        input[type=range]:focus::-webkit-slider-runnable-track {
+            background: #0066cc;
+        }
+
+        /* Custom scrollbar to keep it clean */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #0f1923;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #394756;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #5a6b7c;
+        }
+
+        /* Split view simulation */
+        .split-view-container {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .split-view-divider {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            width: 2px;
+            background: white;
+            z-index: 10;
+            cursor: ew-resize;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .split-view-handle {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 40px;
+            height: 40px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #0066cc;
+            z-index: 20;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+    </style>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+</head>
+
+<body
+    class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-white antialiased transition-colors duration-200">
+    <!-- Wrapper -->
+    <div class="relative flex h-full min-h-screen w-full flex-col overflow-x-hidden">
+        <!-- TopAppBar -->
+        <header
+            class="sticky top-0 z-40 flex items-center justify-between border-b border-gray-200 bg-white/95 px-4 py-3 backdrop-blur dark:border-white/10 dark:bg-background-dark/95 md:px-6">
+            <div class="flex items-center gap-4">
+                <button
+                    class="flex size-10 items-center justify-center rounded-full text-slate-700 hover:bg-slate-100 dark:text-white dark:hover:bg-white/10">
+                    <span class="material-symbols-outlined text-[24px]">menu</span>
+                </button>
+                <div class="flex items-center gap-2">
+                    <div class="flex h-8 w-8 items-center justify-center rounded bg-primary text-white">
+                        <span class="material-symbols-outlined text-[20px]">photo_camera</span>
+                    </div>
+                    <span
+                        class="hidden text-xl font-bold tracking-tight text-slate-900 dark:text-white sm:block">ImageHub
+                        Pro</span>
+                </div>
+            </div>
+            <div class="flex items-center gap-3">
+                <button
+                    class="hidden h-10 items-center gap-2 rounded-lg bg-primary/10 px-4 text-sm font-semibold text-primary transition hover:bg-primary/20 dark:bg-white/10 dark:text-white dark:hover:bg-white/20 sm:flex">
+                    <span class="material-symbols-outlined text-[20px]">diamond</span>
+                    <span>Upgrade</span>
+                </button>
+                <div class="h-10 w-10 overflow-hidden rounded-full border border-gray-200 dark:border-gray-700">
+                    <img alt="User profile avatar showing a person smiling" class="h-full w-full object-cover"
+                        data-alt="User profile avatar"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuBa2HSOX3Sbz22usaE4iXsdDES0lvjugR1pTN6avl8svvVb68gqzehPl3Nx5v_SITi__Bs4Rg4DVDypZMURcAAYFTovOzS14XYB1f1n6HsKAb-6Iz7mYIce4PeBBfib6oofYbwPJYhqlhXKWC9DfAuDd0ImL7Ufi4kxoOFVKrUlrC2tpLBdAemsRnRCWypB3Dl72KJHxndAlz2Or7_0qVpB4oO2Nwh0oRhHgorZJ8df_asELbbz_9zOEXaLVzeiYlLlZWc53QseMiNq" />
+                </div>
+            </div>
+        </header>
+        <!-- Main Content Grid -->
+        <main class="flex-1 p-4 md:p-6 lg:p-8">
+            <div class="mx-auto grid max-w-7xl grid-cols-1 gap-6 lg:grid-cols-12 lg:gap-8">
+                <!-- Left Column: Title, Preview, Stats -->
+                <div class="flex flex-col gap-6 lg:col-span-8">
+                    <!-- Header Text -->
+                    <div>
+                        <div class="mb-2 flex items-center gap-2 text-primary">
+                            <span class="material-symbols-outlined text-sm">auto_fix</span>
+                            <span class="text-sm font-bold uppercase tracking-wider">Free Tool</span>
+                        </div>
+                        <h1 class="text-3xl font-bold leading-tight text-slate-900 dark:text-white md:text-4xl">Image
+                            Optimizer</h1>
+                        <p class="mt-2 text-base text-slate-600 dark:text-slate-400">Reduce file size without losing
+                            quality. Drag &amp; drop or browse to begin.</p>
+                    </div>
+                    <!-- Interactive Preview Area -->
+                    <div
+                        class="group relative overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm dark:border-white/10 dark:bg-surface-dark">
+                        <!-- Toolbar inside Preview -->
+                        <div
+                            class="flex items-center justify-between border-b border-gray-200 bg-gray-50/50 px-4 py-3 backdrop-blur dark:border-white/5 dark:bg-surface-dark-lighter/50">
+                            <div class="flex items-center gap-2">
+                                <span class="material-symbols-outlined text-green-500">check_circle</span>
+                                <span
+                                    class="text-sm font-medium text-slate-700 dark:text-slate-200">mountains_landscape_v2.jpg</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <button
+                                    class="flex size-8 items-center justify-center rounded-lg hover:bg-black/5 dark:text-slate-400 dark:hover:bg-white/10"
+                                    title="Zoom In">
+                                    <span class="material-symbols-outlined text-[20px]">zoom_in</span>
+                                </button>
+                                <button
+                                    class="flex size-8 items-center justify-center rounded-lg hover:bg-black/5 dark:text-slate-400 dark:hover:bg-white/10"
+                                    title="Reset View">
+                                    <span class="material-symbols-outlined text-[20px]">restart_alt</span>
+                                </button>
+                                <div class="mx-2 h-4 w-px bg-gray-300 dark:bg-gray-700"></div>
+                                <button
+                                    class="flex items-center gap-1 text-xs font-semibold text-primary hover:text-primary/80">
+                                    <span class="material-symbols-outlined text-[16px]">upload_file</span>
+                                    <span class="hidden sm:inline">New Image</span>
+                                </button>
+                            </div>
+                        </div>
+                        <!-- Split Image View -->
+                        <div class="relative h-[400px] w-full bg-[#101418] md:h-[500px]">
+                            <!-- Grid Pattern Background for Transparency -->
+                            <div class="absolute inset-0 z-0 opacity-20"
+                                style="background-image: radial-gradient(#4a5568 1px, transparent 1px); background-size: 20px 20px;">
+                            </div>
+                            <div class="split-view-container relative h-full w-full">
+                                <!-- Original Image (Background) -->
+                                <img alt="Original landscape image showing mountains"
+                                    class="h-full w-full object-contain"
+                                    data-alt="Original high resolution nature landscape"
+                                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuAwjhfOOMjuMN3ILDpUD2Kdhe5QpplC7CUuEbUdDJFiJnFGzOrrjq95dfrwp_dnUegHdkkYB9aMWAgVgrTRIchGaUKDlr9G0ecFw3BT7ktxPOX2DwZeRtu1iH671v4zb3ka7oLG1DfUaj8vAjCPowfjEBzXpa5J-f7jXGzz3m63MYqVBaI3pMZxBysgzBqhD9bAhh2vorCBwMORwDROUbe4k1SWT9BNwceHpA0-L2nVKQDXGZA87qU-2e_7IY7oevNQT58ze436zjni" />
+                                <!-- Optimized Image (Clipped Overlay) -->
+                                <!-- In a real app, this would be the optimized version. Here we simulate the effect by using the same image but maybe different filter or just clipped -->
+                                <div class="absolute inset-0 overflow-hidden" style="width: 50%;">
+                                    <img alt="Optimized landscape image showing mountains"
+                                        class="h-full w-full max-w-none object-contain"
+                                        data-alt="Compressed version of nature landscape"
+                                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuDWMXIHbvgY0kUyE3MKs-43Z1p37HP8dEn-E2UzGkffa_1PNWJaW3QTdrDdqkTOvz9eIGlBrymgTRPbWl9f6XXQKafC3QMcuahNC066ALDTs8IefhOrwgM1ooWP9J7AfDs-D-u0d2A0CktMm7QH0-HC4vEektg2pGRgCY_RBCWVZ86CZfzI-46H9U0LTYbKTok8yv4EyNsq03I4Me9eNecpaQMv79eL-g7CiOULGLTRbmEUKdZvqsFVF7o8YoqZkWvplHjtHl3bOBzp"
+                                        style="width: 100vw; height: 100%;" />
+                                    <!-- Label Overlay Left -->
+                                    <div
+                                        class="absolute bottom-4 left-4 rounded bg-black/60 px-2 py-1 text-xs font-bold text-white backdrop-blur-md">
+                                        ORIGINAL (2.4 MB)
+                                    </div>
+                                </div>
+                                <!-- Label Overlay Right -->
+                                <div
+                                    class="absolute bottom-4 right-4 rounded bg-secondary/90 px-2 py-1 text-xs font-bold text-white backdrop-blur-md">
+                                    OPTIMIZED (450 KB)
+                                </div>
+                                <!-- Draggable Divider -->
+                                <div class="split-view-divider" style="left: 50%;">
+                                    <div class="split-view-handle">
+                                        <span class="material-symbols-outlined text-[20px]">code</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Stats Card (Horizontal) -->
+                    <div
+                        class="grid grid-cols-1 gap-4 rounded-xl border border-gray-200 bg-white p-4 shadow-sm dark:border-white/5 dark:bg-surface-dark sm:grid-cols-3">
+                        <div
+                            class="flex flex-col items-center justify-center border-b border-gray-100 pb-2 dark:border-white/5 sm:border-b-0 sm:border-r sm:pb-0">
+                            <span
+                                class="text-xs font-medium uppercase tracking-wide text-slate-500 dark:text-slate-400">Original
+                                Size</span>
+                            <span class="mt-1 text-xl font-bold text-slate-900 dark:text-white">2.4 MB</span>
+                        </div>
+                        <div
+                            class="flex flex-col items-center justify-center border-b border-gray-100 pb-2 dark:border-white/5 sm:border-b-0 sm:border-r sm:pb-0">
+                            <span
+                                class="text-xs font-medium uppercase tracking-wide text-slate-500 dark:text-slate-400">New
+                                Size</span>
+                            <span class="mt-1 text-xl font-bold text-slate-900 dark:text-white">450 KB</span>
+                        </div>
+                        <div class="flex flex-col items-center justify-center">
+                            <span
+                                class="text-xs font-medium uppercase tracking-wide text-slate-500 dark:text-slate-400">Total
+                                Savings</span>
+                            <div class="mt-1 flex items-center gap-1 text-xl font-bold text-secondary">
+                                <span class="material-symbols-outlined text-[20px] font-bold">trending_down</span>
+                                <span>-81%</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Tablet Ad Placeholder (Leaderboard) -->
+                    <div
+                        class="flex h-[90px] w-full items-center justify-center overflow-hidden rounded-lg bg-gray-100 dark:bg-surface-dark-lighter border border-dashed border-gray-300 dark:border-gray-700">
+                        <span class="text-xs font-medium text-gray-400">Advertisement Space (728x90)</span>
+                    </div>
+                </div>
+                <!-- Right Column: Controls Sidebar -->
+                <div class="flex flex-col gap-6 lg:col-span-4">
+                    <!-- Settings Panel -->
+                    <div
+                        class="flex flex-col gap-6 rounded-2xl border border-gray-200 bg-white p-5 shadow-sm dark:border-white/10 dark:bg-surface-dark">
+                        <div class="flex items-center justify-between">
+                            <h2 class="text-lg font-bold text-slate-900 dark:text-white">Settings</h2>
+                            <button class="text-sm font-medium text-primary hover:underline">Reset</button>
+                        </div>
+                        <!-- Format Selection -->
+                        <div class="flex flex-col gap-2">
+                            <label class="text-sm font-semibold text-slate-700 dark:text-slate-300">Output
+                                Format</label>
+                            <div class="grid grid-cols-3 gap-2 rounded-lg bg-gray-100 p-1 dark:bg-surface-dark-lighter">
+                                <button
+                                    class="rounded-md py-2 text-sm font-medium text-slate-600 transition hover:text-slate-900 dark:text-slate-400 dark:hover:text-white">JPG</button>
+                                <button
+                                    class="rounded-md py-2 text-sm font-medium text-slate-600 transition hover:text-slate-900 dark:text-slate-400 dark:hover:text-white">PNG</button>
+                                <button
+                                    class="rounded-md bg-white py-2 text-sm font-bold text-primary shadow-sm dark:bg-primary dark:text-white">WebP</button>
+                            </div>
+                        </div>
+                        <!-- Compression Slider -->
+                        <div class="flex flex-col gap-3">
+                            <div class="flex items-center justify-between">
+                                <label class="text-sm font-semibold text-slate-700 dark:text-slate-300">Quality</label>
+                                <span
+                                    class="rounded bg-primary/10 px-2 py-0.5 text-xs font-bold text-primary dark:bg-primary/20 dark:text-blue-300">80%</span>
+                            </div>
+                            <input
+                                class="h-1.5 w-full appearance-none rounded-lg bg-gray-200 accent-primary dark:bg-gray-700"
+                                max="100" min="0" type="range" value="80" />
+                            <div class="flex justify-between text-xs text-slate-500">
+                                <span>Smaller File</span>
+                                <span>Better Quality</span>
+                            </div>
+                        </div>
+                        <hr class="border-gray-200 dark:border-white/5" />
+                        <!-- Toggles -->
+                        <div class="flex flex-col gap-4">
+                            <!-- EXIF Toggle -->
+                            <div class="flex items-center justify-between">
+                                <div class="flex flex-col">
+                                    <span class="text-sm font-semibold text-slate-700 dark:text-slate-200">Strip
+                                        Metadata</span>
+                                    <span class="text-xs text-slate-500 dark:text-slate-400">Remove EXIF, GPS
+                                        data</span>
+                                </div>
+                                <label class="relative inline-flex cursor-pointer items-center">
+                                    <input checked="" class="peer sr-only" type="checkbox" />
+                                    <div
+                                        class="peer h-6 w-11 rounded-full bg-gray-200 after:absolute after:left-[2px] after:top-[2px] after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-primary peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:outline-none dark:bg-gray-700 dark:border-gray-600">
+                                    </div>
+                                </label>
+                            </div>
+                            <!-- Resize Toggle -->
+                            <div class="flex items-center justify-between">
+                                <div class="flex flex-col">
+                                    <span class="text-sm font-semibold text-slate-700 dark:text-slate-200">Resize for
+                                        Web</span>
+                                    <span class="text-xs text-slate-500 dark:text-slate-400">Max width 1920px</span>
+                                </div>
+                                <label class="relative inline-flex cursor-pointer items-center">
+                                    <input class="peer sr-only" type="checkbox" />
+                                    <div
+                                        class="peer h-6 w-11 rounded-full bg-gray-200 after:absolute after:left-[2px] after:top-[2px] after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-primary peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:outline-none dark:bg-gray-700 dark:border-gray-600">
+                                    </div>
+                                </label>
+                            </div>
+                            <!-- Lossless Option -->
+                            <div class="flex items-center justify-between">
+                                <div class="flex flex-col">
+                                    <span class="text-sm font-semibold text-slate-700 dark:text-slate-200">Lossless
+                                        Mode</span>
+                                    <span class="text-xs text-slate-500 dark:text-slate-400">Best quality, less
+                                        reduction</span>
+                                </div>
+                                <label class="relative inline-flex cursor-pointer items-center">
+                                    <input class="peer sr-only" type="checkbox" />
+                                    <div
+                                        class="peer h-6 w-11 rounded-full bg-gray-200 after:absolute after:left-[2px] after:top-[2px] after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-primary peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:outline-none dark:bg-gray-700 dark:border-gray-600">
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Call to Action Area -->
+                    <div class="flex flex-col gap-3 rounded-2xl bg-white p-5 shadow-sm dark:bg-surface-dark">
+                        <button
+                            class="flex h-14 w-full items-center justify-center gap-2 rounded-xl bg-primary text-base font-bold text-white shadow-lg shadow-blue-900/20 transition-all hover:bg-blue-600 active:scale-[0.98]">
+                            <span class="material-symbols-outlined">download</span>
+                            Optimize &amp; Download
+                        </button>
+                        <p class="text-center text-xs text-slate-500 dark:text-slate-400">Processed securely. Images are
+                            deleted after 1 hour.</p>
+                    </div>
+                    <!-- Sidebar Ad Placeholder (Rectangle) -->
+                    <div
+                        class="flex h-[250px] w-full flex-col items-center justify-center gap-2 rounded-xl border border-dashed border-gray-300 bg-gray-50 p-4 dark:border-gray-700 dark:bg-surface-dark-lighter">
+                        <span
+                            class="material-symbols-outlined text-4xl text-gray-300 dark:text-gray-600">ads_click</span>
+                        <span class="text-xs font-medium text-gray-400">Advertisement (300x250)</span>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <!-- Spacer for bottom padding on mobile/tablet scrolling -->
+        <div class="h-8 w-full"></div>
+    </div>
+    <!-- Hidden Navigation Drawer (Overlay) Example - Positioned absolutely to show structure but hidden by default unless active class applied -->
+    <!-- In a real implementation this would toggle. Here it represents the "closed" state but ready structure. -->
+    <div class="pointer-events-none fixed inset-0 z-50 bg-black/50 opacity-0 transition-opacity">
+        <div
+            class="absolute left-0 top-0 h-full w-3/4 max-w-xs translate-x-[-100%] bg-surface-dark p-6 transition-transform">
+            <!-- Nav content would go here -->
+        </div>
+    </div>
+</body>
+
+</html>

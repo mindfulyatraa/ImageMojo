@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Meme Generator - ImageHub Pro</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#0066cc",
+                        "secondary": "#00CC66",
+                        "background-light": "#f5f7f8",
+                        "background-dark": "#0f1923",
+                        "surface-dark": "#1b2128",
+                        "surface-light": "#ffffff",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"],
+                        "meme": ["Impact", "sans-serif"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+    <style>
+        /* Custom scrollbar for horizontal sections */
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        .text-stroke-black {
+            -webkit-text-stroke: 2px black;
+            text-shadow: 2px 2px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+        }
+    </style>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+</head>
+
+<body
+    class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-white transition-colors duration-200">
+    <div
+        class="relative flex min-h-screen w-full flex-col overflow-x-hidden max-w-md mx-auto shadow-2xl bg-background-light dark:bg-background-dark border-x border-gray-200 dark:border-gray-800">
+        <!-- Header -->
+        <header
+            class="sticky top-0 z-50 bg-background-light/95 dark:bg-background-dark/95 backdrop-blur-md border-b border-gray-200 dark:border-gray-800 p-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <button
+                        class="text-slate-900 dark:text-white p-1 rounded-full hover:bg-black/5 dark:hover:bg-white/10 transition-colors">
+                        <span class="material-symbols-outlined !text-[28px]">menu</span>
+                    </button>
+                    <div class="flex items-center gap-2">
+                        <div
+                            class="w-8 h-8 rounded bg-gradient-to-br from-primary to-blue-400 flex items-center justify-center text-white font-bold text-sm">
+                            IH</div>
+                        <h1 class="text-lg font-bold tracking-tight">ImageHub Pro</h1>
+                    </div>
+                </div>
+                <button
+                    class="w-10 h-10 rounded-full overflow-hidden border-2 border-transparent hover:border-primary transition-colors">
+                    <div class="w-full h-full bg-surface-dark flex items-center justify-center text-gray-400">
+                        <span class="material-symbols-outlined">account_circle</span>
+                    </div>
+                </button>
+            </div>
+        </header>
+        <!-- Main Content -->
+        <main class="flex-1 flex flex-col p-4 gap-6 pb-24">
+            <!-- Page Title -->
+            <div class="flex flex-col gap-1">
+                <h2 class="text-2xl font-bold">Meme Generator</h2>
+                <p class="text-slate-500 dark:text-slate-400 text-sm">Create viral memes in seconds.</p>
+            </div>
+            <!-- Live Preview Canvas -->
+            <section
+                class="relative w-full aspect-square bg-surface-light dark:bg-surface-dark rounded-xl shadow-lg overflow-hidden border border-gray-200 dark:border-gray-700 group">
+                <div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105"
+                    data-alt="Preview of the meme being generated showing a distracted boyfriend template"
+                    style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBLr9WSh7hSXe7WO_EcmxJdbTiyjFmyWhwW9QVLPrnWSf96fJayGm1eKiLp8I8jPMOw18AAJLyF5hdFSetjCfWoiaDgsF9Hwx24peq1gOFszALryCgow7-OKolcxO8T6QK1jnk5_AKFmTV8gmNud_7XDMkpEohth2U_kCuMF3C0yy_pyXrGx5drP2fVib8DzgQp8oxg77VdPtXT7Bp3VUOk5LtyVJtOItwWhz0MMFcd-jXqQRLhwWtiSwba-VXPJ-JKmUUeXa58WWQY');">
+                </div>
+                <!-- Text Overlays -->
+                <div class="absolute inset-0 flex flex-col justify-between p-4 pointer-events-none">
+                    <p
+                        class="font-meme text-4xl text-white text-center font-bold uppercase tracking-wide break-words text-stroke-black leading-none">
+                        WHEN THE CODE
+                    </p>
+                    <p
+                        class="font-meme text-4xl text-white text-center font-bold uppercase tracking-wide break-words text-stroke-black leading-none">
+                        FINALLY WORKS
+                    </p>
+                </div>
+                <!-- Canvas Actions Overlay -->
+                <div class="absolute bottom-2 right-2 flex gap-2">
+                    <button
+                        class="bg-black/60 hover:bg-black/80 text-white p-2 rounded-lg backdrop-blur-sm transition-colors"
+                        title="Expand Preview">
+                        <span class="material-symbols-outlined !text-[20px]">fullscreen</span>
+                    </button>
+                </div>
+            </section>
+            <!-- Source Selection -->
+            <section class="flex flex-col gap-3">
+                <div class="flex items-center justify-between">
+                    <h3 class="text-sm font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Select
+                        Source</h3>
+                    <button class="text-primary text-sm font-medium hover:underline">View All</button>
+                </div>
+                <div class="flex gap-3 overflow-x-auto hide-scrollbar pb-2">
+                    <!-- Upload Button -->
+                    <button
+                        class="flex flex-col items-center justify-center min-w-[100px] h-[100px] rounded-lg border-2 border-dashed border-primary/50 bg-primary/5 hover:bg-primary/10 transition-colors shrink-0 gap-2 group">
+                        <span
+                            class="material-symbols-outlined text-primary group-hover:scale-110 transition-transform">cloud_upload</span>
+                        <span class="text-xs font-bold text-primary">Upload</span>
+                    </button>
+                    <!-- Templates -->
+                    <button
+                        class="relative min-w-[100px] h-[100px] rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700 shrink-0 hover:ring-2 ring-primary transition-all">
+                        <div class="absolute inset-0 bg-cover bg-center" data-alt="Distracted boyfriend meme template"
+                            style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuA5GxmAqQebug2PskZwW-MpefoimDz3rYpe8UP0RJYleyb0m9PVMnMF6WVIRLZOBCdzgD1bZvw6k1AfBC7B_D8zqk84gvKb7GZZA7xNiDRjz9sJR91DX1j3AaOuQ4G92e89ZtwClTsHH8EbgPKs0vZhpQANMZZgXaVOASuYv3DxlOs9lGmWQPoXTe8P7rLaoZQizX7sQLvsRV6MzgQgdxDDCyR2Rftn_UgJlT35Awiz6CM2YAN_HaFBVBpjDxsiJ3eBSRz6wGCXZjzp');">
+                        </div>
+                    </button>
+                    <button
+                        class="relative min-w-[100px] h-[100px] rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700 shrink-0 opacity-60 hover:opacity-100 transition-opacity">
+                        <div class="absolute inset-0 bg-cover bg-center" data-alt="Cat yelling at woman meme template"
+                            style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDW-q6soyjUX-x1fQBnouK6W_iGELvk_m1qFZi-6-J_hkMXnB2D7BBU41yswIYDn5NuZIpk43faAZ2qjDOct1pymKXtr89TQfd1N4FF7vbx8k6iKZtbOABawoHhigGh_utieAaGNNm9_2mgskDoZP0_MM02DzvxTjtcPmwtyHPtW3y2evMJ4birj50vRZR0JTLTG0q0hOF0xMYV48ZVHX9GCEma7YhBpSF6wRYiHAZcYq8kyJu9CKI2ets3lc-vi5LQbOb47iOXThU_');">
+                        </div>
+                    </button>
+                    <button
+                        class="relative min-w-[100px] h-[100px] rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700 shrink-0 opacity-60 hover:opacity-100 transition-opacity">
+                        <div class="absolute inset-0 bg-cover bg-center" data-alt="Success kid meme template"
+                            style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBkQD-dYC0zyA2EhX2jXjr1h4hRzoH6maqtmac-eSxj1JJFDuwVOLPYszklBUWja6ZhI68O5q4ODf9dOBf5EXgULVkFlyBM5tIZ1IFJMPsYzyaeXNJAg-L2SrQC6Ajx4nqIdvpKUgbARG0m0hOXj_1pvIWjgg0glp4IPt6joABkNKSCACU38BGL9jkqJKuvqlNFw3yAcgtpOEHx9SIau22_WR5lJpHTvDXowkn2bcNlCbOJJrXbhkgKk_iR3h5RZourc0cM4ZDCsDbx');">
+                        </div>
+                    </button>
+                    <button
+                        class="relative min-w-[100px] h-[100px] rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700 shrink-0 opacity-60 hover:opacity-100 transition-opacity">
+                        <div class="absolute inset-0 bg-cover bg-center" data-alt="Drake hotline bling meme template"
+                            style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAJJYY0_5e-xS1WSWqDcHRa9pkJXsi87FKCQe7iHektY5jsXfbQdeYDep-6yLcD3MVF-keFdkgyNtB_KrKlIgmsdX8sFH49BHcSzrBRNBbRucgt2rfBMp3kjiXjRFOx-laOBrvU250Oh0GCwrA7NRXj39pgwH1syYqSKWCuoDsYIcarCEWEqs3yM0j7kYlNsX4DKKSqPGWtkN7ymUVhNDrVxQX2kJprweWkjZPHkWIXZokW5fOHPIemTPbagpHhS8K33q81wlRFhxSl');">
+                        </div>
+                    </button>
+                </div>
+            </section>
+            <!-- Ad Placeholder -->
+            <div
+                class="w-full h-[60px] bg-gray-200 dark:bg-gray-800 rounded-lg flex items-center justify-center border border-gray-300 dark:border-gray-700">
+                <span
+                    class="text-xs font-mono text-gray-500 dark:text-gray-400 uppercase tracking-widest">Advertisement</span>
+            </div>
+            <!-- Editor Controls -->
+            <section
+                class="flex flex-col gap-5 bg-surface-light dark:bg-surface-dark p-5 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700">
+                <!-- Text Inputs -->
+                <div class="flex flex-col gap-4">
+                    <div class="space-y-1">
+                        <label class="text-xs font-semibold text-slate-500 dark:text-slate-400 ml-1">TOP TEXT</label>
+                        <div class="relative">
+                            <input
+                                class="w-full bg-background-light dark:bg-background-dark border-transparent focus:border-primary focus:ring-primary rounded-lg py-3 px-4 text-sm font-medium text-slate-900 dark:text-white placeholder-slate-400 transition-all shadow-inner"
+                                placeholder="Enter top text..." type="text" value="WHEN THE CODE" />
+                            <button
+                                class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-primary transition-colors">
+                                <span class="material-symbols-outlined !text-[20px]">close</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="space-y-1">
+                        <label class="text-xs font-semibold text-slate-500 dark:text-slate-400 ml-1">BOTTOM TEXT</label>
+                        <div class="relative">
+                            <input
+                                class="w-full bg-background-light dark:bg-background-dark border-transparent focus:border-primary focus:ring-primary rounded-lg py-3 px-4 text-sm font-medium text-slate-900 dark:text-white placeholder-slate-400 transition-all shadow-inner"
+                                placeholder="Enter bottom text..." type="text" value="FINALLY WORKS" />
+                            <button
+                                class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-primary transition-colors">
+                                <span class="material-symbols-outlined !text-[20px]">close</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Divider -->
+                <div class="h-px w-full bg-gray-200 dark:bg-gray-700"></div>
+                <!-- Style Controls -->
+                <div class="flex flex-col gap-4">
+                    <div class="flex items-center justify-between">
+                        <label class="text-sm font-semibold">Text Size</label>
+                        <span class="text-xs text-primary font-mono bg-primary/10 px-2 py-1 rounded">42px</span>
+                    </div>
+                    <input
+                        class="w-full h-2 bg-gray-200 dark:bg-gray-700 rounded-lg appearance-none cursor-pointer accent-primary"
+                        max="100" min="10" type="range" value="42" />
+                    <div class="flex items-center justify-between mt-2">
+                        <label class="text-sm font-semibold">Text Color</label>
+                        <div class="flex gap-2">
+                            <button class="w-8 h-8 rounded-full bg-white border-2 border-primary shadow-sm"></button>
+                            <button
+                                class="w-8 h-8 rounded-full bg-black border border-gray-600 hover:border-white"></button>
+                            <button
+                                class="w-8 h-8 rounded-full bg-red-500 border border-transparent hover:scale-110 transition-transform"></button>
+                            <button
+                                class="w-8 h-8 rounded-full bg-blue-500 border border-transparent hover:scale-110 transition-transform"></button>
+                            <button
+                                class="w-8 h-8 rounded-full bg-gradient-to-br from-yellow-400 to-orange-500 border border-transparent flex items-center justify-center">
+                                <span class="material-symbols-outlined text-white !text-[16px]">add</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Settings Toggle -->
+                <button
+                    class="flex items-center justify-center gap-2 w-full py-2 text-sm font-medium text-slate-500 dark:text-slate-400 bg-background-light dark:bg-background-dark rounded-lg hover:text-primary hover:bg-primary/5 transition-all">
+                    <span class="material-symbols-outlined !text-[18px]">tune</span>
+                    <span>More Settings</span>
+                </button>
+            </section>
+            <!-- Output Format -->
+            <section
+                class="flex items-center justify-between bg-surface-light dark:bg-surface-dark p-4 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700">
+                <span class="text-sm font-medium">Output Format</span>
+                <div class="flex bg-background-light dark:bg-background-dark p-1 rounded-lg">
+                    <button
+                        class="px-4 py-1.5 rounded-md bg-white dark:bg-gray-700 shadow-sm text-xs font-bold text-slate-900 dark:text-white transition-all">JPG</button>
+                    <button
+                        class="px-4 py-1.5 rounded-md text-slate-500 dark:text-slate-400 text-xs font-medium hover:text-slate-900 dark:hover:text-white transition-all">PNG</button>
+                </div>
+            </section>
+        </main>
+        <!-- Fixed Footer CTA -->
+        <div
+            class="sticky bottom-0 w-full bg-surface-light dark:bg-surface-dark border-t border-gray-200 dark:border-gray-800 p-4 pb-8 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)]">
+            <button
+                class="w-full flex items-center justify-center gap-2 bg-primary hover:bg-blue-600 text-white font-bold py-4 rounded-xl shadow-lg shadow-blue-500/20 active:scale-[0.98] transition-all">
+                <span class="material-symbols-outlined">auto_fix_high</span>
+                Generate &amp; Download
+            </button>
+        </div>
+    </div>
+    <script>
+        // Simple script to toggle dark mode for demonstration
+        // In a real app, this would be handled by system preference or a toggle
+        const html = document.documentElement;
+        // html.classList.toggle('dark'); 
+    </script>
+</body>
+
+</html>

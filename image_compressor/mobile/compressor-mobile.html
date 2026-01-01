@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Image Compressor - ImageHub Pro</title>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#0066cc",
+                        "success": "#00CC66",
+                        "background-light": "#f5f7f8",
+                        "background-dark": "#0f1923",
+                        "surface-dark": "#1a242f",
+                        "surface-light": "#ffffff",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        /* Custom slider thumb */
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            height: 24px;
+            width: 24px;
+            border-radius: 50%;
+            background: #ffffff;
+            cursor: pointer;
+            margin-top: -10px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+        }
+        input[type=range]::-webkit-slider-runnable-track {
+            width: 100%;
+            height: 4px;
+            cursor: pointer;
+            background: #4B5563;
+            border-radius: 2px;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-white transition-colors duration-200">
+<div class="relative flex min-h-screen w-full flex-col overflow-x-hidden pb-24">
+<!-- Top App Bar -->
+<header class="sticky top-0 z-50 flex items-center bg-surface-light dark:bg-[#101418] border-b border-gray-200 dark:border-gray-800 p-4 justify-between backdrop-blur-md bg-opacity-90 dark:bg-opacity-90">
+<div class="text-slate-900 dark:text-white flex size-10 shrink-0 items-center justify-center rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors cursor-pointer">
+<span class="material-symbols-outlined text-2xl">menu</span>
+</div>
+<h2 class="text-slate-900 dark:text-white text-lg font-bold leading-tight tracking-tight flex-1 text-center">ImageHub Pro</h2>
+<div class="flex w-10 items-center justify-end">
+<button class="flex size-10 cursor-pointer items-center justify-center overflow-hidden rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
+<span class="material-symbols-outlined text-slate-900 dark:text-white text-2xl">account_circle</span>
+</button>
+</div>
+</header>
+<!-- Main Content -->
+<main class="flex-1 flex flex-col px-4 pt-6 max-w-md mx-auto w-full">
+<!-- Hero Text -->
+<div class="text-center mb-6">
+<h1 class="text-slate-900 dark:text-white tracking-tight text-[28px] font-bold leading-tight mb-2">Image Compressor</h1>
+<p class="text-slate-500 dark:text-gray-400 text-base font-normal leading-normal">Reduce file size without losing quality.</p>
+</div>
+<!-- Upload Area -->
+<div class="mb-8">
+<div class="group flex flex-col items-center gap-6 rounded-xl border-2 border-dashed border-gray-300 dark:border-[#394756] bg-surface-light dark:bg-surface-dark px-6 py-12 transition-colors hover:border-primary/50 hover:bg-gray-50 dark:hover:bg-[#1f2b36]">
+<div class="flex flex-col items-center gap-3">
+<div class="size-16 rounded-full bg-primary/10 flex items-center justify-center mb-2">
+<span class="material-symbols-outlined text-primary text-4xl">cloud_upload</span>
+</div>
+<p class="text-slate-900 dark:text-white text-lg font-bold leading-tight text-center">Upload Image</p>
+<p class="text-slate-500 dark:text-gray-400 text-sm font-normal leading-normal text-center">Tap to select from gallery</p>
+</div>
+<button class="flex w-full max-w-[200px] cursor-pointer items-center justify-center rounded-lg h-12 bg-primary hover:bg-blue-600 text-white text-sm font-bold shadow-lg shadow-blue-500/20 transition-all active:scale-95">
+<span class="truncate">Browse Files</span>
+</button>
+</div>
+</div>
+<!-- Ad Placeholder -->
+<div class="w-full h-24 bg-gray-200 dark:bg-[#1a242f] rounded-lg flex flex-col items-center justify-center mb-8 border border-gray-300 dark:border-gray-700 relative overflow-hidden">
+<span class="text-xs text-gray-500 dark:text-gray-600 uppercase tracking-wider font-bold mb-1">Advertisement</span>
+<div class="w-16 h-1 bg-gray-300 dark:bg-gray-700 rounded-full"></div>
+</div>
+<!-- Compression Settings -->
+<div class="bg-surface-light dark:bg-surface-dark rounded-xl p-5 border border-gray-200 dark:border-gray-800 shadow-sm mb-6">
+<div class="flex items-center gap-2 mb-6 border-b border-gray-200 dark:border-gray-700 pb-4">
+<span class="material-symbols-outlined text-primary">tune</span>
+<h3 class="text-slate-900 dark:text-white text-lg font-bold">Settings</h3>
+</div>
+<!-- Quality Slider -->
+<div class="mb-6">
+<div class="flex justify-between items-center mb-3">
+<label class="text-slate-700 dark:text-gray-300 text-sm font-semibold">Quality</label>
+<span class="text-primary font-bold text-sm">80%</span>
+</div>
+<div class="relative w-full h-6 flex items-center">
+<input class="w-full h-1 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700 accent-primary" max="100" min="1" type="range" value="80"/>
+</div>
+<div class="flex justify-between text-xs text-gray-400 mt-2 font-medium">
+<span>Low</span>
+<span>Medium</span>
+<span>High</span>
+</div>
+</div>
+<!-- Format Selection -->
+<div class="mb-6">
+<label class="text-slate-700 dark:text-gray-300 text-sm font-semibold mb-3 block">Output Format</label>
+<div class="grid grid-cols-3 gap-2">
+<button class="h-10 rounded-lg bg-primary text-white text-sm font-medium border border-transparent shadow-sm">JPG</button>
+<button class="h-10 rounded-lg bg-transparent border border-gray-300 dark:border-gray-600 text-slate-600 dark:text-gray-400 text-sm font-medium hover:bg-gray-100 dark:hover:bg-gray-800">PNG</button>
+<button class="h-10 rounded-lg bg-transparent border border-gray-300 dark:border-gray-600 text-slate-600 dark:text-gray-400 text-sm font-medium hover:bg-gray-100 dark:hover:bg-gray-800">WebP</button>
+</div>
+</div>
+<!-- Mode Toggle -->
+<div class="flex items-center justify-between">
+<div class="flex flex-col">
+<span class="text-slate-700 dark:text-gray-300 text-sm font-semibold">Lossless</span>
+<span class="text-xs text-gray-500 dark:text-gray-500">Best quality preservation</span>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" type="checkbox" value=""/>
+<div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-primary"></div>
+</label>
+</div>
+</div>
+<!-- Preview Card (Example State) -->
+<div class="bg-surface-light dark:bg-surface-dark rounded-xl overflow-hidden border border-gray-200 dark:border-gray-800 shadow-sm mb-24">
+<div class="relative h-48 w-full bg-gray-100 dark:bg-[#000000] flex items-center justify-center overflow-hidden group">
+<!-- Background Grid Pattern for Transparency -->
+<div class="absolute inset-0 opacity-20" style="background-image: radial-gradient(#4b5563 1px, transparent 1px); background-size: 10px 10px;"></div>
+<img alt="Abstract colorful gradient wave pattern for image compression preview" class="h-full w-full object-cover" data-alt="Abstract colorful gradient wave pattern for image compression preview" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB5cFlXc65Q2IwMXn3-bGnBA92eMphpIBmKBZC3uc3mAfXNrZGB3_m5VEBQCr-sv58keD520cav-KKfP-i6yV7gBwG63Fq6iVqkCIl2da3ymloDTxAMTMf035kGOPz8OfXiMAcvfYxhDkbGn9mhQc-FQyvMYBsEpQ_rabn5hwrfZxi2ZhTGBwtVze611Uot1dJYnB9J-XKByw63KezfJTFte2ApKSy20mnM28ccp6WMYcAy0L55Pix7R1S-hoTpgZW5gTXI3gLmx3i8"/>
+<div class="absolute inset-0 bg-black/50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="text-white text-sm font-medium flex items-center gap-2">
+<span class="material-symbols-outlined">touch_app</span> Tap &amp; Hold to Compare
+                        </span>
+</div>
+<div class="absolute top-3 right-3 bg-success/90 backdrop-blur-sm text-white text-xs font-bold px-2 py-1 rounded-md shadow-lg">
+                        -54% Saved
+                    </div>
+</div>
+<div class="p-4">
+<div class="flex justify-between items-center mb-2">
+<span class="text-slate-500 dark:text-gray-400 text-sm">Original</span>
+<span class="text-slate-900 dark:text-white font-medium">2.4 MB</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-success font-medium text-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-base">arrow_downward</span> Compressed
+                        </span>
+<span class="text-success font-bold text-lg">1.1 MB</span>
+</div>
+</div>
+</div>
+</main>
+<!-- Sticky Bottom Action Bar -->
+<div class="fixed bottom-0 left-0 right-0 bg-surface-light dark:bg-[#101418] border-t border-gray-200 dark:border-gray-800 p-4 pb-8 z-40 backdrop-blur-lg bg-opacity-95 dark:bg-opacity-95">
+<div class="max-w-md mx-auto flex gap-3">
+<button class="flex-1 cursor-pointer items-center justify-center rounded-lg h-12 bg-primary hover:bg-blue-600 text-white text-base font-bold shadow-lg shadow-blue-500/25 transition-all active:scale-95 flex gap-2">
+<span class="material-symbols-outlined">compress</span>
+<span>Compress &amp; Download</span>
+</button>
+</div>
+</div>
+</div>
+</body></html>

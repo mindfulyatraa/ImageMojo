@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Image Rotate/Flip Tool - ImageHub Pro</title>
+    <!-- Material Symbols -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <!-- Tailwind Config -->
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#0066cc",
+                        "secondary": "#00CC66",
+                        "background-light": "#f5f7f8",
+                        "background-dark": "#0f1923",
+                        "surface-dark": "#1b2128",
+                        "surface-light": "#ffffff",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "md": "0.375rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+    <style>
+        /* Checkered background pattern for transparency */
+        .bg-checkered {
+            background-color: #1a1e23;
+            background-image:
+                linear-gradient(45deg, #232930 25%, transparent 25%),
+                linear-gradient(-45deg, #232930 25%, transparent 25%),
+                linear-gradient(45deg, transparent 75%, #232930 75%),
+                linear-gradient(-45deg, transparent 75%, #232930 75%);
+            background-size: 20px 20px;
+            background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+        }
+
+        /* Custom Range Slider Styling */
+        input[type=range] {
+            -webkit-appearance: none;
+            background: transparent;
+        }
+
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            height: 20px;
+            width: 20px;
+            border-radius: 50%;
+            background: #0066cc;
+            cursor: pointer;
+            margin-top: -8px;
+            box-shadow: 0 0 0 4px rgba(0, 102, 204, 0.2);
+        }
+
+        input[type=range]::-webkit-slider-runnable-track {
+            width: 100%;
+            height: 4px;
+            cursor: pointer;
+            background: #27303a;
+            border-radius: 2px;
+        }
+
+        input[type=range]:focus::-webkit-slider-thumb {
+            box-shadow: 0 0 0 6px rgba(0, 102, 204, 0.3);
+        }
+    </style>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+</head>
+
+<body
+    class="flex flex-col min-h-screen bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-white overflow-hidden">
+    <!-- Header -->
+    <header class="flex-none bg-surface-light dark:bg-surface-dark border-b border-gray-200 dark:border-gray-800 z-20">
+        <div class="px-4 md:px-6 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <button
+                    class="p-2 -ml-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-500 dark:text-gray-400">
+                    <span class="material-symbols-outlined">menu</span>
+                </button>
+                <div class="flex items-center gap-2">
+                    <div
+                        class="size-8 rounded-lg bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-white">
+                        <span class="material-symbols-outlined text-xl">perm_media</span>
+                    </div>
+                    <span class="text-xl font-bold tracking-tight hidden sm:block">ImageHub Pro</span>
+                </div>
+            </div>
+            <div class="flex items-center gap-3">
+                <button
+                    class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
+                    <span class="material-symbols-outlined text-primary text-[20px]">diamond</span>
+                    <span class="text-xs font-bold text-primary">Go Pro</span>
+                </button>
+                <div class="h-6 w-px bg-gray-200 dark:bg-gray-700 mx-1"></div>
+                <div class="flex items-center gap-2">
+                    <span class="material-symbols-outlined text-gray-400">dark_mode</span>
+                </div>
+                <div class="size-9 rounded-full bg-gray-200 dark:bg-gray-700 overflow-hidden ml-2">
+                    <div class="w-full h-full bg-cover bg-center" data-alt="User avatar placeholder"
+                        style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAH2BPvNPUS82QiOLnWgERoAfhGwdBt28RaTNIxRwjp5D7FLc1is1qka0-mpluO0q5R3YF4o3VkfHj7vDScoeYu7Y_yIPQhfpS6wOQGYKcjAk7MNXGXVCAooZENR1d2JsIfS3scbn6Rb-c2vurXTEew2ig08G7XFQ3liz18JheWFgUHt-cy1XDjeOaI3kGjhmO1KdueQSzCFaGkVmdqw9s646Hb_mBBst5wcwsHd230gFWWDgUbm9Ioqd92NA4w4uSTWeUa2Rixi39g');">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- AdSense Placeholder (Top Leaderboard) -->
+    <div
+        class="flex-none w-full bg-background-light dark:bg-background-dark py-2 flex justify-center border-b border-gray-200 dark:border-gray-800">
+        <div
+            class="w-full max-w-[728px] h-[60px] md:h-[90px] bg-gray-200 dark:bg-surface-dark rounded border border-dashed border-gray-300 dark:border-gray-700 flex flex-col items-center justify-center text-xs text-gray-400 uppercase tracking-widest">
+            <span>Advertisement</span>
+        </div>
+    </div>
+    <!-- Main Workspace (Split View) -->
+    <main class="flex-1 flex flex-col md:flex-row overflow-hidden">
+        <!-- Left Panel: Controls (Sidebar) -->
+        <aside
+            class="w-full md:w-[360px] lg:w-[400px] flex-none flex flex-col bg-surface-light dark:bg-surface-dark border-r border-gray-200 dark:border-gray-800 overflow-y-auto z-10">
+            <div class="p-5 flex flex-col gap-6">
+                <!-- Title & Reset -->
+                <div class="flex items-center justify-between">
+                    <h1 class="text-lg font-bold">Rotate &amp; Flip</h1>
+                    <button class="text-xs font-medium text-primary hover:text-primary/80">Reset All</button>
+                </div>
+                <!-- Upload Section -->
+                <div class="relative group cursor-pointer">
+                    <div
+                        class="absolute inset-0 bg-primary/5 rounded-xl border border-dashed border-primary/30 group-hover:border-primary/60 transition-colors">
+                    </div>
+                    <div class="relative flex items-center gap-4 p-4">
+                        <div
+                            class="size-12 rounded-lg bg-primary/10 flex items-center justify-center text-primary shrink-0">
+                            <span class="material-symbols-outlined">add_photo_alternate</span>
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <p class="text-sm font-semibold truncate">Change Image</p>
+                            <p class="text-xs text-gray-500 dark:text-gray-400 truncate">landscape-photo.jpg (2.4MB)</p>
+                        </div>
+                        <button
+                            class="size-8 flex items-center justify-center rounded-full bg-surface-light dark:bg-[#27303a] hover:bg-gray-100 dark:hover:bg-[#323b46] shadow-sm">
+                            <span class="material-symbols-outlined text-[18px]">upload</span>
+                        </button>
+                    </div>
+                </div>
+                <hr class="border-gray-200 dark:border-gray-800" />
+                <!-- Transform Controls -->
+                <div class="space-y-4">
+                    <label
+                        class="text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider">Orientation</label>
+                    <div class="grid grid-cols-2 gap-3">
+                        <button
+                            class="flex flex-col items-center justify-center gap-2 p-3 rounded-lg bg-gray-50 dark:bg-[#151b22] hover:bg-gray-100 dark:hover:bg-[#1e262f] border border-gray-200 dark:border-gray-700 transition-all active:scale-95">
+                            <span class="material-symbols-outlined text-[24px]">rotate_left</span>
+                            <span class="text-xs font-medium">Left 90°</span>
+                        </button>
+                        <button
+                            class="flex flex-col items-center justify-center gap-2 p-3 rounded-lg bg-gray-50 dark:bg-[#151b22] hover:bg-gray-100 dark:hover:bg-[#1e262f] border border-gray-200 dark:border-gray-700 transition-all active:scale-95">
+                            <span class="material-symbols-outlined text-[24px]">rotate_right</span>
+                            <span class="text-xs font-medium">Right 90°</span>
+                        </button>
+                        <button
+                            class="flex flex-col items-center justify-center gap-2 p-3 rounded-lg bg-gray-50 dark:bg-[#151b22] hover:bg-gray-100 dark:hover:bg-[#1e262f] border border-gray-200 dark:border-gray-700 transition-all active:scale-95">
+                            <span class="material-symbols-outlined text-[24px]">swap_horiz</span>
+                            <span class="text-xs font-medium">Flip Horiz</span>
+                        </button>
+                        <button
+                            class="flex flex-col items-center justify-center gap-2 p-3 rounded-lg bg-gray-50 dark:bg-[#151b22] hover:bg-gray-100 dark:hover:bg-[#1e262f] border border-gray-200 dark:border-gray-700 transition-all active:scale-95">
+                            <span class="material-symbols-outlined text-[24px]">swap_vert</span>
+                            <span class="text-xs font-medium">Flip Vert</span>
+                        </button>
+                    </div>
+                </div>
+                <!-- Fine Tune Slider -->
+                <div class="space-y-4">
+                    <div class="flex items-center justify-between">
+                        <label class="text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider">Fine
+                            Tune</label>
+                        <span class="text-xs font-mono bg-primary/10 text-primary px-2 py-0.5 rounded">0°</span>
+                    </div>
+                    <div class="px-1">
+                        <input class="w-full" max="360" min="0" type="range" value="0" />
+                    </div>
+                    <div class="flex justify-between text-[10px] text-gray-500 font-mono px-1">
+                        <span>0°</span>
+                        <span>90°</span>
+                        <span>180°</span>
+                        <span>270°</span>
+                        <span>360°</span>
+                    </div>
+                </div>
+                <hr class="border-gray-200 dark:border-gray-800" />
+                <!-- Export Options -->
+                <div class="space-y-4">
+                    <label class="text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider">Output
+                        Format</label>
+                    <div class="flex p-1 bg-gray-100 dark:bg-[#151b22] rounded-lg">
+                        <button
+                            class="flex-1 py-1.5 text-xs font-medium rounded bg-white dark:bg-gray-700 shadow-sm text-gray-900 dark:text-white transition-all">JPG</button>
+                        <button
+                            class="flex-1 py-1.5 text-xs font-medium rounded text-gray-500 hover:text-gray-900 dark:hover:text-white transition-all">PNG</button>
+                        <button
+                            class="flex-1 py-1.5 text-xs font-medium rounded text-gray-500 hover:text-gray-900 dark:hover:text-white transition-all">WEBP</button>
+                    </div>
+                </div>
+                <!-- Spacer to push CTA to bottom if needed -->
+                <div class="flex-1"></div>
+                <!-- CTA -->
+                <button
+                    class="w-full py-3.5 px-4 bg-primary hover:bg-blue-600 active:bg-blue-700 text-white font-semibold rounded-xl shadow-lg shadow-blue-900/20 flex items-center justify-center gap-2 transition-all">
+                    <span>Apply &amp; Download</span>
+                    <span class="material-symbols-outlined text-[20px]">download</span>
+                </button>
+            </div>
+        </aside>
+        <!-- Right Panel: Preview (Canvas) -->
+        <section
+            class="flex-1 relative flex flex-col min-h-[400px] md:min-h-0 bg-background-light dark:bg-background-dark">
+            <!-- Toolbar Overlay -->
+            <div
+                class="absolute top-4 left-1/2 -translate-x-1/2 md:left-auto md:translate-x-0 md:right-4 z-10 flex items-center gap-1 p-1 bg-surface-light/90 dark:bg-surface-dark/90 backdrop-blur border border-gray-200 dark:border-gray-700 rounded-lg shadow-sm">
+                <button class="p-1.5 hover:bg-gray-100 dark:hover:bg-gray-700 rounded text-gray-500 dark:text-gray-400"
+                    title="Zoom Out">
+                    <span class="material-symbols-outlined text-[20px]">remove</span>
+                </button>
+                <span class="text-xs font-mono font-medium px-2 min-w-[3rem] text-center">100%</span>
+                <button class="p-1.5 hover:bg-gray-100 dark:hover:bg-gray-700 rounded text-gray-500 dark:text-gray-400"
+                    title="Zoom In">
+                    <span class="material-symbols-outlined text-[20px]">add</span>
+                </button>
+                <div class="w-px h-4 bg-gray-200 dark:bg-gray-700 mx-1"></div>
+                <button class="p-1.5 hover:bg-gray-100 dark:hover:bg-gray-700 rounded text-gray-500 dark:text-gray-400"
+                    title="Fit to Screen">
+                    <span class="material-symbols-outlined text-[20px]">fit_screen</span>
+                </button>
+            </div>
+            <!-- Canvas Area -->
+            <div class="flex-1 overflow-auto p-4 md:p-8 flex items-center justify-center">
+                <div
+                    class="relative shadow-2xl rounded-lg overflow-hidden border border-gray-200 dark:border-gray-800 group">
+                    <!-- Checkered Background Layer -->
+                    <div class="absolute inset-0 bg-checkered z-0"></div>
+                    <!-- Image Layer -->
+                    <!-- In a real app, transform styles would apply here dynamically -->
+                    <img alt="Serene landscape with mountains and lake, currently being edited"
+                        class="relative z-10 max-h-[60vh] md:max-h-[75vh] max-w-full object-contain transform transition-transform duration-300"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuBq4t1xTzfWs2EsbA6AWYl4H4M2Ow-VH0IZwkvkfLc4OTcZPrV405rlndhMvVlhMAdceltWcgF3h92wbg5oSEdGUbiJnwkf_PK1Pg2B4_-SKldOV-e2srq3XddZZzyY8MeNUr4nHp-TWT32kNN7AyuvuIfNWY7XCP_x3RzvoqOXxWGu8wgnrqNCFjMU_OcwK0l6khTLb3ydcY9hnv78g1Dy6sP6wfYLA1slaAUVLE4YL0H9Df1pL6_fRBv3MrD_Ql4dD0Qpb5cbeOoc"
+                        style="transform: rotate(0deg) scale(1);" />
+                    <!-- Helper Grid Overlay (Optional visual cue) -->
+                    <div
+                        class="absolute inset-0 z-20 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <div class="w-full h-full border border-primary/30 relative">
+                            <div class="absolute top-1/3 left-0 w-full h-px bg-primary/20"></div>
+                            <div class="absolute top-2/3 left-0 w-full h-px bg-primary/20"></div>
+                            <div class="absolute left-1/3 top-0 h-full w-px bg-primary/20"></div>
+                            <div class="absolute left-2/3 top-0 h-full w-px bg-primary/20"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Mobile Ad / Info (Visible on smaller tablet breakpoints) -->
+            <div
+                class="md:hidden p-4 bg-surface-light dark:bg-surface-dark border-t border-gray-200 dark:border-gray-800 text-center">
+                <p class="text-xs text-gray-500">Preview Mode</p>
+            </div>
+        </section>
+    </main>
+    <!-- Footer -->
+    <footer
+        class="flex-none py-6 px-6 bg-surface-light dark:bg-surface-dark border-t border-gray-200 dark:border-gray-800">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+            <p class="text-sm text-gray-500 dark:text-gray-400">© 2023 ImageHub Pro. All rights reserved.</p>
+            <div class="flex items-center gap-6">
+                <a class="text-sm text-gray-500 hover:text-primary transition-colors" href="#">Privacy Policy</a>
+                <a class="text-sm text-gray-500 hover:text-primary transition-colors" href="#">Terms of Service</a>
+                <a class="text-sm font-medium text-primary hover:text-blue-500 transition-colors flex items-center gap-1"
+                    href="#">
+                    Explore 24 other tools
+                    <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+                </a>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>

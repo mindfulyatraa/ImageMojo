@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Image Watermark Tool - ImageHub Pro</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#0066cc",
+                        "secondary": "#00CC66",
+                        "background-light": "#f5f7f8",
+                        "background-dark": "#101418",
+                        "surface-dark": "#1F2937",
+                        "border-dark": "#374151"
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+    <style>
+        /* Custom range slider styling for cross-browser consistency */
+        input[type=range] {
+            -webkit-appearance: none;
+            width: 100%;
+            background: transparent;
+        }
+
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            height: 16px;
+            width: 16px;
+            border-radius: 50%;
+            background: #ffffff;
+            cursor: pointer;
+            margin-top: -6px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+        }
+
+        input[type=range]::-webkit-slider-runnable-track {
+            width: 100%;
+            height: 4px;
+            cursor: pointer;
+            background: #4B5563;
+            border-radius: 2px;
+        }
+
+        input[type=range]:focus::-webkit-slider-runnable-track {
+            background: #0066cc;
+        }
+
+        /* Grid item active state simulation */
+        .position-grid-item.active {
+            background-color: #0066cc;
+            border-color: #0066cc;
+        }
+    </style>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+</head>
+
+<body
+    class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-white antialiased overflow-x-hidden">
+    <div class="relative flex min-h-screen w-full flex-col group/design-root">
+        <!-- Sticky Header -->
+        <header
+            class="sticky top-0 z-50 flex items-center bg-background-light dark:bg-background-dark p-4 border-b border-gray-200 dark:border-border-dark/50 shadow-sm">
+            <button
+                class="text-slate-900 dark:text-white flex size-10 shrink-0 items-center justify-center rounded-full hover:bg-black/5 dark:hover:bg-white/10 transition-colors">
+                <span class="material-symbols-outlined text-[24px]">menu</span>
+            </button>
+            <h2 class="text-slate-900 dark:text-white text-lg font-bold leading-tight flex-1 text-center">ImageHub Pro
+            </h2>
+            <button
+                class="flex size-10 items-center justify-center rounded-full overflow-hidden bg-transparent hover:bg-black/5 dark:hover:bg-white/10 transition-colors">
+                <span class="material-symbols-outlined text-[24px] text-slate-900 dark:text-white">account_circle</span>
+            </button>
+        </header>
+        <!-- Main Scrollable Content -->
+        <main class="flex-1 flex flex-col p-4 pb-32 gap-6 w-full max-w-md mx-auto">
+            <!-- Page Title -->
+            <div class="flex flex-col gap-1">
+                <h1 class="text-2xl font-bold tracking-tight">Image Watermark Tool</h1>
+                <p class="text-sm text-gray-500 dark:text-gray-400">Add text or logos to your photos easily.</p>
+            </div>
+            <!-- Preview Area (Simulating "Post-Upload" state) -->
+            <div
+                class="relative w-full aspect-[4/3] bg-surface-dark rounded-xl overflow-hidden shadow-lg border border-border-dark group">
+                <!-- Background Image -->
+                <img alt="Scenic mountain landscape preview for watermark editing"
+                    class="w-full h-full object-cover opacity-90"
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuDAFaLMTERQv2rRL4dZF6dtJ7XXoCx8OKyXjr874HhIU6rUnMIP3ftwRpCO0D5eWpK-jJ_O8256ZUAUEME1I1Gzp8ovONFG3swKY7-VWex5PioQMh7faRpawgafIvF7XQKq9VI7aV106bIPYx5l7RMMBSzrmYahZB3Rbf6wzCp8wxKapN4BpjPS-7NJBHMavI1JUxdnNd1SEiynaZ-0ixMS8xNKSjchqBfEfempqKkYyOpYnXi9zfLRQ9dFoohFQM2ffKXWNtX8XYWc" />
+                <!-- Watermark Layer Simulation -->
+                <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+                    <span class="text-white/80 font-bold text-3xl select-none drop-shadow-md"
+                        style="transform: rotate(-15deg);">ImageHub</span>
+                </div>
+                <!-- Overlay Actions -->
+                <div class="absolute top-2 right-2 flex gap-2">
+                    <button aria-label="Replace Image"
+                        class="bg-black/60 hover:bg-black/80 text-white p-2 rounded-lg backdrop-blur-sm transition-all">
+                        <span class="material-symbols-outlined text-[20px]">upload_file</span>
+                    </button>
+                </div>
+                <!-- Tag for preview -->
+                <div
+                    class="absolute bottom-2 left-2 bg-black/60 px-2 py-1 rounded text-xs font-medium text-white backdrop-blur-sm">
+                    Live Preview
+                </div>
+            </div>
+            <!-- Controls Section -->
+            <div class="flex flex-col gap-5">
+                <!-- Watermark Type Toggle -->
+                <div class="flex p-1 bg-surface-dark rounded-lg border border-border-dark">
+                    <label class="flex-1 cursor-pointer">
+                        <input checked="" class="peer sr-only" name="wm_type" type="radio" value="text" />
+                        <div
+                            class="flex items-center justify-center py-2 px-3 rounded text-sm font-medium text-gray-400 peer-checked:bg-primary peer-checked:text-white transition-all">
+                            <span class="material-symbols-outlined text-[18px] mr-2">text_fields</span>
+                            Text
+                        </div>
+                    </label>
+                    <label class="flex-1 cursor-pointer">
+                        <input class="peer sr-only" name="wm_type" type="radio" value="image" />
+                        <div
+                            class="flex items-center justify-center py-2 px-3 rounded text-sm font-medium text-gray-400 peer-checked:bg-primary peer-checked:text-white transition-all">
+                            <span class="material-symbols-outlined text-[18px] mr-2">image</span>
+                            Image
+                        </div>
+                    </label>
+                </div>
+                <!-- Text Settings Accordion (Expanded) -->
+                <div class="flex flex-col gap-4 bg-surface-dark p-4 rounded-xl border border-border-dark">
+                    <!-- Text Input -->
+                    <div class="flex flex-col gap-2">
+                        <label class="text-xs font-bold uppercase tracking-wider text-gray-400">Content</label>
+                        <input
+                            class="w-full bg-background-dark border border-border-dark rounded-lg px-3 py-2 text-white placeholder-gray-500 focus:border-primary focus:ring-1 focus:ring-primary outline-none"
+                            placeholder="Enter watermark text" type="text" value="ImageHub" />
+                    </div>
+                    <!-- Appearance Sliders -->
+                    <div class="flex flex-col gap-4">
+                        <div class="flex flex-col gap-2">
+                            <div class="flex justify-between items-center">
+                                <label class="text-xs font-bold uppercase tracking-wider text-gray-400">Opacity</label>
+                                <span class="text-xs text-primary font-medium">80%</span>
+                            </div>
+                            <input class="w-full h-1 bg-gray-600 rounded-lg appearance-none cursor-pointer" max="100"
+                                min="0" type="range" value="80" />
+                        </div>
+                        <div class="flex flex-col gap-2">
+                            <div class="flex justify-between items-center">
+                                <label class="text-xs font-bold uppercase tracking-wider text-gray-400">Size</label>
+                                <span class="text-xs text-primary font-medium">32px</span>
+                            </div>
+                            <input class="w-full h-1 bg-gray-600 rounded-lg appearance-none cursor-pointer" max="100"
+                                min="10" type="range" value="32" />
+                        </div>
+                        <div class="flex flex-col gap-2">
+                            <div class="flex justify-between items-center">
+                                <label class="text-xs font-bold uppercase tracking-wider text-gray-400">Rotation</label>
+                                <span class="text-xs text-primary font-medium">-15°</span>
+                            </div>
+                            <input class="w-full h-1 bg-gray-600 rounded-lg appearance-none cursor-pointer" max="180"
+                                min="-180" type="range" value="-15" />
+                        </div>
+                    </div>
+                    <!-- Layout Controls: Grid & Color -->
+                    <div class="grid grid-cols-2 gap-4 pt-2">
+                        <!-- Position Grid -->
+                        <div class="flex flex-col gap-2">
+                            <label class="text-xs font-bold uppercase tracking-wider text-gray-400">Position</label>
+                            <div class="grid grid-cols-3 gap-1 w-fit">
+                                <div
+                                    class="size-8 rounded border border-gray-600 hover:border-white cursor-pointer transition-colors bg-background-dark">
+                                </div>
+                                <div
+                                    class="size-8 rounded border border-gray-600 hover:border-white cursor-pointer transition-colors bg-background-dark">
+                                </div>
+                                <div
+                                    class="size-8 rounded border border-gray-600 hover:border-white cursor-pointer transition-colors bg-background-dark">
+                                </div>
+                                <div
+                                    class="size-8 rounded border border-gray-600 hover:border-white cursor-pointer transition-colors bg-background-dark">
+                                </div>
+                                <div
+                                    class="size-8 rounded border-primary bg-primary/20 cursor-pointer transition-colors position-grid-item active">
+                                </div>
+                                <div
+                                    class="size-8 rounded border border-gray-600 hover:border-white cursor-pointer transition-colors bg-background-dark">
+                                </div>
+                                <div
+                                    class="size-8 rounded border border-gray-600 hover:border-white cursor-pointer transition-colors bg-background-dark">
+                                </div>
+                                <div
+                                    class="size-8 rounded border border-gray-600 hover:border-white cursor-pointer transition-colors bg-background-dark">
+                                </div>
+                                <div
+                                    class="size-8 rounded border border-gray-600 hover:border-white cursor-pointer transition-colors bg-background-dark">
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Color Palette -->
+                        <div class="flex flex-col gap-2">
+                            <label class="text-xs font-bold uppercase tracking-wider text-gray-400">Color</label>
+                            <div class="flex flex-wrap gap-2">
+                                <button aria-label="White"
+                                    class="size-8 rounded-full bg-white border-2 border-primary shadow-sm"></button>
+                                <button aria-label="Black"
+                                    class="size-8 rounded-full bg-black border border-gray-600"></button>
+                                <button aria-label="Red"
+                                    class="size-8 rounded-full bg-red-500 border border-gray-600"></button>
+                                <button aria-label="Yellow"
+                                    class="size-8 rounded-full bg-yellow-400 border border-gray-600"></button>
+                                <button aria-label="Custom"
+                                    class="size-8 rounded-full bg-gradient-to-br from-blue-400 to-purple-500 border border-gray-600"></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Ad Placeholder -->
+            <div
+                class="w-full h-[100px] bg-background-light dark:bg-[#1a2026] rounded-lg border border-dashed border-gray-600 flex flex-col items-center justify-center gap-1 overflow-hidden">
+                <span class="text-xs font-bold text-gray-500 uppercase tracking-widest">Advertisement</span>
+                <div class="w-32 h-2 bg-gray-700 rounded-full opacity-50"></div>
+                <div class="w-24 h-2 bg-gray-700 rounded-full opacity-50"></div>
+            </div>
+            <!-- Output Format -->
+            <div class="flex flex-col gap-3">
+                <label class="text-xs font-bold uppercase tracking-wider text-gray-400">Output Format</label>
+                <div class="flex gap-2 overflow-x-auto no-scrollbar pb-1">
+                    <button
+                        class="flex items-center gap-2 px-4 py-2 rounded-lg bg-surface-dark border border-primary text-primary font-bold text-sm shadow-[0_0_8px_rgba(0,102,204,0.3)] min-w-max">
+                        <span class="material-symbols-outlined text-[18px]">check_circle</span>
+                        JPG
+                    </button>
+                    <button
+                        class="flex items-center gap-2 px-4 py-2 rounded-lg bg-surface-dark border border-border-dark text-gray-400 font-medium text-sm min-w-max hover:border-gray-500">
+                        PNG
+                    </button>
+                    <button
+                        class="flex items-center gap-2 px-4 py-2 rounded-lg bg-surface-dark border border-border-dark text-gray-400 font-medium text-sm min-w-max hover:border-gray-500">
+                        WebP
+                    </button>
+                </div>
+            </div>
+        </main>
+        <!-- Sticky Bottom Action Bar -->
+        <div
+            class="fixed bottom-0 left-0 w-full bg-surface-dark/95 backdrop-blur-md border-t border-border-dark p-4 z-40">
+            <div class="max-w-md mx-auto flex gap-3">
+                <button
+                    class="flex-1 flex items-center justify-center gap-2 h-12 bg-primary hover:bg-primary/90 text-white rounded-lg font-bold text-base shadow-lg transition-transform active:scale-[0.98]">
+                    <span class="material-symbols-outlined">download</span>
+                    Add Watermark &amp; Download
+                </button>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

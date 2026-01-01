@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Border Maker Tool - ImageHub Pro</title>
+    <!-- Material Symbols -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&amp;family=Noto+Sans:wght@400;500;700&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <!-- Theme Configuration -->
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#0066cc",
+                        "secondary": "#00CC66",
+                        "background-light": "#f5f7f8",
+                        "background-dark": "#0f1923",
+                        "surface-dark": "#1e2936",
+                        "surface-light": "#ffffff",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "Noto Sans", "sans-serif"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "2xl": "1rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+    <style>
+        /* Custom range slider styling for Webkit/Firefox */
+        input[type=range] {
+            -webkit-appearance: none;
+            width: 100%;
+            background: transparent;
+        }
+
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            height: 20px;
+            width: 20px;
+            border-radius: 50%;
+            background: #ffffff;
+            cursor: pointer;
+            margin-top: -8px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        input[type=range]::-webkit-slider-runnable-track {
+            width: 100%;
+            height: 4px;
+            cursor: pointer;
+            background: #394756;
+            border-radius: 2px;
+        }
+
+        input[type=range]:focus::-webkit-slider-runnable-track {
+            background: #0066cc;
+        }
+
+        /* Checkered background pattern for transparency */
+        .bg-checkered {
+            background-color: #1e293b;
+            background-image:
+                linear-gradient(45deg, #283447 25%, transparent 25%),
+                linear-gradient(-45deg, #283447 25%, transparent 25%),
+                linear-gradient(45deg, transparent 75%, #283447 75%),
+                linear-gradient(-45deg, transparent 75%, #283447 75%);
+            background-size: 20px 20px;
+            background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+        }
+    </style>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+</head>
+
+<body
+    class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-white transition-colors duration-200">
+    <!-- Sticky Header -->
+    <div
+        class="sticky top-0 z-50 bg-background-light/95 dark:bg-background-dark/95 backdrop-blur-md border-b border-slate-200 dark:border-slate-800">
+        <div class="flex items-center p-4 justify-between max-w-[1400px] mx-auto">
+            <div class="flex items-center gap-4">
+                <button
+                    class="text-slate-900 dark:text-white flex size-10 shrink-0 items-center justify-center rounded-full hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors">
+                    <span class="material-symbols-outlined">menu</span>
+                </button>
+                <div class="flex items-center gap-2">
+                    <div
+                        class="w-8 h-8 rounded-lg bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-white font-bold text-xl">
+                        I</div>
+                    <h2
+                        class="text-slate-900 dark:text-white text-xl font-bold leading-tight tracking-[-0.015em] hidden sm:block">
+                        ImageHub Pro</h2>
+                </div>
+            </div>
+            <div class="flex items-center justify-end gap-3">
+                <a href="index.html"
+                    class="hidden md:flex h-10 px-4 items-center justify-center rounded-lg bg-surface-dark/50 dark:bg-surface-light/10 text-slate-900 dark:text-white text-sm font-semibold hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">
+                    Back to Hub
+                </a>
+                <button
+                    class="flex size-10 cursor-pointer items-center justify-center overflow-hidden rounded-full bg-slate-200 dark:bg-surface-dark text-slate-900 dark:text-white hover:ring-2 ring-primary transition-all">
+                    <span class="material-symbols-outlined">account_circle</span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <!-- Main Content Area -->
+    <main class="flex flex-col min-h-[calc(100vh-72px)] w-full max-w-[1400px] mx-auto p-4 md:p-6 lg:p-8 gap-6">
+        <!-- Header Section -->
+        <div class="flex flex-col gap-2">
+            <h1 class="text-3xl md:text-4xl font-bold tracking-tight">Border Maker Tool</h1>
+            <p class="text-slate-500 dark:text-slate-400 text-lg max-w-2xl">Add customizable borders to your photos
+                instantly. Adjust thickness, color, radius, and export in high quality.</p>
+        </div>
+        <!-- Tablet Workspace Layout (Split View) -->
+        <div class="flex flex-col lg:flex-row gap-6 h-full">
+            <!-- Left Sidebar: Controls -->
+            <div class="w-full lg:w-[360px] flex flex-col gap-6 shrink-0">
+                <!-- Upload / Change Image Card -->
+                <div
+                    class="bg-white dark:bg-surface-dark rounded-xl p-5 shadow-sm border border-slate-200 dark:border-slate-800">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="font-bold text-lg">Image</h3>
+                        <span class="text-xs font-medium text-secondary bg-secondary/10 px-2 py-1 rounded">Active</span>
+                    </div>
+                    <div class="flex flex-col gap-3">
+                        <div
+                            class="flex items-center gap-3 p-2 bg-slate-100 dark:bg-slate-900/50 rounded-lg border border-slate-200 dark:border-slate-700">
+                            <div class="w-12 h-12 bg-cover bg-center rounded bg-slate-700"
+                                data-alt="Small thumbnail preview of a red sneaker"
+                                style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDoOQ8hB255PUmttofnEMSyy7Sdsi-i8sLjbWgikDg2GJ0VSqwPMrNx6399T-kT6ucdbHg3H47w61WojX2XTAYiTTTssTwfFBsfur2V1pD07e0OeORZUnbWi2s5_SFumQY_eBwUd9_2F0hsdV6bYxZIZFS8MVMMCzs6LMsv-wGpUxWxGy2Nx7eiN6ZA7ctlkrxFz00MLF6s4uevNFwgRLi0TuX8fE6sVZxaCyQN6tUfSpHWnCZ6BIbfEwuFQjGFI0ZT97jnrS9OzoZE");'>
+                            </div>
+                            <div class="flex flex-col flex-1 min-w-0">
+                                <p class="text-sm font-medium truncate">product_shot_v2.jpg</p>
+                                <p class="text-xs text-slate-500">2.4 MB • 1920x1080</p>
+                            </div>
+                            <button class="p-2 text-slate-400 hover:text-red-500 transition-colors">
+                                <span class="material-symbols-outlined text-xl">delete</span>
+                            </button>
+                        </div>
+                        <button
+                            class="w-full py-2.5 rounded-lg border-2 border-dashed border-slate-300 dark:border-slate-600 text-slate-500 hover:text-primary hover:border-primary hover:bg-primary/5 transition-all text-sm font-bold flex items-center justify-center gap-2">
+                            <span class="material-symbols-outlined">cloud_upload</span>
+                            Replace Image
+                        </button>
+                    </div>
+                </div>
+                <!-- Ad Placeholder (Sidebar) -->
+                <div
+                    class="w-full h-[100px] bg-slate-100 dark:bg-slate-900 rounded-lg border border-slate-200 dark:border-slate-800 flex flex-col items-center justify-center overflow-hidden relative">
+                    <span class="text-[10px] uppercase tracking-widest text-slate-400 absolute top-2 right-2">Ad</span>
+                    <p class="text-slate-400 dark:text-slate-600 font-medium">Space for AdSense</p>
+                </div>
+                <!-- Customization Controls -->
+                <div
+                    class="bg-white dark:bg-surface-dark rounded-xl p-5 shadow-sm border border-slate-200 dark:border-slate-800 flex flex-col gap-6">
+                    <div class="flex items-center gap-2 pb-2 border-b border-slate-200 dark:border-slate-700">
+                        <span class="material-symbols-outlined text-primary">tune</span>
+                        <h3 class="font-bold text-lg">Adjustments</h3>
+                    </div>
+                    <!-- Border Width -->
+                    <div class="flex flex-col gap-3">
+                        <div class="flex justify-between items-center">
+                            <label class="text-sm font-medium text-slate-600 dark:text-slate-300">Border Width</label>
+                            <span
+                                class="text-xs font-mono bg-slate-100 dark:bg-slate-800 px-2 py-1 rounded text-primary font-bold">24px</span>
+                        </div>
+                        <input class="accent-primary" max="100" min="0" type="range" value="24" />
+                    </div>
+                    <!-- Corner Radius -->
+                    <div class="flex flex-col gap-3">
+                        <div class="flex justify-between items-center">
+                            <label class="text-sm font-medium text-slate-600 dark:text-slate-300">Corner Radius</label>
+                            <span
+                                class="text-xs font-mono bg-slate-100 dark:bg-slate-800 px-2 py-1 rounded text-primary font-bold">12px</span>
+                        </div>
+                        <input class="accent-primary" max="100" min="0" type="range" value="12" />
+                    </div>
+                    <!-- Border Color -->
+                    <div class="flex flex-col gap-3">
+                        <label class="text-sm font-medium text-slate-600 dark:text-slate-300">Border Color</label>
+                        <div class="grid grid-cols-6 gap-2">
+                            <button
+                                class="aspect-square rounded-full bg-white border-2 border-slate-300 relative"></button>
+                            <button class="aspect-square rounded-full bg-black border border-slate-600"></button>
+                            <button class="aspect-square rounded-full bg-[#ff5252]"></button>
+                            <button
+                                class="aspect-square rounded-full bg-[#00CC66] ring-2 ring-offset-2 ring-offset-surface-dark ring-[#00CC66]"></button>
+                            <!-- Active Green -->
+                            <button class="aspect-square rounded-full bg-[#0066cc]"></button>
+                            <button
+                                class="aspect-square rounded-full bg-gradient-to-br from-pink-500 to-orange-400 flex items-center justify-center">
+                                <span class="material-symbols-outlined text-white text-sm">add</span>
+                            </button>
+                        </div>
+                        <div class="flex items-center gap-2 mt-1">
+                            <div class="w-8 h-8 rounded bg-[#00CC66] border border-slate-600"></div>
+                            <input
+                                class="flex-1 bg-slate-100 dark:bg-slate-900 border-none rounded text-sm text-slate-600 dark:text-slate-300 focus:ring-1 focus:ring-primary h-8 px-3"
+                                type="text" value="#00CC66" />
+                        </div>
+                    </div>
+                    <!-- Border Style -->
+                    <div class="flex flex-col gap-3">
+                        <label class="text-sm font-medium text-slate-600 dark:text-slate-300">Border Style</label>
+                        <div class="grid grid-cols-3 gap-2">
+                            <button
+                                class="flex items-center justify-center py-2 rounded-lg bg-primary text-white text-xs font-bold shadow-md shadow-primary/20">Solid</button>
+                            <button
+                                class="flex items-center justify-center py-2 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-300 text-xs font-medium transition-colors">Dashed</button>
+                            <button
+                                class="flex items-center justify-center py-2 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-300 text-xs font-medium transition-colors">Dotted</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Right Area: Preview & Actions -->
+            <div class="flex-1 flex flex-col gap-6 min-w-0">
+                <!-- Format & Actions Bar -->
+                <div
+                    class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 bg-white dark:bg-surface-dark p-4 rounded-xl border border-slate-200 dark:border-slate-800">
+                    <div class="flex items-center gap-4">
+                        <span class="text-sm font-medium text-slate-500 dark:text-slate-400">Output Format:</span>
+                        <div class="flex bg-slate-100 dark:bg-slate-900 rounded-lg p-1">
+                            <button
+                                class="px-3 py-1.5 rounded-md text-xs font-bold bg-white dark:bg-surface-dark text-slate-900 dark:text-white shadow-sm">JPG</button>
+                            <button
+                                class="px-3 py-1.5 rounded-md text-xs font-medium text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200">PNG</button>
+                            <button
+                                class="px-3 py-1.5 rounded-md text-xs font-medium text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200">WebP</button>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-2 w-full md:w-auto">
+                        <button
+                            class="flex-1 md:flex-none h-10 px-4 rounded-lg border border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-300 font-bold text-sm hover:bg-slate-100 dark:hover:bg-slate-800 flex items-center justify-center gap-2">
+                            <span class="material-symbols-outlined text-lg">refresh</span>
+                            Reset
+                        </button>
+                    </div>
+                </div>
+                <!-- Live Preview Canvas -->
+                <div
+                    class="flex-1 min-h-[400px] bg-checkered rounded-2xl border-2 border-dashed border-slate-700 flex items-center justify-center relative overflow-hidden group">
+                    <!-- Floating Labels for context -->
+                    <div
+                        class="absolute top-4 left-4 bg-black/60 backdrop-blur-sm text-white text-xs px-3 py-1.5 rounded-full pointer-events-none flex items-center gap-2">
+                        <span class="material-symbols-outlined text-[16px] text-green-400">visibility</span>
+                        Live Preview
+                    </div>
+                    <div class="absolute bottom-4 right-4 flex gap-2">
+                        <button aria-label="Zoom Out"
+                            class="bg-black/60 hover:bg-black/80 text-white p-2 rounded-lg backdrop-blur-sm transition-colors">
+                            <span class="material-symbols-outlined">remove</span>
+                        </button>
+                        <button aria-label="Zoom In"
+                            class="bg-black/60 hover:bg-black/80 text-white p-2 rounded-lg backdrop-blur-sm transition-colors">
+                            <span class="material-symbols-outlined">add</span>
+                        </button>
+                    </div>
+                    <!-- The Image being edited (Simulated Border) -->
+                    <div class="relative shadow-2xl transition-all duration-300 ease-out p-6 bg-[#00CC66]"
+                        style="border-radius: 12px;">
+                        <img class="max-w-full max-h-[500px] object-contain rounded-sm block shadow-inner"
+                            data-alt="Red Nike sneaker floating on a red background"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuBh0XEAJUa7yBqixcO157G5w-30-heN93uVqpfPP9Z2i_58SxMR90pYbnxHrIVSrLGiNREQvY_46jE40_pe-tObi0WE88sg5uNa_bQwvnrq_XssPSLqu7tfNtjAIT2z6Y01Ju_Im2TZk4ugVv_frN0VIFBZtZc4vJGpSA35ZsB1kO2sdGInkOO3wtgnxqiqNvM1rBIhb0mTa1VuYduYZBSE2cq3t6_uldd0dxHSZv9AUh0gK3pT-7KzcauriwGRsfHMM7A3K-_qphBO"
+                            style="border-radius: 4px;" />
+                    </div>
+                </div>
+                <!-- Main CTA & Ad (Bottom) -->
+                <div class="flex flex-col gap-6">
+                    <button
+                        class="w-full h-14 bg-secondary hover:bg-green-600 text-white rounded-xl text-lg font-bold shadow-lg shadow-green-900/20 flex items-center justify-center gap-3 transition-all transform active:scale-[0.99]">
+                        <span class="material-symbols-outlined">download</span>
+                        Apply Border &amp; Download
+                    </button>
+                    <!-- Leaderboard Ad Placeholder -->
+                    <div
+                        class="w-full h-[90px] bg-slate-100 dark:bg-slate-900 rounded-lg border border-slate-200 dark:border-slate-800 flex flex-col items-center justify-center overflow-hidden relative">
+                        <span
+                            class="text-[10px] uppercase tracking-widest text-slate-400 absolute top-2 right-2">Ad</span>
+                        <p class="text-slate-400 dark:text-slate-600 font-medium">Responsive AdSense Banner</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Spacer for scrolling -->
+        <div class="h-10"></div>
+    </main>
+</body>
+
+</html>

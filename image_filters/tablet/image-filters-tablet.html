@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Image Filters Tool - ImageHub Pro</title>
+    <!-- Fonts and Icons -->
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#0066cc",
+                        "secondary": "#00cc66",
+                        "background-light": "#f5f7f8",
+                        "background-dark": "#0f1923",
+                        "surface-dark": "#1b2128",
+                        "border-dark": "#394756",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+    <style>
+        /* Custom range slider styling for modern look */
+        input[type=range] {
+            -webkit-appearance: none;
+            width: 100%;
+            background: transparent;
+        }
+
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            height: 20px;
+            width: 20px;
+            border-radius: 50%;
+            background: #ffffff;
+            cursor: pointer;
+            margin-top: -8px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        input[type=range]::-webkit-slider-runnable-track {
+            width: 100%;
+            height: 4px;
+            cursor: pointer;
+            background: #394756;
+            border-radius: 2px;
+        }
+
+        input[type=range]:focus::-webkit-slider-runnable-track {
+            background: #0066cc;
+        }
+
+        /* Scrollbar hiding for cleaner UI */
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+
+        .scrollbar-hide {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+</head>
+
+<body
+    class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-white min-h-screen flex flex-col overflow-hidden">
+    <!-- Top Header -->
+    <header
+        class="flex items-center bg-surface-dark border-b border-border-dark p-4 justify-between h-16 shrink-0 z-20 shadow-md">
+        <div class="flex items-center gap-4">
+            <button
+                class="text-white flex size-10 shrink-0 items-center justify-center rounded-full hover:bg-white/10 transition-colors">
+                <span class="material-symbols-outlined">arrow_back</span>
+            </button>
+            <div class="flex flex-col">
+                <h2 class="text-white text-lg font-bold leading-tight tracking-[-0.015em]">Image Filters Tool</h2>
+                <span class="text-xs text-slate-400 font-medium">ImageHub Pro</span>
+            </div>
+        </div>
+        <div class="flex items-center gap-3">
+            <button
+                class="text-slate-400 hover:text-white text-sm font-bold leading-normal tracking-[0.015em] px-3 py-2 rounded-lg hover:bg-white/5 transition-colors">
+                <span class="material-symbols-outlined align-middle mr-1 text-base">undo</span>
+                Reset
+            </button>
+            <button
+                class="hidden sm:flex bg-primary hover:bg-blue-600 text-white text-sm font-bold px-4 py-2 rounded-lg items-center gap-2 transition-colors">
+                <span class="material-symbols-outlined text-base">upload_file</span>
+                New Image
+            </button>
+        </div>
+    </header>
+    <!-- Main Workspace (Responsive: Stacked on mobile, Split on Tablet/Desktop) -->
+    <main class="flex-1 flex flex-col lg:flex-row overflow-hidden relative">
+        <!-- Left Column: Canvas / Preview Area -->
+        <section
+            class="relative flex-1 bg-black/20 flex flex-col items-center justify-center p-4 lg:p-8 overflow-y-auto lg:overflow-hidden">
+            <!-- Canvas Toolbar (Zoom/Compare) -->
+            <div
+                class="absolute top-4 left-1/2 -translate-x-1/2 flex items-center gap-2 bg-surface-dark/90 backdrop-blur-sm px-3 py-1.5 rounded-full border border-white/10 shadow-lg z-10">
+                <button class="p-1.5 text-slate-300 hover:text-white rounded-full hover:bg-white/10">
+                    <span class="material-symbols-outlined text-xl">zoom_out</span>
+                </button>
+                <span class="text-xs font-mono text-slate-300 w-12 text-center">100%</span>
+                <button class="p-1.5 text-slate-300 hover:text-white rounded-full hover:bg-white/10">
+                    <span class="material-symbols-outlined text-xl">zoom_in</span>
+                </button>
+                <div class="w-px h-4 bg-white/20 mx-1"></div>
+                <button
+                    class="flex items-center gap-1.5 px-2 py-1 text-xs font-bold text-white bg-primary/20 hover:bg-primary/40 rounded-full border border-primary/30 transition-colors">
+                    <span class="material-symbols-outlined text-base">compare</span>
+                    Compare
+                </button>
+            </div>
+            <!-- The Image Canvas -->
+            <div
+                class="relative w-full max-w-4xl aspect-[4/3] lg:aspect-video rounded-xl overflow-hidden shadow-2xl border border-white/5 group">
+                <!-- Checkered background for transparency -->
+                <div class="absolute inset-0 z-0 opacity-20"
+                    style="background-image: radial-gradient(#4a5568 1px, transparent 1px); background-size: 20px 20px;">
+                </div>
+                <!-- Main Image -->
+                <div class="absolute inset-0 w-full h-full bg-cover bg-center transition-all duration-300"
+                    data-alt="A scenic mountain landscape with a lake reflecting the sky, styled with a slight warm vintage filter"
+                    style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCN2au9i71PnCnx-mAsdlQXtLopGjxOHWocFHwz6_kfNl1rQd44XQLmtiVn9lDMPbGuvtL02-IDax96NgBQTwC0xhnDiM-YBOsqU-usqc2KRugs8F3VJNsD-HLT6ROUVsZPqa1ENIQexFJx1jKj2dOTEqSvluYDZ1x4rfsA3arPBGWRLn9RvWJu63vtAqJNcD_LppwcEDysTZIfq1zC9OhYdLtv5ujz8ZiKwsyh5xqLMHhqUXdLcGzaRVeAJHrvs0ka9vfmIFRB8h3H'); filter: contrast(1.1) brightness(1.05) sepia(0.2);">
+                </div>
+                <!-- Hover Overlay for "Drag new image" hint -->
+                <div
+                    class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-0 pointer-events-none lg:group-hover:opacity-100 flex items-center justify-center transition-opacity duration-300">
+                    <p class="text-white font-medium flex items-center gap-2">
+                        <span class="material-symbols-outlined">image</span>
+                        Drop new image to replace
+                    </p>
+                </div>
+            </div>
+            <!-- Mobile Only: Ad Placeholder below image -->
+            <div class="mt-6 lg:hidden w-full flex justify-center">
+                <div
+                    class="w-full max-w-[320px] h-[50px] bg-surface-dark border border-dashed border-border-dark rounded flex items-center justify-center text-xs text-slate-500">
+                    ADVERTISEMENT
+                </div>
+            </div>
+        </section>
+        <!-- Right Column: Controls Sidebar -->
+        <aside
+            class="w-full lg:w-[400px] xl:w-[450px] shrink-0 bg-surface-dark border-t lg:border-t-0 lg:border-l border-border-dark flex flex-col z-10 shadow-[-4px_0_24px_rgba(0,0,0,0.2)]">
+            <!-- Tabs Navigation -->
+            <div class="flex border-b border-border-dark">
+                <button
+                    class="flex-1 py-4 text-center border-b-2 border-primary text-white font-bold text-sm tracking-wide">
+                    Presets
+                </button>
+                <button
+                    class="flex-1 py-4 text-center border-b-2 border-transparent text-slate-400 hover:text-white font-medium text-sm tracking-wide transition-colors">
+                    Adjustments
+                </button>
+            </div>
+            <!-- Scrollable Content Area -->
+            <div class="flex-1 overflow-y-auto p-5 space-y-8 scrollbar-hide">
+                <!-- Section: Popular Filters -->
+                <div class="space-y-4">
+                    <div class="flex items-center justify-between">
+                        <h3 class="text-white text-sm font-bold uppercase tracking-wider text-opacity-80">Popular</h3>
+                        <span class="text-xs text-primary cursor-pointer hover:underline">View All</span>
+                    </div>
+                    <div class="grid grid-cols-3 gap-3">
+                        <!-- Filter Item: Active -->
+                        <button class="group flex flex-col gap-2 cursor-pointer">
+                            <div
+                                class="aspect-square rounded-lg overflow-hidden border-2 border-primary ring-2 ring-primary/20 relative">
+                                <div class="w-full h-full bg-cover bg-center group-hover:scale-110 transition-transform duration-500"
+                                    data-alt="Small thumbnail of the mountain landscape with a warm vintage filter applied"
+                                    style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCNUE88EB8hyg-Z3r0qg1wgMsJlsLVXtEghA4LLwi-4hKeuJ_g08XEHuemvB0o0EqcnnA9qO-QFny-yPPFeTJ0jxKxHoCS8pN6ADNHHtBgKGtFRadGO4WhMUv2H4sx9ZXY0pv98n6uOwj0o6471p8wTbJhiHobJ7YXZX-ljxce8GB0uyfSZFTBbPNjN803v4aivMJPPXoitWalTVInBqjSUC40rQlKixckG8Cxy--nKJiXigv-ulhdlJhozDywEhu0bYD_K-8U4WhGA'); filter: sepia(0.4);">
+                                </div>
+                                <div class="absolute inset-0 bg-primary/10"></div>
+                            </div>
+                            <span class="text-center text-xs font-bold text-white">Vintage</span>
+                        </button>
+                        <!-- Filter Item -->
+                        <button class="group flex flex-col gap-2 cursor-pointer">
+                            <div
+                                class="aspect-square rounded-lg overflow-hidden border-2 border-transparent hover:border-slate-500 transition-colors relative">
+                                <div class="w-full h-full bg-cover bg-center grayscale group-hover:scale-110 transition-transform duration-500"
+                                    data-alt="Small thumbnail of the mountain landscape in black and white"
+                                    style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAQ3GwqJx3hu1ti9DjnunMD8-L31_s5nditqn_Cxi6WB0Nn9TcNNBWgLhyoJD-VPw77U9Qjwx0ZrrEh2ZHTHtDP2cYms-rwzTotZu2O6kRcemxIpDpjNbKusp9KFM7NqRi0lmVaiXR9vPHDTvJZ5hLAAhDq3M6xGhokdobPh4caA-W9vbD2pi2r85mO6ZR95B4B4DLjdgMdCWWCTvyIz6tsvgedFSYgtBbzCv9fzyQVymH_cGNn9D9Zp_elRq7XlTkwxus_nWMaub5L');">
+                                </div>
+                            </div>
+                            <span
+                                class="text-center text-xs font-medium text-slate-400 group-hover:text-white">B&amp;W</span>
+                        </button>
+                        <!-- Filter Item -->
+                        <button class="group flex flex-col gap-2 cursor-pointer">
+                            <div
+                                class="aspect-square rounded-lg overflow-hidden border-2 border-transparent hover:border-slate-500 transition-colors relative">
+                                <div class="w-full h-full bg-cover bg-center contrast-125 brightness-110 group-hover:scale-110 transition-transform duration-500"
+                                    data-alt="Small thumbnail of the mountain landscape with high vivid colors"
+                                    style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDncbUmrJvFPqyEyJZwjbKr-QMsFSmNMM8cSXOHHKteET9C_OnE0oIQM1dYixcGnGgaYDfNW1WCRH0WacQiy5NWhWdu8ylUlp3cEgRwKPDP8jnQQOsA9DNT6Pn47UGkoyjYD4a4jY9fOcYI5U5sGKHxQmY8DbVim367R3b65yqedc40X7zPkYmD6c0l6okbkfs_8y8OEf1FjvrA3Jr3ytwLKSl8uAVliCzApw9o4FTq-aXMvZrGvsD9kFL7ar1ieCpJR-MkjYk3iq13');">
+                                </div>
+                            </div>
+                            <span
+                                class="text-center text-xs font-medium text-slate-400 group-hover:text-white">Vivid</span>
+                        </button>
+                        <!-- Filter Item -->
+                        <button class="group flex flex-col gap-2 cursor-pointer">
+                            <div
+                                class="aspect-square rounded-lg overflow-hidden border-2 border-transparent hover:border-slate-500 transition-colors relative">
+                                <div class="w-full h-full bg-cover bg-center hue-rotate-15 group-hover:scale-110 transition-transform duration-500"
+                                    data-alt="Small thumbnail of the mountain landscape with cool blue tones"
+                                    style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAxmxBL47MLPhuPdp1keAp2qk3k4vT00FZvtuOFkMD0IuSzGwJZSBkSgG9fZozwGVaQNA55ZB2c0ssCegj1QFcEiDqzYKpEhmA6c-DVbcZuBACMtoBSOE8wBvbNzmi_Qy_qWYtORYDX8CmIq77c49sSy1QkwfY9kRMJTVmaiOjg3AjuCrE7niDJzmn4oEGvSz0AbSLShdzdrTTZSSQkDsdO6kq-EzxPhOFR14WY4vJoadpLfGuhaz0klvtlLNubl9p1Skz4BaNg168Q'); filter: hue-rotate(180deg) opacity(0.8);">
+                                </div>
+                            </div>
+                            <span
+                                class="text-center text-xs font-medium text-slate-400 group-hover:text-white">Cool</span>
+                        </button>
+                        <!-- Filter Item -->
+                        <button class="group flex flex-col gap-2 cursor-pointer">
+                            <div
+                                class="aspect-square rounded-lg overflow-hidden border-2 border-transparent hover:border-slate-500 transition-colors relative">
+                                <div class="w-full h-full bg-cover bg-center group-hover:scale-110 transition-transform duration-500"
+                                    data-alt="Small thumbnail of the mountain landscape with faded dramatic look"
+                                    style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDiwA-Uc4jPxDaNNaBBzGCesKskpzIIzmYaZNnzPlw_wlm0oKSplQ9JtMxibbZlxJ7wjpRC0dYrp6w_MEYBjFl7xBW1yv43cAed04f76dr40TeVb4Qa8JTuoLc7ERQ89pkXRFxPaPRnKN_p8r--gFxdeisJmkWfh74KD1tkaPJl3tp30cVOEnhRpEzcx2Odky-oCSeNLSSG4oSArCMPKsdazpw1P00-NjCUwH56BRdJDzkAqve6mDeqXIp8gT1AO68TuEqCkuO_YMqd'); filter: contrast(1.2) saturate(0.5);">
+                                </div>
+                            </div>
+                            <span
+                                class="text-center text-xs font-medium text-slate-400 group-hover:text-white">Drama</span>
+                        </button>
+                        <!-- Filter Item -->
+                        <button class="group flex flex-col gap-2 cursor-pointer">
+                            <div
+                                class="aspect-square rounded-lg overflow-hidden border-2 border-transparent hover:border-slate-500 transition-colors relative">
+                                <div class="w-full h-full bg-cover bg-center group-hover:scale-110 transition-transform duration-500"
+                                    data-alt="Small thumbnail of the mountain landscape blurred slightly"
+                                    style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBuCSysHYlI8SudIbKH581-OgUaqpfDiFXlmRJWcEZpQFlJ5ZJ_PJR194h_ofSt6QEMLurTQ92PPYYPdkdDGVIrzJ6y7jh-Yia8JuZLHN-cPCCD9G69ywoQLYOfzA0-TT-IjhDXdlWkuVw3wR5Wd2xn8Ho6jb-n6EEw6946V0QDgERThRCe9maQi3bHcMrHcmuCwjqtuQT39fLWkCiAx-zn_yxfIBmKeLopb46f516jA6kDmXeMqTFlsMCOdBFNUUjYd2QvP3OlQmAy'); filter: blur(1px);">
+                                </div>
+                            </div>
+                            <span
+                                class="text-center text-xs font-medium text-slate-400 group-hover:text-white">Soft</span>
+                        </button>
+                    </div>
+                </div>
+                <!-- Section: Quick Adjustments -->
+                <div class="space-y-6 pt-4 border-t border-border-dark">
+                    <h3 class="text-white text-sm font-bold uppercase tracking-wider text-opacity-80">Quick Adjust</h3>
+                    <!-- Slider: Intensity -->
+                    <div class="space-y-3">
+                        <div class="flex justify-between text-xs font-medium">
+                            <span class="text-slate-300">Filter Intensity</span>
+                            <span class="text-primary">80%</span>
+                        </div>
+                        <input class="w-full h-1 bg-slate-700 rounded-lg appearance-none cursor-pointer" max="100"
+                            min="0" type="range" value="80" />
+                    </div>
+                    <!-- Slider: Brightness -->
+                    <div class="space-y-3">
+                        <div class="flex justify-between text-xs font-medium">
+                            <span class="text-slate-300">Brightness</span>
+                            <span class="text-slate-400">+10</span>
+                        </div>
+                        <input class="w-full h-1 bg-slate-700 rounded-lg appearance-none cursor-pointer" max="100"
+                            min="-100" type="range" value="10" />
+                    </div>
+                </div>
+                <!-- Tablet/Desktop Ad Placeholder in sidebar -->
+                <div class="hidden lg:flex w-full justify-center pt-4">
+                    <div
+                        class="w-full h-[250px] bg-background-dark/50 border border-dashed border-border-dark rounded-lg flex flex-col items-center justify-center gap-2 text-slate-500">
+                        <span class="material-symbols-outlined text-3xl opacity-50">ads_click</span>
+                        <span class="text-xs tracking-widest">ADVERTISEMENT</span>
+                    </div>
+                </div>
+            </div>
+            <!-- Footer: Export & Action -->
+            <div
+                class="p-5 bg-surface-dark border-t border-border-dark space-y-4 shadow-[0_-10px_40px_rgba(0,0,0,0.2)] z-20">
+                <!-- Format Selector -->
+                <div class="flex items-center justify-between">
+                    <span class="text-sm font-medium text-slate-300">Format:</span>
+                    <div class="flex bg-background-dark rounded-lg p-1 gap-1">
+                        <button
+                            class="px-3 py-1.5 rounded bg-primary/20 text-white text-xs font-bold shadow-sm ring-1 ring-primary/50">JPG</button>
+                        <button
+                            class="px-3 py-1.5 rounded text-slate-400 hover:text-white hover:bg-white/5 text-xs font-medium transition-colors">PNG</button>
+                        <button
+                            class="px-3 py-1.5 rounded text-slate-400 hover:text-white hover:bg-white/5 text-xs font-medium transition-colors">WebP</button>
+                    </div>
+                </div>
+                <!-- Main CTA -->
+                <button
+                    class="w-full bg-secondary hover:bg-green-500 text-white text-base font-bold h-12 rounded-xl shadow-lg shadow-green-900/20 flex items-center justify-center gap-2 transform active:scale-[0.98] transition-all">
+                    <span class="material-symbols-outlined">download</span>
+                    Apply Filters &amp; Download
+                </button>
+            </div>
+        </aside>
+    </main>
+</body>
+
+</html>

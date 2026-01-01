@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Image Merge Tool - ImageHub Pro</title>
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#0000cc", // Deep Blue
+                        "success": "#00CC66", // Green as requested
+                        "background-light": "#f5f5f8",
+                        "background-dark": "#0f0f23", // Dark Navy/Black
+                        "surface-dark": "#1a1a2e",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "2xl": "1rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+    <style>
+        /* Custom scrollbar for horizontal scrolling */
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+</head>
+
+<body
+    class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-white antialiased selection:bg-primary selection:text-white pb-32">
+    <!-- Header -->
+    <header
+        class="sticky top-0 z-50 bg-background-light/95 dark:bg-background-dark/95 backdrop-blur-md border-b border-gray-200 dark:border-white/10">
+        <div class="flex items-center justify-between px-4 h-16">
+            <button
+                class="p-2 -ml-2 rounded-full hover:bg-gray-200 dark:hover:bg-white/10 transition-colors text-slate-600 dark:text-white">
+                <span class="material-symbols-outlined">arrow_back</span>
+            </button>
+            <h1 class="text-lg font-bold tracking-tight">Image Merge</h1>
+            <button
+                class="p-2 -mr-2 rounded-full hover:bg-gray-200 dark:hover:bg-white/10 transition-colors text-slate-600 dark:text-white">
+                <span class="material-symbols-outlined">menu</span>
+            </button>
+        </div>
+    </header>
+    <main class="w-full max-w-md mx-auto flex flex-col gap-6 px-4 py-6">
+        <!-- Title & Description -->
+        <div class="flex flex-col gap-2">
+            <h2 class="text-2xl font-bold leading-tight">Image Merge Tool</h2>
+            <p class="text-slate-500 dark:text-slate-400 text-sm">Combine your photos into one beautiful collage or
+                vertical stack instantly.</p>
+        </div>
+        <!-- Ad Placeholder (Mobile Banner) -->
+        <div
+            class="w-full h-[60px] bg-gray-200 dark:bg-[#1a1a2e] border border-gray-300 dark:border-white/5 rounded-lg flex items-center justify-between px-4 overflow-hidden relative group">
+            <div
+                class="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-full animate-[shimmer_2s_infinite]">
+            </div>
+            <div class="flex flex-col">
+                <span class="text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider">Ad
+                    Space</span>
+                <span class="text-sm font-medium text-slate-600 dark:text-slate-300">Upgrade to Pro for Ad-Free</span>
+            </div>
+            <span class="material-symbols-outlined text-slate-400" style="font-size: 20px;">info</span>
+        </div>
+        <!-- Upload Zone -->
+        <div class="relative group cursor-pointer">
+            <div
+                class="absolute -inset-0.5 bg-gradient-to-r from-primary to-success rounded-xl blur opacity-20 group-hover:opacity-40 transition duration-200">
+            </div>
+            <div
+                class="relative flex flex-col items-center justify-center gap-4 rounded-xl border-2 border-dashed border-primary/30 dark:border-primary/50 bg-white dark:bg-[#15152a] px-6 py-10 hover:bg-gray-50 dark:hover:bg-[#1a1a35] transition-all">
+                <div class="p-4 bg-primary/10 rounded-full text-primary">
+                    <span class="material-symbols-outlined text-4xl">cloud_upload</span>
+                </div>
+                <div class="text-center space-y-1">
+                    <p class="text-base font-bold text-slate-800 dark:text-white">Upload Images</p>
+                    <p class="text-xs text-slate-500 dark:text-slate-400">Tap to select or drag files here</p>
+                </div>
+            </div>
+        </div>
+        <!-- Image Queue (Horizontal Scroll) -->
+        <div class="flex flex-col gap-3">
+            <div class="flex items-center justify-between">
+                <h3 class="text-sm font-semibold text-slate-700 dark:text-slate-200">Selected (3)</h3>
+                <button class="text-xs font-medium text-primary hover:underline">Clear All</button>
+            </div>
+            <div class="flex overflow-x-auto gap-3 pb-2 hide-scrollbar snap-x">
+                <!-- Image 1 -->
+                <div
+                    class="snap-start shrink-0 relative w-24 aspect-[3/4] rounded-lg overflow-hidden group border border-gray-200 dark:border-white/10">
+                    <img alt="Camera lens on a table" class="w-full h-full object-cover"
+                        data-alt="Close up of a camera lens"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuAz6RdfZY1xZ9x6gxwrwo6Uk9u65lQHuIB9wNfjB38hpxgA4XFPftfYDywDnTU9EinrWH4mMSDq7CfDT-Nq_BQco8_X9-vWIi-7_PPBRaeapbYx0XkYwSGjn4FkhMGJfgATPTLJ2uqGQod7mTduC7EfY1rwnkomVcarSZgShrqq69iAXqJ8K8vT6d5fy-aHB9kMDjrSQgJvVmht_PjlZtI0cq4xAS42WdrVhYodVP2FCym9ZbC-AubBG2yD6xasTx2pZ8szjExlAHMv" />
+                    <button
+                        class="absolute top-1 right-1 p-1 bg-black/50 hover:bg-red-500/80 rounded-full text-white backdrop-blur-sm transition-colors">
+                        <span class="material-symbols-outlined" style="font-size: 14px;">close</span>
+                    </button>
+                    <div class="absolute bottom-1 left-1 right-1 flex justify-center">
+                        <span class="material-symbols-outlined text-white/80 drop-shadow-md"
+                            style="font-size: 16px;">drag_indicator</span>
+                    </div>
+                </div>
+                <!-- Image 2 -->
+                <div
+                    class="snap-start shrink-0 relative w-24 aspect-[3/4] rounded-lg overflow-hidden group border border-gray-200 dark:border-white/10 ring-2 ring-primary ring-offset-2 ring-offset-background-dark">
+                    <img alt="Mountain landscape during sunset" class="w-full h-full object-cover"
+                        data-alt="Scenic mountain landscape at sunset"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuCRYSA9amubFMzTzXwqaZ9dliFkkVJQ3EnooOif9RVEW8uTYoYJeh_LikJS18FU7VTJjZrHe5UjExt3kY_QeDhnsZZzVDQTIjyLlnrS-HJiMRhhLFV0rdMeGtDI4UEzFkbsMezhW1lQ5-o0ZU19fG1emzzOd__ydeP5hH-FCc1q2HdU7f98qkW-WBSWYiLvmT6oTiMJ4zVE-A6DXu8i76UVR-Ygxyg48oqjwW0QwDqGK4EzZA3Q-UwrtMAQeQ2myMxT411TTofPN00m" />
+                    <button
+                        class="absolute top-1 right-1 p-1 bg-black/50 hover:bg-red-500/80 rounded-full text-white backdrop-blur-sm transition-colors">
+                        <span class="material-symbols-outlined" style="font-size: 14px;">close</span>
+                    </button>
+                </div>
+                <!-- Image 3 -->
+                <div
+                    class="snap-start shrink-0 relative w-24 aspect-[3/4] rounded-lg overflow-hidden group border border-gray-200 dark:border-white/10">
+                    <img alt="Person walking on a trail" class="w-full h-full object-cover"
+                        data-alt="Hiker walking on a nature trail"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuAARyi1aG1QImjRVFcAmJBLJO6eZG7DOG469a4G0h2Vd86I-lPHYbBI3FfmksC1-qiXlhRxeKlz5ZQ_qdlwJSmvu1XbeOY1uSDmQcwVamDgZ_NGlaxclyLVSV-gZf2hlOxpICM6G067t_N96CMtYx-I1cy_UdrqmEgwPCvBPg6oGNt90VNaCvA9dI4ibD1dg2z5sv_DUXVgtyMLLCTFstOUbwZD2TAVW4Iks1HE5M7DoLVg7SLUvodLyHHdHwha67AgzeIUcPACkWTD" />
+                    <button
+                        class="absolute top-1 right-1 p-1 bg-black/50 hover:bg-red-500/80 rounded-full text-white backdrop-blur-sm transition-colors">
+                        <span class="material-symbols-outlined" style="font-size: 14px;">close</span>
+                    </button>
+                </div>
+                <!-- Add More Button -->
+                <button
+                    class="snap-start shrink-0 w-24 aspect-[3/4] rounded-lg border-2 border-dashed border-gray-300 dark:border-white/10 flex flex-col items-center justify-center gap-1 hover:bg-gray-50 dark:hover:bg-white/5 transition-colors">
+                    <span
+                        class="material-symbols-outlined text-slate-400 dark:text-slate-500">add_photo_alternate</span>
+                    <span class="text-[10px] font-medium text-slate-400 dark:text-slate-500">Add More</span>
+                </button>
+            </div>
+        </div>
+        <hr class="border-gray-200 dark:border-white/10 my-2" />
+        <!-- Controls Section -->
+        <div class="flex flex-col gap-6">
+            <!-- Layout Control -->
+            <div class="space-y-3">
+                <label
+                    class="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">Layout</label>
+                <div class="grid grid-cols-3 gap-2">
+                    <button
+                        class="flex flex-col items-center gap-2 p-3 rounded-lg bg-primary text-white border border-primary transition-all shadow-lg shadow-primary/25">
+                        <span class="material-symbols-outlined">splitscreen_bottom</span>
+                        <span class="text-xs font-semibold">Vertical</span>
+                    </button>
+                    <button
+                        class="flex flex-col items-center gap-2 p-3 rounded-lg bg-white dark:bg-[#1a1a2e] text-slate-600 dark:text-slate-300 border border-gray-200 dark:border-white/5 hover:border-primary/50 transition-all">
+                        <span class="material-symbols-outlined">splitscreen_right</span>
+                        <span class="text-xs font-medium">Horizontal</span>
+                    </button>
+                    <button
+                        class="flex flex-col items-center gap-2 p-3 rounded-lg bg-white dark:bg-[#1a1a2e] text-slate-600 dark:text-slate-300 border border-gray-200 dark:border-white/5 hover:border-primary/50 transition-all">
+                        <span class="material-symbols-outlined">grid_view</span>
+                        <span class="text-xs font-medium">Grid</span>
+                    </button>
+                </div>
+            </div>
+            <!-- Appearance Controls -->
+            <div class="space-y-4">
+                <div class="flex items-center justify-between">
+                    <label
+                        class="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">Appearance</label>
+                </div>
+                <!-- Spacing Slider -->
+                <div class="bg-white dark:bg-[#1a1a2e] p-4 rounded-xl border border-gray-200 dark:border-white/5">
+                    <div class="flex justify-between mb-2">
+                        <span class="text-sm text-slate-700 dark:text-slate-200 font-medium">Spacing</span>
+                        <span class="text-sm text-slate-500">12px</span>
+                    </div>
+                    <input
+                        class="w-full h-2 bg-gray-200 dark:bg-gray-700 rounded-lg appearance-none cursor-pointer accent-primary"
+                        max="50" min="0" type="range" value="12" />
+                </div>
+                <!-- Background Color -->
+                <div
+                    class="bg-white dark:bg-[#1a1a2e] p-4 rounded-xl border border-gray-200 dark:border-white/5 flex items-center justify-between">
+                    <span class="text-sm text-slate-700 dark:text-slate-200 font-medium">Background</span>
+                    <div class="flex items-center gap-2">
+                        <button
+                            class="w-8 h-8 rounded-full bg-white border border-gray-300 shadow-sm focus:ring-2 ring-primary"></button>
+                        <button
+                            class="w-8 h-8 rounded-full bg-black border border-gray-600 focus:ring-2 ring-primary"></button>
+                        <button
+                            class="w-8 h-8 rounded-full bg-blue-500 border-transparent focus:ring-2 ring-primary"></button>
+                        <button
+                            class="w-8 h-8 rounded-full bg-gradient-to-tr from-pink-500 to-yellow-500 border-transparent relative flex items-center justify-center">
+                            <span class="material-symbols-outlined text-white text-xs">add</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <!-- Output Format -->
+            <div class="space-y-3">
+                <label class="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">Output
+                    Format</label>
+                <div class="flex p-1 bg-gray-200 dark:bg-[#1a1a2e] rounded-lg">
+                    <button
+                        class="flex-1 py-2 text-xs font-bold text-slate-800 bg-white dark:bg-primary dark:text-white rounded shadow-sm">JPG</button>
+                    <button
+                        class="flex-1 py-2 text-xs font-medium text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors">PNG</button>
+                    <button
+                        class="flex-1 py-2 text-xs font-medium text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors">WEBP</button>
+                    <button
+                        class="flex-1 py-2 text-xs font-medium text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors">PDF</button>
+                </div>
+            </div>
+        </div>
+        <!-- Live Preview -->
+        <div class="flex flex-col gap-3 pt-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                    <span class="material-symbols-outlined text-success" style="font-size: 20px;">visibility</span>
+                    <h3 class="text-sm font-semibold text-slate-700 dark:text-slate-200">Live Preview</h3>
+                </div>
+                <span class="text-xs text-slate-500">Approx. 2.4 MB</span>
+            </div>
+            <!-- Preview Canvas -->
+            <div
+                class="w-full bg-[#1a1a1a] p-4 rounded-lg border border-gray-200 dark:border-white/10 shadow-inner flex flex-col items-center justify-center min-h-[300px]">
+                <div class="w-3/4 flex flex-col gap-[12px] bg-white p-[12px] shadow-2xl origin-center transform transition-transform"
+                    id="preview-mock">
+                    <img alt="Preview Image 1" class="w-full rounded-sm object-cover" data-alt="Camera lens preview"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuChzzbOL7ZNoNVQxP0BxiAPOpphujx6v71BcHEyqYIFl3IPGKZUnK4bxo03YKc1BhJMTKKYUyhw8QD2ole6KpmSZougEfSDKgym-X05rDoAWno6dW4YG7nQKRpwVhAd1COKQZNvFxPMN7_pLFj573tYloHdvJE_wZap1WfYYS3IXiLT_r0C0CARNe2auwTOCzWv0hiBGeKPvipoDtrtGqjjdqrePfvy73d-Mt8aRbc8uRn2WTmrz8BmjCOmbYy34RCxU6MwUiC8Xmac" />
+                    <img alt="Preview Image 2" class="w-full rounded-sm object-cover"
+                        data-alt="Mountain landscape preview"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuD5ptdIrkTCh-GyDvZWIikwUGtoPELNVRmAr_TlZJPMruCo5kmgQHKb1KIAuFZy1ENWopatpIu9hoktuvOKZ-36qg7rU9791HpBA85ilfvUvgi1YTZmho0xp62ds8cR53Fc77H3g_k3SlDdumpM98bezLLfXEQbruye8XY5X50UOOE_NZrmj4v6jbMIBpkp6plV5gplGe02l1nMK50-8wB-9VofJljeNdJqXAMfgTQH7srxRIDw7LIen1jj699-7lyXN-LbyOCrHfn-" />
+                    <img alt="Preview Image 3" class="w-full rounded-sm object-cover" data-alt="Hiker preview"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuDaXznsLRAO6KdzNmsK7kS721vPHW4A7UbMeNq1Fz3Lh8beVVEWHaO9dpD3Memkq8IwjK1aaxWBsr_9a8ygkOYll7PTgn2aC4XY7oe-jJPYrSIYZ_LHsa9QKM_OcghmjAacWZnHxkKyBWePLSTCyK5snvSMhpNAOMhI6nvjvIJApZPRLfLZx799jY0JDuMVn5G-p_Hh1wIArwU0QK1p0EuAq2KjBavU_Wm6yT2eFhL9FZH_ozjhh_O6c14VoeGUqINJVCY-fThZyOMN" />
+                </div>
+            </div>
+        </div>
+    </main>
+    <!-- Sticky Footer CTA -->
+    <div
+        class="fixed bottom-0 left-0 right-0 p-4 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-lg border-t border-gray-200 dark:border-white/10 z-40">
+        <div class="max-w-md mx-auto flex items-center gap-4">
+            <div class="hidden sm:flex flex-col">
+                <span class="text-xs text-slate-500 dark:text-slate-400">Total Size</span>
+                <span class="text-sm font-bold dark:text-white">1200 x 2800px</span>
+            </div>
+            <button
+                class="flex-1 bg-gradient-to-r from-success to-emerald-600 hover:from-emerald-500 hover:to-emerald-700 text-white font-bold h-12 rounded-lg shadow-lg shadow-success/20 flex items-center justify-center gap-2 transform active:scale-95 transition-all">
+                <span class="material-symbols-outlined">download</span>
+                Merge &amp; Download
+            </button>
+        </div>
+    </div>
+</body>
+
+</html>

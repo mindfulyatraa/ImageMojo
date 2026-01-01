@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>About ImageHub Pro</title>
+    <!-- Google Fonts: Inter -->
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&amp;display=swap"
+        rel="stylesheet" />
+    <!-- Material Symbols -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#0066cc",
+                        "secondary": "#00CC66",
+                        "background-light": "#f5f7f8",
+                        "background-dark": "#0f1923",
+                        "surface-dark": "#1b2128",
+                        "surface-light": "#ffffff",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* Custom scrollbar for webkit */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #0f1923;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #27303a;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #374151;
+        }
+
+        .glass-effect {
+            background: rgba(27, 33, 40, 0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+    </style>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+</head>
+
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-white antialiased overflow-x-hidden">
+    <!-- Sticky Header -->
+    <div class="fixed top-0 left-0 right-0 z-50 glass-effect border-b border-white/5">
+        <div class="flex items-center p-4 justify-between max-w-lg mx-auto w-full">
+            <div class="flex items-center gap-2 cursor-pointer">
+                <div
+                    class="bg-gradient-to-br from-primary to-blue-400 text-white flex size-10 shrink-0 items-center justify-center rounded-lg shadow-lg">
+                    <span class="material-symbols-outlined text-2xl">auto_fix_high</span>
+                </div>
+                <h2 class="text-white text-lg font-bold leading-tight tracking-tight">ImageHub Pro</h2>
+            </div>
+            <!-- Mobile Menu Toggle -->
+            <button
+                class="flex size-10 items-center justify-center rounded-lg hover:bg-white/10 transition-colors text-white">
+                <span class="material-symbols-outlined text-2xl">menu</span>
+            </button>
+        </div>
+    </div>
+    <!-- Main Content Container -->
+    <main class="relative flex flex-col w-full max-w-lg mx-auto pt-20 pb-10 min-h-screen">
+        <!-- Hero Section -->
+        <div class="px-4 mb-6">
+            <div class="relative flex min-h-[320px] flex-col gap-6 rounded-2xl overflow-hidden items-center justify-center p-6 text-center shadow-2xl"
+                data-alt="Abstract blue digital wave pattern representing speed and technology"
+                style='background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.2) 0%, rgba(15, 25, 35, 0.9) 100%), url("https://lh3.googleusercontent.com/aida-public/AB6AXuDNNIzoAiqwM2mOlDjKvQwXXKY1ahpeV-YVt4pnvcStk0LHgfXG99MuUB945KvBw-WbBpDv6QGgZb3w6HrbwtzfXBFbLgYEN9EQEj-hg5vbquyITObc233CfnBTJlb8CvgeUf1QToDHwTifgkc-Bxq7Kbjvdb7Bk5tCsGzIWBE6KJoCMvfHrSsXrtg0bzso-2NpO9XWyqGiiPwBJkVYIDYTJOvb86pycqkCNsXvBvlS62GTGsy3-Yu_cTDR5KRfXqc9kaG0kjzltn1I"); background-size: cover; background-position: center;'>
+                <div class="relative z-10 flex flex-col gap-3">
+                    <div
+                        class="inline-flex items-center justify-center gap-1.5 rounded-full bg-secondary/20 border border-secondary/30 px-3 py-1 w-fit mx-auto backdrop-blur-sm">
+                        <span class="material-symbols-outlined text-secondary text-sm">check_circle</span>
+                        <span class="text-secondary text-xs font-bold uppercase tracking-wide">100% Free Forever</span>
+                    </div>
+                    <h1 class="text-white text-4xl font-black leading-tight tracking-tighter drop-shadow-sm">
+                        Empowering Creators Everywhere
+                    </h1>
+                    <p class="text-gray-200 text-base font-normal leading-relaxed max-w-[32ch] mx-auto">
+                        Your all-in-one suite for professional image editing without the paywall.
+                    </p>
+                </div>
+                <div class="relative z-10 w-full flex flex-col gap-3">
+                    <button
+                        class="w-full h-12 rounded-xl bg-primary hover:bg-blue-600 transition-colors text-white text-base font-bold shadow-lg shadow-blue-900/20 flex items-center justify-center gap-2">
+                        <span>Explore 25+ Tools</span>
+                        <span class="material-symbols-outlined text-lg">arrow_forward</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Stats Section -->
+        <div class="px-4 mb-8">
+            <div class="grid grid-cols-3 gap-3">
+                <div
+                    class="flex flex-col gap-1 rounded-xl p-3 bg-surface-dark border border-white/5 items-center text-center">
+                    <span class="material-symbols-outlined text-secondary text-2xl mb-1">handyman</span>
+                    <p class="text-white text-xl font-bold leading-none">25+</p>
+                    <p class="text-gray-400 text-xs font-medium">Pro Tools</p>
+                </div>
+                <div
+                    class="flex flex-col gap-1 rounded-xl p-3 bg-surface-dark border border-white/5 items-center text-center">
+                    <span class="material-symbols-outlined text-secondary text-2xl mb-1">savings</span>
+                    <p class="text-white text-xl font-bold leading-none">$0</p>
+                    <p class="text-gray-400 text-xs font-medium">Cost to User</p>
+                </div>
+                <div
+                    class="flex flex-col gap-1 rounded-xl p-3 bg-surface-dark border border-white/5 items-center text-center">
+                    <span class="material-symbols-outlined text-secondary text-2xl mb-1">shield_lock</span>
+                    <p class="text-white text-xl font-bold leading-none">100%</p>
+                    <p class="text-gray-400 text-xs font-medium">Privacy</p>
+                </div>
+            </div>
+        </div>
+        <!-- Ad Placeholder 1 -->
+        <div class="px-4 mb-8 w-full">
+            <div
+                class="w-full h-[100px] bg-[#161b22] border border-white/5 rounded-lg flex flex-col items-center justify-center gap-2 overflow-hidden relative group">
+                <p class="text-[10px] uppercase tracking-widest text-gray-600 font-semibold z-10">Advertisement</p>
+                <div
+                    class="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-full group-hover:animate-[shimmer_1.5s_infinite]">
+                </div>
+            </div>
+        </div>
+        <!-- Mission Section -->
+        <div class="px-4 mb-8">
+            <div class="flex flex-col gap-6">
+                <div>
+                    <h2 class="text-white text-2xl font-bold leading-tight mb-2">Our Mission</h2>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        To democratize design by providing professional-grade image editing tools for free, forever. We
+                        believe creativity shouldn't be gated by expensive subscriptions.
+                    </p>
+                </div>
+                <div class="rounded-xl bg-surface-dark border border-white/5 overflow-hidden shadow-sm">
+                    <div class="w-full h-48 bg-cover bg-center"
+                        data-alt="A diverse team collaborating on a digital project in a modern office"
+                        style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuANvYFbTl-tv3YQHFFOW-2e-HM4IbfhCv9MZKGawpy8UBZuaQmrV5DlE0IMcE8US0vOccCIZlqYNs4aspCdwpSytamvxv9hqO_LkTcPu7Fsyr1BiOJhFrCYIjey7rrpgT2rCM7TsFM6ZRlztgsnI2-dABDo-HMZ36oWsMINO38TB2VqcOIDD0SUcNN0oT-l7GMtl-xvsXdreJwengWmNKJyJeMhr7hYSzD0yPExTmFm-lnKFLx0M-KQp3WICFcvJVoUEMYHkbwjbeuw");'>
+                    </div>
+                    <div class="p-5">
+                        <div class="flex items-start gap-3 mb-4">
+                            <div class="bg-primary/20 p-2 rounded-lg text-primary shrink-0">
+                                <span class="material-symbols-outlined">rocket_launch</span>
+                            </div>
+                            <div>
+                                <h3 class="text-white font-bold text-base mb-1">Built for Speed</h3>
+                                <p class="text-gray-400 text-xs leading-relaxed">
+                                    Our tools run directly in your browser using WebAssembly technology, ensuring your
+                                    images are processed instantly without uploading large files.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <div class="bg-secondary/20 p-2 rounded-lg text-secondary shrink-0">
+                                <span class="material-symbols-outlined">lock</span>
+                            </div>
+                            <div>
+                                <h3 class="text-white font-bold text-base mb-1">Privacy First</h3>
+                                <p class="text-gray-400 text-xs leading-relaxed">
+                                    We don't store your data. Images processed on our servers are automatically deleted
+                                    after 1 hour. Your creativity stays yours.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Philosophy / Why Free -->
+        <div class="px-4 mb-8">
+            <div
+                class="rounded-xl bg-gradient-to-b from-surface-dark to-[#161b22] p-6 border border-white/5 relative overflow-hidden">
+                <!-- Decorative background element -->
+                <div class="absolute -right-10 -top-10 w-32 h-32 bg-primary/10 rounded-full blur-3xl"></div>
+                <h2 class="text-white text-xl font-bold mb-4 flex items-center gap-2 relative z-10">
+                    <span class="material-symbols-outlined text-primary">psychology</span>
+                    Why is it free?
+                </h2>
+                <div class="space-y-3 relative z-10">
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        ImageHub Pro is supported by non-intrusive advertisements. This allows us to pay for server
+                        costs and development while keeping the tools completely free for users like you.
+                    </p>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        We are a small team of developers passionate about open web standards. We built the tools we
+                        wanted to use ourselves.
+                    </p>
+                </div>
+                <div class="mt-6 pt-6 border-t border-white/5 flex items-center justify-between">
+                    <div class="flex -space-x-2">
+                        <div class="w-8 h-8 rounded-full border-2 border-surface-dark bg-gray-600 bg-cover bg-center"
+                            data-alt="Portrait of team member Sarah"
+                            style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDqUA05GlaSoHMxv9ouG3sfYINa7_41XKnesSjqabVYRzsSAOpzHraAt1eOrpLm-AyVz9WbwOng0i2B8A4ZdCi_z5-3uMJXWCKmaZF8aPUeXdMtccpRBYXBFvUq0Us77uHcdEAcJDNz4QNRYtsJUpU6th9Gc_UUThLh4kuaHKELOuNCAVVaMWN1-Puv6hb8hh9b9o4YXewTINY0ITUWSD9Yg2PVHr4mkj6abUtG6mIutRA2cstRg4I4uixKooTpl8LSnxqCUVqi_4zw")'>
+                        </div>
+                        <div class="w-8 h-8 rounded-full border-2 border-surface-dark bg-gray-600 bg-cover bg-center"
+                            data-alt="Portrait of team member Mike"
+                            style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAEpgKJhfQOumhllwj8HiiWcb95MgUd7pq-ToaFQLcIUb8WwnkKcTonTcIevS6W0r21RT5CPzuUr8XRp_Vn2AK1ZsZczaMYnzbkq4AlWAHZ7w5HXjZvC2ig4olmY6xFJpjsPH0Z2726YpjQ2hbx-QzIeYmqd295ePajNyPXvLzRGU-6AGYs6gzt_4-AMAnm7yTUXm4xeiJ_hQnEDGde2PZmCXhxwtxGrIc1bDgEv_3JgbR6zJDQvPJgQBPN5UPeXUlCnWy-TT6kqLdw")'>
+                        </div>
+                        <div class="w-8 h-8 rounded-full border-2 border-surface-dark bg-gray-600 bg-cover bg-center"
+                            data-alt="Portrait of team member Jessica"
+                            style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDtXlgl1WJsVBxUL6yE7ux6RlD9BE2f6-B0sv3WpWhfzclULlC7z7QaPPzsanv-ns17OMGnYBEXJl_hapTecjH7AnzS30_qUrNdMUCoeIs4dnZBkYzZ1Ayx2v48qvSuFIewFS0EYJrYnhxS-nAaN3Zeadny3Eqwyoq3einoQqDwHJ2gu5P2Uoohs_pbqCYaxUf39AkpGKUUWmIYO13pTwt2kNidj-f_7cgyD91MXWkXPDtwobSihGH-uKP3xUXij9_nOK5pdzZ4LGBc")'>
+                        </div>
+                    </div>
+                    <span class="text-xs text-gray-500 font-medium">Meet the team</span>
+                </div>
+            </div>
+        </div>
+        <!-- Ad Placeholder 2 -->
+        <div class="px-4 mb-10 w-full">
+            <div
+                class="w-full aspect-video bg-[#161b22] border border-white/5 rounded-lg flex flex-col items-center justify-center gap-2 overflow-hidden">
+                <p class="text-[10px] uppercase tracking-widest text-gray-600 font-semibold">Advertisement</p>
+                <div class="w-12 h-1 bg-gray-700/50 rounded-full"></div>
+            </div>
+        </div>
+        <!-- Footer -->
+        <footer class="mt-auto px-6 py-10 bg-[#0a0f14] border-t border-white/5">
+            <div class="flex flex-col gap-8">
+                <div class="flex flex-col gap-4">
+                    <div class="flex items-center gap-2">
+                        <span class="material-symbols-outlined text-primary text-xl">auto_fix_high</span>
+                        <span class="text-white text-base font-bold">ImageHub Pro</span>
+                    </div>
+                    <p class="text-gray-500 text-sm">
+                        Simple, fast, and free online tools for your daily image editing needs.
+                    </p>
+                </div>
+                <div class="grid grid-cols-2 gap-8">
+                    <div class="flex flex-col gap-3">
+                        <h4 class="text-white font-semibold text-sm">Platform</h4>
+                        <a class="text-gray-400 text-sm hover:text-primary transition-colors" href="#">All Tools</a>
+                        <a class="text-gray-400 text-sm hover:text-primary transition-colors" href="#">Blog</a>
+                        <a class="text-gray-400 text-sm hover:text-primary transition-colors" href="#">Feedback</a>
+                    </div>
+                    <div class="flex flex-col gap-3">
+                        <h4 class="text-white font-semibold text-sm">Legal</h4>
+                        <a class="text-gray-400 text-sm hover:text-primary transition-colors" href="#">Privacy
+                            Policy</a>
+                        <a class="text-gray-400 text-sm hover:text-primary transition-colors" href="#">Terms of
+                            Service</a>
+                        <a class="text-gray-400 text-sm hover:text-primary transition-colors" href="#">Cookie Policy</a>
+                    </div>
+                </div>
+                <div class="h-px bg-white/5 w-full my-2"></div>
+                <div class="flex flex-col gap-4 items-center">
+                    <div class="flex gap-4">
+                        <a class="text-gray-400 hover:text-white transition-colors" href="#">
+                            <span class="sr-only">Twitter</span>
+                            <svg aria-hidden="true" class="h-5 w-5" fill="currentColor" viewbox="0 0 24 24">
+                                <path
+                                    d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84">
+                                </path>
+                            </svg>
+                        </a>
+                        <a class="text-gray-400 hover:text-white transition-colors" href="#">
+                            <span class="sr-only">GitHub</span>
+                            <svg aria-hidden="true" class="h-5 w-5" fill="currentColor" viewbox="0 0 24 24">
+                                <path clip-rule="evenodd"
+                                    d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
+                                    fill-rule="evenodd"></path>
+                            </svg>
+                        </a>
+                    </div>
+                    <p class="text-center text-xs text-gray-600">
+                        © 2023 ImageHub Pro. All rights reserved.
+                    </p>
+                </div>
+            </div>
+        </footer>
+    </main>
+</body>
+
+</html>

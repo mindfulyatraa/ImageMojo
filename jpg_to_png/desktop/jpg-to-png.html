@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>JPG to PNG Converter - ImageHub Pro</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap"
+        rel="stylesheet" />
+    <!-- Material Symbols -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#6600cc",
+                        "primary-dark": "#5200a3",
+                        "background-light": "#f7f5f8",
+                        "background-dark": "#190f23",
+                        "surface-dark": "#211b28",
+                        "surface-light": "#ffffff",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "md": "0.375rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "2xl": "1rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings:
+                'FILL' 0,
+                'wght' 400,
+                'GRAD' 0,
+                'opsz' 24;
+            font-size: 24px;
+        }
+
+        /* Custom scrollbar for webkit */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #333;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+    </style>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+</head>
+
+<body
+    class="bg-background-light dark:bg-background-dark min-h-screen text-slate-900 dark:text-white overflow-x-hidden font-display flex flex-col">
+    <!-- Sticky Header -->
+    <header
+        class="sticky top-0 z-50 bg-background-light/95 dark:bg-background-dark/95 backdrop-blur-md border-b border-gray-200 dark:border-white/10 px-4 py-3">
+        <div class="flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <a href="index.html"
+                    class="flex items-center justify-center p-1 rounded-full hover:bg-black/5 dark:hover:bg-white/10 transition-colors">
+                    <span class="material-symbols-outlined text-slate-900 dark:text-white">arrow_back</span>
+                </a>
+                <div class="flex items-center gap-2">
+                    <div
+                        class="w-8 h-8 rounded-lg bg-gradient-to-br from-primary to-purple-400 flex items-center justify-center">
+                        <span class="material-symbols-outlined text-white text-sm">photo_library</span>
+                    </div>
+                    <h2 class="text-slate-900 dark:text-white text-lg font-bold leading-tight tracking-tight">ImageHub
+                        Pro</h2>
+                </div>
+            </div>
+            <button
+                class="flex items-center justify-center w-10 h-10 rounded-full bg-slate-200 dark:bg-surface-dark border border-transparent dark:border-white/10 overflow-hidden">
+                <img alt="User Profile" class="w-full h-full object-cover" data-alt="User profile avatar placeholder"
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuCEnSY0O-1BZ73bAx9az7aVY3P_b6WcFAvRBsbZSrrZX4PFwDt03goRUwa_WykinjeNSnfLuwIO1ItfziifdMvEV6H4oSgVSTg7zy6fnnFw3KTvR4jV1cdsex_vMyzOnUM6zBCMENFKq3eAdOAuKaWh2Qi3W0NaHvw8jOfGRAxIBN0Xcwgwig4v8D9nWZTzXQll6CKSHYpnt_UUAmvQ4pVwyj25PQ9F5hROTXhF3MCjPq-xcG2R0svVwSGWTbXdCrx4bzvyrw-rPqRI" />
+            </button>
+        </div>
+    </header>
+    <!-- Main Content -->
+    <main class="flex-1 w-full max-w-lg mx-auto flex flex-col pb-24">
+        <!-- Hero Section -->
+        <div class="px-4 pt-6 pb-2">
+            <h1 class="text-slate-900 dark:text-white text-3xl font-bold leading-tight tracking-tight">JPG to PNG</h1>
+            <p class="text-slate-500 dark:text-gray-400 text-base font-normal leading-normal pt-2">Convert images
+                instantly without losing quality.</p>
+        </div>
+        <!-- Top Advertisement Placeholder -->
+        <div class="px-4 py-4 w-full flex justify-center">
+            <div
+                class="w-full max-w-[320px] h-[50px] bg-slate-200 dark:bg-white/5 rounded-md flex items-center justify-center border border-dashed border-gray-400 dark:border-white/20">
+                <p class="text-xs text-slate-500 dark:text-gray-500 uppercase font-semibold tracking-wider">AdSpace
+                    320x50</p>
+            </div>
+        </div>
+        <!-- Upload Zone -->
+        <div class="px-4 py-2">
+            <div class="relative group cursor-pointer">
+                <div
+                    class="absolute -inset-0.5 bg-gradient-to-r from-primary to-purple-600 rounded-xl opacity-20 group-hover:opacity-40 transition duration-200 blur">
+                </div>
+                <div
+                    class="relative flex flex-col items-center justify-center p-8 rounded-xl bg-surface-light dark:bg-surface-dark border-2 border-dashed border-primary/30 dark:border-primary/40 hover:border-primary transition-all gap-4">
+                    <div class="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mb-1">
+                        <span class="material-symbols-outlined text-primary text-4xl">cloud_upload</span>
+                    </div>
+                    <div class="text-center">
+                        <p class="text-slate-900 dark:text-white text-lg font-bold mb-1">Tap to Upload</p>
+                        <p class="text-slate-500 dark:text-gray-400 text-sm">or drag JPG files here</p>
+                    </div>
+                    <button
+                        class="mt-2 flex items-center justify-center px-6 py-2.5 bg-primary hover:bg-primary-dark text-white text-sm font-medium rounded-lg shadow-lg shadow-primary/20 transition-all transform active:scale-95">
+                        Select JPG
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Settings Accordion -->
+        <div class="px-4 py-6">
+            <div
+                class="bg-surface-light dark:bg-surface-dark rounded-xl shadow-sm border border-slate-200 dark:border-white/5 overflow-hidden">
+                <div class="flex items-center justify-between p-4 border-b border-slate-100 dark:border-white/5">
+                    <div class="flex items-center gap-2">
+                        <span class="material-symbols-outlined text-primary">tune</span>
+                        <h3 class="text-slate-900 dark:text-white font-semibold">Conversion Options</h3>
+                    </div>
+                </div>
+                <div class="p-4 space-y-4">
+                    <!-- Toggle 1 -->
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-sm font-medium text-slate-900 dark:text-white">Lossless Compression</p>
+                            <p class="text-xs text-slate-500 dark:text-gray-400">Best quality, larger file size</p>
+                        </div>
+                        <label class="relative inline-flex items-center cursor-pointer">
+                            <input checked="" class="sr-only peer" type="checkbox" value="" />
+                            <div
+                                class="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-primary">
+                            </div>
+                        </label>
+                    </div>
+                    <!-- Toggle 2 -->
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-sm font-medium text-slate-900 dark:text-white">Preserve Metadata</p>
+                            <p class="text-xs text-slate-500 dark:text-gray-400">Keep EXIF data in PNG</p>
+                        </div>
+                        <label class="relative inline-flex items-center cursor-pointer">
+                            <input class="sr-only peer" type="checkbox" value="" />
+                            <div
+                                class="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-primary">
+                            </div>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Live Preview / Status (Simulated State) -->
+        <div class="px-4 pb-4">
+            <h3 class="text-xs font-bold text-slate-500 dark:text-gray-500 uppercase tracking-wider mb-3 px-1">Recent
+                Conversion</h3>
+            <div
+                class="bg-surface-light dark:bg-surface-dark rounded-xl shadow-sm border border-slate-200 dark:border-white/5 p-4">
+                <div class="flex gap-4 items-stretch h-32">
+                    <!-- Before -->
+                    <div class="flex-1 relative rounded-lg overflow-hidden group">
+                        <div
+                            class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity z-10">
+                            <span class="text-white text-xs font-bold">JPG</span>
+                        </div>
+                        <img alt="Original sunny landscape image" class="w-full h-full object-cover"
+                            data-alt="Original JPG Landscape"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuCEb5omQ7LUnRzNmmWdF87APr9mVZOdeIGYk-2Gbldb5DTfEZu2f4ERiBbnjzbHO5qMz87WpEegvdwZuC-NOc7Nnbp5xyQYj5sKgROgORQSB-UUfCx59TDwzCCer5je_TFwz6B2h1TvTCJKBBRN1B-ZQ9n54FXYYUJlOMRb_AlfKOguT2PjWQUvhvnvNJ9WAKhuGuAxrR0zj_RmvKTXK6Vodf7jHAF2KgaQKN-B-N2n0w5OZscVBTWo7lHWWSuvH03L5M18yKDzX61h" />
+                        <div class="absolute bottom-0 left-0 right-0 bg-black/60 backdrop-blur-sm p-1">
+                            <p class="text-[10px] text-white text-center font-medium">Original (2.4MB)</p>
+                        </div>
+                    </div>
+                    <!-- Arrow -->
+                    <div class="flex flex-col items-center justify-center gap-1">
+                        <span class="material-symbols-outlined text-gray-400 dark:text-gray-600">arrow_forward</span>
+                    </div>
+                    <!-- After -->
+                    <div class="flex-1 relative rounded-lg overflow-hidden border-2 border-primary/50 group">
+                        <div class="absolute top-2 right-2 z-20">
+                            <div class="bg-primary text-white text-[10px] font-bold px-1.5 py-0.5 rounded-sm shadow-sm">
+                                PNG</div>
+                        </div>
+                        <!-- Checkboard pattern for transparency indication -->
+                        <div class="absolute inset-0 z-0 bg-[url('https://placeholder.pics/svg/20')] opacity-20"></div>
+                        <img alt="Converted sunny landscape image" class="w-full h-full object-cover relative z-10"
+                            data-alt="Converted PNG Landscape"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuBaresLK6YbX9t0_b-oOGcCBiYd6tmrTTNh3fg9sMSDMhuhPKnNFLlWT71v33RijE8whoNsAbryNXjvlAYBC8GrT9p7H64dCf6ap2aRTci2E4vkYBXeCq7nLTYfp7hZGRNOAEc5aKHTfeUiP5-gAKGm7LHlZp2AKa0P9XaAzzBuWEl68BD2CGuV3cpTMEVZGya0sbewTyWohzjkViDsdKkIW3vQJmPn1O5Sinl9rtEQSs569o1G0TZTKK4OK48ptXOykmlws5SRkLu4" />
+                        <div class="absolute bottom-0 left-0 right-0 bg-primary/90 backdrop-blur-sm p-1 z-20">
+                            <p class="text-[10px] text-white text-center font-medium">Result (1.8MB)</p>
+                        </div>
+                    </div>
+                </div>
+                <div
+                    class="mt-4 flex items-center justify-between text-xs text-slate-500 dark:text-gray-400 border-t border-slate-100 dark:border-white/5 pt-3">
+                    <span>Quality: 100%</span>
+                    <span class="flex items-center gap-1 text-green-500 font-medium">
+                        <span class="material-symbols-outlined text-sm">check_circle</span> Ready to download
+                    </span>
+                </div>
+            </div>
+        </div>
+        <!-- Sticky Bottom CTA for Mobile -->
+        <div
+            class="fixed bottom-0 left-0 right-0 p-4 bg-background-light dark:bg-background-dark/95 backdrop-blur-md border-t border-gray-200 dark:border-white/10 z-40">
+            <div class="max-w-lg mx-auto flex flex-col gap-3">
+                <button
+                    class="w-full flex items-center justify-center gap-2 bg-primary hover:bg-primary-dark text-white font-bold py-3.5 px-6 rounded-xl shadow-lg shadow-primary/25 active:scale-[0.98] transition-all">
+                    <span class="material-symbols-outlined">download</span>
+                    Convert &amp; Download PNG
+                </button>
+            </div>
+        </div>
+    </main>
+    <!-- Footer spacer for fixed button -->
+    <div class="h-20"></div>
+    <!-- AdSense Placeholder Bottom -->
+    <div class="w-full flex justify-center pb-8 px-4">
+        <div
+            class="w-full max-w-[300px] h-[250px] bg-slate-200 dark:bg-surface-dark rounded-lg flex flex-col gap-2 items-center justify-center border border-dashed border-gray-400 dark:border-white/20">
+            <span class="material-symbols-outlined text-gray-400 text-4xl">ads_click</span>
+            <p class="text-sm text-slate-500 dark:text-gray-500 font-medium">Advertisement Area</p>
+            <p class="text-xs text-slate-400 dark:text-gray-600">300x250</p>
+        </div>
+    </div>
+</body>
+
+</html>

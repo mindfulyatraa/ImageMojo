@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Base64 Encoder - ImageHub Pro</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Noto+Sans:wght@400;500;700&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#0000cc", // Deep Blue
+                        "success": "#00CC66", // Green
+                        "background-light": "#f5f5f8",
+                        "background-dark": "#0f0f23",
+                        "surface-dark": "#1a1a2e",
+                        "surface-border": "#27273a",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"],
+                        "mono": ["ui-monospace", "SFMono-Regular", "Menlo", "Monaco", "Consolas", "Liberation Mono", "Courier New", "monospace"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "2xl": "1rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+    <style>
+        /* Custom scrollbar for code block */
+        .code-scroll::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        .code-scroll::-webkit-scrollbar-track {
+            background: #1a1a2e;
+        }
+
+        .code-scroll::-webkit-scrollbar-thumb {
+            background: #393956;
+            border-radius: 4px;
+        }
+
+        .code-scroll::-webkit-scrollbar-thumb:hover {
+            background: #4f4f7a;
+        }
+    </style>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+</head>
+
+<body
+    class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-white font-display antialiased overflow-x-hidden pb-24">
+    <!-- Sticky Header -->
+    <div
+        class="sticky top-0 z-50 bg-background-light/95 dark:bg-background-dark/95 backdrop-blur-md border-b border-slate-200 dark:border-surface-border">
+        <div class="flex items-center p-4 justify-between max-w-md mx-auto">
+            <button
+                class="flex size-10 items-center justify-center rounded-full hover:bg-slate-200 dark:hover:bg-surface-border transition-colors text-slate-900 dark:text-white">
+                <span class="material-symbols-outlined">arrow_back</span>
+            </button>
+            <h1 class="text-lg font-bold leading-tight tracking-tight flex-1 text-center">ImageHub Pro</h1>
+            <button
+                class="flex size-10 items-center justify-center rounded-full hover:bg-slate-200 dark:hover:bg-surface-border transition-colors text-slate-900 dark:text-white">
+                <span class="material-symbols-outlined">menu</span>
+            </button>
+        </div>
+    </div>
+    <!-- Main Content Container -->
+    <div class="flex flex-col max-w-md mx-auto w-full">
+        <!-- Page Title -->
+        <div class="px-4 pt-6 pb-2">
+            <h2 class="text-[28px] font-bold leading-tight tracking-tight text-slate-900 dark:text-white">Base64 Encoder
+            </h2>
+            <p class="text-slate-500 dark:text-slate-400 text-sm mt-1">Convert your images to Base64 strings instantly.
+            </p>
+        </div>
+        <!-- Upload Zone -->
+        <div class="p-4">
+            <div
+                class="group relative flex flex-col items-center justify-center gap-4 rounded-xl border-2 border-dashed border-slate-300 dark:border-[#393956] hover:border-primary/50 dark:hover:border-primary/50 bg-white dark:bg-surface-dark px-6 py-10 transition-all cursor-pointer">
+                <div class="flex size-16 items-center justify-center rounded-full bg-primary/10 text-primary">
+                    <span class="material-symbols-outlined text-4xl">cloud_upload</span>
+                </div>
+                <div class="flex flex-col items-center gap-1 text-center">
+                    <p class="text-lg font-bold leading-tight">Tap to Upload Image</p>
+                    <p class="text-slate-500 dark:text-slate-400 text-xs">JPG, PNG, GIF supported (Max 5MB)</p>
+                </div>
+                <input accept="image/*" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer" type="file" />
+            </div>
+        </div>
+        <!-- Options: Format Selector -->
+        <div class="px-4 pb-6">
+            <div class="flex flex-col gap-2">
+                <label class="text-sm font-medium text-slate-600 dark:text-slate-300 ml-1">Output Format</label>
+                <div class="flex h-12 w-full items-center rounded-lg bg-slate-200 dark:bg-surface-border p-1">
+                    <label
+                        class="flex-1 cursor-pointer h-full items-center justify-center rounded-md transition-all has-[:checked]:bg-white dark:has-[:checked]:bg-[#101018] has-[:checked]:shadow-sm has-[:checked]:text-primary text-slate-500 dark:text-[#9a9abc] font-medium text-sm flex gap-2">
+                        <span class="material-symbols-outlined text-[18px]">code</span>
+                        <span>Data URI</span>
+                        <input checked="" class="hidden" name="format" type="radio" value="data-uri" />
+                    </label>
+                    <label
+                        class="flex-1 cursor-pointer h-full items-center justify-center rounded-md transition-all has-[:checked]:bg-white dark:has-[:checked]:bg-[#101018] has-[:checked]:shadow-sm has-[:checked]:text-primary text-slate-500 dark:text-[#9a9abc] font-medium text-sm flex gap-2">
+                        <span class="material-symbols-outlined text-[18px]">raw_on</span>
+                        <span>Raw Base64</span>
+                        <input class="hidden" name="format" type="radio" value="raw" />
+                    </label>
+                </div>
+            </div>
+        </div>
+        <!-- Inline Ad Placeholder -->
+        <div class="px-4 pb-8">
+            <div
+                class="rounded-lg bg-slate-100 dark:bg-surface-border overflow-hidden border border-slate-200 dark:border-transparent">
+                <div class="flex items-center gap-3 p-3">
+                    <div class="bg-cover bg-center size-12 rounded bg-slate-300"
+                        data-alt="Abstract colorful gradient pattern"
+                        style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuC-1W1z6xT6jP-SLPvKY0AOIVmRHnkDjieRR65ecypkilRNObsaCIL874_Bpt85i3HdqTOFtUjNKE89-HxO6_C8-1PeHKOGCb3adtTVCggD2M12LdkSxTEF7qL0JWM0U-Zz77dqTzAq45eURwUkiB8xQoD3O5xsYdD_pa37a74XLQv6vWhOfNLqysh4dkgo80qsz24vP9EZD4BtDdwg3Fq224EpLMYecQjL6Q3Di8dDQaJlVFugkbX_ltiFFlnsX_P2ckbWZYtdwsfB");'>
+                    </div>
+                    <div class="flex flex-col">
+                        <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Ad</span>
+                        <span class="text-sm font-semibold text-slate-800 dark:text-white">Upgrade to ImageHub
+                            Pro+</span>
+                        <span class="text-xs text-slate-500 dark:text-slate-400">Remove ads and unlock batch
+                            processing.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Output Section -->
+        <div class="px-4 pb-6 flex flex-col gap-4">
+            <div class="flex items-center justify-between">
+                <h3 class="text-lg font-bold text-slate-900 dark:text-white">Result</h3>
+                <span
+                    class="px-2 py-0.5 rounded text-[10px] font-bold bg-success/20 text-success uppercase tracking-wide">Ready</span>
+            </div>
+            <!-- Code Output Area -->
+            <div
+                class="relative rounded-xl bg-slate-900 dark:bg-[#0a0a14] border border-slate-700 dark:border-slate-800 overflow-hidden group">
+                <div class="absolute top-3 right-3 flex gap-2">
+                    <button
+                        class="bg-slate-800/80 hover:bg-slate-700 p-1.5 rounded text-white backdrop-blur-sm transition-colors"
+                        title="Expand">
+                        <span class="material-symbols-outlined text-[18px]">fullscreen</span>
+                    </button>
+                </div>
+                <div
+                    class="p-4 font-mono text-xs text-slate-300 break-all max-h-[140px] overflow-y-auto code-scroll leading-relaxed opacity-70">
+                    data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAlgAAACWCAMAAADlXjF7AAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAC0...
+                    <span class="text-slate-600 italic">// Truncated for preview</span>
+                </div>
+                <!-- Fade out effect at bottom -->
+                <div
+                    class="absolute bottom-0 left-0 right-0 h-12 bg-gradient-to-t from-slate-900 dark:from-[#0a0a14] to-transparent pointer-events-none">
+                </div>
+            </div>
+            <!-- Action Buttons -->
+            <div class="grid grid-cols-1 gap-3">
+                <button
+                    class="flex items-center justify-center gap-2 w-full h-12 rounded-xl bg-primary hover:bg-primary/90 active:scale-[0.98] transition-all shadow-lg shadow-primary/20 text-white font-bold text-base">
+                    <span class="material-symbols-outlined">content_copy</span>
+                    Copy to Clipboard
+                </button>
+                <button
+                    class="flex items-center justify-center gap-2 w-full h-12 rounded-xl bg-slate-200 dark:bg-surface-border hover:bg-slate-300 dark:hover:bg-[#393956] text-slate-900 dark:text-white font-semibold text-sm transition-colors">
+                    <span class="material-symbols-outlined">download</span>
+                    Download as .txt
+                </button>
+            </div>
+        </div>
+        <!-- Image Preview Section -->
+        <div class="px-4 pb-8">
+            <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-3">Image Preview</h3>
+            <div
+                class="rounded-xl overflow-hidden border border-slate-200 dark:border-surface-border bg-slate-100 dark:bg-black/40 p-1 relative">
+                <!-- Checkerboard background for transparency -->
+                <div class="absolute inset-0 opacity-10"
+                    style="background-image: radial-gradient(#4a4a4a 1px, transparent 1px); background-size: 8px 8px;">
+                </div>
+                <div class="relative w-full h-48 bg-contain bg-center bg-no-repeat rounded-lg"
+                    data-alt="Preview of the uploaded image showing a placeholder geometric shape"
+                    style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuA8vz6lZVGBUB8KQSAKuCoxq1jQtEx6iGE6kpLndv3VLYRCw0yxV2kVNqNZiBeACsTed7ZPmZJG8x9_q-zRrB3bVL3fiYehsmhyHC5Yx1PSkY4bbWrja2F6fIC8-lw7lwvn9BopHKqYzHTOp-eoxkT2tH3TkvtMFkMKhiyKvRpq6MyIBTUvULVZ4cNH2MMXAH0P1lbB5PFQvfKQSaYRNtwqZf2dJUCXnjAgDRjxKgTT19fJlooCsh651tMToag4nTJKBO5fEIg8OD4a");'>
+                </div>
+                <div
+                    class="absolute bottom-3 right-3 bg-black/60 backdrop-blur-md px-2 py-1 rounded text-[10px] text-white font-mono">
+                    800 x 600 px | 240 KB
+                </div>
+            </div>
+        </div>
+        <!-- Space for sticky footer ad -->
+        <div class="h-16"></div>
+    </div>
+    <!-- Sticky Bottom Ad Banner -->
+    <div
+        class="fixed bottom-0 left-0 right-0 z-40 bg-slate-100 dark:bg-[#151520] border-t border-slate-200 dark:border-surface-border">
+        <div class="max-w-md mx-auto flex h-[60px] items-center justify-center relative">
+            <span
+                class="absolute top-1 right-1 text-[8px] text-slate-400 border border-slate-300 dark:border-slate-700 px-1 rounded">AD</span>
+            <div class="w-full h-full flex items-center justify-center">
+                <img alt="Banner advertisement placeholder with abstract geometric background"
+                    class="h-[50px] w-[320px] object-cover rounded opacity-80"
+                    data-alt="Banner advertisement placeholder"
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuCAdUnmw9OnlQpzuKaRaQ3CMiJgrv66KWVDxgBpHritBDx_ZCQl9IaqgS7QLD_Sytzy7hCZFoGBaqCo2f9uBNet9OmHrOeYYLB5DOs95rrCQzE_phj0f4ycX9i-YVmkfJOUuz46eobOoBgrEfASR7MS8rgindlNdpFE3VNYrhOE2_L7rU1ppCT7NMeuknlxcPXDx9ALUWS2yVuIXhIf-IfscIcnfmnrzC-7PqyJtS1McHvdvdOAjybTUvQKiSSDohlV_hgaIMWzjCCo" />
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

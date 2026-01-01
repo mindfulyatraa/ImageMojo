@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Meme Generator - ImageHub Pro</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#0066cc",
+                        "secondary": "#00CC66",
+                        "background-light": "#f5f7f8",
+                        "background-dark": "#101418",
+                        "surface-dark": "#1b2128",
+                        "border-dark": "#394756",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"],
+                        "meme": ["Impact", "Inter", "sans-serif"],
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+    <style>
+        /* Simulate meme text stroke */
+        .meme-text {
+            text-shadow:
+                -2px -2px 0 #000,
+                2px -2px 0 #000,
+                -2px 2px 0 #000,
+                2px 2px 0 #000;
+        }
+    </style>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+</head>
+
+<body class="bg-background-dark text-white font-display overflow-x-hidden">
+    <!-- Header -->
+    <header class="sticky top-0 z-50 flex items-center bg-[#101418] border-b border-border-dark p-4 justify-between">
+        <div class="flex items-center gap-4">
+            <button
+                class="text-white flex size-10 shrink-0 items-center justify-center rounded-full hover:bg-white/10 transition">
+                <span class="material-symbols-outlined">menu</span>
+            </button>
+            <div class="flex items-center gap-2">
+                <div class="size-8 rounded bg-primary flex items-center justify-center">
+                    <span class="material-symbols-outlined text-white text-[20px]">photo_library</span>
+                </div>
+                <h2 class="text-white text-lg font-bold leading-tight tracking-[-0.015em] hidden sm:block">ImageHub Pro
+                </h2>
+            </div>
+        </div>
+        <div class="flex items-center justify-end gap-4">
+            <div class="relative hidden md:block">
+                <span
+                    class="absolute left-3 top-1/2 -translate-y-1/2 text-[#9aabbc] material-symbols-outlined text-[20px]">search</span>
+                <input
+                    class="h-10 rounded-full bg-surface-dark border-none pl-10 pr-4 text-sm text-white focus:ring-1 focus:ring-primary w-64 placeholder-[#9aabbc]"
+                    placeholder="Search tools..." type="text" />
+            </div>
+            <button class="text-[#9aabbc] hover:text-white transition">
+                <span class="material-symbols-outlined">account_circle</span>
+            </button>
+        </div>
+    </header>
+    <!-- Main Content -->
+    <main class="w-full max-w-[1400px] mx-auto p-4 md:p-6 lg:p-8">
+        <!-- Page Title -->
+        <div class="mb-6 flex flex-col md:flex-row md:items-center justify-between gap-4">
+            <div>
+                <h1 class="text-white text-3xl font-bold leading-tight tracking-tight">Meme Generator</h1>
+                <p class="text-[#9aabbc] mt-1 text-sm md:text-base">Create custom memes with our easy-to-use editor.</p>
+            </div>
+            <button class="flex items-center gap-2 text-primary hover:text-primary/80 font-medium text-sm">
+                <span class="material-symbols-outlined text-[18px]">play_circle</span>
+                Watch Tutorial
+            </button>
+        </div>
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start">
+            <!-- Left Column: Canvas & Preview (Optimized for visual space) -->
+            <div class="lg:col-span-7 xl:col-span-8 flex flex-col gap-6">
+                <!-- Canvas Area -->
+                <div
+                    class="relative w-full bg-[#0a0c0f] rounded-xl overflow-hidden shadow-2xl border border-border-dark group">
+                    <!-- Toolbar overlay for canvas -->
+                    <div
+                        class="absolute top-4 right-4 z-20 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <button
+                            class="size-8 rounded bg-black/50 backdrop-blur text-white flex items-center justify-center hover:bg-primary transition"
+                            title="Reset">
+                            <span class="material-symbols-outlined text-[18px]">restart_alt</span>
+                        </button>
+                        <button
+                            class="size-8 rounded bg-black/50 backdrop-blur text-white flex items-center justify-center hover:bg-primary transition"
+                            title="Maximize">
+                            <span class="material-symbols-outlined text-[18px]">fullscreen</span>
+                        </button>
+                    </div>
+                    <!-- The Meme Image Container -->
+                    <div
+                        class="relative w-full aspect-[4/3] md:aspect-video flex items-center justify-center bg-[#1b2128]">
+                        <!-- Background Image -->
+                        <img alt="Cat looking surprised meme template" class="max-h-full max-w-full object-contain"
+                            data-alt="Close up of a surprised looking cat face"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuAgaLkRhRPG0NI-sC0z6rOrrXfPL1IiQgMpcyswWhRybT5kT2xR4SIUCFmR_DQn957UH_qj0WrBMpkTOkh2aNmyxkEyvoWIhpQvweBPV0SGFAQMnjsyq3UoIPhqCjRnfyxSj_ME_s3hCcblDP9KbVKE0Fc3H_HtZ0N3DHjtyy6QuuLHAllbw-wadCX5N4oPw1q2lG38w8ooX9OJ2P2FIJbWQdVKD9u7zxxj_ocuhkhGMCdbkyh3_4wKF9RJHKoqj_NT10BqjO5AUofa" />
+                        <!-- Draggable Text Layers (Simulated positioning) -->
+                        <div
+                            class="absolute top-[5%] left-0 w-full px-4 text-center cursor-move hover:border-2 hover:border-dashed hover:border-primary/50 rounded p-2 transition-all">
+                            <span
+                                class="meme-text font-meme text-3xl md:text-5xl lg:text-6xl text-white uppercase font-bold tracking-wide leading-tight break-words">
+                                WHEN YOU REALIZE
+                            </span>
+                        </div>
+                        <div
+                            class="absolute bottom-[5%] left-0 w-full px-4 text-center cursor-move hover:border-2 hover:border-dashed hover:border-primary/50 rounded p-2 transition-all">
+                            <span
+                                class="meme-text font-meme text-3xl md:text-5xl lg:text-6xl text-white uppercase font-bold tracking-wide leading-tight break-words">
+                                IT'S FRIDAY
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Template Strip (Horizontal Scroll) -->
+                <div class="flex flex-col gap-3">
+                    <div class="flex justify-between items-center">
+                        <h3 class="text-white font-medium">Popular Templates</h3>
+                        <button class="text-primary text-sm font-medium hover:underline">View All</button>
+                    </div>
+                    <div class="flex gap-3 overflow-x-auto pb-2 scrollbar-hide">
+                        <!-- Add New -->
+                        <button
+                            class="shrink-0 size-24 md:size-28 rounded-lg border-2 border-dashed border-border-dark flex flex-col items-center justify-center gap-2 hover:border-primary hover:bg-surface-dark transition group/upload">
+                            <span
+                                class="material-symbols-outlined text-[#9aabbc] group-hover/upload:text-primary">add_photo_alternate</span>
+                            <span class="text-xs text-[#9aabbc] font-medium">Upload</span>
+                        </button>
+                        <!-- Templates -->
+                        <button
+                            class="shrink-0 size-24 md:size-28 rounded-lg overflow-hidden border border-transparent hover:border-primary ring-offset-2 ring-offset-background-dark focus:ring-2 focus:ring-primary relative transition">
+                            <div class="w-full h-full bg-cover bg-center" data-alt="Pug dog making a funny face"
+                                style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDNSxewUgYX2cvQqeuIz-0THJ0JrXosHm8OjYKJrCGYjQQKXEemxSPmOA8uI4IuzimRltPUaruZtvKjc5zO-PEb7S2cIcbvJD7eF4z1wKq84Yq3PtlZZHzPDY4Hofqi2VcEyq1bYpwi34S4MDkJg0erOvTHqKYm3vZvL7omz4kTAxYlJ3Ziojmg8yOK0JAgaczcufZ7w4p1NHLYYkNUHEXUW-iqgL8O_K0n3Y6LtH1t_zakEhSHE7BARbgg82FOYHBs7pGDjQvdpRVr')">
+                            </div>
+                        </button>
+                        <button
+                            class="shrink-0 size-24 md:size-28 rounded-lg overflow-hidden border border-transparent hover:border-primary relative transition">
+                            <div class="w-full h-full bg-cover bg-center opacity-70" data-alt="Bulldog looking grumpy"
+                                style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCB8d5aI2SqmFzLvk5WfYbCD-MqDoI4WNpxkNQqiKxclx8SmF8fEF3-Wbytj1scWZbGaE8ztT3_wNcPvMH-muTwzhdc-fgvrx_fTyMoC9dEpBq2zOtmToAzQWwo463KGoD5M9ddrutNsZ3TuZ7ZP-n3rpvKtwFn8-NzbialOPRXClwGZg6r2dt4eW9b0swPinm_S7vrVS5Z-_0BEX-w0LuQ5dVIxOjjU0jr8GVi4I_SVSlYQK7jJA571ZZZxpfIL19M6reUlSYggPsp')">
+                            </div>
+                        </button>
+                        <button
+                            class="shrink-0 size-24 md:size-28 rounded-lg overflow-hidden border border-transparent hover:border-primary relative transition">
+                            <div class="w-full h-full bg-cover bg-center opacity-70" data-alt="Cat hissing intensely"
+                                style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDxjAtY_9zd4IdyH5zAtQxor1duFG0pgTbHIT5FpFtTHgcVOTL_5rXHH0STFDKHu_loL5CEf1d9NWplO-X4y1StQCMle5a9KC5ewBxdSXYq4WZV3sUr6O_XsVlwQOwgqrySKYW8MVyct5nX81CsVqHyexotY1koQiFVTSfL_TJ3pDXg_oPR_X8XAqvCOlEx_I9LDB2pfPoVlvP5dhxo5wJCxDNUD6eTNU-zfk-VAqrZATZ4jCN4E1IOoDI4lWQVJM1zP2UflkZKW6xM')">
+                            </div>
+                        </button>
+                        <button
+                            class="shrink-0 size-24 md:size-28 rounded-lg overflow-hidden border border-transparent hover:border-primary relative transition">
+                            <div class="w-full h-full bg-cover bg-center opacity-70"
+                                data-alt="Large brown bear looking curious"
+                                style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuD2gDfUi1WkMUIc_sWz-OSBzG48AKIt4AtuIxX9X0YCKvVxrQmDy7UGJB0L70tiD5n9XA5WvdSdFLIWMuLxIoz1gskpTltgmR1PYJ61UM0yhFXfOyGFqPEDsOpjE5KKbUv2xbkoGU9Rz7YhxdKQgcP9r0dcEhAGpBV-0aJrkmas1RAreNW2-qi-erqEUyCtSejK43EccrBUh206WH7tAkjyluvQVU_WF1E_3aVYFXBm1sWLKj05vK1vNoW8kgElFUWJV96gAtHmfHVs')">
+                            </div>
+                        </button>
+                    </div>
+                </div>
+                <!-- Ad Banner (Tablet Friendly) -->
+                <div
+                    class="hidden md:flex w-full h-24 bg-surface-dark rounded-lg items-center justify-center border border-dashed border-border-dark relative overflow-hidden">
+                    <span class="text-xs text-[#9aabbc] font-bold tracking-wider uppercase z-10">Advertisement</span>
+                    <div
+                        class="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent opacity-20">
+                    </div>
+                </div>
+            </div>
+            <!-- Right Column: Editor Controls -->
+            <div class="lg:col-span-5 xl:col-span-4 flex flex-col gap-6">
+                <div class="bg-surface-dark rounded-xl border border-border-dark p-5 md:p-6 flex flex-col gap-6">
+                    <div class="flex items-center justify-between pb-2 border-b border-border-dark">
+                        <h3 class="text-white font-bold text-lg">Editor</h3>
+                        <span
+                            class="px-2 py-1 rounded bg-green-900/30 text-secondary text-xs font-bold uppercase tracking-wider">Ready</span>
+                    </div>
+                    <!-- Text Inputs -->
+                    <div class="flex flex-col gap-4">
+                        <label class="flex flex-col gap-2">
+                            <span class="text-[#9aabbc] text-sm font-medium">Top Text</span>
+                            <textarea
+                                class="form-textarea w-full bg-[#101418] border border-border-dark rounded-lg text-white placeholder-[#505f70] focus:ring-1 focus:ring-primary focus:border-primary p-3 text-base resize-none h-20"
+                                placeholder="Enter top text here...">WHEN YOU REALIZE</textarea>
+                        </label>
+                        <label class="flex flex-col gap-2">
+                            <span class="text-[#9aabbc] text-sm font-medium">Bottom Text</span>
+                            <textarea
+                                class="form-textarea w-full bg-[#101418] border border-border-dark rounded-lg text-white placeholder-[#505f70] focus:ring-1 focus:ring-primary focus:border-primary p-3 text-base resize-none h-20"
+                                placeholder="Enter bottom text here...">IT'S FRIDAY</textarea>
+                        </label>
+                        <button
+                            class="flex items-center gap-2 text-primary text-sm font-medium hover:text-white transition w-fit">
+                            <span class="material-symbols-outlined text-[20px]">add_circle</span>
+                            Add another text box
+                        </button>
+                    </div>
+                    <!-- Style Controls -->
+                    <div class="flex flex-col gap-4 pt-2">
+                        <span class="text-white text-sm font-medium">Text Properties</span>
+                        <!-- Font Size Slider -->
+                        <div class="flex items-center gap-3">
+                            <span class="material-symbols-outlined text-[#9aabbc] text-[20px]">format_size</span>
+                            <input
+                                class="w-full h-2 bg-background-dark rounded-lg appearance-none cursor-pointer accent-primary"
+                                max="100" min="10" type="range" value="48" />
+                            <span class="text-white text-sm w-8 text-right">48</span>
+                        </div>
+                        <div class="grid grid-cols-2 gap-4">
+                            <!-- Text Color -->
+                            <div
+                                class="flex items-center justify-between bg-background-dark p-2 rounded-lg border border-border-dark">
+                                <span class="text-[#9aabbc] text-xs px-1">Fill</span>
+                                <div class="flex gap-1">
+                                    <button
+                                        class="size-6 rounded-full bg-white border border-gray-400 focus:ring-2 focus:ring-offset-1 focus:ring-primary focus:ring-offset-surface-dark"></button>
+                                    <button
+                                        class="size-6 rounded-full bg-black border border-gray-600 focus:ring-2 focus:ring-offset-1 focus:ring-primary focus:ring-offset-surface-dark"></button>
+                                    <button
+                                        class="size-6 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 border-none focus:ring-2 focus:ring-offset-1 focus:ring-primary focus:ring-offset-surface-dark"></button>
+                                </div>
+                            </div>
+                            <!-- Stroke Color -->
+                            <div
+                                class="flex items-center justify-between bg-background-dark p-2 rounded-lg border border-border-dark">
+                                <span class="text-[#9aabbc] text-xs px-1">Stroke</span>
+                                <div class="flex gap-1">
+                                    <button
+                                        class="size-6 rounded-full bg-black border border-gray-600 ring-2 ring-primary ring-offset-1 ring-offset-surface-dark"></button>
+                                    <button
+                                        class="size-6 rounded-full bg-white border border-gray-400 focus:ring-2 focus:ring-offset-1 focus:ring-primary focus:ring-offset-surface-dark"></button>
+                                    <button
+                                        class="size-6 rounded-full relative overflow-hidden bg-background-dark border border-gray-600 focus:ring-2 focus:ring-offset-1 focus:ring-primary focus:ring-offset-surface-dark">
+                                        <div class="absolute inset-0 border-t border-red-500 -rotate-45 top-1/2"></div>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Toggles -->
+                        <div class="flex gap-2">
+                            <button
+                                class="flex-1 py-2 rounded-lg bg-background-dark border border-border-dark text-[#9aabbc] hover:text-white hover:bg-[#252b36] transition flex items-center justify-center gap-2">
+                                <span class="material-symbols-outlined text-[20px]">format_bold</span>
+                                <span class="text-sm">Bold</span>
+                            </button>
+                            <button
+                                class="flex-1 py-2 rounded-lg bg-primary/20 border border-primary text-white transition flex items-center justify-center gap-2">
+                                <span class="material-symbols-outlined text-[20px]">uppercase</span>
+                                <span class="text-sm">Caps</span>
+                            </button>
+                        </div>
+                    </div>
+                    <!-- Output Format -->
+                    <div class="pt-2">
+                        <span class="text-[#9aabbc] text-sm font-medium block mb-2">Output Format</span>
+                        <div class="flex p-1 bg-background-dark rounded-lg border border-border-dark">
+                            <button
+                                class="flex-1 py-2 text-sm font-medium rounded text-white bg-primary shadow-sm transition">JPG</button>
+                            <button
+                                class="flex-1 py-2 text-sm font-medium rounded text-[#9aabbc] hover:text-white transition">PNG</button>
+                            <button
+                                class="flex-1 py-2 text-sm font-medium rounded text-[#9aabbc] hover:text-white transition">WEBP</button>
+                        </div>
+                    </div>
+                    <!-- Main Action -->
+                    <button
+                        class="w-full py-4 bg-primary hover:bg-blue-600 text-white font-bold text-lg rounded-lg shadow-lg shadow-blue-900/20 transition-all active:scale-[0.98] flex items-center justify-center gap-2 mt-2">
+                        <span>Generate &amp; Download</span>
+                        <span class="material-symbols-outlined">download</span>
+                    </button>
+                </div>
+                <!-- Secondary Ad (Square) -->
+                <div
+                    class="w-full aspect-square md:aspect-[4/3] bg-surface-dark rounded-xl flex items-center justify-center border border-dashed border-border-dark relative">
+                    <div class="text-center z-10">
+                        <span
+                            class="text-xs text-[#9aabbc] font-bold tracking-wider uppercase block mb-2">Advertisement</span>
+                        <div class="size-12 bg-[#101418] rounded-full flex items-center justify-center mx-auto mb-2">
+                            <span class="material-symbols-outlined text-[#394756]">ads_click</span>
+                        </div>
+                        <p class="text-[#505f70] text-xs px-8">Upgrade to Pro to remove ads</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="h-20"></div> <!-- Bottom spacer -->
+    </main>
+</body>
+
+</html>

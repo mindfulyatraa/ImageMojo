@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Bulk Image Compressor - ImageHub Pro</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#0066cc",
+                        "primary-dark": "#0052a3",
+                        "success": "#00cc66",
+                        "background-light": "#f5f7f8",
+                        "background-dark": "#0f1923",
+                        "card-dark": "#1b2128",
+                        "border-dark": "#2a3441",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"],
+                        "body": ["Inter", "sans-serif"],
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+    <style>
+        /* Custom range slider styling */
+        input[type=range] {
+            -webkit-appearance: none;
+            background: transparent;
+        }
+
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+        }
+
+        input[type=range]:focus {
+            outline: none;
+        }
+    </style>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+</head>
+
+<body
+    class="font-display bg-background-light dark:bg-background-dark text-slate-900 dark:text-white antialiased selection:bg-primary selection:text-white">
+    <div class="relative flex min-h-screen w-full flex-col overflow-x-hidden pb-24">
+        <!-- Header -->
+        <header
+            class="sticky top-0 z-50 flex items-center bg-background-dark/95 backdrop-blur-md p-4 border-b border-white/10">
+            <div class="text-white flex size-12 shrink-0 items-center justify-start cursor-pointer">
+                <span class="material-symbols-outlined text-3xl">menu</span>
+            </div>
+            <h2 class="text-white text-lg font-bold leading-tight tracking-[-0.015em] flex-1 text-center">ImageHub Pro
+            </h2>
+            <div class="flex w-12 items-center justify-end">
+                <button class="flex items-center justify-center text-white cursor-pointer">
+                    <span class="material-symbols-outlined text-3xl">account_circle</span>
+                </button>
+            </div>
+        </header>
+        <!-- Main Content -->
+        <main class="flex-1 flex flex-col w-full max-w-md mx-auto">
+            <!-- Hero Title -->
+            <div class="px-4 pt-6 pb-2">
+                <h1 class="text-white tracking-tight text-3xl font-bold leading-tight">Bulk Image Compressor</h1>
+                <p class="text-slate-400 text-sm font-normal leading-relaxed pt-2">
+                    Optimize multiple images instantly without losing quality. Fast, secure, and free.
+                </p>
+            </div>
+            <!-- Upload Section (Populated State) -->
+            <div class="p-4">
+                <div class="flex flex-col gap-4 rounded-xl border-2 border-dashed border-primary/40 bg-card-dark p-4">
+                    <!-- File List Header -->
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="text-sm font-medium text-white flex items-center gap-2">
+                            <span class="material-symbols-outlined text-primary text-xl">folder_open</span>
+                            3 Files Selected
+                        </span>
+                        <button
+                            class="text-xs text-primary font-bold uppercase tracking-wider hover:text-white transition-colors">Clear
+                            All</button>
+                    </div>
+                    <!-- Thumbnails Scroll -->
+                    <div class="flex gap-3 overflow-x-auto pb-2 scrollbar-hide snap-x">
+                        <!-- File 1 -->
+                        <div class="relative flex-shrink-0 w-24 group snap-start">
+                            <div class="h-24 w-24 rounded-lg bg-cover bg-center border border-white/10"
+                                data-alt="Abstract colorful gradient art"
+                                style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuC2a-EI8FmRbxEFia04aZZjSh6TpwS9bT6mtpZr_GDgHzqmuJTzn4ZZRt9o7J5E-MFyUbL7bKOdTrJrp4o2D8BnTvH6hjvFyYvB3fYSS-PRy77h6iy8IyApUx4smVy4qkJEgVa2dqyXn4seKtZ25dHzLy6uenzyENrD2QH5dIVeZZkdGoVF9QIvj0El-U932t5g3s92r4d-tZ_wh8Fzm5jJMb3xvB9z-LlayXvNK4XBqdfCx9CaRtoTmjnszsqXa3gSM2QYlr563aK3');">
+                                <button
+                                    class="absolute -top-2 -right-2 bg-red-500 rounded-full p-1 shadow-lg flex items-center justify-center hover:bg-red-600 transition-colors">
+                                    <span
+                                        class="material-symbols-outlined text-white text-[14px] font-bold">close</span>
+                                </button>
+                            </div>
+                            <p class="text-[10px] text-slate-400 mt-1 truncate text-center">nature_shot.jpg</p>
+                        </div>
+                        <!-- File 2 -->
+                        <div class="relative flex-shrink-0 w-24 group snap-start">
+                            <div class="h-24 w-24 rounded-lg bg-cover bg-center border border-white/10"
+                                data-alt="Modern abstract geometric pattern"
+                                style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDK5ymcll-DVLYfh1MjzsI3EXk20lmyqES5ya8ARKAsB_XrP6BQTXSKoTmCfXc588uF7ukaUwSmVUBkrmk0kYoZY2Wpfop3_TrxADFB0P0uCLUJf75c8G9HX1JBVFO2QX925Vq8S8TIKJpaGXyLAzy5HTRO2YoujUM1HVAhNgjwGqKA0eeUzX3FONuhtx95mKajmjCTMKPAiKkaZXd4CPCxnexPM2eCS8fbOLPX58ytOwrPT5CZXHTbXWqk8wLZ36UWaD3UZaO857FR');">
+                                <button
+                                    class="absolute -top-2 -right-2 bg-red-500 rounded-full p-1 shadow-lg flex items-center justify-center hover:bg-red-600 transition-colors">
+                                    <span
+                                        class="material-symbols-outlined text-white text-[14px] font-bold">close</span>
+                                </button>
+                            </div>
+                            <p class="text-[10px] text-slate-400 mt-1 truncate text-center">design_v2.png</p>
+                        </div>
+                        <!-- Add More Button -->
+                        <button
+                            class="flex-shrink-0 w-24 h-24 rounded-lg border border-white/10 bg-white/5 flex flex-col items-center justify-center gap-1 hover:bg-white/10 transition-colors snap-start">
+                            <span class="material-symbols-outlined text-primary text-2xl">add_photo_alternate</span>
+                            <span class="text-[10px] text-white font-medium">Add More</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <!-- AdSense Placeholder 1 -->
+            <div class="px-4 pb-6">
+                <div
+                    class="flex items-center justify-between gap-4 rounded-lg bg-card-dark p-3 border border-white/5 shadow-sm">
+                    <div class="flex flex-col gap-1">
+                        <p class="text-white text-sm font-bold">Ad Space</p>
+                        <p class="text-slate-500 text-xs">Sponsored Content</p>
+                    </div>
+                    <div class="h-12 w-full max-w-[200px] rounded bg-gradient-to-r from-slate-800 to-slate-700 flex items-center justify-center"
+                        data-alt="Abstract gradient banner placeholder">
+                        <span class="text-[10px] text-slate-500 uppercase tracking-widest">320x50 Banner</span>
+                    </div>
+                </div>
+            </div>
+            <!-- Settings Section -->
+            <div class="px-4 space-y-4">
+                <h3 class="text-white text-base font-bold flex items-center gap-2">
+                    <span class="material-symbols-outlined text-primary">tune</span>
+                    Compression Settings
+                </h3>
+                <!-- Quality Slider -->
+                <div class="bg-card-dark rounded-xl p-4 border border-white/5">
+                    <div class="flex justify-between items-center mb-4">
+                        <label class="text-sm font-medium text-slate-200">Quality</label>
+                        <span class="text-primary font-bold text-sm bg-primary/10 px-2 py-0.5 rounded">80%</span>
+                    </div>
+                    <div class="relative w-full h-6 flex items-center">
+                        <input
+                            class="w-full h-2 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-primary z-10"
+                            max="100" min="1" type="range" value="80" />
+                        <div class="absolute w-full h-2 bg-slate-700 rounded-lg overflow-hidden pointer-events-none">
+                            <div class="h-full bg-primary w-[80%]"></div>
+                        </div>
+                    </div>
+                    <div class="flex justify-between mt-2 text-[10px] text-slate-500 font-medium">
+                        <span>Low</span>
+                        <span>Balanced</span>
+                        <span>High</span>
+                    </div>
+                </div>
+                <!-- Output Format -->
+                <div class="bg-card-dark rounded-xl p-4 border border-white/5">
+                    <label class="text-sm font-medium text-slate-200 mb-3 block">Output Format</label>
+                    <div class="grid grid-cols-4 gap-2">
+                        <button
+                            class="flex items-center justify-center py-2 rounded-lg bg-primary text-white text-xs font-bold shadow-lg shadow-primary/20 ring-1 ring-primary/50">Auto</button>
+                        <button
+                            class="flex items-center justify-center py-2 rounded-lg bg-white/5 text-slate-400 text-xs font-medium hover:bg-white/10 transition-colors">JPG</button>
+                        <button
+                            class="flex items-center justify-center py-2 rounded-lg bg-white/5 text-slate-400 text-xs font-medium hover:bg-white/10 transition-colors">PNG</button>
+                        <button
+                            class="flex items-center justify-center py-2 rounded-lg bg-white/5 text-slate-400 text-xs font-medium hover:bg-white/10 transition-colors">WEBP</button>
+                    </div>
+                </div>
+                <!-- ZIP Toggle -->
+                <div class="bg-card-dark rounded-xl p-4 border border-white/5 flex items-center justify-between">
+                    <div class="flex items-center gap-3">
+                        <div class="p-2 bg-yellow-500/10 rounded-lg">
+                            <span class="material-symbols-outlined text-yellow-500 text-xl">folder_zip</span>
+                        </div>
+                        <div class="flex flex-col">
+                            <span class="text-sm font-medium text-slate-200">Archive as ZIP</span>
+                            <span class="text-xs text-slate-500">Download single file</span>
+                        </div>
+                    </div>
+                    <!-- Switch -->
+                    <label class="relative inline-flex items-center cursor-pointer">
+                        <input checked="" class="sr-only peer" type="checkbox" value="" />
+                        <div
+                            class="w-11 h-6 bg-slate-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-success">
+                        </div>
+                    </label>
+                </div>
+            </div>
+            <!-- Stats/Results Preview (Mockup for Visual) -->
+            <div class="mt-6 px-4">
+                <div
+                    class="bg-gradient-to-br from-card-dark to-[#16202c] rounded-xl p-5 border border-white/5 relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-success/5 rounded-full blur-2xl -mr-10 -mt-10">
+                    </div>
+                    <h3 class="text-white text-sm font-bold mb-4 relative z-10">Estimated Savings</h3>
+                    <div class="grid grid-cols-3 gap-4 relative z-10">
+                        <div class="flex flex-col">
+                            <span class="text-[10px] text-slate-400 uppercase font-bold tracking-wider">Original</span>
+                            <span class="text-white text-lg font-bold">12.5 <span
+                                    class="text-sm font-normal text-slate-500">MB</span></span>
+                        </div>
+                        <div class="flex flex-col border-l border-white/10 pl-4">
+                            <span
+                                class="text-[10px] text-slate-400 uppercase font-bold tracking-wider">Compressed</span>
+                            <span class="text-white text-lg font-bold">4.2 <span
+                                    class="text-sm font-normal text-slate-500">MB</span></span>
+                        </div>
+                        <div class="flex flex-col items-end justify-center">
+                            <span
+                                class="bg-success/20 text-success text-xs font-bold px-2 py-1 rounded-full">-66%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="h-6"></div> <!-- Spacer -->
+        </main>
+        <!-- Sticky Bottom Action Bar -->
+        <div
+            class="fixed bottom-0 left-0 right-0 p-4 bg-background-dark/95 backdrop-blur-xl border-t border-white/10 z-40 pb-6">
+            <button
+                class="w-full bg-primary hover:bg-primary-dark text-white font-bold h-14 rounded-xl shadow-lg shadow-primary/25 flex items-center justify-center gap-2 text-lg active:scale-[0.98] transition-all">
+                <span class="material-symbols-outlined">compress</span>
+                Compress All &amp; Download
+            </button>
+        </div>
+    </div>
+    <!-- Mobile Navigation (Hidden if sticky button is too large, but typical for app) -->
+    <!-- For this flow, the primary action replaces the nav or floats above it. 
+         Let's assume this page is a tool view, so no bottom nav, just the action bar. -->
+</body>
+
+</html>

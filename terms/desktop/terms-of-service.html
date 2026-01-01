@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>ImageHub Pro - Terms of Service</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <!-- Material Symbols -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <!-- Theme Configuration -->
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#0066cc",
+                        "accent-green": "#00cc66",
+                        "background-light": "#f5f7f8",
+                        "background-dark": "#0f1923",
+                        "surface-dark": "#1a242f",
+                        "border-dark": "#2a3642"
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "2xl": "1rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+    <style>
+        /* Custom scrollbar for better aesthetic in dark mode */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #0f1923;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #2a3642;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #3a4b5b;
+        }
+
+        .sticky-sidebar {
+            position: sticky;
+            top: 2rem;
+            max-height: calc(100vh - 4rem);
+            overflow-y: auto;
+        }
+    </style>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+</head>
+
+<body
+    class="bg-background-light dark:bg-background-dark font-display text-gray-900 dark:text-gray-100 antialiased min-h-screen flex flex-col">
+    <!-- Header / Top App Bar -->
+    <header class="bg-white dark:bg-[#101418] border-b border-gray-200 dark:border-border-dark sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center h-16 justify-between">
+                <!-- Left: Back & Logo -->
+                <div class="flex items-center gap-4">
+                    <a href="index.html"
+                        class="flex items-center justify-center w-10 h-10 rounded-full hover:bg-gray-100 dark:hover:bg-surface-dark transition-colors text-gray-500 dark:text-white">
+                        <span class="material-symbols-outlined text-2xl">arrow_back</span>
+                    </a>
+                    <div class="flex items-center gap-2">
+                        <div
+                            class="w-8 h-8 bg-gradient-to-br from-primary to-blue-400 rounded-lg flex items-center justify-center">
+                            <span class="material-symbols-outlined text-white text-lg">image</span>
+                        </div>
+                        <span class="text-xl font-bold tracking-tight text-gray-900 dark:text-white">ImageHub Pro</span>
+                    </div>
+                </div>
+                <!-- Right: Tools Menu -->
+                <div class="flex items-center gap-4">
+                    <button
+                        class="hidden md:flex items-center gap-2 px-4 py-2 rounded-lg bg-gray-100 dark:bg-surface-dark hover:bg-gray-200 dark:hover:bg-border-dark transition-colors">
+                        <span class="text-sm font-medium text-gray-700 dark:text-[#9aabbc]">Tools</span>
+                        <span
+                            class="material-symbols-outlined text-gray-700 dark:text-[#9aabbc] text-sm">expand_more</span>
+                    </button>
+                    <div
+                        class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-white font-bold shadow-lg shadow-blue-900/20">
+                        IP
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- Main Layout -->
+    <main class="flex-grow w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-12">
+            <!-- Left Column: Sticky Navigation (Tablet/Desktop) -->
+            <aside class="hidden md:block md:col-span-4 lg:col-span-3">
+                <nav class="sticky-sidebar space-y-1">
+                    <p
+                        class="px-4 py-2 text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-2">
+                        Table of Contents</p>
+                    <a class="flex items-center gap-3 px-4 py-3 rounded-lg bg-primary/10 text-primary font-medium border-l-4 border-primary transition-all"
+                        href="#introduction">
+                        <span class="material-symbols-outlined text-[20px]">info</span>
+                        Introduction
+                    </a>
+                    <a class="flex items-center gap-3 px-4 py-3 rounded-lg text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-surface-dark hover:text-gray-900 dark:hover:text-white transition-all"
+                        href="#acceptance">
+                        <span class="material-symbols-outlined text-[20px]">gavel</span>
+                        1. Acceptance
+                    </a>
+                    <a class="flex items-center gap-3 px-4 py-3 rounded-lg text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-surface-dark hover:text-gray-900 dark:hover:text-white transition-all"
+                        href="#responsibilities">
+                        <span class="material-symbols-outlined text-[20px]">badge</span>
+                        2. Responsibilities
+                    </a>
+                    <a class="flex items-center gap-3 px-4 py-3 rounded-lg text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-surface-dark hover:text-gray-900 dark:hover:text-white transition-all"
+                        href="#intellectual-property">
+                        <span class="material-symbols-outlined text-[20px]">copyright</span>
+                        3. IP Rights
+                    </a>
+                    <a class="flex items-center gap-3 px-4 py-3 rounded-lg text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-surface-dark hover:text-gray-900 dark:hover:text-white transition-all"
+                        href="#disclaimers">
+                        <span class="material-symbols-outlined text-[20px]">warning</span>
+                        4. Disclaimers
+                    </a>
+                    <a class="flex items-center gap-3 px-4 py-3 rounded-lg text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-surface-dark hover:text-gray-900 dark:hover:text-white transition-all"
+                        href="#liability">
+                        <span class="material-symbols-outlined text-[20px]">shield</span>
+                        5. Liability
+                    </a>
+                    <!-- Sidebar Ad Placeholder -->
+                    <div
+                        class="mt-8 p-4 bg-gray-100 dark:bg-surface-dark rounded-xl border border-dashed border-gray-300 dark:border-border-dark flex flex-col items-center justify-center text-center gap-2 min-h-[250px]">
+                        <span class="text-xs font-medium text-gray-400 uppercase tracking-widest">Advertisement</span>
+                        <div
+                            class="w-full h-full bg-gradient-to-br from-gray-200 to-gray-300 dark:from-gray-800 dark:to-gray-700 rounded-lg flex items-center justify-center opacity-50">
+                            <span class="material-symbols-outlined text-4xl text-gray-400">ads_click</span>
+                        </div>
+                        <img class="hidden w-full h-auto rounded-lg object-cover opacity-60 hover:opacity-100 transition-opacity"
+                            data-alt="Vertical banner advertisement placeholder"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuB4UE894RiZwd5CjJ-CYWKL7z4Vxj16gYZs_tJZINhU4AqGh69CCGnAxYYJRs0iJuTbYtdZ8hPvpX97DRsWSyvDsmAnmLnD0bRBygSqi4i2ikPvBml-Hd05p8Ct87WCssjY1PEGS8qJtZj_4GRYjn4_OS4LGw8brcBdIDDcY7QuQRrmosBY2pVZyfXdlltZeej4Hu1rj4cYYZVcAkUoENZYqOKDU6Ak6ikFyyCr89HmNNyrrV__MWn8iI8j4AZp31PbCjNRZ-bwbFtd" />
+                    </div>
+                </nav>
+            </aside>
+            <!-- Right Column: Content -->
+            <div class="col-span-1 md:col-span-8 lg:col-span-9">
+                <!-- Title Section -->
+                <div class="mb-10 border-b border-gray-200 dark:border-border-dark pb-8">
+                    <h1
+                        class="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white tracking-tight mb-4">
+                        Terms of Service</h1>
+                    <div class="flex items-center gap-4 text-sm">
+                        <span
+                            class="px-3 py-1 rounded-full bg-accent-green/10 text-accent-green font-medium border border-accent-green/20">
+                            Effective Status: Active
+                        </span>
+                        <p class="text-gray-500 dark:text-[#9aabbc]">Last Updated: <span
+                                class="font-medium text-gray-700 dark:text-gray-300">October 24, 2023</span></p>
+                    </div>
+                </div>
+                <!-- Content Blocks -->
+                <div class="space-y-12 text-lg text-gray-600 dark:text-gray-300 leading-relaxed max-w-3xl">
+                    <!-- Introduction -->
+                    <div id="introduction">
+                        <p class="mb-6">
+                            Welcome to <span class="text-primary font-semibold">ImageHub Pro</span>. We provide over 25
+                            free online image tools designed to help you edit, convert, and optimize your images
+                            efficiently. By accessing or using our platform, you acknowledge that you have read,
+                            understood, and agree to be bound by these Terms.
+                        </p>
+                        <p>
+                            If you do not agree with any part of these terms, you may not access the service. These
+                            Terms apply to all visitors, users, and others who access or use the Service.
+                        </p>
+                    </div>
+                    <!-- Horizontal Ad -->
+                    <div
+                        class="w-full h-32 bg-gray-100 dark:bg-surface-dark rounded-xl flex items-center justify-center border border-gray-200 dark:border-border-dark relative overflow-hidden group">
+                        <div
+                            class="absolute top-2 right-2 px-2 py-0.5 bg-black/20 rounded text-[10px] text-gray-500 font-medium">
+                            AD</div>
+                        <div class="text-center">
+                            <span class="block text-gray-400 text-sm mb-1">Sponsored Content</span>
+                            <div class="h-1 w-12 bg-gray-300 dark:bg-gray-600 rounded-full mx-auto"></div>
+                        </div>
+                        <img class="absolute inset-0 w-full h-full object-cover opacity-10 dark:opacity-20 group-hover:opacity-30 transition-opacity"
+                            data-alt="Horizontal banner advertisement placeholder"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuBoncbSs-HafktNAQ3kRhvUr4dKiAGc08Whd_6AycF79h-SHwlrA3pelir5uFCZBBxKcSwlYXeZSUQPXK7ZZ5Q8UPh0X1ariuiDdZKbGXZA7GfpKKqe1fxH2A-nVPoUq4IUVhQpBQk3T90xRItdQM-Bl1yImtPw3Q_3csAZ0Fmrqe-DPzdvf-M1KRzXAAj8uOzOLE2c_FPgYlBEuBOhbRM_x1mTjUUGLMvvPgMSGtUgt0ugWD5w2cBqBVpr-8fk5Rbd4f40dDBM_jgB" />
+                    </div>
+                    <!-- Section 1 -->
+                    <section class="scroll-mt-24" id="acceptance">
+                        <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-3">
+                            <span
+                                class="flex items-center justify-center w-8 h-8 rounded-lg bg-surface-dark text-white text-sm">1</span>
+                            Acceptance of Terms
+                        </h2>
+                        <div
+                            class="bg-white dark:bg-surface-dark rounded-xl p-6 border border-gray-200 dark:border-border-dark shadow-sm">
+                            <p class="mb-4">
+                                By accessing or using the Service you agree to be bound by these Terms. If you disagree
+                                with any part of the terms then you may not access the Service.
+                            </p>
+                            <p class="text-base text-gray-500 dark:text-gray-400">
+                                We reserve the right, at our sole discretion, to modify or replace these Terms at any
+                                time. If a revision is material we will try to provide at least 30 days notice prior to
+                                any new terms taking effect.
+                            </p>
+                        </div>
+                    </section>
+                    <!-- Section 2 -->
+                    <section class="scroll-mt-24" id="responsibilities">
+                        <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-3">
+                            <span
+                                class="flex items-center justify-center w-8 h-8 rounded-lg bg-surface-dark text-white text-sm">2</span>
+                            User Responsibilities
+                        </h2>
+                        <p class="mb-4">
+                            You are responsible for your use of the Service and for any content you provide, including
+                            compliance with applicable laws, rules, and regulations. You should only provide Content
+                            that you are comfortable sharing with others.
+                        </p>
+                        <ul class="list-none space-y-3 mt-4">
+                            <li class="flex items-start gap-3">
+                                <span class="material-symbols-outlined text-red-500 mt-1 shrink-0">cancel</span>
+                                <span>You agree not to upload any content that is illegal, harmful, or violates any
+                                    third-party rights.</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="material-symbols-outlined text-red-500 mt-1 shrink-0">cancel</span>
+                                <span>You must not attempt to interfere with the proper working of the Service or gain
+                                    unauthorized access.</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span
+                                    class="material-symbols-outlined text-accent-green mt-1 shrink-0">check_circle</span>
+                                <span>You are responsible for maintaining the security of your account and
+                                    password.</span>
+                            </li>
+                        </ul>
+                    </section>
+                    <!-- Section 3 -->
+                    <section class="scroll-mt-24" id="intellectual-property">
+                        <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-3">
+                            <span
+                                class="flex items-center justify-center w-8 h-8 rounded-lg bg-surface-dark text-white text-sm">3</span>
+                            Intellectual Property
+                        </h2>
+                        <p>
+                            The Service and its original content (excluding Content provided by users), features and
+                            functionality are and will remain the exclusive property of ImageHub Pro and its licensors.
+                            The Service is protected by copyright, trademark, and other laws of both the United States
+                            and foreign countries.
+                        </p>
+                        <div class="mt-6 p-4 bg-primary/10 border-l-4 border-primary rounded-r-lg">
+                            <h4 class="text-primary font-bold text-sm uppercase tracking-wide mb-1">Note on User Content
+                            </h4>
+                            <p class="text-base text-gray-700 dark:text-gray-300">
+                                We claim no intellectual property rights over the material you provide to the Service.
+                                Your profile and materials uploaded remain yours.
+                            </p>
+                        </div>
+                    </section>
+                    <!-- In-content Ad Block -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div
+                            class="bg-gray-100 dark:bg-surface-dark rounded-xl p-6 border border-gray-200 dark:border-border-dark flex flex-col items-center justify-center min-h-[180px] text-center">
+                            <span class="text-xs font-semibold text-gray-400 mb-2">ADVERTISEMENT</span>
+                            <p class="text-sm text-gray-500 dark:text-gray-400">Discover premium tools for
+                                professionals.</p>
+                            <button
+                                class="mt-3 px-4 py-2 bg-white dark:bg-border-dark rounded-full text-xs font-bold shadow-sm">Learn
+                                More</button>
+                        </div>
+                        <div
+                            class="bg-gray-100 dark:bg-surface-dark rounded-xl p-6 border border-gray-200 dark:border-border-dark flex flex-col items-center justify-center min-h-[180px] text-center">
+                            <span class="text-xs font-semibold text-gray-400 mb-2">ADVERTISEMENT</span>
+                            <p class="text-sm text-gray-500 dark:text-gray-400">Secure cloud storage solutions.</p>
+                            <button
+                                class="mt-3 px-4 py-2 bg-white dark:bg-border-dark rounded-full text-xs font-bold shadow-sm">View
+                                Offer</button>
+                        </div>
+                    </div>
+                    <!-- Section 4 -->
+                    <section class="scroll-mt-24" id="disclaimers">
+                        <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-3">
+                            <span
+                                class="flex items-center justify-center w-8 h-8 rounded-lg bg-surface-dark text-white text-sm">4</span>
+                            Disclaimer of Warranties
+                        </h2>
+                        <p class="mb-4">
+                            Your use of the Service is at your sole risk. The Service is provided on an "AS IS" and "AS
+                            AVAILABLE" basis. The Service is provided without warranties of any kind, whether express or
+                            implied.
+                        </p>
+                        <p>
+                            ImageHub Pro does not warrant that a) the Service will function uninterrupted, secure or
+                            available at any particular time or location; b) any errors or defects will be corrected; c)
+                            the Service is free of viruses or other harmful components.
+                        </p>
+                    </section>
+                    <!-- Section 5 -->
+                    <section class="scroll-mt-24" id="liability">
+                        <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-3">
+                            <span
+                                class="flex items-center justify-center w-8 h-8 rounded-lg bg-surface-dark text-white text-sm">5</span>
+                            Limitation of Liability
+                        </h2>
+                        <div
+                            class="bg-red-500/5 dark:bg-red-500/10 border border-red-200 dark:border-red-500/20 rounded-xl p-6">
+                            <p class="text-red-900 dark:text-red-200">
+                                In no event shall ImageHub Pro, nor its directors, employees, partners, agents,
+                                suppliers, or affiliates, be liable for any indirect, incidental, special, consequential
+                                or punitive damages, including without limitation, loss of profits, data, use, goodwill,
+                                or other intangible losses, resulting from your access to or use of or inability to
+                                access or use the Service.
+                            </p>
+                        </div>
+                    </section>
+                </div>
+                <!-- Bottom Action -->
+                <div
+                    class="mt-16 pt-8 border-t border-gray-200 dark:border-border-dark flex flex-col md:flex-row items-center justify-between gap-6">
+                    <p class="text-gray-500 text-sm">Have questions about our Terms?</p>
+                    <div class="flex gap-4">
+                        <button
+                            class="px-6 py-3 rounded-lg border border-gray-300 dark:border-border-dark text-gray-700 dark:text-white font-medium hover:bg-gray-50 dark:hover:bg-surface-dark transition-colors">
+                            Contact Support
+                        </button>
+                        <button
+                            class="px-6 py-3 rounded-lg bg-primary hover:bg-blue-600 text-white font-medium shadow-lg shadow-blue-500/25 transition-all">
+                            I Agree &amp; Continue
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <!-- Footer -->
+    <footer class="bg-white dark:bg-[#101418] border-t border-gray-200 dark:border-border-dark mt-12 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+                <div class="flex flex-col md:flex-row items-center gap-6">
+                    <span class="text-xl font-bold text-gray-900 dark:text-white">ImageHub Pro</span>
+                    <span class="hidden md:inline text-gray-400">|</span>
+                    <nav class="flex gap-6">
+                        <a class="text-gray-500 hover:text-primary transition-colors text-sm" href="#">Privacy
+                            Policy</a>
+                        <a class="text-gray-500 hover:text-primary transition-colors text-sm"
+                            href="terms-of-service.html">Terms of Service</a>
+                        <a class="text-gray-500 hover:text-primary transition-colors text-sm" href="#">Cookies</a>
+                    </nav>
+                </div>
+                <p class="text-gray-500 text-sm">© 2023 ImageHub Pro. All rights reserved.</p>
+            </div>
+            <!-- Footer Ad -->
+            <div
+                class="mt-10 mx-auto max-w-2xl h-24 bg-gray-100 dark:bg-surface-dark rounded-lg flex items-center justify-center border border-dashed border-gray-300 dark:border-border-dark">
+                <span class="text-xs font-medium text-gray-400 uppercase tracking-widest">Footer Advertisement
+                    Space</span>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>

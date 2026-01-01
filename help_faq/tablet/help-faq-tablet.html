@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>ImageHub Pro - Help &amp; FAQ</title>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=Spline+Sans:wght@300;400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <!-- Material Symbols -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#0066cc",
+                        "secondary": "#00CC66",
+                        "background-light": "#f5f7f8",
+                        "background-dark": "#0f1923",
+                        "surface-dark": "#1b2128",
+                        "surface-highlight": "#27303a",
+                    },
+                    fontFamily: {
+                        "display": ["Spline Sans", "sans-serif"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+    <style>
+        /* Custom scrollbar for webkit */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #0f1923;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #27303a;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #394756;
+        }
+
+        /* Accordion transition logic without JS */
+        details>summary {
+            list-style: none;
+        }
+
+        details>summary::-webkit-details-marker {
+            display: none;
+        }
+
+        details[open] summary~* {
+            animation: sweep .3s ease-in-out;
+        }
+
+        @keyframes sweep {
+            0% {
+                opacity: 0;
+                transform: translateY(-10px)
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0)
+            }
+        }
+
+        /* Icon rotation */
+        details summary .icon-expand {
+            transition: transform 0.2s;
+        }
+
+        details[open] summary .icon-expand {
+            transform: rotate(180deg);
+        }
+    </style>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+</head>
+
+<body
+    class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-white font-display overflow-x-hidden transition-colors duration-200">
+    <div class="relative flex h-auto min-h-screen w-full flex-col mx-auto max-w-screen-xl">
+        <!-- TopAppBar -->
+        <header
+            class="sticky top-0 z-50 flex flex-col gap-2 bg-background-light/95 dark:bg-background-dark/95 backdrop-blur-md p-4 pb-2 border-b border-gray-200 dark:border-gray-800">
+            <div class="flex items-center h-12 justify-between">
+                <div class="flex items-center gap-3">
+                    <div
+                        class="text-primary dark:text-white flex size-12 shrink-0 items-center justify-center rounded-lg bg-primary/10 dark:bg-primary/20">
+                        <span class="material-symbols-outlined text-primary dark:text-primary">photo_library</span>
+                    </div>
+                    <p
+                        class="text-slate-900 dark:text-white tracking-tight text-xl md:text-2xl font-bold leading-tight">
+                        ImageHub Pro</p>
+                </div>
+                <div class="flex items-center gap-4">
+                    <nav class="hidden md:flex gap-6 text-sm font-medium text-slate-600 dark:text-slate-400">
+                        <a class="hover:text-primary transition-colors" href="index.html">Tools</a>
+                        <a class="hover:text-primary transition-colors" href="#">Pricing</a>
+                        <a class="text-primary" href="#">Help</a>
+                    </nav>
+                    <a href="index.html"
+                        class="flex items-center justify-center rounded-lg h-10 w-10 md:w-auto md:px-4 bg-primary text-white gap-2 text-sm font-bold shadow-lg shadow-primary/20 hover:bg-primary/90 transition-all">
+                        <span class="material-symbols-outlined text-[20px]">home</span>
+                        <span class="hidden md:inline">Home</span>
+                    </a>
+                    <button class="md:hidden text-slate-900 dark:text-white">
+                        <span class="material-symbols-outlined">menu</span>
+                    </button>
+                </div>
+            </div>
+        </header>
+        <!-- Main Content Area -->
+        <main class="flex-1 flex flex-col px-4 md:px-8 py-6 gap-8">
+            <!-- Hero Search Section -->
+            <section class="flex flex-col items-center justify-center py-8 md:py-12 gap-6 text-center">
+                <div class="space-y-2 max-w-2xl">
+                    <h1 class="text-3xl md:text-5xl font-bold tracking-tight text-slate-900 dark:text-white">
+                        How can we help you?
+                    </h1>
+                    <p class="text-slate-500 dark:text-slate-400 text-lg">
+                        Search for help with tools, account settings, or troubleshooting.
+                    </p>
+                </div>
+                <div class="w-full max-w-xl">
+                    <label
+                        class="flex flex-col h-14 w-full shadow-lg shadow-black/5 dark:shadow-black/20 rounded-xl overflow-hidden transition-transform focus-within:scale-[1.01]">
+                        <div
+                            class="flex w-full flex-1 items-stretch bg-white dark:bg-surface-highlight border border-gray-200 dark:border-gray-700 rounded-xl focus-within:border-primary dark:focus-within:border-primary focus-within:ring-2 focus-within:ring-primary/20">
+                            <div class="text-slate-400 flex items-center justify-center pl-4 pr-2">
+                                <span class="material-symbols-outlined">search</span>
+                            </div>
+                            <input
+                                class="flex w-full min-w-0 flex-1 bg-transparent border-none text-slate-900 dark:text-white placeholder:text-slate-400 focus:ring-0 text-base md:text-lg h-full"
+                                placeholder="Describe your issue (e.g., 'compress pdf')..." />
+                            <button
+                                class="bg-primary text-white px-6 font-semibold hover:bg-blue-600 transition-colors hidden sm:block">Search</button>
+                        </div>
+                    </label>
+                </div>
+            </section>
+            <!-- Ad Placeholder (Tablet Leaderboard) -->
+            <div
+                class="w-full h-[90px] bg-slate-200 dark:bg-surface-dark border border-dashed border-slate-300 dark:border-slate-700 rounded-lg flex items-center justify-center relative overflow-hidden group">
+                <div
+                    class="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-full group-hover:animate-[shimmer_1.5s_infinite]">
+                </div>
+                <span class="text-xs font-mono text-slate-400 uppercase tracking-widest">Advertisement Space
+                    (728x90)</span>
+            </div>
+            <!-- Categories Grid -->
+            <section>
+                <h2 class="text-xl md:text-2xl font-bold mb-5 px-1 text-slate-900 dark:text-white">Browse by Category
+                </h2>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <!-- General -->
+                    <a class="flex flex-col md:flex-row gap-3 rounded-xl border border-gray-200 dark:border-slate-700 bg-white dark:bg-surface-dark p-4 md:p-5 items-center md:items-start text-center md:text-left hover:border-primary/50 hover:shadow-lg hover:shadow-primary/5 transition-all group"
+                        href="#">
+                        <div
+                            class="p-3 rounded-full bg-blue-50 dark:bg-blue-900/20 text-primary group-hover:scale-110 transition-transform">
+                            <span class="material-symbols-outlined">info</span>
+                        </div>
+                        <div>
+                            <h3
+                                class="text-base font-bold text-slate-900 dark:text-white group-hover:text-primary transition-colors">
+                                General</h3>
+                            <p class="text-xs text-slate-500 dark:text-slate-400 mt-1 line-clamp-2">Account basics,
+                                pricing, and platform info.</p>
+                        </div>
+                    </a>
+                    <!-- Image Tools -->
+                    <a class="flex flex-col md:flex-row gap-3 rounded-xl border border-gray-200 dark:border-slate-700 bg-white dark:bg-surface-dark p-4 md:p-5 items-center md:items-start text-center md:text-left hover:border-primary/50 hover:shadow-lg hover:shadow-primary/5 transition-all group"
+                        href="#">
+                        <div
+                            class="p-3 rounded-full bg-green-50 dark:bg-green-900/20 text-secondary group-hover:scale-110 transition-transform">
+                            <span class="material-symbols-outlined">image</span>
+                        </div>
+                        <div>
+                            <h3
+                                class="text-base font-bold text-slate-900 dark:text-white group-hover:text-primary transition-colors">
+                                Image Tools</h3>
+                            <p class="text-xs text-slate-500 dark:text-slate-400 mt-1 line-clamp-2">Resizing, cropping,
+                                and converting images.</p>
+                        </div>
+                    </a>
+                    <!-- PDF Tools -->
+                    <a class="flex flex-col md:flex-row gap-3 rounded-xl border border-gray-200 dark:border-slate-700 bg-white dark:bg-surface-dark p-4 md:p-5 items-center md:items-start text-center md:text-left hover:border-primary/50 hover:shadow-lg hover:shadow-primary/5 transition-all group"
+                        href="#">
+                        <div
+                            class="p-3 rounded-full bg-red-50 dark:bg-red-900/20 text-red-500 group-hover:scale-110 transition-transform">
+                            <span class="material-symbols-outlined">picture_as_pdf</span>
+                        </div>
+                        <div>
+                            <h3
+                                class="text-base font-bold text-slate-900 dark:text-white group-hover:text-primary transition-colors">
+                                PDF Tools</h3>
+                            <p class="text-xs text-slate-500 dark:text-slate-400 mt-1 line-clamp-2">Compression,
+                                merging, and splitting PDFs.</p>
+                        </div>
+                    </a>
+                    <!-- Account -->
+                    <a class="flex flex-col md:flex-row gap-3 rounded-xl border border-gray-200 dark:border-slate-700 bg-white dark:bg-surface-dark p-4 md:p-5 items-center md:items-start text-center md:text-left hover:border-primary/50 hover:shadow-lg hover:shadow-primary/5 transition-all group"
+                        href="#">
+                        <div
+                            class="p-3 rounded-full bg-purple-50 dark:bg-purple-900/20 text-purple-500 group-hover:scale-110 transition-transform">
+                            <span class="material-symbols-outlined">manage_accounts</span>
+                        </div>
+                        <div>
+                            <h3
+                                class="text-base font-bold text-slate-900 dark:text-white group-hover:text-primary transition-colors">
+                                Account</h3>
+                            <p class="text-xs text-slate-500 dark:text-slate-400 mt-1 line-clamp-2">Login issues,
+                                password reset, and settings.</p>
+                        </div>
+                    </a>
+                </div>
+            </section>
+            <!-- FAQs Accordion -->
+            <section class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                <div class="lg:col-span-8 flex flex-col gap-4">
+                    <div class="flex items-center justify-between mb-2 px-1">
+                        <h2 class="text-xl md:text-2xl font-bold text-slate-900 dark:text-white">Popular Questions</h2>
+                        <a class="text-sm font-semibold text-primary hover:text-blue-400" href="#">View All</a>
+                    </div>
+                    <!-- FAQ Item 1 -->
+                    <details
+                        class="group bg-white dark:bg-surface-dark rounded-xl border border-gray-200 dark:border-slate-700 overflow-hidden">
+                        <summary
+                            class="flex items-center justify-between p-5 cursor-pointer hover:bg-gray-50 dark:hover:bg-slate-800 transition-colors">
+                            <span class="font-medium text-lg text-slate-900 dark:text-white">Is ImageHub Pro completely
+                                free?</span>
+                            <span class="material-symbols-outlined text-slate-400 icon-expand">expand_more</span>
+                        </summary>
+                        <div
+                            class="px-5 pb-5 text-slate-600 dark:text-slate-300 leading-relaxed border-t border-gray-100 dark:border-slate-800 pt-4">
+                            Yes! All our tools are <span class="text-secondary font-bold">100% free</span> to use for
+                            standard tasks. We do not require a credit card. However, we have usage limits for
+                            unregistered users. Creating a free account gives you higher file size limits and faster
+                            processing speeds.
+                        </div>
+                    </details>
+                    <!-- FAQ Item 2 -->
+                    <details
+                        class="group bg-white dark:bg-surface-dark rounded-xl border border-gray-200 dark:border-slate-700 overflow-hidden">
+                        <summary
+                            class="flex items-center justify-between p-5 cursor-pointer hover:bg-gray-50 dark:hover:bg-slate-800 transition-colors">
+                            <span class="font-medium text-lg text-slate-900 dark:text-white">How do I compress a PDF
+                                file?</span>
+                            <span class="material-symbols-outlined text-slate-400 icon-expand">expand_more</span>
+                        </summary>
+                        <div
+                            class="px-5 pb-5 text-slate-600 dark:text-slate-300 leading-relaxed border-t border-gray-100 dark:border-slate-800 pt-4">
+                            1. Go to the <strong>PDF Tools</strong> category.<br />
+                            2. Select "Compress PDF".<br />
+                            3. Upload your file and choose your compression level (Low, Medium, High).<br />
+                            4. Click "Compress" and wait for the download link.
+                        </div>
+                    </details>
+                    <!-- FAQ Item 3 -->
+                    <details
+                        class="group bg-white dark:bg-surface-dark rounded-xl border border-gray-200 dark:border-slate-700 overflow-hidden">
+                        <summary
+                            class="flex items-center justify-between p-5 cursor-pointer hover:bg-gray-50 dark:hover:bg-slate-800 transition-colors">
+                            <span class="font-medium text-lg text-slate-900 dark:text-white">Are my files secure?</span>
+                            <span class="material-symbols-outlined text-slate-400 icon-expand">expand_more</span>
+                        </summary>
+                        <div
+                            class="px-5 pb-5 text-slate-600 dark:text-slate-300 leading-relaxed border-t border-gray-100 dark:border-slate-800 pt-4">
+                            Security is our top priority. All files uploaded to ImageHub Pro are processed securely and
+                            deleted from our servers automatically after 2 hours. We do not look at, copy, or share your
+                            files with anyone.
+                        </div>
+                    </details>
+                    <!-- FAQ Item 4 -->
+                    <details
+                        class="group bg-white dark:bg-surface-dark rounded-xl border border-gray-200 dark:border-slate-700 overflow-hidden">
+                        <summary
+                            class="flex items-center justify-between p-5 cursor-pointer hover:bg-gray-50 dark:hover:bg-slate-800 transition-colors">
+                            <span class="font-medium text-lg text-slate-900 dark:text-white">Why did my upload
+                                fail?</span>
+                            <span class="material-symbols-outlined text-slate-400 icon-expand">expand_more</span>
+                        </summary>
+                        <div
+                            class="px-5 pb-5 text-slate-600 dark:text-slate-300 leading-relaxed border-t border-gray-100 dark:border-slate-800 pt-4">
+                            Uploads usually fail due to:
+                            <ul class="list-disc ml-5 mt-2 space-y-1">
+                                <li>Unstable internet connection.</li>
+                                <li>The file exceeds the size limit (50MB for guests).</li>
+                                <li>Unsupported file format.</li>
+                            </ul>
+                            If the problem persists, please try a different browser or clear your cache.
+                        </div>
+                    </details>
+                </div>
+                <!-- Right Sidebar: Support & Ads -->
+                <div class="lg:col-span-4 flex flex-col gap-6">
+                    <!-- Support Card -->
+                    <div
+                        class="rounded-xl bg-gradient-to-br from-surface-dark to-[#161e27] border border-gray-200 dark:border-slate-700 p-6 shadow-xl relative overflow-hidden">
+                        <!-- Decorative background blur -->
+                        <div
+                            class="absolute -right-10 -top-10 w-40 h-40 bg-secondary/10 rounded-full blur-3xl pointer-events-none">
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-2 relative z-10">Still need help?</h3>
+                        <p class="text-slate-400 mb-6 text-sm relative z-10">Our support team is available 24/7 to
+                            assist you with any issues.</p>
+                        <div class="space-y-3 relative z-10">
+                            <a href="contact.html"
+                                class="w-full flex items-center justify-center gap-2 bg-secondary hover:bg-secondary/90 text-white font-bold py-3 rounded-lg transition-colors">
+                                <span class="material-symbols-outlined text-[20px]">support_agent</span>
+                                Contact Support
+                            </a>
+                            <a href="contact.html"
+                                class="w-full flex items-center justify-center gap-2 bg-slate-800 hover:bg-slate-700 text-slate-200 font-semibold py-3 rounded-lg border border-slate-700 transition-colors">
+                                <span class="material-symbols-outlined text-[20px]">bug_report</span>
+                                Report a Bug
+                            </a>
+                        </div>
+                    </div>
+                    <!-- Side Ad -->
+                    <div
+                        class="w-full h-[300px] bg-slate-200 dark:bg-surface-dark border border-dashed border-slate-300 dark:border-slate-700 rounded-lg flex items-center justify-center text-center p-4">
+                        <span class="text-xs font-mono text-slate-400 uppercase tracking-widest">Ad Space
+                            (300x250)</span>
+                    </div>
+                </div>
+            </section>
+        </main>
+        <!-- Footer -->
+        <footer
+            class="mt-8 border-t border-gray-200 dark:border-slate-800 bg-white dark:bg-[#0b1218] py-8 px-4 md:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+                <div class="text-slate-500 dark:text-slate-400 text-sm">
+                    © 2023 ImageHub Pro. All rights reserved.
+                </div>
+                <div class="flex flex-wrap justify-center gap-6 text-sm font-medium text-slate-600 dark:text-slate-300">
+                    <a class="hover:text-primary" href="privacy-policy.html">Privacy Policy</a>
+                    <a class="hover:text-primary" href="terms-of-service.html">Terms of Service</a>
+                    <a class="hover:text-primary" href="#">Sitemap</a>
+                </div>
+                <div class="flex gap-4">
+                    <a class="text-slate-400 hover:text-white transition-colors" href="#"><span
+                            class="material-symbols-outlined">public</span></a>
+                    <a class="text-slate-400 hover:text-white transition-colors" href="#"><span
+                            class="material-symbols-outlined">mail</span></a>
+                </div>
+            </div>
+        </footer>
+    </div>
+    <!-- Background texture for visual interest -->
+    <div class="fixed top-0 left-0 w-full h-full pointer-events-none -z-10 opacity-30 dark:opacity-20"
+        data-alt="Subtle dot pattern background"
+        style="background-image: radial-gradient(#0066cc 1px, transparent 1px); background-size: 40px 40px;"></div>
+</body>
+
+</html>

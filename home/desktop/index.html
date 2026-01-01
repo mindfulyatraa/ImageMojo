@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ImageHub Pro - All-in-One Image Toolset</title>
+
+  <!-- Design System -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+    rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            primary: { DEFAULT: "#0066cc", hover: "#0052a3", light: "#e0f2fe" },
+            secondary: { DEFAULT: "#00cc66", hover: "#00b359", light: "#dcfce7" },
+            dark: {
+              bg: "#0f1923",
+              surface: "#1e293b",
+              border: "#334155"
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      min-height: 100vh;
+    }
+
+    .tool-card:hover {
+      transform: translateY(-4px);
+    }
+
+    .search-ring:focus-within {
+      box-shadow: 0 0 0 4px rgba(0, 102, 204, 0.2);
+    }
+  </style>
+</head>
+
+<body
+  class="bg-gray-50 dark:bg-dark-bg text-slate-900 dark:text-white font-sans antialiased transition-colors duration-200">
+
+  <!-- Navbar -->
+  <header
+    class="sticky top-0 z-50 bg-white/80 dark:bg-dark-bg/80 backdrop-blur-md border-b border-gray-200 dark:border-dark-border">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <div
+          class="size-9 bg-gradient-to-br from-primary-DEFAULT to-blue-400 rounded-xl flex items-center justify-center text-white shadow-lg shadow-primary-DEFAULT/20">
+          <span class="material-symbols-outlined">hub</span>
+        </div>
+        <span class="text-xl font-bold tracking-tight">ImageHub <span class="text-primary-DEFAULT">Pro</span></span>
+      </div>
+
+      <nav class="hidden md:flex items-center gap-6 text-sm font-medium text-slate-600 dark:text-slate-400">
+        <a href="about.html" class="hover:text-primary-DEFAULT transition-colors">About</a>
+        <a href="blog.html" class="hover:text-primary-DEFAULT transition-colors">Blog</a>
+        <a href="contact.html" class="hover:text-primary-DEFAULT transition-colors">Contact</a>
+      </nav>
+
+      <div class="flex items-center gap-2">
+        <a href="mobile-home.html"
+          class="md:hidden p-2 text-slate-600 dark:text-slate-400 hover:bg-gray-100 dark:hover:bg-white/5 rounded-lg">
+          <span class="material-symbols-outlined">smartphone</span>
+        </a>
+        <button
+          class="bg-primary-DEFAULT hover:bg-primary-hover text-white px-4 py-2 rounded-lg text-sm font-bold transition-all shadow-md shadow-primary-DEFAULT/20">
+          Get Started
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="relative pt-12 pb-12 px-4 text-center overflow-hidden">
+    <div
+      class="absolute inset-0 bg-gradient-to-b from-primary-light/50 to-transparent dark:from-primary-DEFAULT/10 pointer-events-none -z-10">
+    </div>
+
+    <div class="max-w-3xl mx-auto">
+      <div
+        class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-secondary-light text-secondary-DEFAULT text-xs font-bold mb-6 border border-secondary-DEFAULT/20">
+        <span class="relative flex h-2 w-2">
+          <span
+            class="animate-ping absolute inline-flex h-full w-full rounded-full bg-secondary-DEFAULT opacity-75"></span>
+          <span class="relative inline-flex rounded-full h-2 w-2 bg-secondary-DEFAULT"></span>
+        </span>
+        v2.0 Released with 30+ New Tools
+      </div>
+
+      <h1
+        class="text-4xl md:text-6xl font-black tracking-tight mb-6 bg-clip-text text-transparent bg-gradient-to-r from-slate-900 to-slate-600 dark:from-white dark:to-slate-400">
+        Master Your Images
+      </h1>
+      <p class="text-lg text-slate-600 dark:text-slate-400 mb-8 max-w-xl mx-auto">
+        The most complete collection of free image editing, conversion, and optimization tools on the web. Secure &
+        private.
+      </p>
+
+      <!-- Search Bar -->
+      <div class="max-w-xl mx-auto relative group z-10">
+        <div
+          class="absolute -inset-1 bg-gradient-to-r from-primary-DEFAULT to-blue-400 rounded-2xl blur opacity-25 group-hover:opacity-50 transition duration-500">
+        </div>
+        <div
+          class="relative flex items-center bg-white dark:bg-dark-surface border border-gray-200 dark:border-dark-border rounded-xl p-2 shadow-xl search-ring transition-all">
+          <span class="material-symbols-outlined text-slate-400 ml-3">search</span>
+          <input type="text" id="toolSearch" placeholder="Find a tool (e.g., 'compress', 'remove bg')..."
+            class="w-full bg-transparent border-none focus:ring-0 text-slate-900 dark:text-white placeholder-slate-400 h-10">
+          <div
+            class="hidden md:flex text-xs text-slate-400 border border-slate-200 dark:border-slate-700 rounded px-2 py-1 mr-2 bg-gray-50 dark:bg-dark-bg">
+            CMD+K
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Content Grid -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 pb-24 space-y-12">
+
+    <!-- Category: Optimization -->
+    <div class="tool-category">
+      <div class="flex items-center gap-3 mb-6">
+        <div class="p-2 bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 rounded-lg">
+          <span class="material-symbols-outlined">speed</span>
+        </div>
+        <h2 class="text-2xl font-bold">Optimization & Layout</h2>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+        <!-- Bulk Compressor -->
+        <div
+          class="tool-card bg-white dark:bg-dark-surface p-5 rounded-xl border border-gray-200 dark:border-dark-border shadow-sm hover:shadow-md transition-all group">
+          <div class="flex justify-between items-start mb-4">
+            <div
+              class="size-10 bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400 rounded-lg flex items-center justify-center">
+              <span class="material-symbols-outlined">compress</span>
+            </div>
+            <span class="bg-gray-100 dark:bg-dark-bg text-xs font-bold px-2 py-1 rounded text-slate-500">HOT</span>
+          </div>
+          <h3 class="font-bold text-lg mb-1 group-hover:text-primary-DEFAULT transition-colors">Image Compressor</h3>
+          <p class="text-sm text-slate-500 dark:text-slate-400 mb-4 line-clamp-2">Smart compression for JPG, PNG, & WebP
+            files.</p>
+          <div class="flex gap-2 mt-auto">
+            <a href="image-compressor.html"
+              class="flex-1 bg-slate-900 dark:bg-white text-white dark:text-slate-900 py-2 rounded-lg text-sm font-bold text-center hover:opacity-90 transition-opacity">Launch</a>
+            <a href="image-compressor-tablet.html"
+              class="size-9 flex items-center justify-center bg-gray-100 dark:bg-dark-bg rounded-lg hover:bg-gray-200 dark:hover:bg-slate-700 transition-colors"
+              title="Pro Mode">
+              <span class="material-symbols-outlined text-[18px]">desktop_windows</span>
+            </a>
+            <a href="image-compressor-alt.html"
+              class="size-9 flex items-center justify-center bg-gray-100 dark:bg-dark-bg rounded-lg hover:bg-gray-200 dark:hover:bg-slate-700 transition-colors"
+              title="Alt Layout">
+              <span class="material-symbols-outlined text-[18px]">grid_view</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Resizer -->
+        <div
+          class="tool-card bg-white dark:bg-dark-surface p-5 rounded-xl border border-gray-200 dark:border-dark-border shadow-sm hover:shadow-md transition-all group">
+          <div
+            class="size-10 bg-indigo-100 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400 rounded-lg flex items-center justify-center mb-4">
+            <span class="material-symbols-outlined">aspect_ratio</span>
+          </div>
+          <h3 class="font-bold text-lg mb-1 group-hover:text-primary-DEFAULT transition-colors">Image Resizer</h3>
+          <p class="text-sm text-slate-500 dark:text-slate-400 mb-4 line-clamp-2">Change dimensions and DPI
+            pixel-perfectly.</p>
+          <div class="flex gap-2 mt-auto">
+            <a href="resizer.html"
+              class="flex-1 bg-slate-900 dark:bg-white text-white dark:text-slate-900 py-2 rounded-lg text-sm font-bold text-center hover:opacity-90 transition-opacity">Launch</a>
+            <a href="resizer-tablet.html"
+              class="px-3 flex items-center justify-center bg-gray-100 dark:bg-dark-bg rounded-lg hover:bg-gray-200 transition-colors text-xs font-bold text-slate-500">PRO</a>
+          </div>
+        </div>
+
+        <!-- Merger -->
+        <div
+          class="tool-card bg-white dark:bg-dark-surface p-5 rounded-xl border border-gray-200 dark:border-dark-border shadow-sm hover:shadow-md transition-all group">
+          <div
+            class="size-10 bg-purple-100 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400 rounded-lg flex items-center justify-center mb-4">
+            <span class="material-symbols-outlined">join_inner</span>
+          </div>
+          <h3 class="font-bold text-lg mb-1 group-hover:text-primary-DEFAULT transition-colors">Image Merger</h3>
+          <p class="text-sm text-slate-500 dark:text-slate-400 mb-4 line-clamp-2">Combine photos horizontally or
+            vertically.</p>
+          <div class="flex gap-2 mt-auto">
+            <a href="image-merger.html"
+              class="flex-1 bg-slate-900 dark:bg-white text-white dark:text-slate-900 py-2 rounded-lg text-sm font-bold text-center hover:opacity-90 transition-opacity">Launch</a>
+            <a href="image-merger-alt.html"
+              class="size-9 flex items-center justify-center bg-gray-100 dark:bg-dark-bg rounded-lg hover:bg-gray-200 dark:hover:bg-slate-700 transition-colors"
+              title="Collage Mode">
+              <span class="material-symbols-outlined text-[18px]">dashboard</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Cropper -->
+        <div
+          class="tool-card bg-white dark:bg-dark-surface p-5 rounded-xl border border-gray-200 dark:border-dark-border shadow-sm hover:shadow-md transition-all group">
+          <div
+            class="size-10 bg-orange-100 dark:bg-orange-900/30 text-orange-600 dark:text-orange-400 rounded-lg flex items-center justify-center mb-4">
+            <span class="material-symbols-outlined">crop</span>
+          </div>
+          <h3 class="font-bold text-lg mb-1 group-hover:text-primary-DEFAULT transition-colors">Image Cropper</h3>
+          <p class="text-sm text-slate-500 dark:text-slate-400 mb-4 line-clamp-2">Trim edges and frame your shots
+            simply.</p>
+          <div class="flex gap-2 mt-auto">
+            <a href="cropper.html"
+              class="flex-1 bg-slate-900 dark:bg-white text-white dark:text-slate-900 py-2 rounded-lg text-sm font-bold text-center hover:opacity-90 transition-opacity">Launch</a>
+            <a href="cropper-tablet.html"
+              class="px-3 flex items-center justify-center bg-gray-100 dark:bg-dark-bg rounded-lg hover:bg-gray-200 transition-colors text-xs font-bold text-slate-500">PRO</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Category: Editing -->
+    <div class="tool-category">
+      <div class="flex items-center gap-3 mb-6">
+        <div class="p-2 bg-pink-100 dark:bg-pink-900/30 text-pink-600 dark:text-pink-400 rounded-lg">
+          <span class="material-symbols-outlined">auto_fix_high</span>
+        </div>
+        <h2 class="text-2xl font-bold">Editing & Effects</h2>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+        <!-- BG Remover -->
+        <div
+          class="tool-card bg-white dark:bg-dark-surface p-5 rounded-xl border border-gray-200 dark:border-dark-border shadow-sm hover:shadow-md transition-all group">
+          <div class="flex justify-between items-start mb-4">
+            <div
+              class="size-10 bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400 rounded-lg flex items-center justify-center">
+              <span class="material-symbols-outlined">remove_selection</span>
+            </div>
+            <span class="bg-primary-light text-primary-DEFAULT text-xs font-bold px-2 py-1 rounded">AI</span>
+          </div>
+          <h3 class="font-bold text-lg mb-1 group-hover:text-primary-DEFAULT transition-colors">BG Remover</h3>
+          <p class="text-sm text-slate-500 dark:text-slate-400 mb-4 line-clamp-2">Instantly remove backgrounds from any
+            photo.</p>
+          <div class="flex gap-2 mt-auto">
+            <a href="background-remover.html"
+              class="flex-1 bg-slate-900 dark:bg-white text-white dark:text-slate-900 py-2 rounded-lg text-sm font-bold text-center hover:opacity-90 transition-opacity">Launch</a>
+            <a href="background-remover-alt.html"
+              class="size-9 flex items-center justify-center bg-gray-100 dark:bg-dark-bg rounded-lg hover:bg-gray-200 dark:hover:bg-slate-700 transition-colors"
+              title="Editor Mode">
+              <span class="material-symbols-outlined text-[18px]">edit</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Filters -->
+        <div
+          class="tool-card bg-white dark:bg-dark-surface p-5 rounded-xl border border-gray-200 dark:border-dark-border shadow-sm hover:shadow-md transition-all group">
+          <div
+            class="size-10 bg-teal-100 dark:bg-teal-900/30 text-teal-600 dark:text-teal-400 rounded-lg flex items-center justify-center mb-4">
+            <span class="material-symbols-outlined">palette</span>
+          </div>
+          <h3 class="font-bold text-lg mb-1 group-hover:text-primary-DEFAULT transition-colors">Filters & Adjust</h3>
+          <p class="text-sm text-slate-500 dark:text-slate-400 mb-4 line-clamp-2">Apply presets, brightness, and
+            contrast.</p>
+          <div class="flex gap-2 mt-auto">
+            <a href="image-filters.html"
+              class="flex-1 bg-slate-900 dark:bg-white text-white dark:text-slate-900 py-2 rounded-lg text-sm font-bold text-center hover:opacity-90 transition-opacity">Launch</a>
+            <a href="image-filters-alt.html"
+              class="size-9 flex items-center justify-center bg-gray-100 dark:bg-dark-bg rounded-lg hover:bg-gray-200 dark:hover:bg-slate-700 transition-colors"
+              title="Advanced Control">
+              <span class="material-symbols-outlined text-[18px]">tune</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Watermark -->
+        <div
+          class="tool-card bg-white dark:bg-dark-surface p-5 rounded-xl border border-gray-200 dark:border-dark-border shadow-sm hover:shadow-md transition-all group">
+          <div
+            class="size-10 bg-cyan-100 dark:bg-cyan-900/30 text-cyan-600 dark:text-cyan-400 rounded-lg flex items-center justify-center mb-4">
+            <span class="material-symbols-outlined">branding_watermark</span>
+          </div>
+          <h3 class="font-bold text-lg mb-1 group-hover:text-primary-DEFAULT transition-colors">Watermark Tool</h3>
+          <p class="text-sm text-slate-500 dark:text-slate-400 mb-4 line-clamp-2">Protect your images with text or
+            logos.</p>
+          <div class="flex gap-2 mt-auto">
+            <a href="watermark.html"
+              class="flex-1 bg-slate-900 dark:bg-white text-white dark:text-slate-900 py-2 rounded-lg text-sm font-bold text-center hover:opacity-90 transition-opacity">Launch</a>
+            <a href="watermark-tablet.html"
+              class="px-3 flex items-center justify-center bg-gray-100 dark:bg-dark-bg rounded-lg hover:bg-gray-200 transition-colors text-xs font-bold text-slate-500">PRO</a>
+          </div>
+        </div>
+
+        <!-- Rotate/Flip -->
+        <div
+          class="tool-card bg-white dark:bg-dark-surface p-5 rounded-xl border border-gray-200 dark:border-dark-border shadow-sm hover:shadow-md transition-all group">
+          <div
+            class="size-10 bg-yellow-100 dark:bg-yellow-900/30 text-yellow-600 dark:text-yellow-400 rounded-lg flex items-center justify-center mb-4">
+            <span class="material-symbols-outlined">rotate_right</span>
+          </div>
+          <h3 class="font-bold text-lg mb-1 group-hover:text-primary-DEFAULT transition-colors">Rotate & Flip</h3>
+          <p class="text-sm text-slate-500 dark:text-slate-400 mb-4 line-clamp-2">Quickly correct orientation or mirror
+            images.</p>
+          <div class="flex gap-2 mt-auto">
+            <a href="image-rotate.html"
+              class="flex-1 bg-slate-900 dark:bg-white text-white dark:text-slate-900 py-2 rounded-lg text-sm font-bold text-center hover:opacity-90 transition-opacity">Launch</a>
+            <a href="image-rotate-alt.html"
+              class="size-9 flex items-center justify-center bg-gray-100 dark:bg-dark-bg rounded-lg hover:bg-gray-200 dark:hover:bg-slate-700 transition-colors"
+              title="Mobile Friendly">
+              <span class="material-symbols-outlined text-[18px]">smartphone</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Border Maker -->
+        <div
+          class="tool-card bg-white dark:bg-dark-surface p-5 rounded-xl border border-gray-200 dark:border-dark-border shadow-sm hover:shadow-md transition-all group">
+          <div
+            class="size-10 bg-indigo-100 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400 rounded-lg flex items-center justify-center mb-4">
+            <span class="material-symbols-outlined">border_outer</span>
+          </div>
+          <h3 class="font-bold text-lg mb-1 group-hover:text-primary-DEFAULT transition-colors">Border Maker</h3>
+          <p class="text-sm text-slate-500 dark:text-slate-400 mb-4 line-clamp-2">Add professional frames and colored
+            borders.</p>
+          <div class="flex gap-2 mt-auto">
+            <a href="border-maker.html"
+              class="flex-1 bg-slate-900 dark:bg-white text-white dark:text-slate-900 py-2 rounded-lg text-sm font-bold text-center hover:opacity-90 transition-opacity">Launch</a>
+            <a href="border-maker-tablet.html"
+              class="px-3 flex items-center justify-center bg-gray-100 dark:bg-dark-bg rounded-lg hover:bg-gray-200 transition-colors text-xs font-bold text-slate-500">PRO</a>
+          </div>
+        </div>
+
+        <!-- Thumbnail Generator -->
+        <div
+          class="tool-card bg-white dark:bg-dark-surface p-5 rounded-xl border border-gray-200 dark:border-dark-border shadow-sm hover:shadow-md transition-all group">
+          <div
+            class="size-10 bg-indigo-100 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400 rounded-lg flex items-center justify-center mb-4">
+            <span class="material-symbols-outlined">photo_size_select_large</span>
+          </div>
+          <h3 class="font-bold text-lg mb-1 group-hover:text-primary-DEFAULT transition-colors">Thumbnail Maker</h3>
+          <p class="text-sm text-slate-500 dark:text-slate-400 mb-4 line-clamp-2">Create optimized thumbnails for
+            YouTube & social.</p>
+          <div class="flex gap-2 mt-auto">
+            <a href="thumbnail-generator.html"
+              class="flex-1 bg-slate-900 dark:bg-white text-white dark:text-slate-900 py-2 rounded-lg text-sm font-bold text-center hover:opacity-90 transition-opacity">Launch</a>
+            <span
+              class="px-2 py-1 rounded text-xs font-bold bg-green-100 text-green-700 dark:bg-green-900 dark:text-green-300 flex items-center">NEW</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Category: Conversion -->
+    <div class="tool-category">
+      <div class="flex items-center gap-3 mb-6">
+        <div class="p-2 bg-indigo-100 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400 rounded-lg">
+          <span class="material-symbols-outlined">transform</span>
+        </div>
+        <h2 class="text-2xl font-bold">Convert & Transform</h2>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+        <!-- HEIC to JPG -->
+        <div
+          class="tool-card bg-white dark:bg-dark-surface p-5 rounded-xl border border-gray-200 dark:border-dark-border shadow-sm hover:shadow-md transition-all group">
+          <div
+            class="size-10 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 rounded-lg flex items-center justify-center mb-4">
+            <span class="font-bold text-xs">HEIC</span>
+          </div>
+          <h3 class="font-bold text-lg mb-1 group-hover:text-primary-DEFAULT transition-colors">HEIC to JPG</h3>
+          <p class="text-sm text-slate-500 dark:text-slate-400 mb-4 line-clamp-2">Convert iPhone photos to widely
+            compatible format.</p>
+          <div class="flex gap-2 mt-auto">
+            <a href="heic-to-jpg.html"
+              class="flex-1 bg-slate-900 dark:bg-white text-white dark:text-slate-900 py-2 rounded-lg text-sm font-bold text-center hover:opacity-90 transition-opacity">Launch</a>
+            <a href="heic-to-jpg-tablet.html"
+              class="px-3 flex items-center justify-center bg-gray-100 dark:bg-dark-bg rounded-lg hover:bg-gray-200 transition-colors text-xs font-bold text-slate-500">PRO</a>
+          </div>
+        </div>
+
+        <!-- WebP Converter -->
+        <div
+          class="tool-card bg-white dark:bg-dark-surface p-5 rounded-xl border border-gray-200 dark:border-dark-border shadow-sm hover:shadow-md transition-all group">
+          <div
+            class="size-10 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 rounded-lg flex items-center justify-center mb-4">
+            <span class="font-bold text-xs">WebP</span>
+          </div>
+          <h3 class="font-bold text-lg mb-1 group-hover:text-primary-DEFAULT transition-colors">WebP Converter</h3>
+          <p class="text-sm text-slate-500 dark:text-slate-400 mb-4 line-clamp-2">Convert images to and from modern WebP
+            format.</p>
+          <div class="flex gap-2 mt-auto">
+            <a href="webp-converter.html"
+              class="flex-1 bg-slate-900 dark:bg-white text-white dark:text-slate-900 py-2 rounded-lg text-sm font-bold text-center hover:opacity-90 transition-opacity">Launch</a>
+          </div>
+        </div>
+
+        <!-- PDF Tools -->
+        <div
+          class="tool-card bg-white dark:bg-dark-surface p-5 rounded-xl border border-gray-200 dark:border-dark-border shadow-sm hover:shadow-md transition-all group">
+          <div
+            class="size-10 bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400 rounded-lg flex items-center justify-center mb-4">
+            <span class="material-symbols-outlined">picture_as_pdf</span>
+          </div>
+          <h3 class="font-bold text-lg mb-1 group-hover:text-primary-DEFAULT transition-colors">Image to PDF</h3>
+          <p class="text-sm text-slate-500 dark:text-slate-400 mb-4 line-clamp-2">Compile multiple images into a single
+            PDF document.</p>
+          <div class="flex gap-2 mt-auto">
+            <a href="image-to-pdf.html"
+              class="flex-1 bg-slate-900 dark:bg-white text-white dark:text-slate-900 py-2 rounded-lg text-sm font-bold text-center hover:opacity-90 transition-opacity">Launch</a>
+            <a href="image-to-pdf-tablet.html"
+              class="px-3 flex items-center justify-center bg-gray-100 dark:bg-dark-bg rounded-lg hover:bg-gray-200 transition-colors text-xs font-bold text-slate-500">PRO</a>
+          </div>
+        </div>
+
+        <!-- Base64 -->
+        <div
+          class="tool-card bg-white dark:bg-dark-surface p-5 rounded-xl border border-gray-200 dark:border-dark-border shadow-sm hover:shadow-md transition-all group">
+          <div
+            class="size-10 bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 rounded-lg flex items-center justify-center mb-4">
+            <span class="material-symbols-outlined">code</span>
+          </div>
+          <h3 class="font-bold text-lg mb-1 group-hover:text-primary-DEFAULT transition-colors">Base64 Encoder</h3>
+          <p class="text-sm text-slate-500 dark:text-slate-400 mb-4 line-clamp-2">Convert images to Base64 strings for
+            development.</p>
+          <div class="flex gap-2 mt-auto">
+            <a href="base64-encoder.html"
+              class="flex-1 bg-slate-900 dark:bg-white text-white dark:text-slate-900 py-2 rounded-lg text-sm font-bold text-center hover:opacity-90 transition-opacity">Launch</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Category: Utilities -->
+    <div class="tool-category">
+      <div class="flex items-center gap-3 mb-6">
+        <div class="p-2 bg-purple-100 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400 rounded-lg">
+          <span class="material-symbols-outlined">science</span>
+        </div>
+        <h2 class="text-2xl font-bold">Deep Analysis</h2>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+        <!-- EXIF Viewer -->
+        <div
+          class="tool-card bg-white dark:bg-dark-surface p-5 rounded-xl border border-gray-200 dark:border-dark-border shadow-sm hover:shadow-md transition-all group">
+          <div
+            class="size-10 bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 rounded-lg flex items-center justify-center mb-4">
+            <span class="material-symbols-outlined">info</span>
+          </div>
+          <h3 class="font-bold text-lg mb-1 group-hover:text-primary-DEFAULT transition-colors">EXIF Viewer</h3>
+          <p class="text-sm text-slate-500 dark:text-slate-400 mb-4 line-clamp-2">View hidden metadata, camera settings,
+            and location.</p>
+          <div class="flex gap-2 mt-auto">
+            <a href="exif-viewer.html"
+              class="flex-1 bg-slate-900 dark:bg-white text-white dark:text-slate-900 py-2 rounded-lg text-sm font-bold text-center hover:opacity-90 transition-opacity">Launch</a>
+            <a href="exif-viewer-tablet.html"
+              class="px-3 flex items-center justify-center bg-gray-100 dark:bg-dark-bg rounded-lg hover:bg-gray-200 transition-colors text-xs font-bold text-slate-500">PRO</a>
+          </div>
+        </div>
+
+        <!-- Color Picker -->
+        <div
+          class="tool-card bg-white dark:bg-dark-surface p-5 rounded-xl border border-gray-200 dark:border-dark-border shadow-sm hover:shadow-md transition-all group">
+          <div
+            class="size-10 bg-gradient-to-br from-pink-500 to-orange-400 text-white rounded-lg flex items-center justify-center mb-4">
+            <span class="material-symbols-outlined">colorize</span>
+          </div>
+          <h3 class="font-bold text-lg mb-1 group-hover:text-primary-DEFAULT transition-colors">Color Picker</h3>
+          <p class="text-sm text-slate-500 dark:text-slate-400 mb-4 line-clamp-2">Extract palette and Hex codes from any
+            image.</p>
+          <div class="flex gap-2 mt-auto">
+            <a href="color-picker.html"
+              class="flex-1 bg-slate-900 dark:bg-white text-white dark:text-slate-900 py-2 rounded-lg text-sm font-bold text-center hover:opacity-90 transition-opacity">Launch</a>
+            <a href="color-picker-alt.html"
+              class="size-9 flex items-center justify-center bg-gray-100 dark:bg-dark-bg rounded-lg hover:bg-gray-200 dark:hover:bg-slate-700 transition-colors"
+              title="Mobile Mode">
+              <span class="material-symbols-outlined text-[18px]">smartphone</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Meme Generator -->
+        <div
+          class="tool-card bg-white dark:bg-dark-surface p-5 rounded-xl border border-gray-200 dark:border-dark-border shadow-sm hover:shadow-md transition-all group">
+          <div
+            class="size-10 bg-yellow-100 dark:bg-yellow-900/30 text-yellow-600 dark:text-yellow-400 rounded-lg flex items-center justify-center mb-4">
+            <span class="material-symbols-outlined">sentiment_very_satisfied</span>
+          </div>
+          <h3 class="font-bold text-lg mb-1 group-hover:text-primary-DEFAULT transition-colors">Meme Generator</h3>
+          <p class="text-sm text-slate-500 dark:text-slate-400 mb-4 line-clamp-2">Create viral memes with custom text
+            instantly.</p>
+          <div class="flex gap-2 mt-auto">
+            <a href="meme-generator.html"
+              class="flex-1 bg-slate-900 dark:bg-white text-white dark:text-slate-900 py-2 rounded-lg text-sm font-bold text-center hover:opacity-90 transition-opacity">Launch</a>
+            <a href="meme-generator-tablet.html"
+              class="px-3 flex items-center justify-center bg-gray-100 dark:bg-dark-bg rounded-lg hover:bg-gray-200 transition-colors text-xs font-bold text-slate-500">PRO</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-slate-900 text-slate-400 py-12 border-t border-slate-800">
+    <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-4 gap-8">
+      <div class="col-span-1 md:col-span-1">
+        <div class="flex items-center gap-2 mb-4 text-white">
+          <span class="material-symbols-outlined text-primary-DEFAULT">hub</span>
+          <span class="font-bold text-lg">ImageHub Pro</span>
+        </div>
+        <p class="text-sm">Secure, client-side image tools. No uploads only processing right in your browser.</p>
+      </div>
+      <div>
+        <h4 class="text-white font-bold mb-4">Legal</h4>
+        <ul class="space-y-2 text-sm">
+          <li><a href="privacy-policy.html" class="hover:text-white transition-colors">Privacy Policy</a></li>
+          <li><a href="terms-of-service.html" class="hover:text-white transition-colors">Terms of Service</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="text-white font-bold mb-4">Links</h4>
+        <ul class="space-y-2 text-sm">
+          <li><a href="contact.html" class="hover:text-white transition-colors">Contact Us</a></li>
+          <li><a href="help-faq-tablet.html" class="hover:text-white transition-colors">Help & FAQ</a></li>
+          <li><a href="feedback.html" class="hover:text-white transition-colors">Feedback</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="text-white font-bold mb-4">Social</h4>
+        <div class="flex gap-4">
+          <a href="#" class="hover:text-white transition-colors">Twitter</a>
+          <a href="#" class="hover:text-white transition-colors">GitHub</a>
+        </div>
+      </div>
+    </div>
+    <div class="max-w-7xl mx-auto px-4 mt-8 pt-8 border-t border-slate-800 text-center text-sm">
+      &copy; 2026 ImageHub Pro. All rights reserved.
+    </div>
+  </footer>
+
+  <!-- Simple Search Script -->
+  <script>
+    document.getElementById('toolSearch').addEventListener('keyup', function (e) {
+      const term = e.target.value.toLowerCase();
+      const cards = document.querySelectorAll('.tool-card');
+
+      cards.forEach(card => {
+        const title = card.querySelector('h3').textContent.toLowerCase();
+        const desc = card.querySelector('p').textContent.toLowerCase();
+
+        if (title.includes(term) || desc.includes(term)) {
+          card.parentElement.style.display = 'block'; // Ensure parent grid logic might need adjustment if hidden
+          // Actually better to hide the card wrapper itself
+          card.style.display = 'flex';
+          card.style.flexDirection = 'column';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    });
+  </script>
+</body>
+
+</html>

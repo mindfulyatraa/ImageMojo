@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Image Rotate/Flip Tool - ImageHub Pro</title>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <!-- Material Icons -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <!-- Theme Config -->
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#0066cc",
+                        "primary-hover": "#0052a3",
+                        "accent-green": "#00CC66",
+                        "background-light": "#f5f7f8",
+                        "background-dark": "#0f1923",
+                        "surface-dark": "#1A2633",
+                        "surface-light": "#ffffff",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "2xl": "1rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+    <style>
+        /* Custom styles for range slider thumb */
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            height: 20px;
+            width: 20px;
+            border-radius: 50%;
+            background: #ffffff;
+            border: 2px solid #0066cc;
+            cursor: pointer;
+            margin-top: -8px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+        }
+
+        input[type=range]::-moz-range-thumb {
+            height: 20px;
+            width: 20px;
+            border-radius: 50%;
+            background: #ffffff;
+            border: 2px solid #0066cc;
+            cursor: pointer;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+        }
+
+        input[type=range]::-webkit-slider-runnable-track {
+            width: 100%;
+            height: 4px;
+            cursor: pointer;
+            background: #394756;
+            border-radius: 2px;
+        }
+
+        input[type=range]:focus::-webkit-slider-thumb {
+            box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.3);
+        }
+
+        /* Checkerboard pattern for transparency */
+        .bg-checkerboard {
+            background-color: #1e1e1e;
+            background-image:
+                linear-gradient(45deg, #2a2a2a 25%, transparent 25%),
+                linear-gradient(-45deg, #2a2a2a 25%, transparent 25%),
+                linear-gradient(45deg, transparent 75%, #2a2a2a 75%),
+                linear-gradient(-45deg, transparent 75%, #2a2a2a 75%);
+            background-size: 20px 20px;
+            background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+        }
+    </style>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+</head>
+
+<body
+    class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-white transition-colors duration-200">
+    <div class="relative flex h-full min-h-screen w-full flex-col overflow-x-hidden max-w-md mx-auto shadow-2xl">
+        <!-- Header -->
+        <header
+            class="sticky top-0 z-50 bg-background-light/95 dark:bg-background-dark/95 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 px-4 py-3 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="size-8 rounded bg-primary flex items-center justify-center text-white">
+                    <span class="material-symbols-outlined text-xl">flip_camera_ios</span>
+                </div>
+                <h1 class="text-lg font-bold tracking-tight">ImageHub Pro</h1>
+            </div>
+            <button class="text-slate-600 dark:text-slate-300 hover:text-primary transition-colors p-1">
+                <span class="material-symbols-outlined text-2xl">menu</span>
+            </button>
+        </header>
+        <!-- Ad Placeholder -->
+        <div
+            class="w-full bg-slate-200 dark:bg-[#15202b] py-3 flex justify-center items-center border-b border-slate-200 dark:border-slate-800">
+            <div
+                class="w-[320px] h-[50px] bg-slate-300 dark:bg-surface-dark border border-dashed border-slate-400 dark:border-slate-600 rounded flex flex-col items-center justify-center text-xs text-slate-500 dark:text-slate-400">
+                <span class="font-semibold">Sponsored Ad Space</span>
+                <span>(320x50)</span>
+            </div>
+        </div>
+        <!-- Main Content -->
+        <main class="flex-1 flex flex-col p-4 pb-24 gap-6">
+            <!-- Page Title -->
+            <div class="flex items-center justify-between">
+                <h2 class="text-2xl font-bold tracking-tight">Rotate &amp; Flip</h2>
+                <span
+                    class="px-2 py-1 bg-primary/10 text-primary text-xs font-semibold rounded-full border border-primary/20">Free
+                    Tool</span>
+            </div>
+            <!-- Preview Area (Canvas) -->
+            <div class="flex flex-col gap-3">
+                <div
+                    class="relative w-full aspect-[4/3] rounded-2xl overflow-hidden bg-checkerboard shadow-lg border border-slate-200 dark:border-slate-700 group">
+                    <!-- Image -->
+                    <img alt="Preview of a mountain landscape with sun rays"
+                        class="w-full h-full object-contain transition-transform duration-300"
+                        data-alt="Preview of a mountain landscape with sun rays"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuA4k6-AiwHX9CHFzouSKbRa1xsl6zijMtG3thRrufJ1pbrHGMhcl60KoAivUarqJoUDMHSzVhmsW5AO0t0_W7xuHYi7i-QQsZGGTU3ZEpyxpmtQ6yz6PzkpQmMl3eKTWyAPSTkIrUCiwVeoatE7xap2gDE6DkX5Ad1ADjZE02nJiPnVDIFYMbsraLwq-tmTdTmjT9PFLGl7Fyjy7JxhZeIrr8x-sm_zLr8aRLK0fZdZfwL0IilieRmPrOgxeybICpAk9Izex7mQLHk-"
+                        style="transform: rotate(0deg) scaleX(1) scaleY(1);" />
+                    <!-- Overlay Actions -->
+                    <div class="absolute top-3 right-3 flex gap-2">
+                        <button
+                            class="size-9 rounded-full bg-black/50 backdrop-blur-sm text-white flex items-center justify-center hover:bg-primary transition-colors"
+                            title="Zoom In">
+                            <span class="material-symbols-outlined text-lg">zoom_in</span>
+                        </button>
+                        <button
+                            class="size-9 rounded-full bg-black/50 backdrop-blur-sm text-white flex items-center justify-center hover:bg-primary transition-colors"
+                            title="Reset">
+                            <span class="material-symbols-outlined text-lg">restart_alt</span>
+                        </button>
+                    </div>
+                    <!-- Replace Image Overlay (Bottom) -->
+                    <div
+                        class="absolute bottom-0 left-0 w-full p-3 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex justify-center">
+                        <button class="text-white text-sm font-medium hover:text-primary-300 flex items-center gap-1">
+                            <span class="material-symbols-outlined text-sm">file_upload</span>
+                            Change Image
+                        </button>
+                    </div>
+                </div>
+                <p class="text-xs text-center text-slate-500 dark:text-slate-400">Original: 1920x1080 • JPG • 2.4MB</p>
+            </div>
+            <!-- Controls Section -->
+            <div class="flex flex-col gap-6">
+                <!-- Quick Orientation -->
+                <div class="flex flex-col gap-3">
+                    <label class="text-sm font-semibold text-slate-700 dark:text-slate-300 flex items-center gap-2">
+                        <span class="material-symbols-outlined text-primary text-lg">crop_rotate</span>
+                        Orientation
+                    </label>
+                    <div class="grid grid-cols-4 gap-3">
+                        <button
+                            class="aspect-square flex flex-col items-center justify-center gap-1 rounded-xl bg-white dark:bg-surface-dark border border-slate-200 dark:border-slate-700 shadow-sm hover:border-primary/50 hover:bg-slate-50 dark:hover:bg-slate-800 transition-all active:scale-95 text-slate-700 dark:text-slate-200">
+                            <span class="material-symbols-outlined text-2xl">rotate_left</span>
+                            <span class="text-[10px] font-medium">-90°</span>
+                        </button>
+                        <button
+                            class="aspect-square flex flex-col items-center justify-center gap-1 rounded-xl bg-white dark:bg-surface-dark border border-slate-200 dark:border-slate-700 shadow-sm hover:border-primary/50 hover:bg-slate-50 dark:hover:bg-slate-800 transition-all active:scale-95 text-slate-700 dark:text-slate-200">
+                            <span class="material-symbols-outlined text-2xl">rotate_right</span>
+                            <span class="text-[10px] font-medium">+90°</span>
+                        </button>
+                        <button
+                            class="aspect-square flex flex-col items-center justify-center gap-1 rounded-xl bg-white dark:bg-surface-dark border border-slate-200 dark:border-slate-700 shadow-sm hover:border-primary/50 hover:bg-slate-50 dark:hover:bg-slate-800 transition-all active:scale-95 text-slate-700 dark:text-slate-200">
+                            <span class="material-symbols-outlined text-2xl"
+                                style="transform: scaleX(-1);">swap_horiz</span>
+                            <span class="text-[10px] font-medium">Flip H</span>
+                        </button>
+                        <button
+                            class="aspect-square flex flex-col items-center justify-center gap-1 rounded-xl bg-white dark:bg-surface-dark border border-slate-200 dark:border-slate-700 shadow-sm hover:border-primary/50 hover:bg-slate-50 dark:hover:bg-slate-800 transition-all active:scale-95 text-slate-700 dark:text-slate-200">
+                            <span class="material-symbols-outlined text-2xl">swap_vert</span>
+                            <span class="text-[10px] font-medium">Flip V</span>
+                        </button>
+                    </div>
+                </div>
+                <!-- Precision Slider -->
+                <div class="flex flex-col gap-4">
+                    <div class="flex justify-between items-center">
+                        <label class="text-sm font-semibold text-slate-700 dark:text-slate-300 flex items-center gap-2">
+                            <span class="material-symbols-outlined text-primary text-lg">tune</span>
+                            Fine Tune
+                        </label>
+                        <div class="flex items-center">
+                            <input
+                                class="w-14 h-8 bg-transparent text-right font-mono text-sm border-b border-slate-600 focus:border-primary focus:outline-none"
+                                placeholder="0" type="number" value="0" />
+                            <span class="ml-1 text-sm text-slate-500">°</span>
+                        </div>
+                    </div>
+                    <div class="relative h-6 flex items-center">
+                        <input
+                            class="w-full h-1 bg-slate-300 dark:bg-slate-700 rounded-lg appearance-none cursor-pointer"
+                            max="360" min="0" type="range" value="0" />
+                    </div>
+                    <div class="flex justify-between text-[10px] text-slate-400 font-medium px-1">
+                        <span>0°</span>
+                        <span>90°</span>
+                        <span>180°</span>
+                        <span>270°</span>
+                        <span>360°</span>
+                    </div>
+                </div>
+                <!-- Output Format -->
+                <div class="flex flex-col gap-3">
+                    <label class="text-sm font-semibold text-slate-700 dark:text-slate-300 flex items-center gap-2">
+                        <span class="material-symbols-outlined text-primary text-lg">save_as</span>
+                        Output Format
+                    </label>
+                    <div
+                        class="bg-slate-100 dark:bg-surface-dark p-1 rounded-lg flex border border-slate-200 dark:border-slate-700">
+                        <button
+                            class="flex-1 py-2 rounded-md text-sm font-semibold bg-white dark:bg-slate-700 text-primary shadow-sm transition-all">JPG</button>
+                        <button
+                            class="flex-1 py-2 rounded-md text-sm font-medium text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200 transition-all">PNG</button>
+                        <button
+                            class="flex-1 py-2 rounded-md text-sm font-medium text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200 transition-all">WebP</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <!-- Sticky Footer Action -->
+        <div
+            class="fixed bottom-0 left-0 w-full max-w-md mx-auto z-40 p-4 bg-background-light/90 dark:bg-background-dark/90 backdrop-blur border-t border-slate-200 dark:border-slate-800">
+            <button
+                class="w-full bg-primary hover:bg-primary-hover text-white font-bold h-12 rounded-xl shadow-lg shadow-primary/20 flex items-center justify-center gap-2 transition-all active:scale-[0.98]">
+                <span class="material-symbols-outlined">download</span>
+                Apply &amp; Download
+            </button>
+        </div>
+    </div>
+</body>
+
+</html>

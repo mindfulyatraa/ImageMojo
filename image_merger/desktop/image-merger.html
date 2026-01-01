@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Image Merge Tool - ImageHub Pro</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <!-- Material Symbols -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <!-- Tailwind Config -->
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#0066cc",
+                        "secondary": "#00cc66",
+                        "background-light": "#f5f7f8",
+                        "background-dark": "#0f1923",
+                        "surface-dark": "#1a242f",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"],
+                        "sans": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "2xl": "1rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+</head>
+
+<body
+    class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-white font-display antialiased selection:bg-primary selection:text-white overflow-x-hidden pb-24">
+    <!-- Header -->
+    <header
+        class="sticky top-0 z-50 w-full backdrop-blur-md bg-background-light/80 dark:bg-background-dark/80 border-b border-gray-200 dark:border-gray-800">
+        <div class="flex items-center justify-between px-4 h-16">
+            <div class="flex items-center gap-2">
+                <div
+                    class="size-8 rounded-lg bg-gradient-to-br from-primary to-blue-400 flex items-center justify-center text-white font-bold text-lg">
+                    IH
+                </div>
+                <h1 class="text-lg font-bold tracking-tight">ImageHub Pro</h1>
+            </div>
+            <button class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-800 transition-colors">
+                <span class="material-symbols-outlined text-2xl">menu</span>
+            </button>
+        </div>
+    </header>
+    <main class="w-full max-w-md mx-auto flex flex-col gap-6 p-4">
+        <!-- Hero Section -->
+        <section class="flex flex-col gap-2 pt-2">
+            <h2 class="text-2xl font-bold leading-tight">Image Merge Tool</h2>
+            <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">
+                Combine photos vertically, horizontally, or in a grid. Drag to reorder.
+            </p>
+        </section>
+        <!-- Upload Zone -->
+        <section>
+            <div
+                class="relative group cursor-pointer flex flex-col items-center justify-center gap-4 rounded-xl border-2 border-dashed border-gray-300 dark:border-gray-700 bg-white dark:bg-surface-dark p-8 hover:border-primary dark:hover:border-primary transition-all active:scale-[0.99]">
+                <div
+                    class="size-12 rounded-full bg-primary/10 flex items-center justify-center text-primary group-hover:scale-110 transition-transform">
+                    <span class="material-symbols-outlined text-3xl">add_photo_alternate</span>
+                </div>
+                <div class="text-center">
+                    <p class="font-semibold text-sm">Tap to Upload Images</p>
+                    <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">JPG, PNG, WebP supported</p>
+                </div>
+            </div>
+        </section>
+        <!-- Uploaded Images List (Mock Data) -->
+        <section class="flex flex-col gap-3">
+            <div class="flex items-center justify-between">
+                <h3 class="text-sm font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">Your
+                    Images (3)</h3>
+                <button class="text-xs text-primary font-medium hover:underline">Clear All</button>
+            </div>
+            <div class="grid grid-cols-3 gap-3">
+                <!-- Image 1 -->
+                <div
+                    class="relative aspect-square rounded-lg overflow-hidden bg-gray-100 dark:bg-gray-800 group shadow-sm border border-gray-200 dark:border-gray-700">
+                    <img class="w-full h-full object-cover" data-alt="Mountain landscape thumbnail"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuDM2essueIIY_K6tT_WjHU9IzbpuztNrCB5sRHtRhaWenybMhwwu7Y2jPKMeg2QAzafJoLkVv4ltiBREXCibjVWnQO4f4voilbwJhgQYJyu4HiOcnCUQISHBailEZf8sG-uuTuTgfleFbR-5fJnFIiyElw8FS1MKP_AaqIFLu_GSIQd_B3fnuCOhHl4Ow0-EU-XVzIfT3vT2oRVXUblvEaIV5EBNRQwjF0sBC2hRsbJttsNuJCazgheEClVnh1dx5fraLuR1bsm-VZ2" />
+                    <button
+                        class="absolute top-1 right-1 p-1 bg-black/50 hover:bg-red-500 rounded-full text-white backdrop-blur-sm transition-colors">
+                        <span class="material-symbols-outlined text-[16px]">close</span>
+                    </button>
+                    <div
+                        class="absolute bottom-1 left-1 bg-black/60 px-1.5 py-0.5 rounded text-[10px] text-white font-medium">
+                        1</div>
+                </div>
+                <!-- Image 2 -->
+                <div
+                    class="relative aspect-square rounded-lg overflow-hidden bg-gray-100 dark:bg-gray-800 group shadow-sm border border-gray-200 dark:border-gray-700">
+                    <img class="w-full h-full object-cover" data-alt="Ocean waves thumbnail"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuCNqcQoDhwlionr18JKoyEs13Iv53z8oXdybpoduP3Jaulfkj24keBmqplubcq53Z58lskQowIsBeoPFjBkPYUfoVP9L3_epCm5OvQvU97CZUahDUi26BXNQBBXWmPv-7TFvrX06ARLDr8DBNrXlWQt6cehl8lrkNFe-PygAvoG3Wpr0A_pSzB7BeYZt7w-2vFHLvYQ38mocolz1jFG-hpoDMTwwWBprEOVfASk1Wg-xWF2oBX2tZpiB1IaLVOgfhU-Ov62bJdyHLp4" />
+                    <button
+                        class="absolute top-1 right-1 p-1 bg-black/50 hover:bg-red-500 rounded-full text-white backdrop-blur-sm transition-colors">
+                        <span class="material-symbols-outlined text-[16px]">close</span>
+                    </button>
+                    <div
+                        class="absolute bottom-1 left-1 bg-black/60 px-1.5 py-0.5 rounded text-[10px] text-white font-medium">
+                        2</div>
+                </div>
+                <!-- Image 3 -->
+                <div
+                    class="relative aspect-square rounded-lg overflow-hidden bg-gray-100 dark:bg-gray-800 group shadow-sm border border-gray-200 dark:border-gray-700 ring-2 ring-primary ring-offset-2 ring-offset-background-dark">
+                    <img class="w-full h-full object-cover" data-alt="Forest trees thumbnail"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuAoK4lq9WrJHXwNqhA9g4pIebpegrsj_FaemuV2drJctglLRke5jQB-JjGvO9OIfeBPdCrW8N8DH0KZcjziScAE0qhjMVmLTxyDx8BiF75ShXuJy8W9zDUwNR2OLWCD13JNIfk1FLXon8Ou3xfpB1cWgKUsboM4YKnmmYsNqeetO-o1qsIeWRBnGwsbRWHnM58r6ZYiOC6TVzmyKD2YVc6pC8zjT1elcluS1YAL1J_HH5Vz4JEVaCyiO77ofJqNTtinjYL_H4vWNvF-" />
+                    <button
+                        class="absolute top-1 right-1 p-1 bg-black/50 hover:bg-red-500 rounded-full text-white backdrop-blur-sm transition-colors">
+                        <span class="material-symbols-outlined text-[16px]">close</span>
+                    </button>
+                    <div
+                        class="absolute bottom-1 left-1 bg-black/60 px-1.5 py-0.5 rounded text-[10px] text-white font-medium">
+                        3</div>
+                </div>
+            </div>
+            <p class="text-xs text-center text-slate-500 italic mt-1">Tap and hold to reorder images</p>
+        </section>
+        <!-- Ad Placeholder -->
+        <div
+            class="w-full h-[60px] bg-gray-200 dark:bg-surface-dark border border-gray-300 dark:border-gray-700 rounded-lg flex flex-col items-center justify-center overflow-hidden my-2">
+            <span class="text-[10px] text-slate-500 uppercase tracking-widest font-semibold mb-1">Advertisement</span>
+            <div class="w-16 h-1 bg-gray-300 dark:bg-gray-600 rounded-full"></div>
+        </div>
+        <!-- Configuration -->
+        <section
+            class="flex flex-col gap-6 bg-white dark:bg-surface-dark rounded-xl p-5 shadow-sm border border-gray-200 dark:border-gray-800">
+            <div class="flex items-center gap-2 mb-1">
+                <span class="material-symbols-outlined text-primary">tune</span>
+                <h3 class="text-base font-bold">Merge Settings</h3>
+            </div>
+            <!-- Layout Options -->
+            <div class="space-y-3">
+                <label class="text-sm font-medium text-slate-700 dark:text-slate-300">Layout</label>
+                <div class="grid grid-cols-3 gap-2">
+                    <button
+                        class="flex flex-col items-center justify-center gap-2 p-3 rounded-lg border border-primary bg-primary/10 text-primary transition-all">
+                        <span class="material-symbols-outlined">view_column</span>
+                        <span class="text-xs font-semibold">Vertical</span>
+                    </button>
+                    <button
+                        class="flex flex-col items-center justify-center gap-2 p-3 rounded-lg border border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700 text-slate-600 dark:text-slate-400 transition-all">
+                        <span class="material-symbols-outlined">table_rows</span>
+                        <span class="text-xs font-semibold">Horizontal</span>
+                    </button>
+                    <button
+                        class="flex flex-col items-center justify-center gap-2 p-3 rounded-lg border border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700 text-slate-600 dark:text-slate-400 transition-all">
+                        <span class="material-symbols-outlined">grid_view</span>
+                        <span class="text-xs font-semibold">Grid</span>
+                    </button>
+                </div>
+            </div>
+            <!-- Spacing Slider -->
+            <div class="space-y-3">
+                <div class="flex justify-between">
+                    <label class="text-sm font-medium text-slate-700 dark:text-slate-300">Spacing</label>
+                    <span class="text-xs font-mono text-slate-500">10px</span>
+                </div>
+                <input
+                    class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700 accent-primary"
+                    max="100" min="0" type="range" value="10" />
+            </div>
+            <!-- Background Color -->
+            <div class="space-y-3">
+                <label class="text-sm font-medium text-slate-700 dark:text-slate-300">Background</label>
+                <div class="flex gap-4">
+                    <label class="relative cursor-pointer group">
+                        <input checked="" class="peer sr-only" name="bg-color" type="radio" />
+                        <div
+                            class="size-10 rounded-full bg-white border border-gray-300 shadow-sm peer-checked:ring-2 peer-checked:ring-offset-2 peer-checked:ring-primary dark:peer-checked:ring-offset-background-dark">
+                        </div>
+                        <span
+                            class="absolute inset-0 flex items-center justify-center opacity-0 peer-checked:opacity-100 text-black">
+                            <span class="material-symbols-outlined text-sm">check</span>
+                        </span>
+                    </label>
+                    <label class="relative cursor-pointer group">
+                        <input class="peer sr-only" name="bg-color" type="radio" />
+                        <div
+                            class="size-10 rounded-full bg-black border border-gray-600 shadow-sm peer-checked:ring-2 peer-checked:ring-offset-2 peer-checked:ring-primary dark:peer-checked:ring-offset-background-dark">
+                        </div>
+                        <span
+                            class="absolute inset-0 flex items-center justify-center opacity-0 peer-checked:opacity-100 text-white">
+                            <span class="material-symbols-outlined text-sm">check</span>
+                        </span>
+                    </label>
+                    <label class="relative cursor-pointer group">
+                        <input class="peer sr-only" name="bg-color" type="radio" />
+                        <div
+                            class="size-10 rounded-full bg-gradient-to-br from-gray-300 to-gray-400 dark:from-gray-600 dark:to-gray-700 border border-transparent shadow-sm peer-checked:ring-2 peer-checked:ring-offset-2 peer-checked:ring-primary dark:peer-checked:ring-offset-background-dark flex items-center justify-center">
+                            <span
+                                class="material-symbols-outlined text-lg text-slate-800 dark:text-slate-200">block</span>
+                        </div>
+                    </label>
+                    <label class="relative cursor-pointer group">
+                        <input class="peer sr-only" name="bg-color" type="radio" />
+                        <div
+                            class="size-10 rounded-full bg-gradient-to-tr from-blue-500 to-purple-500 border border-transparent shadow-sm peer-checked:ring-2 peer-checked:ring-offset-2 peer-checked:ring-primary dark:peer-checked:ring-offset-background-dark">
+                        </div>
+                    </label>
+                </div>
+            </div>
+        </section>
+        <!-- Preview Section (Mini) -->
+        <section class="flex flex-col gap-3">
+            <div class="flex items-center justify-between">
+                <h3 class="text-base font-bold">Preview</h3>
+                <span class="text-xs px-2 py-1 bg-secondary/10 text-secondary rounded-full font-medium">Live
+                    Update</span>
+            </div>
+            <div
+                class="w-full bg-checkerboard rounded-lg border border-gray-200 dark:border-gray-700 overflow-hidden relative min-h-[200px] flex items-center justify-center p-4 bg-gray-50 dark:bg-black/20">
+                <!-- Mock Merged Image -->
+                <div
+                    class="flex flex-col gap-2 p-2 bg-white shadow-lg max-w-[80%] rotate-1 hover:rotate-0 transition-transform duration-300">
+                    <img class="w-full h-auto object-cover rounded-sm" data-alt="Merged landscape part 1"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuADQ2x-Snh07GqgxFwWaP_SSp7pW-EcTH7raZV5q-QDoYJfLNtgVykX-asfVpLe_02yuQu-d_FDkNk0DidLvJ9vNiLHJ65vFVPexgVZo2hiOBCABFjSWeM-RhG--Y-xSuP1y-MuqBqj6xwDqxOktCJYJVirbEydw-GyqqZex244Bi0theCR8PYlfkXgKwuWzdQK9vlp_97Ki0Jb8n464Rcru_wGmCCS9dQfNMXI1WGUDOL-SVq-I0dCTgEYkZFIDwFzgd-v7sz8dQMZ" />
+                    <img class="w-full h-auto object-cover rounded-sm" data-alt="Merged landscape part 2"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuDkgVM2fpfx_NFD7BjRAB_JqU8-h9SWxBm3t5SqAfh01haANJlkVPYJGPJgbTzqRsu8HwNrvZEKeuNYV_OH9suqG8lU9uLa0Zih08j5Wg49zgI_SRvY2X9dr8n6ZTRivMmBuTQbOYTLxjvtwe5xgRt82npGHw2d_ORCxTlZQUDLEs5qcLFp9RuJ-Rps2Qf3NMR3Qe-46IFrCa7pUWSnJPNWYeLISFtT4C9fxBlTSU7EvKWIoI8bZshkbrckpPvLWoXeniMKQ_ISKg80" />
+                    <img class="w-full h-auto object-cover rounded-sm" data-alt="Merged landscape part 3"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuBaeu55Jh5dWLmzTseRCLoOOve06dAI-mRyTw1h4sk0kuJ34Z2Yn1-_v2m7Lf89fcT4D0ifdY4XuqvyjJZjj4ibRX6gYgB3oBqTSRsTHJfPkNN6BSDMCHTIXTSvwpxUFnJ1Wxkph5DVx7-0CZCCEFG_aiIzHhYf17Fx3Gip4BEtojQL3rFX10wfq6TnDY4cJeQBK5-CscBPf4EChuaggI6GMb4983kJzsZBSbJtJX9zdPOpt4vFTqCXR1bSUWDK5yMwtyPD4PMSlm9x" />
+                </div>
+            </div>
+        </section>
+    </main>
+    <!-- Sticky Bottom Action Bar -->
+    <div
+        class="fixed bottom-0 left-0 w-full bg-white dark:bg-surface-dark border-t border-gray-200 dark:border-gray-800 px-4 py-4 z-40 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)]">
+        <div class="max-w-md mx-auto flex gap-3">
+            <div class="relative min-w-[100px]">
+                <select
+                    class="w-full h-12 pl-3 pr-8 bg-gray-100 dark:bg-background-dark border-0 rounded-lg text-sm font-semibold focus:ring-2 focus:ring-primary appearance-none cursor-pointer">
+                    <option>JPG</option>
+                    <option>PNG</option>
+                    <option>WebP</option>
+                </select>
+                <div class="absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none text-slate-500">
+                    <span class="material-symbols-outlined text-lg">expand_more</span>
+                </div>
+            </div>
+            <button
+                class="flex-1 h-12 bg-primary hover:bg-blue-600 active:bg-blue-700 text-white rounded-lg font-bold text-sm tracking-wide shadow-lg shadow-primary/25 flex items-center justify-center gap-2 transition-all active:scale-[0.98]">
+                <span class="material-symbols-outlined">download</span>
+                Merge &amp; Download
+            </button>
+        </div>
+    </div>
+</body>
+
+</html>

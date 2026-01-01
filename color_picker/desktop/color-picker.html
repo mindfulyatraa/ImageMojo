@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Color Picker Tool - ImageHub Pro</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <!-- Material Symbols -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <!-- Theme Configuration -->
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#0066cc",
+                        "accent": "#00CC66",
+                        "background-light": "#f5f7f8",
+                        "background-dark": "#101418",
+                        "surface-dark": "#1b2128",
+                        "surface-light": "#ffffff",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"],
+                        "mono": ["ui-monospace", "SFMono-Regular", "Menlo", "Monaco", "Consolas", "Liberation Mono", "Courier New", "monospace"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "2xl": "1rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        /* Custom scrollbar for better mobile feel in dark mode */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #101418;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #2d3748;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #4a5568;
+        }
+    </style>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+</head>
+
+<body
+    class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-white antialiased transition-colors duration-200">
+    <div
+        class="relative flex h-auto min-h-screen w-full flex-col overflow-x-hidden max-w-md mx-auto border-x border-gray-800 shadow-2xl">
+        <!-- TopAppBar -->
+        <div
+            class="sticky top-0 z-50 flex items-center bg-background-light/95 dark:bg-[#101418]/95 backdrop-blur-md p-4 justify-between border-b border-gray-200 dark:border-gray-800">
+            <div class="flex items-center gap-2">
+                <div class="flex size-10 shrink-0 items-center justify-center rounded-lg bg-primary text-white">
+                    <span class="material-symbols-outlined text-2xl">palette</span>
+                </div>
+                <h2 class="text-slate-900 dark:text-white text-lg font-bold leading-tight tracking-tight">ImageHub Pro
+                </h2>
+            </div>
+            <div class="flex items-center justify-end">
+                <button
+                    class="flex items-center justify-center rounded-lg size-10 text-slate-900 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-800 transition-colors">
+                    <span class="material-symbols-outlined">menu</span>
+                </button>
+            </div>
+        </div>
+        <!-- Main Content -->
+        <main class="flex-1 flex flex-col p-4 gap-6">
+            <!-- Header Section -->
+            <div class="flex flex-col gap-2">
+                <h1 class="text-slate-900 dark:text-white tracking-tight text-[28px] font-bold leading-tight">Color
+                    Picker</h1>
+                <p class="text-slate-500 dark:text-gray-400 text-base font-normal leading-relaxed">
+                    Upload an image or drag to extract colors instantly.
+                </p>
+            </div>
+            <!-- Interactive Canvas (Card) -->
+            <div
+                class="flex flex-col items-stretch justify-start rounded-xl shadow-lg bg-surface-light dark:bg-surface-dark overflow-hidden border border-gray-200 dark:border-gray-800">
+                <!-- Image Viewer Area -->
+                <div class="relative w-full aspect-[4/3] bg-gray-100 dark:bg-gray-800 group cursor-crosshair">
+                    <!-- Placeholder Image -->
+                    <div class="absolute inset-0 bg-cover bg-center"
+                        data-alt="Vibrant abstract gradient with blue and purple hues"
+                        style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBRU7GqcjYkZ9mibT0OnOYpB9cqi-fMdNuuCNOPjcZNSxDQtSuIIsH9t-YI7M2GELCoP5-CkXqq8y0_HIjnuivvXJ9NQZGNqgep3aW435IUWn20Z3IYfoPNIeP67IsL3p3TXbH_tkvMdQ_LXvS64E9FsNkLFzFaDX6dPHHU7FrYRunCSN7E94kYY4I9ChgB9TNxzgF_fCVI2unkhAZaRfjM8mX7NmeYTJ2Bkui-zrBlt3q8JOy7G6lkqVSiEx9srlBMKkRcyRuHsN-h');">
+                    </div>
+                    <!-- Magnifying Loupe Simulation (Static for UI Design) -->
+                    <div
+                        class="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center gap-2 pointer-events-none">
+                        <div class="size-20 rounded-full border-4 border-white shadow-xl overflow-hidden relative z-10 bg-no-repeat bg-cover"
+                            style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCBhSvoT7VndfIboJ5-mxmfk4XzvViTjad06QWIqorAGaWIjPXm273JheOaALqWlKJzmijX3NHP_OpaFJRRyiazPTrUijJQ2XT4KDL2Rtgb4nYN6sUSTZuDeNM8Z0hzgLTNiskQGU3RsbKAjuI3Fzdn8fSjEIKUbCVTunIPQt2cANsPmkueFc1yOOHVr7A8cOuAITqXPbsRJx0lJM96oOQ3PCLokFdGa8WY6bPX_VDlaz9CxkU9ViIJZvWP9yyYSANrbuKVPIotKmz2'); background-position: 50% 33%; background-size: 300%;">
+                            <!-- Crosshair -->
+                            <div class="absolute inset-0 flex items-center justify-center">
+                                <div class="size-1 bg-white/50 rounded-full ring-1 ring-black/50"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Hover/Touch Hint -->
+                    <div
+                        class="absolute bottom-4 left-0 right-0 text-center opacity-0 group-hover:opacity-100 transition-opacity">
+                        <span
+                            class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-black/60 backdrop-blur-sm text-xs font-medium text-white border border-white/10">
+                            <span class="material-symbols-outlined text-[16px]">touch_app</span>
+                            Tap &amp; Drag to pick
+                        </span>
+                    </div>
+                </div>
+                <!-- Canvas Controls -->
+                <div class="flex items-center justify-between p-4 border-t border-gray-200 dark:border-gray-700/50">
+                    <div class="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400">
+                        <span class="material-symbols-outlined text-lg">image</span>
+                        <span>gradient_sample.jpg</span>
+                    </div>
+                    <button
+                        class="flex items-center gap-2 px-4 py-2 bg-primary hover:bg-primary/90 text-white text-sm font-semibold rounded-lg transition-colors shadow-lg shadow-primary/20">
+                        <span class="material-symbols-outlined text-[18px]">upload</span>
+                        Upload New
+                    </button>
+                </div>
+            </div>
+            <!-- Ad Placeholder 1 -->
+            <div
+                class="w-full h-[60px] bg-gray-200 dark:bg-[#161b22] rounded-lg border border-dashed border-gray-300 dark:border-gray-700 flex flex-col items-center justify-center text-xs text-gray-400 uppercase tracking-wider">
+                <span class="mb-1">Advertisement</span>
+                <span class="w-4 h-0.5 bg-gray-400"></span>
+            </div>
+            <!-- Results Section -->
+            <div class="flex flex-col gap-4">
+                <h3 class="text-slate-900 dark:text-white text-lg font-bold leading-tight px-1 flex items-center gap-2">
+                    <span class="material-symbols-outlined text-accent">colorize</span>
+                    Selected Color
+                </h3>
+                <div
+                    class="bg-surface-light dark:bg-surface-dark rounded-xl p-4 shadow-sm border border-gray-200 dark:border-gray-800">
+                    <div class="flex gap-4 items-stretch">
+                        <!-- Color Swatch -->
+                        <div class="w-24 shrink-0 flex flex-col gap-2">
+                            <div class="w-full aspect-square rounded-lg shadow-inner border border-gray-200 dark:border-gray-700 relative overflow-hidden"
+                                style="background-color: #6D28D9;">
+                                <div class="absolute inset-0 bg-gradient-to-tr from-white/10 to-transparent"></div>
+                            </div>
+                            <div class="text-center">
+                                <span class="text-xs font-mono text-gray-500 dark:text-gray-400">Closest Match</span>
+                                <div class="text-xs font-bold text-slate-900 dark:text-white mt-0.5">Purple Heart</div>
+                            </div>
+                        </div>
+                        <!-- Values List -->
+                        <div class="flex-1 flex flex-col gap-3 justify-center">
+                            <!-- HEX Input -->
+                            <div class="relative group">
+                                <label
+                                    class="text-[10px] uppercase font-bold text-gray-400 dark:text-gray-500 mb-1 block pl-1">HEX</label>
+                                <div
+                                    class="flex items-center bg-gray-50 dark:bg-[#12161b] border border-gray-200 dark:border-gray-700 rounded-lg pr-1 pl-3 h-10 transition-colors focus-within:border-primary">
+                                    <span class="text-gray-400 select-none mr-1">#</span>
+                                    <input
+                                        class="bg-transparent border-none focus:ring-0 text-slate-900 dark:text-white font-mono text-sm w-full p-0"
+                                        readonly="" type="text" value="6D28D9" />
+                                    <button aria-label="Copy HEX"
+                                        class="size-8 flex items-center justify-center text-gray-400 hover:text-primary hover:bg-primary/10 rounded-md transition-all active:scale-95">
+                                        <span class="material-symbols-outlined text-[18px]">content_copy</span>
+                                    </button>
+                                </div>
+                            </div>
+                            <!-- RGB Input -->
+                            <div class="relative group">
+                                <label
+                                    class="text-[10px] uppercase font-bold text-gray-400 dark:text-gray-500 mb-1 block pl-1">RGB</label>
+                                <div
+                                    class="flex items-center bg-gray-50 dark:bg-[#12161b] border border-gray-200 dark:border-gray-700 rounded-lg pr-1 pl-3 h-10 transition-colors focus-within:border-primary">
+                                    <input
+                                        class="bg-transparent border-none focus:ring-0 text-slate-900 dark:text-white font-mono text-sm w-full p-0"
+                                        readonly="" type="text" value="109, 40, 217" />
+                                    <button aria-label="Copy RGB"
+                                        class="size-8 flex items-center justify-center text-gray-400 hover:text-primary hover:bg-primary/10 rounded-md transition-all active:scale-95">
+                                        <span class="material-symbols-outlined text-[18px]">content_copy</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Advanced Formats Collapsible (Visual only) -->
+                    <div class="mt-4 pt-4 border-t border-gray-200 dark:border-gray-700">
+                        <div class="grid grid-cols-2 gap-3">
+                            <div class="relative">
+                                <label
+                                    class="text-[10px] uppercase font-bold text-gray-400 dark:text-gray-500 mb-1 block pl-1">HSL</label>
+                                <div
+                                    class="flex items-center bg-gray-50 dark:bg-[#12161b] border border-gray-200 dark:border-gray-700 rounded-lg pr-1 pl-3 h-9">
+                                    <input
+                                        class="bg-transparent border-none focus:ring-0 text-slate-900 dark:text-white font-mono text-xs w-full p-0"
+                                        readonly="" type="text" value="263, 69%, 50%" />
+                                    <button aria-label="Copy HSL"
+                                        class="size-7 flex items-center justify-center text-gray-400 hover:text-primary">
+                                        <span class="material-symbols-outlined text-[16px]">content_copy</span>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="relative">
+                                <label
+                                    class="text-[10px] uppercase font-bold text-gray-400 dark:text-gray-500 mb-1 block pl-1">CMYK</label>
+                                <div
+                                    class="flex items-center bg-gray-50 dark:bg-[#12161b] border border-gray-200 dark:border-gray-700 rounded-lg pr-1 pl-3 h-9">
+                                    <input
+                                        class="bg-transparent border-none focus:ring-0 text-slate-900 dark:text-white font-mono text-xs w-full p-0"
+                                        readonly="" type="text" value="50, 82, 0, 15" />
+                                    <button aria-label="Copy CMYK"
+                                        class="size-7 flex items-center justify-center text-gray-400 hover:text-primary">
+                                        <span class="material-symbols-outlined text-[16px]">content_copy</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Palette Generator Section -->
+            <div class="flex flex-col gap-4 pb-4">
+                <h3 class="text-slate-900 dark:text-white text-lg font-bold leading-tight px-1">Image Palette</h3>
+                <div
+                    class="bg-surface-light dark:bg-surface-dark rounded-xl p-4 shadow-sm border border-gray-200 dark:border-gray-800">
+                    <div class="grid grid-cols-5 gap-2">
+                        <!-- Palette Item 1 -->
+                        <div class="flex flex-col items-center gap-2 group cursor-pointer">
+                            <div class="w-full aspect-square rounded-full bg-[#1e293b] shadow-sm border-2 border-transparent hover:border-white transition-all scale-100 hover:scale-110"
+                                style="background-color: #6D28D9;"></div>
+                            <span class="text-[10px] font-mono text-gray-500 group-hover:text-white">#6D28D9</span>
+                        </div>
+                        <!-- Palette Item 2 -->
+                        <div class="flex flex-col items-center gap-2 group cursor-pointer">
+                            <div class="w-full aspect-square rounded-full bg-[#1e293b] shadow-sm border-2 border-transparent hover:border-white transition-all scale-100 hover:scale-110"
+                                style="background-color: #3B82F6;"></div>
+                            <span class="text-[10px] font-mono text-gray-500 group-hover:text-white">#3B82F6</span>
+                        </div>
+                        <!-- Palette Item 3 -->
+                        <div class="flex flex-col items-center gap-2 group cursor-pointer">
+                            <div class="w-full aspect-square rounded-full bg-[#1e293b] shadow-sm border-2 border-transparent hover:border-white transition-all scale-100 hover:scale-110"
+                                style="background-color: #10B981;"></div>
+                            <span class="text-[10px] font-mono text-gray-500 group-hover:text-white">#10B981</span>
+                        </div>
+                        <!-- Palette Item 4 -->
+                        <div class="flex flex-col items-center gap-2 group cursor-pointer">
+                            <div class="w-full aspect-square rounded-full bg-[#1e293b] shadow-sm border-2 border-transparent hover:border-white transition-all scale-100 hover:scale-110"
+                                style="background-color: #F59E0B;"></div>
+                            <span class="text-[10px] font-mono text-gray-500 group-hover:text-white">#F59E0B</span>
+                        </div>
+                        <!-- Palette Item 5 -->
+                        <div class="flex flex-col items-center gap-2 group cursor-pointer">
+                            <div class="w-full aspect-square rounded-full bg-[#1e293b] shadow-sm border-2 border-transparent hover:border-white transition-all scale-100 hover:scale-110"
+                                style="background-color: #EF4444;"></div>
+                            <span class="text-[10px] font-mono text-gray-500 group-hover:text-white">#EF4444</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Ad Placeholder 2 (Sticky Bottom optional feel) -->
+            <div
+                class="w-full h-[250px] bg-gray-200 dark:bg-[#161b22] rounded-xl border border-dashed border-gray-300 dark:border-gray-700 flex flex-col items-center justify-center text-sm text-gray-400 uppercase tracking-wider mb-4">
+                <span class="mb-2">Ad Space (300x250)</span>
+                <span class="w-8 h-1 bg-gray-400 mb-1"></span>
+                <span class="w-8 h-1 bg-gray-400 opacity-50"></span>
+            </div>
+        </main>
+        <!-- Mobile Footer -->
+        <footer class="bg-surface-light dark:bg-surface-dark border-t border-gray-200 dark:border-gray-800 p-6 pb-8">
+            <div class="flex flex-col gap-6">
+                <div class="flex items-center justify-between">
+                    <span class="text-sm font-semibold text-slate-900 dark:text-white">ImageHub Pro</span>
+                    <div class="flex gap-4">
+                        <a class="text-gray-500 hover:text-primary transition-colors" href="#">
+                            <span class="material-symbols-outlined">home</span>
+                        </a>
+                        <a class="text-gray-500 hover:text-primary transition-colors" href="#">
+                            <span class="material-symbols-outlined">build</span>
+                        </a>
+                        <a class="text-gray-500 hover:text-primary transition-colors" href="#">
+                            <span class="material-symbols-outlined">rss_feed</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="h-px w-full bg-gray-200 dark:bg-gray-800"></div>
+                <div class="flex flex-col sm:flex-row justify-between items-center gap-4 text-xs text-gray-500">
+                    <p>© 2023 ImageHub Pro. All rights reserved.</p>
+                    <div class="flex gap-4">
+                        <a class="hover:text-white" href="#">Privacy</a>
+                        <a class="hover:text-white" href="#">Terms</a>
+                        <a class="hover:text-white" href="#">Feedback</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+</body>
+
+</html>

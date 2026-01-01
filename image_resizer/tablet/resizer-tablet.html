@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Image Resizer - ImageHub Pro</title>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <!-- Tailwind Configuration -->
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#6600cc",
+                        "background-light": "#f7f5f8",
+                        "background-dark": "#190f23",
+                        "surface-dark": "#231530",
+                        "surface-light": "#ffffff",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "2xl": "1rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+    <style>
+        /* Custom scrollbar for control panel if needed */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        /* Range Slider Styling */
+        input[type=range] {
+            -webkit-appearance: none;
+            background: transparent;
+        }
+
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+        }
+
+        input[type=range]:focus {
+            outline: none;
+        }
+    </style>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+</head>
+
+<body
+    class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-white transition-colors duration-200 min-h-screen flex flex-col overflow-x-hidden">
+    <!-- TopAppBar -->
+    <header
+        class="sticky top-0 z-50 flex items-center bg-background-light dark:bg-background-dark p-4 border-b border-gray-200 dark:border-white/10 justify-between h-16">
+        <div class="flex items-center gap-4">
+            <button
+                class="text-slate-900 dark:text-white flex size-10 shrink-0 items-center justify-center rounded-full hover:bg-black/5 dark:hover:bg-white/10 transition-colors">
+                <span class="material-symbols-outlined text-[24px]">menu</span>
+            </button>
+            <div class="flex items-center gap-2">
+                <div class="size-8 rounded bg-primary flex items-center justify-center text-white">
+                    <span class="material-symbols-outlined text-[20px]">aspect_ratio</span>
+                </div>
+                <h2
+                    class="text-slate-900 dark:text-white text-lg font-bold leading-tight tracking-[-0.015em] hidden sm:block">
+                    ImageHub Pro</h2>
+            </div>
+        </div>
+        <div class="flex items-center justify-end gap-3">
+            <button
+                class="flex items-center justify-center size-10 rounded-full hover:bg-black/5 dark:hover:bg-white/10 text-slate-900 dark:text-white transition-colors">
+                <span class="material-symbols-outlined text-[24px]">search</span>
+            </button>
+            <div
+                class="size-8 rounded-full bg-gradient-to-br from-primary to-purple-400 overflow-hidden border-2 border-white dark:border-[#2c2c2c]">
+                <img class="w-full h-full object-cover" data-alt="User profile avatar showing a smiling person"
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuB-9PPDpZEiUqUm1cIKl461ozczcgpUuPC_-Xd4laOA1LTHhZ--7EXzC2OdcWQQt7N5cmyUrLLCF-2T1Fk789FIA3zWTyFJQ4Ic3mPkevqgbJNJGXDgnAZ0LVeMMDy1BwAOZDJ5nORPloaHfBJb5CdeKe-XwxNxUYAxmhSjYsL_t1BiUJbUvHo-iAZQvFLMokhLYojUR3jQRACbcyIeUVpiZXOf_IGVI_U-QQTGyhXnXiI8lDw-WdCe7pUE6i7-3u3MaTlQYKTKALxO" />
+            </div>
+        </div>
+    </header>
+    <!-- Main Content Area (Tablet Optimized) -->
+    <main class="flex-grow flex flex-col lg:flex-row h-[calc(100vh-64px)] overflow-hidden">
+        <!-- Left Panel: Workspace & Preview -->
+        <section
+            class="flex-1 flex flex-col relative h-full overflow-y-auto lg:overflow-hidden p-4 lg:p-6 pb-24 lg:pb-6 gap-4">
+            <!-- Breadcrumbs & Title -->
+            <div class="flex flex-col gap-1">
+                <div class="flex items-center gap-2 text-xs font-medium text-slate-500 dark:text-gray-400">
+                    <span>Tools</span>
+                    <span class="material-symbols-outlined text-[10px]">chevron_right</span>
+                    <span class="text-primary">Resize</span>
+                </div>
+                <h1 class="text-slate-900 dark:text-white tracking-tight text-2xl lg:text-3xl font-bold leading-tight">
+                    Image Resizer</h1>
+            </div>
+            <!-- Tabs -->
+            <div class="flex border-b border-gray-200 dark:border-white/10 w-full mb-2">
+                <button
+                    class="flex items-center justify-center border-b-2 border-transparent text-slate-500 dark:text-gray-400 pb-3 pt-2 px-6 hover:text-primary transition-colors">
+                    <span class="text-sm font-bold tracking-wide">Upload</span>
+                </button>
+                <button class="flex items-center justify-center border-b-2 border-primary text-primary pb-3 pt-2 px-6">
+                    <span class="text-sm font-bold tracking-wide">Preview</span>
+                </button>
+            </div>
+            <!-- Preview Canvas -->
+            <div
+                class="flex-grow bg-gray-100 dark:bg-[#0f0915] rounded-xl border border-dashed border-gray-300 dark:border-white/10 relative group overflow-hidden flex flex-col items-center justify-center shadow-inner">
+                <!-- Toolbar Floating inside Canvas -->
+                <div class="absolute top-4 left-4 right-4 flex justify-between items-center z-10 pointer-events-none">
+                    <div
+                        class="bg-black/60 backdrop-blur-md text-white text-xs font-medium px-3 py-1.5 rounded-full pointer-events-auto flex items-center gap-2">
+                        <span class="material-symbols-outlined text-[14px]">zoom_in</span>
+                        <span>56%</span>
+                    </div>
+                    <div class="flex gap-2 pointer-events-auto">
+                        <button
+                            class="bg-black/60 backdrop-blur-md hover:bg-black/80 text-white size-8 flex items-center justify-center rounded-full transition-colors"
+                            title="Compare">
+                            <span class="material-symbols-outlined text-[16px]">compare</span>
+                        </button>
+                        <button
+                            class="bg-black/60 backdrop-blur-md hover:bg-black/80 text-white size-8 flex items-center justify-center rounded-full transition-colors"
+                            title="Remove Image">
+                            <span class="material-symbols-outlined text-[16px]">close</span>
+                        </button>
+                    </div>
+                </div>
+                <!-- Image Container -->
+                <!-- Grid background pattern for transparency -->
+                <div class="w-full h-full flex items-center justify-center p-8"
+                    style="background-image: radial-gradient(#4b4b4b 1px, transparent 1px); background-size: 20px 20px;">
+                    <div class="relative shadow-2xl rounded-lg overflow-hidden max-h-full max-w-full">
+                        <img class="max-w-full max-h-[60vh] lg:max-h-[calc(100vh-300px)] object-contain block"
+                            data-alt="Mountain landscape photography being resized"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuDFqB3eW234LdtHmnza8-cVkT5BY4G19hAONQIuFgFSHRmR3i2MZHHmgj8FeSZuvOpEWFt-rsxjw-5p8adk0CPBZsOrRvmQZyQbAeQoqI8m5iqLpR-wpe_Xdo0m8QBak68lqaF4SqIKJdpQuZHuBg7ZflTdmpPri7Qxf49vrZRZDxB4YUakaE1BB8ILBAV5K4gPHMIMGpmO6dbDn2XBcJSxqF285XFSZjHn2itznypyNp152HBQDnj1jRXhRlumYbv7zxhZBp7um9VN" />
+                        <!-- Dimensions Overlay -->
+                        <div
+                            class="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/80 to-transparent p-4 pt-12 flex justify-between items-end text-white">
+                            <div>
+                                <p class="text-[10px] uppercase tracking-wider opacity-70">Original</p>
+                                <p class="font-mono text-sm">4928 x 3264 • 2.4 MB</p>
+                            </div>
+                            <div class="text-right text-primary font-bold">
+                                <p class="text-[10px] uppercase tracking-wider opacity-70 text-white">New Size</p>
+                                <p class="font-mono text-sm text-green-400">1920 x 1272 • ~650 KB</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Ad Placeholder Tablet Banner -->
+            <div
+                class="w-full h-20 bg-gray-200 dark:bg-white/5 rounded-lg flex flex-col items-center justify-center border border-gray-300 dark:border-white/5 text-gray-400 dark:text-white/20 text-xs">
+                <span class="font-bold tracking-widest uppercase">Advertisement</span>
+                <span>728x90 Leaderboard</span>
+            </div>
+        </section>
+        <!-- Right Panel: Controls Sidebar -->
+        <aside
+            class="w-full lg:w-[360px] xl:w-[400px] shrink-0 bg-surface-light dark:bg-surface-dark border-t lg:border-t-0 lg:border-l border-gray-200 dark:border-white/10 flex flex-col h-auto lg:h-full overflow-y-auto z-20 shadow-xl lg:shadow-none">
+            <div class="p-6 space-y-8 pb-32 lg:pb-6">
+                <!-- Dimensions Section -->
+                <div class="space-y-4">
+                    <div class="flex items-center justify-between">
+                        <label
+                            class="text-sm font-bold text-slate-700 dark:text-white uppercase tracking-wider">Dimensions</label>
+                        <div class="flex items-center gap-1">
+                            <button
+                                class="text-xs font-medium px-2 py-1 rounded bg-primary/10 text-primary dark:bg-primary dark:text-white">Pixels</button>
+                            <button
+                                class="text-xs font-medium px-2 py-1 rounded hover:bg-gray-100 dark:hover:bg-white/5 text-slate-500 dark:text-gray-400">%</button>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <!-- Width -->
+                        <div class="relative flex-1 group">
+                            <label
+                                class="absolute -top-2.5 left-2 bg-surface-light dark:bg-surface-dark px-1 text-[10px] text-primary font-bold">Width</label>
+                            <input
+                                class="w-full h-12 bg-transparent border-2 border-primary rounded-lg px-3 text-slate-900 dark:text-white font-mono font-medium focus:outline-none focus:ring-0"
+                                type="number" value="1920" />
+                        </div>
+                        <!-- Lock Ratio Toggle -->
+                        <button
+                            class="size-10 flex items-center justify-center text-primary bg-primary/10 rounded-lg shrink-0 hover:bg-primary hover:text-white transition-colors"
+                            title="Unlock Aspect Ratio">
+                            <span class="material-symbols-outlined">link</span>
+                        </button>
+                        <!-- Height -->
+                        <div class="relative flex-1 group">
+                            <label
+                                class="absolute -top-2.5 left-2 bg-surface-light dark:bg-surface-dark px-1 text-[10px] text-slate-500 dark:text-gray-400 font-bold group-focus-within:text-primary">Height</label>
+                            <input
+                                class="w-full h-12 bg-transparent border border-gray-300 dark:border-white/20 rounded-lg px-3 text-slate-900 dark:text-white font-mono font-medium focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary transition-all"
+                                type="number" value="1272" />
+                        </div>
+                    </div>
+                </div>
+                <!-- Presets -->
+                <div class="space-y-3">
+                    <label class="text-sm font-bold text-slate-700 dark:text-white uppercase tracking-wider">Quick
+                        Presets</label>
+                    <div class="grid grid-cols-2 gap-2">
+                        <button
+                            class="flex items-center gap-2 p-3 rounded-lg border border-gray-200 dark:border-white/10 hover:border-primary/50 hover:bg-primary/5 dark:hover:bg-white/5 transition-all text-left group">
+                            <span
+                                class="material-symbols-outlined text-slate-400 group-hover:text-primary">photo_camera</span>
+                            <div class="flex flex-col">
+                                <span class="text-xs font-bold text-slate-700 dark:text-white">Instagram</span>
+                                <span class="text-[10px] text-slate-500 dark:text-gray-400">1080 x 1080</span>
+                            </div>
+                        </button>
+                        <button
+                            class="flex items-center gap-2 p-3 rounded-lg border border-gray-200 dark:border-white/10 hover:border-primary/50 hover:bg-primary/5 dark:hover:bg-white/5 transition-all text-left group">
+                            <span class="material-symbols-outlined text-slate-400 group-hover:text-primary">hd</span>
+                            <div class="flex flex-col">
+                                <span class="text-xs font-bold text-slate-700 dark:text-white">Full HD</span>
+                                <span class="text-[10px] text-slate-500 dark:text-gray-400">1920 x 1080</span>
+                            </div>
+                        </button>
+                        <button
+                            class="flex items-center gap-2 p-3 rounded-lg border border-gray-200 dark:border-white/10 hover:border-primary/50 hover:bg-primary/5 dark:hover:bg-white/5 transition-all text-left group">
+                            <span class="material-symbols-outlined text-slate-400 group-hover:text-primary">mail</span>
+                            <div class="flex flex-col">
+                                <span class="text-xs font-bold text-slate-700 dark:text-white">Email</span>
+                                <span class="text-[10px] text-slate-500 dark:text-gray-400">800px Width</span>
+                            </div>
+                        </button>
+                        <button
+                            class="flex items-center gap-2 p-3 rounded-lg border border-gray-200 dark:border-white/10 hover:border-primary/50 hover:bg-primary/5 dark:hover:bg-white/5 transition-all text-left group">
+                            <span class="material-symbols-outlined text-slate-400 group-hover:text-primary">print</span>
+                            <div class="flex flex-col">
+                                <span class="text-xs font-bold text-slate-700 dark:text-white">A4 Print</span>
+                                <span class="text-[10px] text-slate-500 dark:text-gray-400">300 DPI</span>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+                <hr class="border-gray-200 dark:border-white/10" />
+                <!-- Output Format -->
+                <div class="space-y-4">
+                    <div class="flex justify-between items-center">
+                        <label class="text-sm font-bold text-slate-700 dark:text-white uppercase tracking-wider">Output
+                            Format</label>
+                    </div>
+                    <div class="flex p-1 bg-gray-100 dark:bg-white/5 rounded-lg">
+                        <button
+                            class="flex-1 py-2 text-xs font-bold rounded shadow bg-white dark:bg-primary text-primary dark:text-white transition-all">JPG</button>
+                        <button
+                            class="flex-1 py-2 text-xs font-bold rounded text-slate-500 dark:text-gray-400 hover:text-slate-900 dark:hover:text-white transition-all">PNG</button>
+                        <button
+                            class="flex-1 py-2 text-xs font-bold rounded text-slate-500 dark:text-gray-400 hover:text-slate-900 dark:hover:text-white transition-all">WEBP</button>
+                    </div>
+                    <!-- Quality Slider -->
+                    <div class="space-y-2 pt-2">
+                        <div class="flex justify-between text-xs">
+                            <span class="text-slate-500 dark:text-gray-400 font-medium">Quality</span>
+                            <span class="text-primary font-bold">85%</span>
+                        </div>
+                        <div class="relative w-full h-6 flex items-center">
+                            <div
+                                class="absolute w-full h-1.5 bg-gray-200 dark:bg-white/10 rounded-full overflow-hidden">
+                                <div class="h-full bg-primary w-[85%] rounded-full"></div>
+                            </div>
+                            <input class="absolute w-full h-full opacity-0 cursor-pointer z-10" max="100" min="1"
+                                type="range" value="85" />
+                            <div
+                                class="size-4 bg-white border-2 border-primary rounded-full absolute left-[85%] -ml-2 shadow pointer-events-none z-20">
+                            </div>
+                        </div>
+                        <div
+                            class="flex justify-between text-[10px] text-slate-400 uppercase font-medium tracking-wide">
+                            <span>Small File</span>
+                            <span>High Quality</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Sticky Bottom Action (Mobile/Tablet Stacked) or Bottom of Sidebar -->
+            <div
+                class="mt-auto sticky bottom-0 z-30 p-4 bg-surface-light/95 dark:bg-surface-dark/95 backdrop-blur border-t border-gray-200 dark:border-white/10">
+                <button
+                    class="w-full h-12 bg-primary hover:bg-primary/90 text-white rounded-lg font-bold text-base shadow-lg shadow-primary/25 flex items-center justify-center gap-2 transition-all transform active:scale-[0.98]">
+                    <span class="material-symbols-outlined">download</span>
+                    Resize &amp; Download Image
+                </button>
+                <p class="text-center text-xs text-slate-400 dark:text-gray-500 mt-2">Free for commercial use. No
+                    attribution required.</p>
+            </div>
+        </aside>
+    </main>
+</body>
+
+</html>

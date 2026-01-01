@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>HEIC to JPG Converter - ImageHub Pro</title>
+    <!-- Google Fonts: Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <!-- Material Symbols -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <!-- Tailwind Config -->
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#0000cc",
+                        "accent": "#00CC66",
+                        "background-light": "#f5f5f8",
+                        "background-dark": "#0f0f23",
+                        "surface-light": "#ffffff",
+                        "surface-dark": "#1b1b28",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "2xl": "1rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+    <style>
+        /* Custom range slider styling for webkit */
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            height: 20px;
+            width: 20px;
+            border-radius: 50%;
+            background: #ffffff;
+            cursor: pointer;
+            margin-top: -8px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+        }
+
+        input[type=range]::-webkit-slider-runnable-track {
+            width: 100%;
+            height: 4px;
+            cursor: pointer;
+            background: #4b5563;
+            border-radius: 2px;
+        }
+
+        /* Hide scrollbar for clean horizontal scroll */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+</head>
+
+<body
+    class="font-display bg-background-light dark:bg-background-dark text-slate-900 dark:text-white selection:bg-primary selection:text-white">
+    <div class="relative flex h-full min-h-screen w-full flex-col overflow-x-hidden pb-24">
+        <!-- Header -->
+        <header
+            class="sticky top-0 z-50 flex items-center justify-between px-4 py-3 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md border-b border-slate-200 dark:border-white/5">
+            <div class="flex items-center gap-2">
+                <div class="flex items-center justify-center w-8 h-8 rounded-lg bg-primary text-white">
+                    <span class="material-symbols-outlined text-[20px]">hub</span>
+                </div>
+                <h1 class="text-lg font-bold tracking-tight">ImageHub <span class="text-primary font-normal">Pro</span>
+                </h1>
+            </div>
+            <button
+                class="flex items-center justify-center w-10 h-10 rounded-full hover:bg-slate-200 dark:hover:bg-white/10 transition-colors">
+                <span class="material-symbols-outlined">menu</span>
+            </button>
+        </header>
+        <!-- Hero Section -->
+        <div class="px-4 pt-6 pb-4">
+            <h2 class="text-3xl font-bold tracking-tight mb-2">HEIC to JPG</h2>
+            <p class="text-slate-600 dark:text-slate-400 text-base leading-relaxed">
+                Free, fast, and secure conversion tailored for iOS.
+            </p>
+        </div>
+        <!-- Upload Zone -->
+        <div class="px-4 mb-6">
+            <div class="relative group cursor-pointer">
+                <div
+                    class="absolute -inset-0.5 bg-gradient-to-r from-primary to-accent rounded-xl blur opacity-25 group-hover:opacity-50 transition duration-1000">
+                </div>
+                <div
+                    class="relative flex flex-col items-center justify-center p-8 border-2 border-dashed border-slate-300 dark:border-slate-700 bg-surface-light dark:bg-surface-dark rounded-xl transition-all hover:border-primary/50 dark:hover:border-primary/50">
+                    <div
+                        class="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mb-4 text-primary">
+                        <span class="material-symbols-outlined text-[32px]">cloud_upload</span>
+                    </div>
+                    <p class="text-lg font-semibold text-center mb-1">Tap to upload HEIC</p>
+                    <p class="text-sm text-slate-500 dark:text-slate-400 text-center">or drop files here</p>
+                </div>
+            </div>
+        </div>
+        <!-- Ad Placeholder -->
+        <div class="px-4 mb-8">
+            <div
+                class="w-full h-[100px] rounded-lg bg-slate-200 dark:bg-[#151520] border border-slate-300 dark:border-white/5 flex flex-col items-center justify-center gap-2 relative overflow-hidden">
+                <span class="text-xs font-medium text-slate-400 uppercase tracking-wider">Advertisement</span>
+                <!-- Abstract pattern for Ad placeholder -->
+                <div class="absolute inset-0 opacity-10"
+                    style="background-image: radial-gradient(#4b5563 1px, transparent 1px); background-size: 16px 16px;">
+                </div>
+            </div>
+        </div>
+        <!-- Settings Section -->
+        <div class="px-4 mb-6">
+            <h3 class="text-lg font-bold mb-4 flex items-center gap-2">
+                <span class="material-symbols-outlined text-primary">tune</span>
+                Conversion Settings
+            </h3>
+            <div
+                class="bg-surface-light dark:bg-surface-dark rounded-xl p-5 shadow-sm border border-slate-100 dark:border-white/5 space-y-6">
+                <!-- Quality Slider -->
+                <div>
+                    <div class="flex justify-between items-center mb-3">
+                        <label class="text-sm font-medium text-slate-700 dark:text-slate-300">Image Quality</label>
+                        <span class="text-sm font-bold text-primary bg-primary/10 px-2 py-0.5 rounded">85%</span>
+                    </div>
+                    <input
+                        class="w-full h-2 bg-slate-200 dark:bg-slate-700 rounded-lg appearance-none cursor-pointer accent-primary"
+                        max="100" min="1" type="range" value="85" />
+                    <div class="flex justify-between mt-2 text-xs text-slate-400">
+                        <span>Low Size</span>
+                        <span>High Quality</span>
+                    </div>
+                </div>
+                <div class="h-px bg-slate-100 dark:bg-white/5"></div>
+                <!-- Toggles Grid -->
+                <div class="grid grid-cols-1 gap-4">
+                    <!-- Batch Mode Toggle -->
+                    <div class="flex items-center justify-between">
+                        <div class="flex flex-col">
+                            <span class="text-sm font-medium text-slate-800 dark:text-slate-200">Batch Mode</span>
+                            <span class="text-xs text-slate-500 dark:text-slate-400">Convert all as ZIP</span>
+                        </div>
+                        <label class="relative inline-flex items-center cursor-pointer">
+                            <input class="sr-only peer" type="checkbox" value="" />
+                            <div
+                                class="w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer dark:bg-slate-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary">
+                            </div>
+                        </label>
+                    </div>
+                    <!-- Metadata Toggle -->
+                    <div class="flex items-center justify-between">
+                        <div class="flex flex-col">
+                            <span class="text-sm font-medium text-slate-800 dark:text-slate-200">Keep Metadata</span>
+                            <span class="text-xs text-slate-500 dark:text-slate-400">EXIF, Location, etc.</span>
+                        </div>
+                        <label class="relative inline-flex items-center cursor-pointer">
+                            <input checked="" class="sr-only peer" type="checkbox" value="" />
+                            <div
+                                class="w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer dark:bg-slate-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary">
+                            </div>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Live Preview / File List -->
+        <div class="px-4 mb-4">
+            <h3 class="text-lg font-bold mb-4 flex items-center gap-2">
+                <span class="material-symbols-outlined text-primary">image</span>
+                Files &amp; Preview
+            </h3>
+            <!-- Horizontal Scrolling Container -->
+            <div class="flex gap-4 overflow-x-auto no-scrollbar pb-4 snap-x">
+                <!-- File Card 1 (Active) -->
+                <div
+                    class="snap-center shrink-0 w-[85vw] max-w-[320px] bg-surface-light dark:bg-surface-dark rounded-xl overflow-hidden border border-slate-200 dark:border-white/10 shadow-lg relative group">
+                    <!-- Status Badge -->
+                    <div
+                        class="absolute top-3 right-3 z-10 bg-accent/90 text-white text-[10px] font-bold px-2 py-1 rounded-full backdrop-blur-sm shadow-sm flex items-center gap-1">
+                        <span class="material-symbols-outlined text-[12px]">check_circle</span> READY
+                    </div>
+                    <!-- Split Image Preview -->
+                    <div class="relative h-48 w-full group">
+                        <div class="absolute inset-0 bg-cover bg-center"
+                            data-alt="Vibrant mountain landscape showing original HEIC quality"
+                            style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAHUKOl34MmZ7L1ASD9vvuSEyhAAfW3cxxtT4mzVU3zFpFeLJRltxNFsmCuAwKNIrfFxPIeau1G3thvYt0mWbDAge6FDT4WKlOkIkkwkfgB41ZN9Z-nxKZxZetzlPfnnJlVy9ZiwDCG6eHw3ff5DAjM2edEH_07P-F4f5ePOogfQnUj2xjFXhoHGyz0EPwzdiC9z9b5jihw_Z819JVgFYMDJHsdw8eH6GzTLerN-UHIheJmOVORGL0_7kg7MgoKFqC6ol93Dkfc7vz-');">
+                        </div>
+                        <!-- Comparison Slider Overlay (Simulated) -->
+                        <div
+                            class="absolute inset-y-0 right-0 w-1/2 bg-black/5 backdrop-grayscale border-l border-white/30 flex items-center justify-center">
+                            <span class="bg-black/50 text-white text-[10px] px-2 py-1 rounded backdrop-blur">JPG
+                                Preview</span>
+                        </div>
+                        <div
+                            class="absolute bottom-2 left-2 bg-black/50 text-white text-[10px] px-2 py-1 rounded backdrop-blur">
+                            Original</div>
+                    </div>
+                    <!-- Details -->
+                    <div class="p-4">
+                        <div class="flex justify-between items-start mb-2">
+                            <div>
+                                <h4 class="text-sm font-semibold truncate max-w-[150px]">IMG_4092.HEIC</h4>
+                                <p class="text-xs text-slate-500">2.4 MB</p>
+                            </div>
+                            <div class="text-right">
+                                <h4 class="text-sm font-bold text-accent">~ 450 KB</h4>
+                                <p class="text-xs text-accent/80">-81% size</p>
+                            </div>
+                        </div>
+                        <button
+                            class="w-full py-2 mt-2 text-xs font-semibold text-slate-600 dark:text-slate-300 bg-slate-100 dark:bg-white/5 rounded-lg hover:bg-slate-200 dark:hover:bg-white/10 transition-colors flex items-center justify-center gap-1">
+                            <span class="material-symbols-outlined text-[16px]">visibility</span> Preview Full Size
+                        </button>
+                    </div>
+                </div>
+                <!-- File Card 2 -->
+                <div
+                    class="snap-center shrink-0 w-[85vw] max-w-[320px] bg-surface-light dark:bg-surface-dark rounded-xl overflow-hidden border border-slate-200 dark:border-white/10 shadow-sm opacity-80 scale-95 origin-left">
+                    <div class="relative h-48 w-full bg-slate-100 dark:bg-[#151520] flex items-center justify-center">
+                        <div class="absolute inset-0 bg-cover bg-center opacity-70"
+                            data-alt="City skyline at dusk showing urban details"
+                            style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuB2Gg7zG89-Pjq5puETPXva7h51t3A5EhQrFprGf4tsfEUOl5bg7hnDrZf9N690qj63vIAeqUx1ntnoucqFd4C2_1XZF5F3VcMYytnc005Nf8SH0I74f__Xn8kFSz2HkQs4QMpsAIX39f4v6Lux97CV1dmp4VnambR6pSLGOnJ6_Klhp06-NLBOInhmHahxs6rI_P7cqFS6jCdnNZLDe1UaZwDBq3oBgD6yNLMnzS8hAqVnERrWbdq9ceoUNQhXc1YdSa7TFjRtHuMe');">
+                        </div>
+                        <div class="z-10 bg-black/40 p-2 rounded-full">
+                            <span class="material-symbols-outlined text-white">hourglass_empty</span>
+                        </div>
+                    </div>
+                    <div class="p-4">
+                        <div class="flex justify-between items-start mb-2">
+                            <div>
+                                <h4 class="text-sm font-semibold truncate max-w-[150px]">IMG_4093.HEIC</h4>
+                                <p class="text-xs text-slate-500">3.1 MB</p>
+                            </div>
+                            <div class="text-right">
+                                <h4 class="text-sm font-bold text-slate-400">Calculating...</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Sticky Footer CTA -->
+        <div
+            class="fixed bottom-0 left-0 right-0 p-4 bg-background-light/90 dark:bg-background-dark/90 backdrop-blur-lg border-t border-slate-200 dark:border-white/5 z-40 pb-safe">
+            <button
+                class="w-full flex items-center justify-center gap-2 bg-primary hover:bg-blue-700 text-white font-bold h-14 rounded-xl shadow-lg shadow-primary/25 transition-all transform active:scale-[0.98]">
+                <span class="material-symbols-outlined">bolt</span>
+                <span>Convert &amp; Download JPG</span>
+            </button>
+        </div>
+        <!-- Safe Area Spacer for Bottom Nav on iPhone -->
+        <div class="h-8"></div>
+    </div>
+</body>
+
+</html>

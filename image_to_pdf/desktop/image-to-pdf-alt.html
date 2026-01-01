@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Image to PDF Converter - ImageHub Pro</title>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <!-- Material Symbols -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <!-- Tailwind Config -->
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#0066cc",
+                        "accent-green": "#00CC66",
+                        "background-light": "#f5f7f8",
+                        "background-dark": "#0f1923",
+                        "surface-light": "#ffffff",
+                        "surface-dark": "#18222d",
+                        "border-dark": "#2a3645",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "2xl": "1rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        /* Custom scrollbar hide for horizontal scrolling */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+</head>
+
+<body
+    class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-white font-display min-h-screen flex flex-col antialiased selection:bg-primary selection:text-white pb-24">
+    <!-- Sticky Header -->
+    <header
+        class="sticky top-0 z-50 bg-background-light/90 dark:bg-background-dark/90 backdrop-blur-lg border-b border-gray-200 dark:border-border-dark px-4 py-3">
+        <div class="flex items-center justify-between">
+            <button
+                class="flex items-center justify-center p-2 -ml-2 rounded-full hover:bg-gray-200 dark:hover:bg-surface-dark transition-colors text-slate-700 dark:text-white">
+                <span class="material-symbols-outlined">menu</span>
+            </button>
+            <div class="flex items-center gap-2">
+                <div class="size-6 bg-primary rounded-lg flex items-center justify-center text-white font-bold text-xs">
+                    IH</div>
+                <h1 class="text-base font-bold tracking-tight">ImageHub Pro</h1>
+            </div>
+            <button
+                class="flex items-center justify-center p-2 -mr-2 rounded-full hover:bg-gray-200 dark:hover:bg-surface-dark transition-colors text-slate-700 dark:text-white">
+                <span class="material-symbols-outlined">account_circle</span>
+            </button>
+        </div>
+    </header>
+    <!-- Main Content -->
+    <main class="flex-1 flex flex-col w-full max-w-md mx-auto">
+        <!-- Hero Title -->
+        <div class="px-5 pt-6 pb-2">
+            <div class="flex items-center gap-2 mb-2">
+                <span
+                    class="bg-primary/20 text-primary dark:text-blue-400 text-xs font-semibold px-2 py-1 rounded-full">Free
+                    Tool</span>
+            </div>
+            <h2 class="text-2xl font-bold leading-tight">Image to PDF</h2>
+            <p class="text-slate-500 dark:text-slate-400 text-sm mt-1 leading-relaxed">
+                Convert JPG, PNG, and HEIC files into a single PDF document in seconds.
+            </p>
+        </div>
+        <!-- Upload Zone -->
+        <div class="px-4 py-4">
+            <div class="relative group cursor-pointer">
+                <div
+                    class="absolute -inset-0.5 bg-gradient-to-r from-primary to-accent-green rounded-xl blur opacity-20 group-hover:opacity-40 transition duration-200">
+                </div>
+                <div
+                    class="relative flex flex-col items-center justify-center gap-4 rounded-xl border-2 border-dashed border-gray-300 dark:border-border-dark bg-surface-light dark:bg-surface-dark px-6 py-10 hover:border-primary/50 dark:hover:border-primary/50 transition-colors">
+                    <div
+                        class="size-16 rounded-full bg-background-light dark:bg-background-dark flex items-center justify-center shadow-inner">
+                        <span class="material-symbols-outlined text-primary text-3xl">cloud_upload</span>
+                    </div>
+                    <div class="text-center space-y-1">
+                        <p class="text-lg font-bold">Tap to Upload</p>
+                        <p class="text-xs text-slate-500 dark:text-slate-400">or drag and drop images here</p>
+                    </div>
+                    <button
+                        class="bg-primary hover:bg-blue-600 text-white text-sm font-semibold py-2.5 px-6 rounded-lg transition-colors shadow-lg shadow-primary/20 flex items-center gap-2">
+                        <span class="material-symbols-outlined text-[18px]">add_photo_alternate</span>
+                        Select Images
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Selected Images (Mock State) -->
+        <div class="px-4 pb-6">
+            <div class="flex items-center justify-between mb-3">
+                <h3 class="text-sm font-semibold flex items-center gap-2">
+                    Selected Images
+                    <span class="bg-accent-green text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full">3</span>
+                </h3>
+                <button class="text-xs text-red-400 hover:text-red-300 font-medium">Clear All</button>
+            </div>
+            <div class="flex overflow-x-auto gap-3 pb-2 no-scrollbar snap-x snap-mandatory">
+                <!-- Image 1 -->
+                <div
+                    class="relative shrink-0 w-24 h-32 rounded-lg overflow-hidden border border-gray-200 dark:border-border-dark group snap-start">
+                    <img alt="Uploaded mountain landscape" class="w-full h-full object-cover"
+                        data-alt="Cloudy mountain landscape preview"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuBlTZ3qDD2TBGdLXGbyaW-lm7b_hNPwUw4WqA0ahxzIW-GSMeRx0wdK1YnZNnKGELhnBnY5nMarT0s_isGRNTgVAic965Lpo2ucAbRyceGpGCFlqNrSzpp3dQWK80o661R7JMaHNiRQgZNvKqE9wb5jMLC8oYa-MdifyesQU5q7QsNhUgHMcYjiZot23AGlLxS7mWL0hxWfxyJA2Ib0T02hKg3NxLprUfqlQYNiGhsXZGwDYrGMYUAxYR8puLOewordbUfna0CgzjvI" />
+                    <button
+                        class="absolute top-1 right-1 bg-black/60 hover:bg-red-500 text-white rounded-full p-0.5 backdrop-blur-sm transition-colors">
+                        <span class="material-symbols-outlined text-[16px]">close</span>
+                    </button>
+                    <div class="absolute bottom-0 inset-x-0 bg-black/60 backdrop-blur-sm p-1">
+                        <p class="text-[9px] text-white text-center truncate">mountains.jpg</p>
+                    </div>
+                </div>
+                <!-- Image 2 -->
+                <div
+                    class="relative shrink-0 w-24 h-32 rounded-lg overflow-hidden border border-gray-200 dark:border-border-dark group snap-start">
+                    <img alt="Uploaded forest path" class="w-full h-full object-cover"
+                        data-alt="Dark green forest path preview"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuCJ3CDz29duUi_jdvnd4-4TKl3oVHNcgJIKitxH6IuO6KemMoCvfgiXmOoW66v-6I3OAMh2jReskJcxbTmJ4nMQqNL3yg65jQHwk_GX6aA3t6DurTA-z6Ghx8ClZl00d-l2YzWZHy8j23Nt8dOI4L6FYo3Ro3FEPtXsOX0Yj6zooyF5i8o8KaG4g4AsYX7gXC-GCzREUV8gwFsjXlXBswsbu9ujOy3VGZAbX5ZXTA0jp5QAMpemVB_hG1IyXYBJNk3GnDNx_uG09qFo" />
+                    <button
+                        class="absolute top-1 right-1 bg-black/60 hover:bg-red-500 text-white rounded-full p-0.5 backdrop-blur-sm transition-colors">
+                        <span class="material-symbols-outlined text-[16px]">close</span>
+                    </button>
+                    <div class="absolute bottom-0 inset-x-0 bg-black/60 backdrop-blur-sm p-1">
+                        <p class="text-[9px] text-white text-center truncate">forest_walk.png</p>
+                    </div>
+                </div>
+                <!-- Image 3 -->
+                <div
+                    class="relative shrink-0 w-24 h-32 rounded-lg overflow-hidden border border-gray-200 dark:border-border-dark group snap-start">
+                    <img alt="Uploaded grassy field" class="w-full h-full object-cover"
+                        data-alt="Sunny grassy field preview"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuBPKB7vI_YzuFR41MSFZBKw33CJEJ4oIEIn-pWSCXChxF_XLbFtzmokmqPRMOiM6_zm92Pvz0O1Yz2Rhu0uXAbbuRYcCkn8PxhqoVzZ65gOfN0ZNgvkGrzfLN80N8vSYCppSV0dFgdiI9PTlI9E3TPkH7POO3J9U9ZKOuUmWGfGw7Gcg4F9sMlqsNoS8tmp6OpBIcmB-1w7GMjcA3f-8JLQfPacOyo4ARWQj94OOAI1V9OCa095JYtNdLKM63awKn5rrhXNDzJfdFN0" />
+                    <button
+                        class="absolute top-1 right-1 bg-black/60 hover:bg-red-500 text-white rounded-full p-0.5 backdrop-blur-sm transition-colors">
+                        <span class="material-symbols-outlined text-[16px]">close</span>
+                    </button>
+                    <div class="absolute bottom-0 inset-x-0 bg-black/60 backdrop-blur-sm p-1">
+                        <p class="text-[9px] text-white text-center truncate">field_shot.heic</p>
+                    </div>
+                </div>
+                <!-- Add More Placeholder -->
+                <button
+                    class="shrink-0 w-24 h-32 rounded-lg border-2 border-dashed border-gray-300 dark:border-border-dark flex flex-col items-center justify-center gap-1 hover:bg-surface-light dark:hover:bg-surface-dark/50 transition-colors snap-start">
+                    <span class="material-symbols-outlined text-gray-400">add</span>
+                    <span class="text-[10px] text-gray-400 font-medium">Add More</span>
+                </button>
+            </div>
+        </div>
+        <!-- Configuration Accordions -->
+        <div class="px-4 space-y-3">
+            <!-- PDF Settings -->
+            <details
+                class="group bg-surface-light dark:bg-surface-dark border border-gray-200 dark:border-border-dark rounded-xl overflow-hidden"
+                open="">
+                <summary class="flex items-center justify-between p-4 cursor-pointer select-none">
+                    <div class="flex items-center gap-3">
+                        <span class="material-symbols-outlined text-primary">settings</span>
+                        <span class="text-sm font-semibold">PDF Settings</span>
+                    </div>
+                    <span
+                        class="material-symbols-outlined text-gray-400 group-open:rotate-180 transition-transform">expand_more</span>
+                </summary>
+                <div class="px-4 pb-5 pt-1 space-y-5 border-t border-gray-200 dark:border-border-dark/50">
+                    <!-- Orientation Control -->
+                    <div>
+                        <label
+                            class="text-xs font-medium text-slate-500 dark:text-slate-400 mb-2 block uppercase tracking-wider">Orientation</label>
+                        <div class="grid grid-cols-2 bg-background-light dark:bg-background-dark p-1 rounded-lg">
+                            <button
+                                class="bg-white dark:bg-surface-dark shadow-sm text-primary dark:text-white text-sm font-medium py-2 rounded-md transition-all flex items-center justify-center gap-2">
+                                <span class="material-symbols-outlined text-[18px]">crop_portrait</span> Portrait
+                            </button>
+                            <button
+                                class="text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200 text-sm font-medium py-2 rounded-md transition-all flex items-center justify-center gap-2">
+                                <span class="material-symbols-outlined text-[18px]">crop_landscape</span> Landscape
+                            </button>
+                        </div>
+                    </div>
+                    <!-- Page Size -->
+                    <div>
+                        <label
+                            class="text-xs font-medium text-slate-500 dark:text-slate-400 mb-2 block uppercase tracking-wider">Page
+                            Size</label>
+                        <div class="relative">
+                            <select
+                                class="w-full bg-background-light dark:bg-background-dark border-none rounded-lg py-3 pl-3 pr-10 text-sm focus:ring-2 focus:ring-primary cursor-pointer appearance-none">
+                                <option>A4 (210 x 297 mm)</option>
+                                <option>Letter (8.5 x 11 in)</option>
+                                <option>Original Size</option>
+                            </select>
+                            <span
+                                class="material-symbols-outlined absolute right-3 top-3 pointer-events-none text-slate-400">unfold_more</span>
+                        </div>
+                    </div>
+                    <!-- Margins Slider -->
+                    <div>
+                        <div class="flex justify-between items-center mb-2">
+                            <label
+                                class="text-xs font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider">Margins</label>
+                            <span class="text-xs text-primary font-bold">Small</span>
+                        </div>
+                        <input
+                            class="w-full h-2 bg-gray-200 dark:bg-background-dark rounded-lg appearance-none cursor-pointer accent-primary"
+                            max="2" min="0" step="1" type="range" />
+                        <div class="flex justify-between text-[10px] text-slate-400 mt-1">
+                            <span>None</span>
+                            <span>Small</span>
+                            <span>Big</span>
+                        </div>
+                    </div>
+                </div>
+            </details>
+            <!-- Compression Settings -->
+            <details
+                class="group bg-surface-light dark:bg-surface-dark border border-gray-200 dark:border-border-dark rounded-xl overflow-hidden">
+                <summary class="flex items-center justify-between p-4 cursor-pointer select-none">
+                    <div class="flex items-center gap-3">
+                        <span class="material-symbols-outlined text-primary">compress</span>
+                        <span class="text-sm font-semibold">Image Compression</span>
+                    </div>
+                    <span
+                        class="material-symbols-outlined text-gray-400 group-open:rotate-180 transition-transform">expand_more</span>
+                </summary>
+                <div
+                    class="px-4 pb-4 pt-0 text-sm text-slate-500 dark:text-slate-400 border-t border-gray-200 dark:border-border-dark/50">
+                    <div class="pt-4 flex gap-2">
+                        <button
+                            class="flex-1 py-2 border border-gray-200 dark:border-border-dark rounded-lg hover:border-primary hover:text-primary transition-colors">Low</button>
+                        <button
+                            class="flex-1 py-2 border border-primary bg-primary/10 text-primary font-semibold rounded-lg transition-colors">Medium</button>
+                        <button
+                            class="flex-1 py-2 border border-gray-200 dark:border-border-dark rounded-lg hover:border-primary hover:text-primary transition-colors">High</button>
+                    </div>
+                </div>
+            </details>
+        </div>
+        <!-- Ad Placeholder -->
+        <div class="px-4 py-6 flex justify-center">
+            <div
+                class="w-full max-w-[320px] h-[100px] bg-surface-light dark:bg-surface-dark border border-gray-200 dark:border-border-dark rounded-lg flex flex-col items-center justify-center relative overflow-hidden">
+                <span class="text-[10px] text-gray-400 absolute top-1 right-2">Ad</span>
+                <p class="text-xs text-gray-400 font-medium">Advertisement Space</p>
+                <div
+                    class="absolute inset-0 bg-[linear-gradient(45deg,transparent_25%,rgba(255,255,255,0.05)_50%,transparent_75%,transparent_100%)] bg-[length:250%_250%] bg-[0%_0%] animate-[shimmer_3s_infinite]">
+                </div>
+            </div>
+        </div>
+        <!-- Footer Links -->
+        <div class="px-6 pb-8 text-center">
+            <div class="flex justify-center gap-4 mb-4 text-xs text-slate-500">
+                <a class="hover:text-primary" href="#">All Tools</a>
+                <span>•</span>
+                <a class="hover:text-primary" href="#">Privacy</a>
+                <span>•</span>
+                <a class="hover:text-primary" href="#">Terms</a>
+            </div>
+            <p class="text-[10px] text-slate-600 dark:text-slate-500">© 2023 ImageHub Pro. All rights reserved.</p>
+        </div>
+    </main>
+    <!-- Sticky Action Bar -->
+    <div
+        class="fixed bottom-0 left-0 w-full z-40 px-4 py-4 bg-surface-light/80 dark:bg-surface-dark/90 backdrop-blur-xl border-t border-gray-200 dark:border-border-dark flex flex-col gap-2 shadow-[0_-5px_20px_-5px_rgba(0,0,0,0.1)]">
+        <!-- Summary Info (Optional, small text above button) -->
+        <div class="flex justify-between items-center px-1 text-xs text-slate-500 dark:text-slate-400">
+            <span>3 Images selected</span>
+            <span>Est. size: 2.4 MB</span>
+        </div>
+        <button
+            class="group relative w-full h-12 bg-primary hover:bg-blue-600 active:scale-[0.99] rounded-lg text-white font-bold text-base shadow-lg shadow-primary/25 transition-all flex items-center justify-center gap-2 overflow-hidden">
+            <span class="relative z-10 flex items-center gap-2">
+                Convert &amp; Download PDF
+                <span
+                    class="material-symbols-outlined text-[20px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
+            </span>
+            <!-- Shine effect -->
+            <div
+                class="absolute inset-0 -translate-x-full group-hover:animate-[shimmer_1.5s_infinite] bg-gradient-to-r from-transparent via-white/20 to-transparent z-0">
+            </div>
+        </button>
+    </div>
+</body>
+
+</html>

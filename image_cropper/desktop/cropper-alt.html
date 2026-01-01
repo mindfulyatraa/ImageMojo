@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Image Cropper Tool - ImageHub Pro</title>
+    <!-- Material Symbols -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <!-- Theme Configuration -->
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#0000cc",
+                        "primary-hover": "#000099",
+                        "accent": "#00CC66",
+                        "background-light": "#f5f5f8",
+                        "background-dark": "#0f0f23",
+                        "surface-dark": "#1a1a2e",
+                        "surface-light": "#ffffff",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"],
+                        "sans": ["Inter", "sans-serif"],
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+    <style>
+        /* Custom scrollbar hiding for clean mobile look */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+</head>
+
+<body
+    class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-white antialiased transition-colors duration-200">
+    <div
+        class="relative flex min-h-screen w-full flex-col overflow-x-hidden max-w-md mx-auto shadow-2xl bg-background-light dark:bg-background-dark">
+        <!-- TopAppBar -->
+        <header
+            class="sticky top-0 z-50 flex items-center justify-between bg-surface-light/90 dark:bg-surface-dark/90 px-4 py-3 backdrop-blur-md border-b border-gray-200 dark:border-gray-800">
+            <div class="flex items-center gap-3">
+                <button
+                    class="flex items-center justify-center text-slate-700 dark:text-white p-1 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors">
+                    <span class="material-symbols-outlined" style="font-size: 24px;">menu</span>
+                </button>
+            </div>
+            <div class="flex items-center gap-2">
+                <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-white">
+                    <span class="material-symbols-outlined" style="font-size: 20px;">crop</span>
+                </div>
+                <h1 class="text-lg font-bold tracking-tight text-slate-900 dark:text-white">ImageHub Pro</h1>
+            </div>
+            <div class="flex items-center justify-end">
+                <button
+                    class="flex items-center justify-center overflow-hidden rounded-full h-9 w-9 bg-gray-200 dark:bg-gray-700 text-slate-700 dark:text-white">
+                    <span class="material-symbols-outlined" style="font-size: 24px;">account_circle</span>
+                </button>
+            </div>
+        </header>
+        <!-- Main Content -->
+        <main class="flex-1 flex flex-col p-4 gap-5">
+            <!-- Page Title -->
+            <div class="flex flex-col items-center pt-2">
+                <h2 class="text-2xl font-bold text-center dark:text-white">Image Cropper</h2>
+                <p class="text-sm text-slate-500 dark:text-slate-400 text-center mt-1">Upload, resize, and crop your
+                    images instantly.</p>
+            </div>
+            <!-- Upload Area (Empty State - Collapsed version for "Replace" functionality if needed, but let's show the Active state primarily) -->
+            <!-- We will simulate an active state where an image is already loaded for cropping -->
+            <!-- Editor Workspace -->
+            <div class="flex flex-col gap-4">
+                <!-- Canvas Area -->
+                <div
+                    class="relative w-full aspect-[4/5] bg-[#1a1a2e] rounded-xl overflow-hidden border border-gray-200 dark:border-gray-700 shadow-inner group">
+                    <!-- Background Grid Pattern -->
+                    <div class="absolute inset-0 opacity-10"
+                        style="background-image: radial-gradient(#4b5563 1px, transparent 1px); background-size: 16px 16px;">
+                    </div>
+                    <!-- The Image -->
+                    <div class="absolute inset-4 flex items-center justify-center">
+                        <img alt="Image to crop"
+                            class="max-w-full max-h-full object-contain pointer-events-none select-none"
+                            data-alt="A professional photography setup with a camera lens in focus, used as a sample image for cropping"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuAtV4ScDIxLYHgEI9x5OYx9s53Zc_9Z40KdU6cPHJO880vOI3S6XPmJ2anj02xTAAByNaSweNvzrAcwYp7Gm3-I4o4sSQduFUyAoXkhgRM-yvlxapZZkl2Ha1SXbL7-YxqeDkDl2G-FWGzyK1M5PxwHxJ8D2axEUa6nNTBGz9ZdmoCkq3swBkpiJu1DKmKTxu84BARheP83RtMvsNb-_8upoR1QDUsIgolGgl2iY9hA4APXtv0sD-hBm6i7O3056wh2II5qKohiGlqb" />
+                    </div>
+                    <!-- Dark Overlay outside crop area -->
+                    <div class="absolute inset-0 bg-black/60 pointer-events-none"></div>
+                    <!-- Crop Box (The "Cutout") -->
+                    <!-- Simulating the cutout visually by layering another image or using complex clip-path. 
+                         For this UI demo, we place a "clear" box with borders on top. -->
+                    <div class="absolute top-[15%] left-[10%] right-[10%] bottom-[25%] cursor-move">
+                        <!-- The "Clean" Image part inside the crop box -->
+                        <div class="absolute inset-0 overflow-hidden outline outline-[2000px] outline-black/60 z-10">
+                            <!-- This div simulates the "hole" in the overlay using a massive outline -->
+                        </div>
+                        <!-- Grid Lines -->
+                        <div class="absolute inset-0 z-20 border border-white/50 flex flex-col">
+                            <div class="flex-1 flex border-b border-white/30">
+                                <div class="flex-1 border-r border-white/30"></div>
+                                <div class="flex-1 border-r border-white/30"></div>
+                                <div class="flex-1"></div>
+                            </div>
+                            <div class="flex-1 flex border-b border-white/30">
+                                <div class="flex-1 border-r border-white/30"></div>
+                                <div class="flex-1 border-r border-white/30"></div>
+                                <div class="flex-1"></div>
+                            </div>
+                            <div class="flex-1 flex">
+                                <div class="flex-1 border-r border-white/30"></div>
+                                <div class="flex-1 border-r border-white/30"></div>
+                                <div class="flex-1"></div>
+                            </div>
+                        </div>
+                        <!-- Corners Handles -->
+                        <div
+                            class="absolute -top-1.5 -left-1.5 w-5 h-5 border-t-4 border-l-4 border-accent z-30 rounded-tl-sm">
+                        </div>
+                        <div
+                            class="absolute -top-1.5 -right-1.5 w-5 h-5 border-t-4 border-r-4 border-accent z-30 rounded-tr-sm">
+                        </div>
+                        <div
+                            class="absolute -bottom-1.5 -left-1.5 w-5 h-5 border-b-4 border-l-4 border-accent z-30 rounded-bl-sm">
+                        </div>
+                        <div
+                            class="absolute -bottom-1.5 -right-1.5 w-5 h-5 border-b-4 border-r-4 border-accent z-30 rounded-br-sm">
+                        </div>
+                    </div>
+                    <!-- Toolbar inside image (Reset/Replace) -->
+                    <div class="absolute top-2 right-2 z-40 flex gap-2">
+                        <button
+                            class="bg-black/50 hover:bg-black/70 text-white p-2 rounded-lg backdrop-blur-sm transition-all"
+                            title="Replace Image">
+                            <span class="material-symbols-outlined text-[20px]">upload_file</span>
+                        </button>
+                        <button
+                            class="bg-black/50 hover:bg-black/70 text-white p-2 rounded-lg backdrop-blur-sm transition-all"
+                            title="Reset Crop">
+                            <span class="material-symbols-outlined text-[20px]">restart_alt</span>
+                        </button>
+                    </div>
+                </div>
+                <!-- Controls Section -->
+                <div class="flex flex-col gap-4">
+                    <!-- Aspect Ratios -->
+                    <div class="flex flex-col gap-2">
+                        <label
+                            class="text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400 px-1">Aspect
+                            Ratio</label>
+                        <div class="flex gap-2 overflow-x-auto no-scrollbar pb-1">
+                            <button
+                                class="flex shrink-0 items-center gap-2 rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-white shadow-lg shadow-primary/20 ring-1 ring-white/10">
+                                <span class="material-symbols-outlined text-[18px]">crop_free</span>
+                                Free
+                            </button>
+                            <button
+                                class="flex shrink-0 items-center gap-2 rounded-lg bg-surface-light dark:bg-surface-dark border border-gray-200 dark:border-gray-700 px-4 py-2 text-sm font-medium text-slate-700 dark:text-slate-300 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
+                                <span class="material-symbols-outlined text-[18px]">square</span>
+                                1:1
+                            </button>
+                            <button
+                                class="flex shrink-0 items-center gap-2 rounded-lg bg-surface-light dark:bg-surface-dark border border-gray-200 dark:border-gray-700 px-4 py-2 text-sm font-medium text-slate-700 dark:text-slate-300 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
+                                <span class="material-symbols-outlined text-[18px]">crop_16_9</span>
+                                16:9
+                            </button>
+                            <button
+                                class="flex shrink-0 items-center gap-2 rounded-lg bg-surface-light dark:bg-surface-dark border border-gray-200 dark:border-gray-700 px-4 py-2 text-sm font-medium text-slate-700 dark:text-slate-300 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
+                                <span class="material-symbols-outlined text-[18px]">crop_3_2</span>
+                                4:3
+                            </button>
+                            <button
+                                class="flex shrink-0 items-center gap-2 rounded-lg bg-surface-light dark:bg-surface-dark border border-gray-200 dark:border-gray-700 px-4 py-2 text-sm font-medium text-slate-700 dark:text-slate-300 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
+                                <span class="material-symbols-outlined text-[18px]">circle</span>
+                                Circle
+                            </button>
+                        </div>
+                    </div>
+                    <!-- Manual Dimensions -->
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="flex flex-col gap-1.5">
+                            <label
+                                class="text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400 px-1">Width
+                                (px)</label>
+                            <div class="relative">
+                                <input
+                                    class="w-full rounded-lg border-gray-200 dark:border-gray-700 bg-surface-light dark:bg-surface-dark py-2.5 px-3 text-sm font-semibold text-slate-900 dark:text-white placeholder-slate-400 focus:border-primary focus:ring-1 focus:ring-primary dark:focus:border-primary"
+                                    type="number" value="1080" />
+                                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+                                    <span class="text-xs text-slate-400">px</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex flex-col gap-1.5">
+                            <label
+                                class="text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400 px-1">Height
+                                (px)</label>
+                            <div class="relative">
+                                <input
+                                    class="w-full rounded-lg border-gray-200 dark:border-gray-700 bg-surface-light dark:bg-surface-dark py-2.5 px-3 text-sm font-semibold text-slate-900 dark:text-white placeholder-slate-400 focus:border-primary focus:ring-1 focus:ring-primary dark:focus:border-primary"
+                                    type="number" value="1350" />
+                                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+                                    <span class="text-xs text-slate-400">px</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Action Button -->
+                    <button
+                        class="mt-2 flex w-full cursor-pointer items-center justify-center gap-2 rounded-xl bg-primary py-4 text-base font-bold text-white shadow-lg shadow-primary/25 hover:bg-primary-hover active:scale-[0.98] transition-all duration-200">
+                        <span class="material-symbols-outlined">download</span>
+                        Crop &amp; Download
+                    </button>
+                </div>
+            </div>
+            <!-- AdSense Placeholder -->
+            <div class="mt-4 flex w-full items-center justify-center">
+                <div
+                    class="flex h-[100px] w-full max-w-[320px] flex-col items-center justify-center rounded-lg border-2 border-dashed border-gray-300 dark:border-gray-700 bg-gray-50 dark:bg-gray-800/50 p-4">
+                    <span class="text-xs font-bold uppercase tracking-widest text-slate-400">Advertisement</span>
+                    <p class="text-[10px] text-slate-400">Ad Space 320x100</p>
+                </div>
+            </div>
+        </main>
+        <!-- Simple Footer -->
+        <footer
+            class="mt-auto border-t border-gray-200 dark:border-gray-800 bg-surface-light dark:bg-surface-dark py-6">
+            <div class="flex justify-center gap-6 text-sm text-slate-500 dark:text-slate-400">
+                <a class="hover:text-primary transition-colors" href="#">Privacy</a>
+                <a class="hover:text-primary transition-colors" href="#">Terms</a>
+                <a class="hover:text-primary transition-colors" href="#">Contact</a>
+            </div>
+            <p class="mt-4 text-center text-xs text-slate-400 dark:text-slate-600">© 2023 ImageHub Pro. All rights
+                reserved.</p>
+        </footer>
+    </div>
+</body>
+
+</html>

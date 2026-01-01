@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>EXIF Viewer - ImageHub Pro</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <!-- Theme Config -->
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#0066cc",
+                        "secondary": "#00CC66",
+                        "background-light": "#f5f7f8",
+                        "background-dark": "#0f1923", // Deep dark blue/charcoal
+                        "surface-dark": "#1e2732", // Slightly lighter for cards
+                        "surface-highlight": "#2a3441", // For hover/active states
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"],
+                        "body": ["Inter", "sans-serif"],
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "2xl": "1rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <!-- Material Symbols -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* Custom scrollbar for data list */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+</head>
+
+<body
+    class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-white antialiased transition-colors duration-200">
+    <div
+        class="relative flex min-h-screen w-full flex-col overflow-x-hidden max-w-md mx-auto shadow-2xl bg-background-light dark:bg-background-dark">
+        <!-- Header -->
+        <header
+            class="sticky top-0 z-40 flex items-center justify-between bg-background-light/95 dark:bg-[#101418]/95 backdrop-blur-md p-4 border-b border-gray-200 dark:border-gray-800">
+            <div class="flex items-center gap-2">
+                <div class="flex items-center justify-center size-8 rounded-lg bg-primary text-white">
+                    <span class="material-symbols-outlined text-[20px]">photo_camera</span>
+                </div>
+                <h2 class="text-lg font-bold leading-tight tracking-tight text-slate-900 dark:text-white">ImageHub Pro
+                </h2>
+            </div>
+            <button
+                class="flex size-10 items-center justify-center rounded-full hover:bg-gray-200 dark:hover:bg-gray-800 transition-colors">
+                <span class="material-symbols-outlined text-slate-900 dark:text-white">menu</span>
+            </button>
+        </header>
+        <!-- Main Content -->
+        <main class="flex-1 flex flex-col px-4 pb-8">
+            <!-- Hero Text -->
+            <div class="pt-6 pb-4">
+                <h1 class="text-3xl font-bold tracking-tight text-slate-900 dark:text-white mb-2">EXIF Viewer</h1>
+                <p class="text-slate-600 dark:text-gray-400 text-base leading-relaxed">
+                    View hidden metadata, camera settings, and location info instantly.
+                </p>
+            </div>
+            <!-- Upload Area -->
+            <div class="mb-6">
+                <div
+                    class="group relative flex flex-col items-center justify-center gap-4 rounded-xl border-2 border-dashed border-gray-300 dark:border-gray-700 bg-white dark:bg-surface-dark py-10 px-6 hover:border-primary/50 hover:bg-gray-50 dark:hover:bg-surface-highlight transition-all cursor-pointer">
+                    <div class="flex size-14 items-center justify-center rounded-full bg-primary/10 text-primary">
+                        <span class="material-symbols-outlined text-[32px]">cloud_upload</span>
+                    </div>
+                    <div class="text-center space-y-1">
+                        <p class="text-base font-semibold text-slate-900 dark:text-white">Tap to Upload Image</p>
+                        <p class="text-xs text-slate-500 dark:text-gray-400">Supports JPG, PNG, HEIC up to 25MB</p>
+                    </div>
+                    <button
+                        class="mt-2 flex h-9 items-center px-4 rounded-lg bg-primary text-white text-sm font-medium hover:bg-primary/90 shadow-lg shadow-primary/20">
+                        Select Photo
+                    </button>
+                </div>
+                <!-- Privacy Note -->
+                <p
+                    class="mt-3 text-center text-xs text-slate-400 dark:text-gray-500 flex items-center justify-center gap-1.5">
+                    <span class="material-symbols-outlined text-[14px]">lock</span>
+                    Images are processed locally and never stored.
+                </p>
+            </div>
+            <!-- Ad Placeholder (Banner) -->
+            <div
+                class="w-full h-[60px] bg-gray-200 dark:bg-gray-800 rounded-lg flex flex-col items-center justify-center mb-8 border border-gray-300 dark:border-gray-700/50">
+                <span class="text-[10px] uppercase tracking-wider text-gray-400 font-semibold">Advertisement</span>
+            </div>
+            <!-- Analysis Result (Simulated State) -->
+            <div class="flex flex-col gap-5">
+                <div class="flex items-center justify-between">
+                    <h3 class="text-lg font-bold text-slate-900 dark:text-white">Analysis Result</h3>
+                    <span
+                        class="px-2.5 py-0.5 rounded-full bg-secondary/10 text-secondary text-xs font-bold border border-secondary/20">Success</span>
+                </div>
+                <!-- Image Preview Card -->
+                <div
+                    class="overflow-hidden rounded-xl bg-white dark:bg-surface-dark shadow-sm border border-gray-200 dark:border-gray-700/50">
+                    <div class="relative h-56 w-full bg-gray-800">
+                        <img alt="Landscape photo of Iceland mountains used as a preview for EXIF data analysis"
+                            class="h-full w-full object-cover opacity-90"
+                            data-alt="Landscape photo of Iceland mountains used as a preview for EXIF data analysis"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuA3FCOHMZe0xJfSxkaNxFNe1pSs865DoFbOuXrbh8SRrk6-ZId5LDsbljJ8xjlmHA1pWnbrB6ZIbIs4kwos0kHPTcgH1wnBYzLB5mzLX18yOV201jK9cZqRuXn4MwAfpd2qPPNC-uBYK8uCBdfvVIYj90pBU_8jOumFr0MnA8HV9KVtAJuxckMnVyy_dzowJPyWGZABJT9cerdZZW_yq4KgX02jzP4Ry13IQC2nb8KpDK9e91HLFl7jZTFu0K1U-5D_XTIg7z53Yrvs" />
+                        <div class="absolute bottom-3 right-3">
+                            <button
+                                class="size-8 flex items-center justify-center rounded-full bg-black/50 backdrop-blur-sm text-white hover:bg-black/70 border border-white/10">
+                                <span class="material-symbols-outlined text-[18px]">fullscreen</span>
+                            </button>
+                        </div>
+                    </div>
+                    <!-- Quick Stats Row -->
+                    <div
+                        class="flex border-b border-gray-200 dark:border-gray-700/50 divide-x divide-gray-200 dark:divide-gray-700/50">
+                        <div class="flex-1 p-3 text-center">
+                            <div class="text-[10px] text-gray-500 uppercase font-bold tracking-wider mb-0.5">ISO</div>
+                            <div class="text-sm font-semibold dark:text-white">100</div>
+                        </div>
+                        <div class="flex-1 p-3 text-center">
+                            <div class="text-[10px] text-gray-500 uppercase font-bold tracking-wider mb-0.5">Aperture
+                            </div>
+                            <div class="text-sm font-semibold dark:text-white">f/2.8</div>
+                        </div>
+                        <div class="flex-1 p-3 text-center">
+                            <div class="text-[10px] text-gray-500 uppercase font-bold tracking-wider mb-0.5">Shutter
+                            </div>
+                            <div class="text-sm font-semibold dark:text-white">1/250s</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Data Sections -->
+                <div class="flex flex-col gap-4">
+                    <!-- Camera Info -->
+                    <div
+                        class="rounded-xl bg-white dark:bg-surface-dark border border-gray-200 dark:border-gray-700/50 overflow-hidden">
+                        <div
+                            class="px-4 py-3 bg-gray-50 dark:bg-white/5 border-b border-gray-200 dark:border-gray-700/50 flex items-center gap-2">
+                            <span class="material-symbols-outlined text-primary text-[20px]">photo_camera</span>
+                            <span class="text-sm font-bold text-slate-900 dark:text-white">Camera Gear</span>
+                        </div>
+                        <div class="p-0">
+                            <div
+                                class="flex justify-between items-center p-4 border-b border-gray-100 dark:border-gray-700/30">
+                                <span class="text-sm text-gray-500 dark:text-gray-400">Make</span>
+                                <span class="text-sm font-medium text-slate-900 dark:text-white">Sony</span>
+                            </div>
+                            <div
+                                class="flex justify-between items-center p-4 border-b border-gray-100 dark:border-gray-700/30">
+                                <span class="text-sm text-gray-500 dark:text-gray-400">Model</span>
+                                <span class="text-sm font-medium text-slate-900 dark:text-white">Alpha a7 III</span>
+                            </div>
+                            <div class="flex justify-between items-center p-4">
+                                <span class="text-sm text-gray-500 dark:text-gray-400">Lens</span>
+                                <span class="text-sm font-medium text-slate-900 dark:text-white text-right">FE 24-70mm
+                                    GM</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Date & File -->
+                    <div
+                        class="rounded-xl bg-white dark:bg-surface-dark border border-gray-200 dark:border-gray-700/50 overflow-hidden">
+                        <div
+                            class="px-4 py-3 bg-gray-50 dark:bg-white/5 border-b border-gray-200 dark:border-gray-700/50 flex items-center gap-2">
+                            <span class="material-symbols-outlined text-primary text-[20px]">calendar_month</span>
+                            <span class="text-sm font-bold text-slate-900 dark:text-white">Date &amp; File</span>
+                        </div>
+                        <div class="p-0">
+                            <div
+                                class="flex justify-between items-center p-4 border-b border-gray-100 dark:border-gray-700/30">
+                                <span class="text-sm text-gray-500 dark:text-gray-400">Date Taken</span>
+                                <span class="text-sm font-medium text-slate-900 dark:text-white">Oct 24, 2023
+                                    14:30</span>
+                            </div>
+                            <div
+                                class="flex justify-between items-center p-4 border-b border-gray-100 dark:border-gray-700/30">
+                                <span class="text-sm text-gray-500 dark:text-gray-400">Resolution</span>
+                                <span class="text-sm font-medium text-slate-900 dark:text-white">6000 x 4000 px</span>
+                            </div>
+                            <div class="flex justify-between items-center p-4">
+                                <span class="text-sm text-gray-500 dark:text-gray-400">File Size</span>
+                                <span class="text-sm font-medium text-slate-900 dark:text-white">14.2 MB</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Location with Map -->
+                    <div
+                        class="rounded-xl bg-white dark:bg-surface-dark border border-gray-200 dark:border-gray-700/50 overflow-hidden">
+                        <div
+                            class="px-4 py-3 bg-gray-50 dark:bg-white/5 border-b border-gray-200 dark:border-gray-700/50 flex items-center justify-between">
+                            <div class="flex items-center gap-2">
+                                <span class="material-symbols-outlined text-secondary text-[20px]">location_on</span>
+                                <span class="text-sm font-bold text-slate-900 dark:text-white">GPS Location</span>
+                            </div>
+                            <span
+                                class="text-[10px] font-bold text-secondary bg-secondary/10 px-2 py-0.5 rounded border border-secondary/20">FOUND</span>
+                        </div>
+                        <div class="relative w-full h-40 bg-gray-700">
+                            <img alt="Map view showing the location in Iceland" class="w-full h-full object-cover"
+                                data-alt="Map view showing the location in Iceland" data-location="Reykjavik, Iceland"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuDzz59eGO-UPTgQsnENIcgqe7Wiionxm8t_D-fTIgJqeqptgrWy3a-lavYRPldrEVNa-lPfHKnbkgA8egHmrphVhyKRkJXdnLNrc-xtWm0bMmYD7pwid6txcYhnsbtckzgZ5hqzUGPvDty1ea60cL5iLQPmdu6K6fMq1CRAdTiwr8bniLbY85A8oSFL6uWHasqJk5fgmcvLicEFlav7nVh-azlaivaYtB7E67JKkJJzi94AjLyMbs6jh1Rm7eAtmGoRPdPyQZc0w_oQ" />
+                            <div
+                                class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-4">
+                                <div>
+                                    <p class="text-white font-bold text-sm">Reykjavik, Iceland</p>
+                                    <p class="text-gray-300 text-xs font-mono">64.1466° N, 21.9426° W</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-3 flex items-center justify-center">
+                            <button
+                                class="flex items-center gap-2 text-sm text-primary font-medium hover:text-primary/80">
+                                <span class="material-symbols-outlined text-[18px]">map</span>
+                                Open in Maps
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Sticky Actions (Bottom of content) -->
+                <div class="sticky bottom-4 z-30 mt-4 flex gap-3">
+                    <button
+                        class="flex-1 h-12 flex items-center justify-center gap-2 rounded-xl bg-surface-dark border border-gray-600 hover:bg-surface-highlight text-white font-semibold transition-colors shadow-lg">
+                        <span class="material-symbols-outlined text-[20px]">content_copy</span>
+                        Copy All
+                    </button>
+                    <button
+                        class="flex-1 h-12 flex items-center justify-center gap-2 rounded-xl bg-primary hover:bg-primary/90 text-white font-semibold transition-colors shadow-lg shadow-primary/25">
+                        <span class="material-symbols-outlined text-[20px]">ios_share</span>
+                        Share Report
+                    </button>
+                </div>
+                <!-- Ad Placeholder (Native) -->
+                <div
+                    class="w-full h-auto min-h-[250px] bg-gray-50 dark:bg-surface-dark border border-gray-200 dark:border-gray-700/50 rounded-xl p-4 flex flex-col gap-3 mt-4">
+                    <div class="flex items-center gap-2">
+                        <div
+                            class="size-5 bg-yellow-500 rounded text-[8px] flex items-center justify-center font-bold text-white">
+                            AD</div>
+                        <span class="text-xs text-gray-500 dark:text-gray-400">Sponsored</span>
+                    </div>
+                    <div class="flex-1 bg-gray-200 dark:bg-gray-800 rounded-lg flex items-center justify-center">
+                        <span class="text-gray-400 text-sm">Native Ad Content</span>
+                    </div>
+                    <div class="h-4 w-2/3 bg-gray-200 dark:bg-gray-800 rounded"></div>
+                    <div class="h-4 w-1/2 bg-gray-200 dark:bg-gray-800 rounded"></div>
+                </div>
+            </div>
+        </main>
+        <!-- Footer -->
+        <footer
+            class="p-6 border-t border-gray-200 dark:border-gray-800 bg-background-light dark:bg-background-dark text-center">
+            <p class="text-sm text-gray-500 dark:text-gray-400 mb-4">© 2023 ImageHub Pro. All rights reserved.</p>
+            <div class="flex justify-center gap-6">
+                <a class="text-xs text-gray-400 hover:text-primary transition-colors" href="#">Privacy</a>
+                <a class="text-xs text-gray-400 hover:text-primary transition-colors" href="#">Terms</a>
+                <a class="text-xs text-gray-400 hover:text-primary transition-colors" href="#">Contact</a>
+            </div>
+        </footer>
+        <!-- Hidden Navigation Drawer (For completeness based on component list) -->
+        <div class="hidden fixed inset-0 z-50 bg-[#141414]/60 backdrop-blur-sm" id="nav-drawer">
+            <div class="absolute left-0 top-0 h-full w-3/4 max-w-xs bg-[#101418] p-4 shadow-2xl">
+                <div class="flex items-center justify-between mb-8 px-2">
+                    <h2 class="text-white text-lg font-bold">ImageHub Pro</h2>
+                    <button class="text-gray-400 hover:text-white">
+                        <span class="material-symbols-outlined">close</span>
+                    </button>
+                </div>
+                <ul class="flex flex-col gap-2">
+                    <li class="flex h-12 items-center gap-4 rounded-lg px-4 hover:bg-white/5 cursor-pointer"><span
+                            class="material-symbols-outlined text-white">home</span>
+                        <p class="text-white text-base font-bold">Home</p>
+                    </li>
+                    <li class="flex h-12 items-center gap-4 rounded-lg px-4 bg-primary/20 text-primary cursor-pointer">
+                        <span class="material-symbols-outlined">build</span>
+                        <p class="text-base font-bold">Tools</p>
+                    </li>
+                    <li class="flex h-12 items-center gap-4 rounded-lg px-4 hover:bg-white/5 cursor-pointer"><span
+                            class="material-symbols-outlined text-white">article</span>
+                        <p class="text-white text-base font-bold">Blog</p>
+                    </li>
+                    <li class="flex h-12 items-center gap-4 rounded-lg px-4 hover:bg-white/5 cursor-pointer"><span
+                            class="material-symbols-outlined text-white">chat</span>
+                        <p class="text-white text-base font-bold">Feedback</p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

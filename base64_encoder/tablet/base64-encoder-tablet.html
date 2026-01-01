@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Base64 Encoder - ImageHub Pro</title>
+    <!-- Material Symbols -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <!-- Theme Config -->
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#0300cc",
+                        "primary-hover": "#0200a3",
+                        "success": "#00cc66",
+                        "background-light": "#f5f5f8",
+                        "background-dark": "#0f0f23",
+                        "surface-dark": "#1a1a2e",
+                        "surface-darker": "#141428",
+                        "border-dark": "#2d2d42"
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"],
+                        "mono": ["JetBrains Mono", "monospace"]
+                    },
+                    borderRadius: { "DEFAULT": "0.5rem", "lg": "0.75rem", "xl": "1rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+</head>
+
+<body
+    class="bg-background-light dark:bg-background-dark font-display min-h-screen text-slate-800 dark:text-slate-100 selection:bg-primary selection:text-white">
+    <!-- Main Container -->
+    <div class="relative flex min-h-screen w-full flex-col overflow-x-hidden">
+        <!-- Header -->
+        <header
+            class="sticky top-0 z-50 flex w-full items-center justify-between bg-white/80 dark:bg-background-dark/80 px-4 py-3 backdrop-blur-md border-b border-slate-200 dark:border-border-dark">
+            <div class="flex items-center gap-3">
+                <button
+                    class="flex items-center justify-center rounded-full p-2 text-slate-500 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-surface-dark transition-colors">
+                    <span class="material-symbols-outlined">arrow_back</span>
+                </button>
+                <div class="flex items-center gap-2">
+                    <div
+                        class="size-8 rounded-lg bg-gradient-to-br from-primary to-blue-500 flex items-center justify-center text-white">
+                        <span class="material-symbols-outlined text-lg">image</span>
+                    </div>
+                    <h1 class="text-lg font-bold tracking-tight text-slate-900 dark:text-white">ImageHub Pro</h1>
+                </div>
+            </div>
+            <button
+                class="flex items-center justify-center rounded-full p-2 text-slate-500 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-surface-dark transition-colors">
+                <span class="material-symbols-outlined">menu</span>
+            </button>
+        </header>
+        <!-- Content Area -->
+        <main class="flex-1 w-full max-w-7xl mx-auto p-4 md:p-6 lg:p-8">
+            <div class="flex flex-col gap-8">
+                <!-- Title Section -->
+                <div class="space-y-2">
+                    <h2 class="text-3xl md:text-4xl font-bold tracking-tight text-slate-900 dark:text-white">Base64
+                        Encoder</h2>
+                    <p class="text-slate-600 dark:text-slate-400 max-w-2xl text-lg">Convert your images to Base64
+                        strings instantly. Drag and drop or browse to upload.</p>
+                </div>
+                <!-- Main Grid Layout for Tablet/Desktop -->
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start">
+                    <!-- Left Column: Upload & Options -->
+                    <div class="lg:col-span-5 flex flex-col gap-6">
+                        <!-- Upload Card -->
+                        <div
+                            class="group relative flex flex-col items-center justify-center rounded-xl border-2 border-dashed border-slate-300 dark:border-border-dark hover:border-primary dark:hover:border-primary bg-white dark:bg-surface-dark p-8 transition-all duration-300 cursor-pointer shadow-sm hover:shadow-md">
+                            <input accept="image/*" class="absolute inset-0 z-10 opacity-0 cursor-pointer"
+                                type="file" />
+                            <div
+                                class="flex size-16 items-center justify-center rounded-full bg-blue-50 dark:bg-primary/10 text-primary mb-4 group-hover:scale-110 transition-transform">
+                                <span class="material-symbols-outlined text-3xl">cloud_upload</span>
+                            </div>
+                            <h3 class="text-lg font-semibold text-slate-900 dark:text-white text-center">Upload Image
+                            </h3>
+                            <p class="text-sm text-slate-500 dark:text-slate-400 text-center mt-1">Drag &amp; drop or
+                                tap to browse</p>
+                            <p class="text-xs text-slate-400 dark:text-slate-500 mt-4">Supports JPG, PNG, GIF, WEBP</p>
+                        </div>
+                        <!-- Settings Card -->
+                        <div
+                            class="rounded-xl bg-white dark:bg-surface-dark border border-slate-200 dark:border-border-dark p-5 shadow-sm">
+                            <h3
+                                class="text-sm font-semibold text-slate-900 dark:text-white mb-4 uppercase tracking-wider">
+                                Format Options</h3>
+                            <!-- Segmented Control -->
+                            <div class="bg-slate-100 dark:bg-surface-darker p-1 rounded-lg flex relative">
+                                <label class="flex-1 relative z-10 cursor-pointer">
+                                    <input checked="" class="peer sr-only" name="format" type="radio" value="uri" />
+                                    <div
+                                        class="w-full py-2.5 px-3 rounded-md text-sm font-medium text-center text-slate-500 dark:text-slate-400 transition-all peer-checked:bg-white dark:peer-checked:bg-primary peer-checked:text-primary dark:peer-checked:text-white peer-checked:shadow-sm">
+                                        Data URI
+                                    </div>
+                                </label>
+                                <label class="flex-1 relative z-10 cursor-pointer">
+                                    <input class="peer sr-only" name="format" type="radio" value="raw" />
+                                    <div
+                                        class="w-full py-2.5 px-3 rounded-md text-sm font-medium text-center text-slate-500 dark:text-slate-400 transition-all peer-checked:bg-white dark:peer-checked:bg-primary peer-checked:text-primary dark:peer-checked:text-white peer-checked:shadow-sm">
+                                        Raw String
+                                    </div>
+                                </label>
+                            </div>
+                            <div class="mt-4 flex items-center justify-between">
+                                <span class="text-sm text-slate-600 dark:text-slate-300">Optimize Output</span>
+                                <label class="relative inline-flex items-center cursor-pointer">
+                                    <input class="sr-only peer" type="checkbox" value="" />
+                                    <div
+                                        class="w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer dark:bg-surface-darker peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-primary">
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+                        <!-- Ad Placeholder (Mobile/Tablet Stack) -->
+                        <div
+                            class="w-full bg-slate-200 dark:bg-surface-darker rounded-lg h-24 flex items-center justify-center overflow-hidden relative border border-slate-300 dark:border-border-dark border-dashed">
+                            <div
+                                class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/diagonal-stripes.png')] opacity-10">
+                            </div>
+                            <span class="text-xs text-slate-400 font-medium z-10">ADVERTISEMENT</span>
+                        </div>
+                    </div>
+                    <!-- Right Column: Output & Preview -->
+                    <div class="lg:col-span-7 flex flex-col gap-6">
+                        <!-- Output Area -->
+                        <div
+                            class="rounded-xl bg-white dark:bg-surface-dark border border-slate-200 dark:border-border-dark p-1 shadow-sm flex flex-col h-full min-h-[320px]">
+                            <div
+                                class="flex items-center justify-between p-4 border-b border-slate-100 dark:border-border-dark">
+                                <div class="flex items-center gap-2">
+                                    <span class="material-symbols-outlined text-primary text-xl">code</span>
+                                    <h3 class="text-base font-semibold text-slate-900 dark:text-white">Output String
+                                    </h3>
+                                </div>
+                                <div class="flex gap-2">
+                                    <button
+                                        class="p-1.5 rounded-md text-slate-400 hover:text-primary hover:bg-slate-100 dark:hover:bg-surface-darker transition-colors"
+                                        title="Download as .txt">
+                                        <span class="material-symbols-outlined text-xl">download</span>
+                                    </button>
+                                </div>
+                            </div>
+                            <div
+                                class="relative flex-1 bg-slate-50 dark:bg-surface-darker m-1 rounded-lg overflow-hidden group">
+                                <textarea
+                                    class="w-full h-full min-h-[250px] bg-transparent border-0 resize-none p-4 font-mono text-xs md:text-sm text-slate-600 dark:text-slate-300 focus:ring-0 focus:outline-none selection:bg-primary/30 scrollbar-thin scrollbar-thumb-slate-300 dark:scrollbar-thumb-slate-600"
+                                    readonly="">data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII=
+(Example truncated for preview...)</textarea>
+                                <!-- Copy Button Floating -->
+                                <div class="absolute bottom-4 right-4 md:right-6">
+                                    <button
+                                        class="flex items-center gap-2 bg-primary hover:bg-primary-hover text-white px-5 py-3 rounded-lg shadow-lg shadow-primary/30 transition-all active:scale-95 font-medium">
+                                        <span class="material-symbols-outlined text-xl">content_copy</span>
+                                        <span>Copy to Clipboard</span>
+                                    </button>
+                                </div>
+                            </div>
+                            <div
+                                class="p-3 flex justify-between items-center text-xs text-slate-400 dark:text-slate-500 font-mono">
+                                <span>Size: ~12 KB</span>
+                                <span>Characters: 8,492</span>
+                            </div>
+                        </div>
+                        <!-- Preview Card -->
+                        <div
+                            class="rounded-xl bg-white dark:bg-surface-dark border border-slate-200 dark:border-border-dark p-5 shadow-sm">
+                            <h3
+                                class="text-base font-semibold text-slate-900 dark:text-white mb-4 flex items-center gap-2">
+                                <span class="material-symbols-outlined text-primary">visibility</span>
+                                Decoded Preview
+                            </h3>
+                            <div
+                                class="w-full h-64 rounded-lg bg-[url('https://www.transparenttextures.com/patterns/checkerboard.png')] bg-repeat border border-slate-200 dark:border-border-dark flex items-center justify-center overflow-hidden relative">
+                                <!-- Placeholder or Actual Preview Image -->
+                                <img alt="Abstract gradient preview showing decoded base64 output"
+                                    class="max-w-full max-h-full object-contain shadow-xl rounded-md"
+                                    data-alt="Abstract gradient preview showing decoded base64 output"
+                                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuCalqgn6_V7zYf1ueFC5h9bG7WEka8pZ8j0qX1O4d0mfmXrnTgCnc8Z3sR65FUlDOm9S_WunhsVyC7S7TVByS_q8HTrktqY7vKnqXsLSoltRfXITqLI9Zf7Q3wecikJ9uQDfzkozUWDqgQeyPIZY5Des2Uzl6nJ6eA3Vnys1zN4eS7j3cPyG5DJ9ab0eWR7M75UvxQZmITWuLdZzoxv0lYyQv2rFsqvFFAyXxFFeeBMR3xzxqtJHV9lplB6hlDCiVxH3Gkivk4jACKx" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Bottom Ad / Info Section -->
+                <div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div
+                        class="md:col-span-2 p-6 rounded-xl bg-blue-50 dark:bg-primary/5 border border-blue-100 dark:border-primary/10">
+                        <h4 class="font-semibold text-primary mb-2">Why use Base64?</h4>
+                        <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+                            Base64 encoding schemes are commonly used when there is a need to encode binary data that
+                            needs to be stored and transferred over media that are designed to deal with textual data.
+                            This is to ensure that the data remains intact without modification during transport.
+                        </p>
+                    </div>
+                    <div
+                        class="h-full bg-slate-200 dark:bg-surface-darker rounded-lg min-h-[100px] flex items-center justify-center border border-slate-300 dark:border-border-dark border-dashed relative">
+                        <span class="text-xs text-slate-400 font-medium z-10">ADVERTISEMENT</span>
+                        <div
+                            class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/diagonal-stripes.png')] opacity-10">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <!-- Simple Footer -->
+        <footer class="mt-12 border-t border-slate-200 dark:border-border-dark bg-white dark:bg-surface-dark py-8 px-4">
+            <div
+                class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-slate-500 dark:text-slate-400">
+                <p>© 2023 ImageHub Pro. All rights reserved.</p>
+                <div class="flex gap-6">
+                    <a class="hover:text-primary transition-colors" href="#">Privacy</a>
+                    <a class="hover:text-primary transition-colors" href="#">Terms</a>
+                    <a class="hover:text-primary transition-colors" href="#">Contact</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+</body>
+
+</html>

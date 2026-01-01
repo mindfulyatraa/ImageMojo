@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>PNG to JPG Converter - ImageHub Pro</title>
+    <!-- Material Symbols -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <!-- Theme Configuration -->
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#0066cc",
+                        "secondary": "#00CC66",
+                        "background-light": "#f5f7f8",
+                        "background-dark": "#0f1923",
+                        "surface-dark": "#1a2634",
+                        "surface-light": "#ffffff"
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "2xl": "1rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+    <style>
+        /* Custom range slider styling for Webkit */
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            height: 20px;
+            width: 20px;
+            border-radius: 50%;
+            background: #ffffff;
+            border: 2px solid #0066cc;
+            cursor: pointer;
+            margin-top: -8px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+        }
+
+        input[type=range]::-webkit-slider-runnable-track {
+            width: 100%;
+            height: 4px;
+            cursor: pointer;
+            background: #374151;
+            border-radius: 2px;
+        }
+    </style>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+</head>
+
+<body
+    class="bg-background-light dark:bg-background-dark font-display antialiased text-slate-900 dark:text-white transition-colors duration-200">
+    <!-- Main Container: Mobile Optimized -->
+    <div
+        class="relative flex min-h-screen w-full flex-col max-w-md mx-auto bg-background-light dark:bg-background-dark border-x border-gray-200 dark:border-gray-800 shadow-2xl">
+        <!-- Sticky Header -->
+        <header
+            class="sticky top-0 z-50 flex items-center justify-between px-4 py-3 bg-background-light/95 dark:bg-background-dark/95 backdrop-blur-md border-b border-gray-200 dark:border-gray-800">
+            <button
+                class="flex items-center justify-center p-2 -ml-2 text-slate-600 dark:text-slate-300 hover:bg-black/5 dark:hover:bg-white/10 rounded-full transition-colors">
+                <span class="material-symbols-outlined">arrow_back_ios_new</span>
+            </button>
+            <h1 class="text-lg font-bold tracking-tight text-center flex-1">ImageHub Pro</h1>
+            <button
+                class="flex items-center justify-center p-2 -mr-2 text-slate-600 dark:text-slate-300 hover:bg-black/5 dark:hover:bg-white/10 rounded-full transition-colors">
+                <span class="material-symbols-outlined">menu</span>
+            </button>
+        </header>
+        <!-- Advertisement Placeholder 1 (Banner) -->
+        <div class="w-full flex justify-center py-2 bg-gray-200 dark:bg-[#16202c]">
+            <div
+                class="w-[320px] h-[50px] bg-gray-300 dark:bg-gray-700/30 border border-gray-400/20 dark:border-gray-600/20 rounded flex items-center justify-center text-xs text-gray-500 font-medium uppercase tracking-widest">
+                Ad Space (320x50)
+            </div>
+        </div>
+        <!-- Scrollable Content -->
+        <main class="flex-1 flex flex-col gap-6 px-4 py-6">
+            <!-- Hero Text -->
+            <div class="text-center space-y-2">
+                <h2
+                    class="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-[#4da3ff] dark:from-white dark:to-gray-400">
+                    PNG to JPG Converter
+                </h2>
+                <p class="text-sm text-slate-600 dark:text-gray-400 max-w-[280px] mx-auto leading-relaxed">
+                    Convert PNG images to JPG instantly. Free, fast, and high quality.
+                </p>
+            </div>
+            <!-- Upload Area (Empty State / Dropzone) -->
+            <div class="relative group cursor-pointer">
+                <div
+                    class="absolute inset-0 bg-primary/5 dark:bg-primary/10 rounded-2xl transform transition-transform group-hover:scale-[1.02]">
+                </div>
+                <div
+                    class="relative flex flex-col items-center justify-center gap-4 rounded-2xl border-2 border-dashed border-primary/40 group-hover:border-primary px-6 py-10 bg-surface-light dark:bg-surface-dark transition-colors">
+                    <div
+                        class="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center text-primary mb-1">
+                        <span class="material-symbols-outlined text-[32px]">cloud_upload</span>
+                    </div>
+                    <div class="text-center space-y-1">
+                        <p class="font-bold text-lg">Tap to Upload</p>
+                        <p class="text-xs text-slate-500 dark:text-gray-400">or drag and drop PNG file here</p>
+                    </div>
+                    <button
+                        class="mt-2 px-6 py-2.5 bg-primary hover:bg-primary/90 text-white text-sm font-semibold rounded-lg shadow-lg shadow-primary/20 transition-all active:scale-95">
+                        Select PNG File
+                    </button>
+                </div>
+            </div>
+            <!-- Conversion Settings (Accordion Style) -->
+            <div
+                class="rounded-xl bg-surface-light dark:bg-surface-dark border border-gray-200 dark:border-gray-800 overflow-hidden">
+                <div class="flex items-center justify-between p-4 border-b border-gray-100 dark:border-gray-800">
+                    <div class="flex items-center gap-2">
+                        <span class="material-symbols-outlined text-primary text-xl">tune</span>
+                        <h3 class="font-semibold text-sm">Conversion Settings</h3>
+                    </div>
+                    <span class="material-symbols-outlined text-gray-400">expand_less</span>
+                </div>
+                <div class="p-4 space-y-5">
+                    <!-- Quality Slider -->
+                    <div class="space-y-3">
+                        <div class="flex justify-between text-sm">
+                            <span class="text-slate-600 dark:text-gray-300">Quality</span>
+                            <span class="font-mono text-primary font-bold">85%</span>
+                        </div>
+                        <input
+                            class="w-full h-1.5 bg-gray-200 dark:bg-gray-700 rounded-lg appearance-none cursor-pointer"
+                            max="100" min="1" type="range" value="85" />
+                        <div
+                            class="flex justify-between text-[10px] text-gray-400 uppercase tracking-wider font-medium">
+                            <span>Small Size</span>
+                            <span>High Quality</span>
+                        </div>
+                    </div>
+                    <!-- Background Fill -->
+                    <div class="space-y-3">
+                        <span class="text-sm text-slate-600 dark:text-gray-300 block">Fill Transparent Background</span>
+                        <div class="flex items-center gap-3">
+                            <label class="cursor-pointer">
+                                <input checked="" class="peer sr-only" name="bg_fill" type="radio" />
+                                <div
+                                    class="w-10 h-10 rounded-full bg-white border-2 border-gray-200 dark:border-gray-600 peer-checked:border-primary peer-checked:ring-2 peer-checked:ring-primary/30 flex items-center justify-center transition-all">
+                                    <span
+                                        class="material-symbols-outlined text-gray-800 text-sm hidden peer-checked:block">check</span>
+                                </div>
+                                <span class="text-[10px] text-center block mt-1 text-gray-500">White</span>
+                            </label>
+                            <label class="cursor-pointer">
+                                <input class="peer sr-only" name="bg_fill" type="radio" />
+                                <div
+                                    class="w-10 h-10 rounded-full bg-black border-2 border-gray-200 dark:border-gray-600 peer-checked:border-primary peer-checked:ring-2 peer-checked:ring-primary/30 flex items-center justify-center transition-all">
+                                    <span
+                                        class="material-symbols-outlined text-white text-sm hidden peer-checked:block">check</span>
+                                </div>
+                                <span class="text-[10px] text-center block mt-1 text-gray-500">Black</span>
+                            </label>
+                            <label class="cursor-pointer">
+                                <input class="peer sr-only" name="bg_fill" type="radio" />
+                                <div
+                                    class="w-10 h-10 rounded-full border-2 border-gray-200 dark:border-gray-600 bg-white peer-checked:border-primary peer-checked:ring-2 peer-checked:ring-primary/30 flex items-center justify-center transition-all overflow-hidden relative">
+                                    <div class="absolute inset-0 opacity-50"
+                                        style="background-image: radial-gradient(#cbd5e1 1px, transparent 1px); background-size: 4px 4px;">
+                                    </div>
+                                    <span
+                                        class="material-symbols-outlined text-black text-sm relative z-10 hidden peer-checked:block">check</span>
+                                </div>
+                                <span class="text-[10px] text-center block mt-1 text-gray-500">No Fill</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Preview Card (Example State) -->
+            <div
+                class="rounded-xl bg-surface-light dark:bg-surface-dark border border-gray-200 dark:border-gray-800 p-4 shadow-sm">
+                <div class="flex items-center justify-between mb-3">
+                    <h3 class="font-semibold text-sm">Live Preview</h3>
+                    <span
+                        class="px-2 py-0.5 bg-secondary/10 text-secondary text-[10px] font-bold rounded-full uppercase tracking-wide">-75%
+                        Size</span>
+                </div>
+                <div class="flex gap-3">
+                    <!-- Before -->
+                    <div class="flex-1 space-y-2">
+                        <div
+                            class="relative w-full aspect-square rounded-lg overflow-hidden bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700">
+                            <div
+                                class="absolute top-2 left-2 px-1.5 py-0.5 bg-black/60 backdrop-blur-sm rounded text-[10px] text-white font-medium">
+                                PNG</div>
+                            <div class="w-full h-full bg-cover bg-center"
+                                data-alt="Original PNG image placeholder showing a gradient pattern"
+                                style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuA8bCUG0WK7lXPn1PonKYckvAhtS87C0_BrEe2nmA0NxcZMW3OOBwUYVuzZOZPmWUj_mbY6QwcSy4kT91g94oA6dUPjAVkhjPksiaG9DpbfRg7GoGc15SmCR74jUVdZo83ZEmCybn-UOPfyOU5vNDhexBhLJ-FrbNEes-wqjulTpUkGx4UvjAsdeEksKQVkmY_cU_Z8_T3BGMSIKsOBpPXNaX3ROjfAyvcPv0uUgOQBk7Tjn3ennpxFXWL2TKklK-Wc3lTqSmxfhvS8');">
+                            </div>
+                        </div>
+                        <div class="text-center">
+                            <p class="text-xs text-gray-500">Original</p>
+                            <p class="text-xs font-bold font-mono">1.2 MB</p>
+                        </div>
+                    </div>
+                    <!-- Arrow -->
+                    <div class="flex flex-col justify-center pt-8">
+                        <span class="material-symbols-outlined text-gray-400">arrow_forward</span>
+                    </div>
+                    <!-- After -->
+                    <div class="flex-1 space-y-2">
+                        <div
+                            class="relative w-full aspect-square rounded-lg overflow-hidden bg-gray-100 dark:bg-gray-800 border-2 border-secondary/50 shadow-[0_0_15px_-3px_rgba(0,204,102,0.3)]">
+                            <div
+                                class="absolute top-2 left-2 px-1.5 py-0.5 bg-secondary text-white rounded text-[10px] font-bold">
+                                JPG</div>
+                            <div class="w-full h-full bg-cover bg-center"
+                                data-alt="Converted JPG image preview placeholder with green tint"
+                                style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuC38TdLLGXqz1WAgZx5ZPyT9yAv6driCG0lMzrck2inCkPN1YamOAn6mEyCHsJhMlDVuw1P0N3RsUt2ghGB-hZmTfASllPcYsgNVKfU3ZQHVoDO42GNx6HHTOFovot13zC2HDoPDmfJ40PlOhgBxZhohR1oV0GWssaEFrj2p2aYEYVqYgtGr0tDVuPW5ZtENb2FVKnzyewh35AwlKsYVf6BPcRAJiTsZuCy2FMCazRFXIACO4ukq7APZ-cIvr1UtNMAnUlZy2rNIe4P');">
+                            </div>
+                        </div>
+                        <div class="text-center">
+                            <p class="text-xs text-secondary font-medium">Converted</p>
+                            <p class="text-xs font-bold font-mono text-secondary">300 KB</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Primary Action Button -->
+            <button
+                class="w-full relative group overflow-hidden rounded-xl bg-primary p-4 transition-all hover:bg-primary/90 active:scale-[0.99] shadow-lg shadow-primary/25">
+                <div
+                    class="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000">
+                </div>
+                <div class="flex items-center justify-center gap-2 text-white">
+                    <span class="material-symbols-outlined">download</span>
+                    <span class="text-base font-bold">Convert &amp; Download JPG</span>
+                </div>
+            </button>
+            <!-- Advertisement Placeholder 2 (Rectangle) -->
+            <div class="flex justify-center pt-2 pb-6">
+                <div
+                    class="w-[300px] h-[250px] bg-gray-200 dark:bg-[#16202c] border border-gray-300 dark:border-gray-700/30 rounded-lg flex flex-col items-center justify-center gap-3 text-gray-400 dark:text-gray-600">
+                    <span class="material-symbols-outlined text-4xl opacity-50">ads_click</span>
+                    <span class="text-xs font-medium uppercase tracking-widest">Ad Space (300x250)</span>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+
+</html>

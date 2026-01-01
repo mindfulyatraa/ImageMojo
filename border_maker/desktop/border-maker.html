@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Border Maker - ImageHub Pro</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#0000cc",
+                        "background-light": "#f5f5f8",
+                        "background-dark": "#0f0f23",
+                        "surface-dark": "#1e1e2d",
+                        "surface-light": "#ffffff",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "2xl": "1rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+</head>
+
+<body
+    class="bg-background-light dark:bg-background-dark font-display text-gray-900 dark:text-white antialiased selection:bg-primary selection:text-white">
+    <div class="relative flex min-h-screen w-full flex-col overflow-x-hidden pb-24"> <!-- pb-24 for sticky footer -->
+        <!-- TopAppBar -->
+        <div
+            class="sticky top-0 z-50 flex items-center bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md p-4 pb-2 justify-between border-b border-gray-200 dark:border-gray-800">
+            <div class="text-gray-900 dark:text-white flex size-12 shrink-0 items-center justify-start cursor-pointer">
+                <span class="material-symbols-outlined text-3xl">menu</span>
+            </div>
+            <h2
+                class="text-gray-900 dark:text-white text-lg font-bold leading-tight tracking-[-0.015em] flex-1 text-center">
+                ImageHub Pro</h2>
+            <div class="flex w-12 items-center justify-end">
+                <button
+                    class="flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 bg-transparent text-gray-900 dark:text-white gap-2 text-base font-bold leading-normal tracking-[0.015em] min-w-0 p-0">
+                    <span class="material-symbols-outlined text-3xl">account_circle</span>
+                </button>
+            </div>
+        </div>
+        <!-- Headline & Intro -->
+        <div class="flex flex-col items-center pt-6 px-4">
+            <h1 class="text-gray-900 dark:text-white tracking-tight text-[28px] font-bold leading-tight text-center">
+                Border Maker</h1>
+            <p class="text-gray-600 dark:text-gray-400 text-base font-normal leading-normal pt-2 text-center max-w-sm">
+                Add custom borders and frames to your photos instantly.</p>
+        </div>
+        <!-- Ad Placeholder 1 (Slim Banner) -->
+        <div class="w-full px-4 py-4">
+            <div
+                class="w-full h-14 bg-gray-200 dark:bg-surface-dark rounded-lg flex items-center justify-center border border-gray-300 dark:border-gray-700 relative overflow-hidden">
+                <span class="text-xs font-bold text-gray-400 uppercase tracking-widest z-10">Advertisement</span>
+                <div
+                    class="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent skew-x-12 opacity-20">
+                </div>
+            </div>
+        </div>
+        <!-- Main Workspace -->
+        <main class="flex flex-col gap-6 px-4">
+            <!-- Upload/Preview Zone (Modified EmptyState) -->
+            <div class="flex flex-col relative group">
+                <!-- Label -->
+                <div class="flex justify-between items-center mb-2 px-1">
+                    <span class="text-sm font-semibold text-gray-700 dark:text-gray-300">Preview</span>
+                    <span class="text-xs text-primary font-medium cursor-pointer">Reset</span>
+                </div>
+                <div
+                    class="flex flex-col items-center justify-center gap-6 rounded-2xl border-2 border-dashed border-gray-300 dark:border-gray-700 bg-white dark:bg-surface-dark px-6 py-12 transition-all hover:border-primary/50 cursor-pointer shadow-sm">
+                    <div class="flex max-w-[480px] flex-col items-center gap-3">
+                        <div class="h-16 w-16 rounded-full bg-primary/10 flex items-center justify-center mb-2">
+                            <span class="material-symbols-outlined text-primary text-4xl">add_photo_alternate</span>
+                        </div>
+                        <p
+                            class="text-gray-900 dark:text-white text-lg font-bold leading-tight tracking-[-0.015em] text-center">
+                            Upload Image</p>
+                        <p
+                            class="text-gray-500 dark:text-gray-400 text-sm font-normal leading-normal text-center max-w-[260px]">
+                            Tap to upload your photo or drag and drop file here</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Controls Panel -->
+            <div
+                class="flex flex-col gap-6 bg-white dark:bg-surface-dark p-5 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-800">
+                <!-- Accordion Header Style Title -->
+                <div class="flex items-center gap-2 border-b border-gray-100 dark:border-gray-700 pb-3 mb-1">
+                    <span class="material-symbols-outlined text-primary">tune</span>
+                    <h3 class="text-base font-bold text-gray-900 dark:text-white">Border Settings</h3>
+                </div>
+                <!-- Border Width Slider -->
+                <div class="flex flex-col gap-3">
+                    <div class="flex justify-between">
+                        <label class="text-sm font-medium text-gray-700 dark:text-gray-300">Width</label>
+                        <span class="text-sm font-bold text-primary">12px</span>
+                    </div>
+                    <input
+                        class="w-full h-2 bg-gray-200 dark:bg-gray-700 rounded-lg appearance-none cursor-pointer accent-primary"
+                        max="100" min="0" type="range" value="12" />
+                </div>
+                <!-- Corner Radius Slider -->
+                <div class="flex flex-col gap-3">
+                    <div class="flex justify-between">
+                        <label class="text-sm font-medium text-gray-700 dark:text-gray-300">Corner Radius</label>
+                        <span class="text-sm font-bold text-primary">24px</span>
+                    </div>
+                    <input
+                        class="w-full h-2 bg-gray-200 dark:bg-gray-700 rounded-lg appearance-none cursor-pointer accent-primary"
+                        max="100" min="0" type="range" value="24" />
+                </div>
+                <!-- Color Picker -->
+                <div class="flex flex-col gap-3">
+                    <label class="text-sm font-medium text-gray-700 dark:text-gray-300">Border Color</label>
+                    <div class="flex items-center gap-3 overflow-x-auto pb-2 scrollbar-hide">
+                        <!-- Custom Color Trigger -->
+                        <button
+                            class="size-10 rounded-full bg-gradient-to-tr from-blue-500 via-purple-500 to-red-500 border-2 border-transparent hover:scale-105 transition-transform shrink-0 shadow-sm relative">
+                            <span
+                                class="material-symbols-outlined text-white text-lg absolute inset-0 m-auto drop-shadow-md">colorize</span>
+                        </button>
+                        <!-- Presets -->
+                        <button class="size-10 rounded-full bg-white border-2 border-gray-300 shrink-0"></button>
+                        <button class="size-10 rounded-full bg-black border-2 border-transparent shrink-0"></button>
+                        <button class="size-10 rounded-full bg-[#ff3b30] border-2 border-transparent shrink-0"></button>
+                        <button class="size-10 rounded-full bg-[#ff9500] border-2 border-transparent shrink-0"></button>
+                        <button
+                            class="size-10 rounded-full bg-primary border-2 border-white ring-2 ring-primary ring-offset-2 ring-offset-surface-dark shrink-0"></button>
+                        <!-- Selected State -->
+                        <button class="size-10 rounded-full bg-[#4cd964] border-2 border-transparent shrink-0"></button>
+                        <button class="size-10 rounded-full bg-[#5ac8fa] border-2 border-transparent shrink-0"></button>
+                    </div>
+                </div>
+                <!-- Style Selector -->
+                <div class="flex flex-col gap-3">
+                    <label class="text-sm font-medium text-gray-700 dark:text-gray-300">Style</label>
+                    <div class="flex bg-gray-100 dark:bg-gray-900 rounded-lg p-1">
+                        <button
+                            class="flex-1 py-2 text-xs font-semibold rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white shadow-sm transition-all">Solid</button>
+                        <button
+                            class="flex-1 py-2 text-xs font-medium rounded-md text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 transition-all">Dashed</button>
+                        <button
+                            class="flex-1 py-2 text-xs font-medium rounded-md text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 transition-all">Dotted</button>
+                    </div>
+                </div>
+                <!-- Output Format -->
+                <div class="flex flex-col gap-3 pt-2 border-t border-gray-100 dark:border-gray-700">
+                    <label class="text-sm font-medium text-gray-700 dark:text-gray-300">Output Format</label>
+                    <div class="flex gap-2 flex-wrap">
+                        <button
+                            class="px-4 py-1.5 rounded-full text-xs font-bold bg-primary/20 text-primary border border-primary/20">JPG</button>
+                        <button
+                            class="px-4 py-1.5 rounded-full text-xs font-medium bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 border border-transparent hover:bg-gray-200 dark:hover:bg-gray-700">PNG</button>
+                        <button
+                            class="px-4 py-1.5 rounded-full text-xs font-medium bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 border border-transparent hover:bg-gray-200 dark:hover:bg-gray-700">WebP</button>
+                    </div>
+                </div>
+            </div>
+            <!-- Native Ad Card -->
+            <div
+                class="flex items-stretch justify-between gap-4 rounded-xl bg-white dark:bg-surface-dark p-4 shadow-sm border border-gray-200 dark:border-gray-800">
+                <div class="flex flex-[2_2_0px] flex-col justify-center gap-3">
+                    <div class="flex flex-col gap-1">
+                        <p class="text-gray-900 dark:text-white text-sm font-bold leading-tight">Pro Photo Editor</p>
+                        <p class="text-gray-500 dark:text-gray-400 text-xs font-normal leading-normal">Get advanced
+                            filters and AI tools.</p>
+                    </div>
+                    <button
+                        class="flex px-3 py-1.5 cursor-pointer items-center justify-center overflow-hidden rounded-md bg-gray-900 dark:bg-gray-700 text-white text-xs font-medium leading-normal w-fit transition hover:bg-gray-800 dark:hover:bg-gray-600">
+                        <span class="truncate">Install Now</span>
+                    </button>
+                </div>
+                <div class="w-24 bg-center bg-no-repeat bg-cover rounded-lg flex-none bg-gray-200 dark:bg-gray-800"
+                    data-alt="Abstract colorful gradient pattern representing photo editing features"
+                    style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuC8kFxfyspds5BVWkHMnCThyfQYgky-1YnVZ0eHcldJ-oVC9Nxc9CmheWBAbkilnvUkWP__oyk55LfmpejdErdCva8dO0g2bUc4u7il14iTjnaxt0SMC92j2kiWj987X1YVekaZYQYqvAZ3Qp-j31nXDl0Mg9LJm15rAo9mqNREdkpC8_5iQDAoXTOVzBYlQ6Vik1vut4y6LNvw_cWgAlwKFpf-Pw4vOvggNT6_4dvatWG5_oLZdz9tfox0uU6X2pWRUT1gW8Xdipug");'>
+                </div>
+            </div>
+            <div class="h-6"></div> <!-- Spacer -->
+        </main>
+        <!-- Sticky Footer Action Bar -->
+        <div
+            class="fixed bottom-0 w-full bg-white/90 dark:bg-background-dark/90 backdrop-blur-lg border-t border-gray-200 dark:border-gray-800 p-4 pb-6 z-50">
+            <button
+                class="w-full flex cursor-pointer items-center justify-center rounded-xl h-12 bg-primary hover:bg-blue-700 active:scale-[0.98] transition-all text-white gap-2 text-base font-bold shadow-lg shadow-primary/25">
+                <span class="material-symbols-outlined text-xl">download</span>
+                <span>Apply Border &amp; Download</span>
+            </button>
+        </div>
+    </div>
+</body>
+
+</html>

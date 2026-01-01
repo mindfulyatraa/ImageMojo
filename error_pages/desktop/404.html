@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>ImageHub Pro - 404 Not Found</title>
+    <!-- Google Fonts: Spline Sans -->
+    <link href="https://fonts.googleapis.com/css2?family=Spline+Sans:wght@300;400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <!-- Material Symbols -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#0066cc",
+                        "secondary": "#00CC66",
+                        "background-light": "#f5f7f8",
+                        "background-dark": "#0f1923",
+                        "surface-dark": "#1a2733",
+                    },
+                    fontFamily: {
+                        "display": ["Spline Sans", "sans-serif"]
+                    },
+                    borderRadius: { "DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px" },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'float-delayed': 'float 6s ease-in-out 3s infinite',
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        }
+                    }
+                },
+            },
+        }
+    </script>
+    <style>
+        /* Custom scrollbar for a cleaner look */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #0f1923;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #394756;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #0066cc;
+        }
+
+        .text-gradient {
+            background: linear-gradient(135deg, #0066cc 0%, #00CC66 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+    </style>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+</head>
+
+<body
+    class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-white transition-colors duration-300 overflow-x-hidden">
+    <div class="relative min-h-screen flex flex-col w-full">
+        <!-- Navigation Bar -->
+        <header
+            class="sticky top-0 z-50 w-full backdrop-blur-md bg-white/70 dark:bg-[#101418]/80 border-b border-gray-200 dark:border-gray-800 transition-all duration-300">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex items-center justify-between h-16">
+                    <!-- Logo -->
+                    <a href="index.html" class="flex-shrink-0 flex items-center gap-2 cursor-pointer">
+                        <div
+                            class="w-8 h-8 rounded-lg bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-white">
+                            <span class="material-symbols-outlined text-[20px]">photo_library</span>
+                        </div>
+                        <h1 class="text-xl font-bold tracking-tight">ImageHub <span class="text-primary">Pro</span></h1>
+                    </a>
+                    <!-- Desktop/Tablet Navigation -->
+                    <nav class="hidden md:flex gap-8">
+                        <a class="text-sm font-semibold hover:text-primary transition-colors" href="index.html">Home</a>
+                        <a class="text-sm font-semibold text-primary" href="index.html#tools">Tools</a>
+                        <a class="text-sm font-semibold hover:text-primary transition-colors"
+                            href="about-us.html">About</a>
+                        <a class="text-sm font-semibold hover:text-primary transition-colors" href="blog.html">Blog</a>
+                    </nav>
+                    <!-- Actions -->
+                    <div class="flex items-center gap-2">
+                        <button
+                            class="flex items-center justify-center w-10 h-10 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors text-gray-500 dark:text-gray-400">
+                            <span class="material-symbols-outlined">dark_mode</span>
+                        </button>
+                        <button
+                            class="md:hidden flex items-center justify-center w-10 h-10 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
+                            <span class="material-symbols-outlined">menu</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- Main Content -->
+        <main
+            class="flex-grow flex flex-col items-center justify-center w-full max-w-7xl mx-auto px-4 py-8 sm:px-6 lg:px-8 relative overflow-hidden">
+            <!-- Animated Background Elements -->
+            <div
+                class="absolute top-1/4 left-10 w-64 h-64 bg-primary/10 rounded-full blur-3xl animate-pulse-slow pointer-events-none">
+            </div>
+            <div class="absolute bottom-1/4 right-10 w-96 h-96 bg-secondary/5 rounded-full blur-3xl animate-pulse-slow pointer-events-none"
+                style="animation-delay: 1s;"></div>
+            <div class="w-full max-w-4xl flex flex-col items-center z-10">
+                <!-- 404 Hero Animation -->
+                <div class="relative mb-8 md:mb-12">
+                    <h1
+                        class="text-[120px] md:text-[180px] font-black leading-none tracking-tighter text-gradient select-none">
+                        404
+                    </h1>
+                    <!-- Floating Particles/Icons -->
+                    <div class="absolute -top-4 -right-8 animate-float text-primary/40 dark:text-white/20">
+                        <span class="material-symbols-outlined text-4xl md:text-6xl">broken_image</span>
+                    </div>
+                    <div class="absolute bottom-4 -left-8 animate-float-delayed text-secondary/40 dark:text-white/20">
+                        <span class="material-symbols-outlined text-3xl md:text-5xl">hide_image</span>
+                    </div>
+                    <div
+                        class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-20 blur-sm pointer-events-none">
+                        <span
+                            class="material-symbols-outlined text-[150px] md:text-[200px] text-white">sentiment_dissatisfied</span>
+                    </div>
+                </div>
+                <!-- Text Content -->
+                <div class="text-center max-w-2xl mb-10 space-y-4">
+                    <h2 class="text-2xl md:text-4xl font-bold text-gray-900 dark:text-white">
+                        Oops! That image didn't load.
+                    </h2>
+                    <p class="text-gray-600 dark:text-gray-400 text-base md:text-lg">
+                        We couldn't find the page you're looking for. It might have been moved, deleted, or perhaps it
+                        was just a bad pixel.
+                    </p>
+                </div>
+                <!-- Interactive Search -->
+                <div class="w-full max-w-lg mb-12 relative group">
+                    <div
+                        class="absolute -inset-1 bg-gradient-to-r from-primary to-secondary rounded-full blur opacity-25 group-hover:opacity-50 transition duration-500">
+                    </div>
+                    <div
+                        class="relative flex items-center bg-white dark:bg-surface-dark rounded-full shadow-lg h-14 px-2">
+                        <span class="material-symbols-outlined text-gray-400 ml-4">search</span>
+                        <input
+                            class="w-full bg-transparent border-none focus:ring-0 text-gray-900 dark:text-white placeholder-gray-500 text-base h-full px-4"
+                            placeholder="Search for a tool (e.g., Resize, Compress)..." type="text" />
+                        <button
+                            class="bg-primary hover:bg-primary/90 text-white rounded-full p-2 h-10 w-10 flex items-center justify-center transition-colors">
+                            <span class="material-symbols-outlined text-[20px]">arrow_forward</span>
+                        </button>
+                    </div>
+                </div>
+                <!-- Quick Links Grid -->
+                <div class="w-full mb-12">
+                    <p class="text-center text-sm font-medium text-gray-500 uppercase tracking-wider mb-6">Popular Tools
+                    </p>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                        <!-- Card 1 -->
+                        <a class="group flex flex-col items-center p-6 rounded-2xl bg-white dark:bg-surface-dark border border-gray-200 dark:border-gray-800 hover:border-primary/50 hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
+                            href="image-compressor.html">
+                            <div
+                                class="w-12 h-12 rounded-full bg-blue-100 dark:bg-blue-900/30 text-primary flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                                <span class="material-symbols-outlined">compress</span>
+                            </div>
+                            <span class="font-semibold text-sm">Compress</span>
+                        </a>
+                        <!-- Card 2 -->
+                        <a class="group flex flex-col items-center p-6 rounded-2xl bg-white dark:bg-surface-dark border border-gray-200 dark:border-gray-800 hover:border-primary/50 hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
+                            href="resizer.html">
+                            <div
+                                class="w-12 h-12 rounded-full bg-green-100 dark:bg-green-900/30 text-secondary flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                                <span class="material-symbols-outlined">photo_size_select_large</span>
+                            </div>
+                            <span class="font-semibold text-sm">Resize</span>
+                        </a>
+                        <!-- Card 3 -->
+                        <a class="group flex flex-col items-center p-6 rounded-2xl bg-white dark:bg-surface-dark border border-gray-200 dark:border-gray-800 hover:border-primary/50 hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
+                            href="index.html#conversion">
+                            <div
+                                class="w-12 h-12 rounded-full bg-purple-100 dark:bg-purple-900/30 text-purple-500 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                                <span class="material-symbols-outlined">transform</span>
+                            </div>
+                            <span class="font-semibold text-sm">Convert</span>
+                        </a>
+                        <!-- Card 4 -->
+                        <a class="group flex flex-col items-center p-6 rounded-2xl bg-white dark:bg-surface-dark border border-gray-200 dark:border-gray-800 hover:border-primary/50 hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
+                            href="cropper.html">
+                            <div
+                                class="w-12 h-12 rounded-full bg-orange-100 dark:bg-orange-900/30 text-orange-500 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                                <span class="material-symbols-outlined">crop</span>
+                            </div>
+                            <span class="font-semibold text-sm">Crop</span>
+                        </a>
+                    </div>
+                </div>
+                <!-- Primary CTA -->
+                <div class="flex justify-center mb-12">
+                    <a class="relative inline-flex items-center justify-center px-8 py-3 overflow-hidden font-bold text-white transition-all duration-300 bg-primary rounded-full group hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
+                        href="index.html">
+                        <span
+                            class="absolute w-0 h-0 transition-all duration-500 ease-out bg-white rounded-full group-hover:w-56 group-hover:h-56 opacity-10"></span>
+                        <span class="relative flex items-center gap-2">
+                            <span class="material-symbols-outlined text-[20px]">home</span>
+                            Go to Homepage
+                        </span>
+                    </a>
+                </div>
+                <!-- AdSense Placeholder -->
+                <div class="w-full max-w-3xl mx-auto mt-auto">
+                    <div
+                        class="relative w-full h-24 bg-gray-200 dark:bg-white/5 rounded-xl overflow-hidden flex items-center justify-center border border-gray-300 dark:border-white/10">
+                        <!-- Shimmer effect -->
+                        <div
+                            class="absolute inset-0 -translate-x-full animate-[shimmer_2s_infinite] bg-gradient-to-r from-transparent via-white/10 to-transparent">
+                        </div>
+                        <span class="text-xs font-medium text-gray-400 uppercase tracking-widest z-10">Sponsored
+                            Advertisement</span>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <!-- Footer -->
+        <footer
+            class="border-t border-gray-200 dark:border-gray-800 bg-white/50 dark:bg-[#101418]/50 backdrop-blur-sm mt-8">
+            <div
+                class="max-w-7xl mx-auto px-4 py-6 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-sm text-gray-500 dark:text-gray-400">© 2026 ImageHub Pro. All rights reserved.</p>
+                <div class="flex gap-6">
+                    <a class="text-sm text-gray-500 hover:text-primary dark:text-gray-400 dark:hover:text-white transition-colors"
+                        href="privacy-policy.html">Privacy</a>
+                    <a class="text-sm text-gray-500 hover:text-primary dark:text-gray-400 dark:hover:text-white transition-colors"
+                        href="terms-of-service.html">Terms</a>
+                    <a class="text-sm text-gray-500 hover:text-primary dark:text-gray-400 dark:hover:text-white transition-colors"
+                        href="contact.html">Contact</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+</body>
+
+</html>

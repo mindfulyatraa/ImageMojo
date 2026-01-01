@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>WebP Converter - ImageHub Pro</title>
+    <!-- Fonts and Icons -->
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <!-- Theme Configuration -->
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#0066cc",
+                        "secondary": "#00CC66", // Green accent
+                        "background-light": "#f5f7f8",
+                        "background-dark": "#0f1923",
+                        "surface-dark": "#1A2633", // Slightly lighter than background-dark
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"],
+                        "body": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "2xl": "1rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        /* Custom scrollbar for webkit */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #0f1923;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #27303a;
+            border-radius: 3px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #0066cc;
+        }
+
+        /* Range Slider Styling */
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            height: 20px;
+            width: 20px;
+            border-radius: 50%;
+            background: #ffffff;
+            cursor: pointer;
+            margin-top: -8px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+        }
+
+        input[type=range]::-webkit-slider-runnable-track {
+            width: 100%;
+            height: 4px;
+            cursor: pointer;
+            background: #4B5563;
+            border-radius: 2px;
+        }
+
+        /* Custom toggle switch */
+        .toggle-checkbox:checked {
+            right: 0;
+            border-color: #00CC66;
+        }
+
+        .toggle-checkbox:checked+.toggle-label {
+            background-color: #00CC66;
+        }
+    </style>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+</head>
+
+<body
+    class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-white antialiased selection:bg-primary selection:text-white">
+    <div class="relative flex h-auto min-h-screen w-full flex-col overflow-x-hidden">
+        <!-- Header -->
+        <header
+            class="sticky top-0 z-50 flex items-center justify-between bg-background-dark/95 backdrop-blur-sm px-4 py-3 border-b border-white/10 shadow-lg">
+            <div class="flex items-center gap-3">
+                <button class="text-white hover:text-primary transition-colors p-1 rounded-full active:bg-white/10">
+                    <span class="material-symbols-outlined text-[24px]">menu</span>
+                </button>
+                <div class="flex flex-col">
+                    <h2 class="text-white text-lg font-bold leading-tight tracking-tight">ImageHub <span
+                            class="text-primary">Pro</span></h2>
+                </div>
+            </div>
+            <button
+                class="flex items-center justify-center rounded-full size-10 bg-surface-dark text-white hover:bg-white/10 transition-colors">
+                <span class="material-symbols-outlined text-[24px]">account_circle</span>
+            </button>
+        </header>
+        <!-- Main Content -->
+        <main class="flex-1 flex flex-col gap-5 px-4 pb-24 pt-4">
+            <!-- Title Section -->
+            <div class="flex flex-col gap-1 animate-fade-in-up">
+                <h1 class="text-white text-3xl font-bold tracking-tight">WebP Converter</h1>
+                <p class="text-slate-400 text-sm leading-relaxed">Convert images to WebP for faster web loading.
+                    Supports JPG, PNG, GIF.</p>
+            </div>
+            <!-- Upload Zone -->
+            <div class="relative group cursor-pointer">
+                <div
+                    class="absolute inset-0 bg-primary/5 rounded-2xl blur-xl group-hover:bg-primary/10 transition-all duration-300">
+                </div>
+                <div
+                    class="relative flex flex-col items-center justify-center gap-4 rounded-2xl border-2 border-dashed border-slate-600 bg-surface-dark/50 hover:bg-surface-dark hover:border-primary transition-all duration-300 px-6 py-10">
+                    <div
+                        class="flex items-center justify-center size-16 rounded-full bg-primary/20 text-primary mb-2 shadow-[0_0_15px_rgba(0,102,204,0.3)]">
+                        <span class="material-symbols-outlined text-[32px]">cloud_upload</span>
+                    </div>
+                    <div class="text-center">
+                        <p class="text-white text-lg font-bold mb-1">Tap to Upload</p>
+                        <p class="text-slate-400 text-xs">or drag and drop (JPG, PNG, GIF)</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Ad Placeholder 1 -->
+            <div class="w-full flex justify-center my-1">
+                <div
+                    class="w-full max-w-[320px] h-[50px] bg-slate-800 rounded flex items-center justify-center border border-slate-700/50">
+                    <span class="text-slate-500 text-[10px] tracking-widest font-medium uppercase">Advertisement</span>
+                </div>
+            </div>
+            <!-- Configuration Accordion -->
+            <div class="flex flex-col gap-4 rounded-2xl bg-surface-dark p-5 border border-white/5 shadow-lg">
+                <div class="flex items-center justify-between pb-2 border-b border-white/5">
+                    <h3 class="text-white font-bold text-base flex items-center gap-2">
+                        <span class="material-symbols-outlined text-primary text-[20px]">tune</span>
+                        Conversion Settings
+                    </h3>
+                </div>
+                <!-- Format Selection -->
+                <div class="flex flex-col gap-2">
+                    <label class="text-slate-400 text-xs font-semibold uppercase tracking-wider">Output Format</label>
+                    <div class="grid grid-cols-3 gap-2 bg-background-dark p-1 rounded-lg">
+                        <button
+                            class="bg-primary text-white text-sm font-bold py-2 rounded shadow-sm transition-all">WebP</button>
+                        <button
+                            class="text-slate-400 hover:text-white text-sm font-medium py-2 rounded hover:bg-white/5 transition-all">JPG</button>
+                        <button
+                            class="text-slate-400 hover:text-white text-sm font-medium py-2 rounded hover:bg-white/5 transition-all">PNG</button>
+                    </div>
+                </div>
+                <!-- Quality Slider -->
+                <div class="flex flex-col gap-3 pt-2">
+                    <div class="flex justify-between items-center">
+                        <label class="text-slate-400 text-xs font-semibold uppercase tracking-wider">Quality</label>
+                        <span class="text-secondary font-bold text-sm">80%</span>
+                    </div>
+                    <input class="w-full h-1.5 bg-slate-700 rounded-lg appearance-none cursor-pointer" max="100" min="0"
+                        type="range" value="80" />
+                    <div class="flex justify-between text-[10px] text-slate-500 font-medium">
+                        <span>Low Size</span>
+                        <span>Best Quality</span>
+                    </div>
+                </div>
+                <!-- Toggles -->
+                <div class="flex items-center justify-between pt-2">
+                    <span class="text-white text-sm font-medium">Lossless Compression</span>
+                    <div
+                        class="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in">
+                        <input
+                            class="toggle-checkbox absolute block w-5 h-5 rounded-full bg-white border-4 border-slate-700 appearance-none cursor-pointer transition-all duration-300"
+                            id="toggle" name="toggle" type="checkbox" />
+                        <label class="toggle-label block overflow-hidden h-5 rounded-full bg-slate-700 cursor-pointer"
+                            for="toggle"></label>
+                    </div>
+                </div>
+            </div>
+            <!-- Example Result Card (Mockup state: file ready) -->
+            <div class="flex flex-col gap-3 animate-pulse-once">
+                <div class="flex items-center justify-between px-1">
+                    <h3 class="text-white font-bold text-base">Preview Result</h3>
+                    <span class="text-xs text-slate-400">1 file processed</span>
+                </div>
+                <div class="rounded-xl bg-surface-dark border border-white/5 overflow-hidden shadow-lg">
+                    <div class="relative w-full aspect-[16/9] bg-background-dark group">
+                        <!-- Comparison Slider Mockup -->
+                        <div class="absolute inset-0 bg-cover bg-center"
+                            data-alt="Original car image showing high detail"
+                            style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDK9_CJ8wy-k0bPKQz1EsBMh57U21ueMMrYAS_t1zFDHM_fapmUgDOEavttHEiNSALuISLwyaPUfrzD9asv2P5dP1cYYsMaOHFtXBED4WvxDGOJsO60WnBuwOaqDvypSNDptqK9cUGWCwUTtGj-A_S6Ik0pGsMD7n4LOrwoRHxEaxYeu0y5s8gMnlESotF_r89-uSeEZaYGrvNMLtj15AO_xc7EL9fS1gDniyWSz2zACpoUcpjE6DLlk2c7tFpyZy6Ao5PUd_tMxDf2');">
+                        </div>
+                        <div class="absolute inset-y-0 left-1/2 w-0.5 bg-white z-10 shadow-[0_0_10px_rgba(0,0,0,0.5)]">
+                            <div
+                                class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 size-8 bg-white rounded-full flex items-center justify-center shadow-lg text-black">
+                                <span class="material-symbols-outlined text-[16px]">code</span>
+                            </div>
+                        </div>
+                        <div
+                            class="absolute bottom-2 left-2 bg-black/60 backdrop-blur-md px-2 py-1 rounded text-[10px] text-white font-mono">
+                            JPG</div>
+                        <div
+                            class="absolute bottom-2 right-2 bg-secondary/80 backdrop-blur-md px-2 py-1 rounded text-[10px] text-white font-mono">
+                            WEBP</div>
+                    </div>
+                    <div class="p-4 flex flex-col gap-3">
+                        <div class="flex justify-between items-center pb-3 border-b border-white/5">
+                            <div class="flex flex-col">
+                                <span
+                                    class="text-white text-sm font-semibold truncate max-w-[150px]">supercar_photo.webp</span>
+                                <span class="text-slate-400 text-xs">800x600px</span>
+                            </div>
+                            <div class="flex flex-col items-end">
+                                <span class="text-secondary font-bold text-sm">-54% Saved</span>
+                                <span class="text-slate-400 text-xs line-through mr-1">2.4MB</span>
+                                <span class="text-white text-xs font-mono">1.1MB</span>
+                            </div>
+                        </div>
+                        <div class="flex gap-2">
+                            <button
+                                class="flex-1 flex items-center justify-center gap-2 h-10 rounded-lg border border-slate-600 text-white text-sm font-medium hover:bg-white/5 transition-colors">
+                                <span class="material-symbols-outlined text-[18px]">visibility</span>
+                                Preview
+                            </button>
+                            <button
+                                class="flex-[2] flex items-center justify-center gap-2 h-10 rounded-lg bg-secondary text-white text-sm font-bold shadow-lg hover:bg-secondary/90 hover:scale-[1.02] transition-all">
+                                <span class="material-symbols-outlined text-[20px]">download</span>
+                                Download
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Ad Placeholder 2 -->
+            <div class="w-full flex justify-center mt-2 mb-6">
+                <div
+                    class="w-full max-w-[300px] h-[250px] bg-slate-800 rounded-lg flex flex-col items-center justify-center border border-slate-700/50 gap-2">
+                    <span class="material-symbols-outlined text-slate-600 text-[32px]">ads_click</span>
+                    <span class="text-slate-500 text-xs tracking-widest font-medium uppercase">Advertisement</span>
+                </div>
+            </div>
+        </main>
+        <!-- Sticky Bottom Action Bar -->
+        <div
+            class="fixed bottom-0 left-0 w-full bg-background-dark/95 backdrop-blur-md border-t border-white/10 p-4 pb-8 z-40 shadow-[0_-5px_20px_rgba(0,0,0,0.3)]">
+            <button
+                class="w-full flex items-center justify-center gap-2 h-12 rounded-xl bg-primary text-white text-base font-bold shadow-lg shadow-primary/30 hover:bg-primary/90 active:scale-[0.98] transition-all">
+                <span class="material-symbols-outlined">autorenew</span>
+                Convert &amp; Download
+            </button>
+        </div>
+    </div>
+</body>
+
+</html>

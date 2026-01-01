@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>HEIC to JPG Converter - ImageHub Pro</title>
+    <!-- Google Fonts & Icons -->
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <!-- Tailwind CSS with Plugins -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <!-- Theme Configuration -->
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#0066cc",
+                        "primary-dark": "#0052a3",
+                        "success": "#00CC66",
+                        "background-light": "#f5f7f8",
+                        "background-dark": "#0f1923",
+                        "surface-dark": "#1A2633",
+                        "border-dark": "#394756",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"],
+                        "body": ["Inter", "sans-serif"],
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+    <style>
+        /* Custom scrollbar for webkit */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #0f1923;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #394756;
+            border-radius: 3px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #4a5b6d;
+        }
+
+        /* Range Slider Styling */
+        input[type=range] {
+            -webkit-appearance: none;
+            background: transparent;
+        }
+
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            height: 20px;
+            width: 20px;
+            border-radius: 50%;
+            background: #0066cc;
+            margin-top: -8px;
+            box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
+            cursor: pointer;
+        }
+
+        input[type=range]::-webkit-slider-runnable-track {
+            width: 100%;
+            height: 4px;
+            cursor: pointer;
+            background: #394756;
+            border-radius: 2px;
+        }
+
+        input[type=range]:focus::-webkit-slider-runnable-track {
+            background: #394756;
+        }
+
+        /* Toggle Switch */
+        .toggle-checkbox:checked {
+            right: 0;
+            border-color: #0066cc;
+        }
+
+        .toggle-checkbox:checked+.toggle-label {
+            background-color: #0066cc;
+        }
+    </style>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+</head>
+
+<body class="bg-background-light dark:bg-background-dark font-display antialiased text-slate-900 dark:text-white pb-24">
+    <!-- Top App Bar -->
+    <header
+        class="sticky top-0 z-50 flex items-center bg-background-light dark:bg-background-dark p-4 pb-2 justify-between border-b border-gray-200 dark:border-border-dark/50 backdrop-blur-md bg-opacity-90 dark:bg-opacity-90">
+        <div class="text-slate-900 dark:text-white flex size-12 shrink-0 items-center justify-start cursor-pointer">
+            <span class="material-symbols-outlined text-[28px]">menu</span>
+        </div>
+        <div class="flex items-center gap-2 flex-1 justify-center">
+            <!-- Logo placeholder or icon -->
+            <div
+                class="size-6 bg-gradient-to-br from-primary to-success rounded-md flex items-center justify-center text-white">
+                <span class="material-symbols-outlined text-[16px]">photo_library</span>
+            </div>
+            <h2 class="text-slate-900 dark:text-white text-lg font-bold leading-tight tracking-[-0.015em]">ImageHub Pro
+            </h2>
+        </div>
+        <div class="flex w-12 items-center justify-end">
+            <button
+                class="flex items-center justify-center rounded-full size-10 bg-gray-200 dark:bg-surface-dark text-slate-900 dark:text-white">
+                <span class="material-symbols-outlined text-[24px]">account_circle</span>
+            </button>
+        </div>
+    </header>
+    <!-- Main Content -->
+    <main class="flex flex-col w-full px-4 pt-4 max-w-lg mx-auto">
+        <!-- Headline Section -->
+        <div class="flex flex-col mb-4">
+            <h1 class="text-slate-900 dark:text-white text-2xl font-bold leading-tight mb-2">HEIC to JPG Converter</h1>
+            <p class="text-slate-500 dark:text-gray-400 text-sm font-normal leading-normal">
+                Convert high-efficiency photos to compatible JPGs instantly. Safe, fast, and free.
+            </p>
+        </div>
+        <!-- Upload Area (Empty State / Dropzone) -->
+        <div class="flex flex-col mb-6">
+            <div
+                class="group relative flex flex-col items-center justify-center gap-4 rounded-xl border-2 border-dashed border-gray-300 dark:border-border-dark hover:border-primary/50 dark:hover:border-primary/50 bg-white dark:bg-surface-dark/50 px-6 py-10 transition-colors cursor-pointer">
+                <div class="size-14 rounded-full bg-primary/10 flex items-center justify-center text-primary mb-2">
+                    <span class="material-symbols-outlined text-[32px]">cloud_upload</span>
+                </div>
+                <div class="flex flex-col items-center gap-1">
+                    <p class="text-slate-900 dark:text-white text-base font-bold text-center">Tap to Upload HEIC</p>
+                    <p class="text-slate-500 dark:text-gray-400 text-xs text-center">or drag and drop files here</p>
+                </div>
+                <button
+                    class="pointer-events-none mt-2 flex cursor-pointer items-center justify-center rounded-lg h-9 px-5 bg-primary text-white text-sm font-semibold shadow-lg shadow-primary/20">
+                    Browse Files
+                </button>
+            </div>
+        </div>
+        <!-- Settings Accordion -->
+        <div class="flex flex-col gap-3 mb-6">
+            <details
+                class="flex flex-col rounded-xl border border-gray-200 dark:border-border-dark bg-white dark:bg-surface-dark overflow-hidden group">
+                <summary class="flex cursor-pointer items-center justify-between gap-4 p-4 select-none">
+                    <div class="flex items-center gap-3">
+                        <span class="material-symbols-outlined text-primary">tune</span>
+                        <p class="text-slate-900 dark:text-white text-sm font-semibold">Output Settings</p>
+                    </div>
+                    <span
+                        class="material-symbols-outlined text-slate-500 group-open:rotate-180 transition-transform">expand_more</span>
+                </summary>
+                <div
+                    class="px-4 pb-4 pt-0 border-t border-transparent group-open:border-gray-100 dark:group-open:border-border-dark/50 transition-colors">
+                    <!-- Quality Slider -->
+                    <div class="mt-4">
+                        <div class="flex justify-between mb-2">
+                            <label class="text-xs font-medium text-slate-500 dark:text-gray-400">Quality</label>
+                            <span class="text-xs font-bold text-primary">85%</span>
+                        </div>
+                        <input class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700"
+                            max="100" min="1" type="range" value="85" />
+                        <div class="flex justify-between mt-1">
+                            <span class="text-[10px] text-gray-500">Low Size</span>
+                            <span class="text-[10px] text-gray-500">High Quality</span>
+                        </div>
+                    </div>
+                    <!-- Metadata Toggle -->
+                    <div class="flex items-center justify-between mt-5">
+                        <div class="flex flex-col">
+                            <span class="text-sm font-medium text-slate-900 dark:text-white">Keep EXIF Data</span>
+                            <span class="text-xs text-slate-500 dark:text-gray-400">Preserve location &amp; camera
+                                details</span>
+                        </div>
+                        <div
+                            class="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in">
+                            <input
+                                class="toggle-checkbox absolute block w-5 h-5 rounded-full bg-white border-4 appearance-none cursor-pointer border-gray-300 dark:border-gray-600 checked:border-primary outline-none transition-all duration-300"
+                                id="toggle" name="toggle" type="checkbox" />
+                            <label
+                                class="toggle-label block overflow-hidden h-5 rounded-full bg-gray-300 dark:bg-gray-700 cursor-pointer checked:bg-primary transition-colors duration-300"
+                                for="toggle"></label>
+                        </div>
+                    </div>
+                </div>
+            </details>
+        </div>
+        <!-- Ad Placeholder -->
+        <div
+            class="w-full h-[60px] bg-gray-200 dark:bg-[#151f2b] rounded-lg mb-6 flex items-center justify-center border border-dashed border-gray-300 dark:border-border-dark overflow-hidden relative">
+            <!-- Background pattern for ad -->
+            <div class="absolute inset-0 opacity-10"
+                style="background-image: radial-gradient(#64748b 1px, transparent 1px); background-size: 10px 10px;">
+            </div>
+            <span
+                class="text-xs font-medium text-slate-400 dark:text-gray-500 relative z-10 uppercase tracking-wider">Advertisement</span>
+        </div>
+        <!-- File List / Queue -->
+        <div class="flex flex-col gap-4 mb-6">
+            <div class="flex items-center justify-between px-1">
+                <h3 class="text-sm font-semibold text-slate-900 dark:text-white">File Queue (2)</h3>
+                <button class="text-xs text-primary font-medium hover:underline">Clear All</button>
+            </div>
+            <!-- Item 1: Converted (Success) -->
+            <div
+                class="flex flex-col bg-white dark:bg-surface-dark rounded-xl border border-gray-200 dark:border-border-dark overflow-hidden shadow-sm">
+                <div class="flex p-3 gap-3">
+                    <!-- Thumbnail -->
+                    <div class="relative w-16 h-16 shrink-0 rounded-lg overflow-hidden bg-gray-800">
+                        <img alt="Thumbnail of uploaded image showing colorful architectural forms"
+                            class="w-full h-full object-cover opacity-80"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuAzMyj32-8-S7lGDhSaYBaGPxsDc-RJCnT1RgCDYCagNxLnOTY7w6nVj8IRfh12BxzSh-X5O_q_zbREV9Kn0FvbvBruaPQw_X8NU759hf9y3pj0zS7n1TG_VQjpb_EwUXFNC8elG6-_M2bFQg12Eml1DsVvNZyYAIU07kd03ANNE7kquWkuS3-MKfqy8VKDj30J7Yro0eZ-M3VZbew7UDdzXXwrJtNSkgTvo8fXqzx2itomzxlqVZMMP4Uavwvnsf3Eb3l6wZ00UllQ" />
+                        <div class="absolute inset-0 flex items-center justify-center bg-black/20">
+                            <span class="material-symbols-outlined text-white text-sm drop-shadow-md">image</span>
+                        </div>
+                    </div>
+                    <!-- Details -->
+                    <div class="flex flex-col flex-1 justify-center min-w-0">
+                        <div class="flex items-start justify-between mb-1">
+                            <h4 class="text-sm font-medium text-slate-900 dark:text-white truncate pr-2">IMG_4920.HEIC
+                            </h4>
+                            <span
+                                class="shrink-0 inline-flex items-center rounded-full bg-success/10 px-2 py-0.5 text-[10px] font-bold text-success ring-1 ring-inset ring-success/20">
+                                READY
+                            </span>
+                        </div>
+                        <div class="flex items-center gap-2 text-xs text-slate-500 dark:text-gray-400">
+                            <span>2.4 MB</span>
+                            <span class="material-symbols-outlined text-[10px]">arrow_right_alt</span>
+                            <span class="text-white font-medium">850 KB</span>
+                        </div>
+                        <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-1 mt-2">
+                            <div class="bg-success h-1 rounded-full" style="width: 100%"></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Action Row -->
+                <div
+                    class="flex border-t border-gray-100 dark:border-border-dark/50 divide-x divide-gray-100 dark:divide-border-dark/50">
+                    <button
+                        class="flex-1 py-2.5 text-xs font-medium text-slate-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-white/5 flex items-center justify-center gap-1.5">
+                        <span class="material-symbols-outlined text-[16px]">visibility</span>
+                        Preview
+                    </button>
+                    <button
+                        class="flex-1 py-2.5 text-xs font-bold text-success hover:bg-success/5 flex items-center justify-center gap-1.5">
+                        <span class="material-symbols-outlined text-[16px]">download</span>
+                        Save JPG
+                    </button>
+                </div>
+            </div>
+            <!-- Item 2: Converting/Waiting -->
+            <div
+                class="flex flex-col bg-white dark:bg-surface-dark rounded-xl border border-gray-200 dark:border-border-dark overflow-hidden opacity-90 shadow-sm">
+                <div class="flex p-3 gap-3">
+                    <!-- Thumbnail placeholder -->
+                    <div
+                        class="w-16 h-16 shrink-0 rounded-lg bg-gray-100 dark:bg-gray-800 flex items-center justify-center">
+                        <span class="material-symbols-outlined text-gray-400 text-[24px]">image</span>
+                    </div>
+                    <!-- Details -->
+                    <div class="flex flex-col flex-1 justify-center min-w-0">
+                        <div class="flex items-start justify-between mb-1">
+                            <h4 class="text-sm font-medium text-slate-900 dark:text-white truncate pr-2">IMG_4921.HEIC
+                            </h4>
+                            <span
+                                class="shrink-0 inline-flex items-center rounded-full bg-yellow-500/10 px-2 py-0.5 text-[10px] font-bold text-yellow-500 ring-1 ring-inset ring-yellow-500/20">
+                                WAITING
+                            </span>
+                        </div>
+                        <div class="flex items-center gap-2 text-xs text-slate-500 dark:text-gray-400">
+                            <span>1.8 MB</span>
+                        </div>
+                        <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-1 mt-2">
+                            <div class="bg-yellow-500 h-1 rounded-full" style="width: 0%"></div>
+                        </div>
+                    </div>
+                    <!-- Delete Btn -->
+                    <button class="self-center p-2 text-gray-400 hover:text-red-400">
+                        <span class="material-symbols-outlined text-[20px]">close</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+    <!-- Sticky Footer Action Bar -->
+    <div
+        class="fixed bottom-0 left-0 w-full bg-white dark:bg-background-dark border-t border-gray-200 dark:border-border-dark p-4 pb-8 z-40 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)]">
+        <div class="flex gap-3 max-w-lg mx-auto">
+            <button
+                class="flex-1 flex items-center justify-center gap-2 bg-primary hover:bg-primary-dark text-white h-12 rounded-lg font-bold text-base shadow-lg shadow-primary/25 active:scale-[0.98] transition-all">
+                <span class="material-symbols-outlined">bolt</span>
+                Convert All Files
+            </button>
+        </div>
+    </div>
+</body>
+
+</html>

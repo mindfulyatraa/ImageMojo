@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>PDF to Image Converter - ImageHub Pro</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#0066cc",
+                        "secondary": "#00CC66",
+                        "background-light": "#f5f7f8",
+                        "background-dark": "#0f1923",
+                        "surface-dark": "#1A2633",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+    <style>
+        /* Custom scrollbar for horizontal preview */
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+</head>
+
+<body
+    class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-white antialiased selection:bg-primary selection:text-white">
+    <div
+        class="relative flex h-screen w-full flex-col overflow-hidden mx-auto max-w-md shadow-2xl bg-background-light dark:bg-background-dark border-x border-slate-200 dark:border-slate-800">
+        <!-- Header -->
+        <header
+            class="flex items-center justify-between p-4 bg-background-light dark:bg-background-dark sticky top-0 z-20 border-b border-slate-200 dark:border-slate-800/50">
+            <button
+                class="flex items-center justify-center p-2 text-slate-600 dark:text-white hover:bg-slate-200 dark:hover:bg-slate-800 rounded-full transition-colors">
+                <span class="material-symbols-outlined">menu</span>
+            </button>
+            <div class="flex items-center gap-2">
+                <div class="w-8 h-8 rounded-lg bg-primary flex items-center justify-center text-white">
+                    <span class="material-symbols-outlined text-[20px]">image</span>
+                </div>
+                <h1 class="text-lg font-bold tracking-tight">ImageHub Pro</h1>
+            </div>
+            <button
+                class="flex items-center justify-center p-2 text-slate-600 dark:text-white hover:bg-slate-200 dark:hover:bg-slate-800 rounded-full transition-colors">
+                <span class="material-symbols-outlined">account_circle</span>
+            </button>
+        </header>
+        <!-- Main Content (Scrollable) -->
+        <main class="flex-1 overflow-y-auto scroll-smooth pb-32">
+            <!-- Hero Title -->
+            <div class="px-6 pt-6 pb-4 text-center">
+                <h2 class="text-2xl font-bold leading-tight mb-2">PDF to Image Converter</h2>
+                <p class="text-slate-500 dark:text-slate-400 text-sm">Convert PDF pages to high-quality images
+                    instantly.</p>
+            </div>
+            <!-- Upload Zone -->
+            <div class="px-4 mb-6">
+                <div
+                    class="group relative flex flex-col items-center justify-center gap-4 rounded-xl border-2 border-dashed border-slate-300 dark:border-slate-600 hover:border-primary dark:hover:border-primary bg-white dark:bg-surface-dark px-6 py-10 transition-all cursor-pointer">
+                    <div
+                        class="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center text-primary mb-2 group-hover:scale-110 transition-transform">
+                        <span class="material-symbols-outlined text-[32px]">cloud_upload</span>
+                    </div>
+                    <div class="text-center">
+                        <p class="text-base font-bold mb-1">Tap to Upload PDF</p>
+                        <p class="text-xs text-slate-500 dark:text-slate-400">or drag file here (Max 20MB)</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Preview Strip (Simulated post-upload state for design richness) -->
+            <div class="px-4 mb-6">
+                <div class="flex items-center justify-between mb-3">
+                    <h3 class="text-sm font-semibold text-slate-700 dark:text-slate-300">Preview Pages</h3>
+                    <span class="text-xs text-[#00CC66] font-medium flex items-center gap-1">
+                        <span class="material-symbols-outlined text-[14px]">check_circle</span>
+                        Ready
+                    </span>
+                </div>
+                <div class="flex gap-3 overflow-x-auto hide-scrollbar pb-2 snap-x">
+                    <!-- Page 1 -->
+                    <div
+                        class="snap-center shrink-0 w-24 aspect-[2/3] rounded-lg bg-slate-200 dark:bg-slate-700 relative overflow-hidden border border-slate-300 dark:border-slate-600 group">
+                        <div class="absolute inset-0 bg-cover bg-center opacity-80"
+                            data-alt="Abstract colorful document preview thumbnail"
+                            style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCP7ZTV2YK8xXha_7r8j0Lv8oYcUIcfTlxpHYuA4q7BLLFcvBrbrj3RGbvv3cB5NkmdfhOasHpJYThZcBkbFNJbEoenIuxY7TQgXp0kxchS0Ea0lv46eBn257hE9LfS0cVeek6v5MXmIgCS7NibKDYlg3M4AyKDFnXSvQF3vV_CvxEIKTm27F3_m_VKmN180-o6wHu37AjK0l_Oco_znhMsDEr4speg-B8JcfLwIBXdbLOx-Ln1pLqmnjADSh0UclLsTPZXAtzwE5gA');">
+                        </div>
+                        <div class="absolute bottom-0 w-full bg-black/60 text-white text-[10px] text-center py-1">Page 1
+                        </div>
+                    </div>
+                    <!-- Page 2 -->
+                    <div
+                        class="snap-center shrink-0 w-24 aspect-[2/3] rounded-lg bg-slate-200 dark:bg-slate-700 relative overflow-hidden border border-slate-300 dark:border-slate-600">
+                        <div class="absolute inset-0 bg-cover bg-center opacity-80"
+                            data-alt="Abstract business chart document thumbnail"
+                            style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuB0PSf5foJKYtY29CZA_BrPcyH2jBj5yDNQfWVBKZ517v7PFNURce608DJXL9rapbu1RIGWvBg5sbQw-76DflHps45XzjCZXigzy2K1z4GMu9k_mPNfttn0Msdq5kwf3wSmWVtTVCfk9n4pbhM0kJV__kTzIWfvk9W6YeJ1wYj4X8icr2IzKHzeIEzlOkOIz6S3g7e9gjx9OZKUL-3XWwzYfvo6zGrZhkPqTtnswsXtop2neFLM9RwY0W4nEakTzqsUmZIsCkWdV7Pl');">
+                        </div>
+                        <div class="absolute bottom-0 w-full bg-black/60 text-white text-[10px] text-center py-1">Page 2
+                        </div>
+                    </div>
+                    <!-- Page 3 -->
+                    <div
+                        class="snap-center shrink-0 w-24 aspect-[2/3] rounded-lg bg-slate-200 dark:bg-slate-700 relative overflow-hidden border border-slate-300 dark:border-slate-600">
+                        <div class="absolute inset-0 bg-cover bg-center opacity-80"
+                            data-alt="Abstract gradient report cover thumbnail"
+                            style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBXBJkHzemTdeMbllyeNfITs6PbIOegoXS-bqRuFaH6A-VQ5QpUYYb5CMYfIRR1KwmSNILPJTDaW6QOhbPQvCvm6pcbLD1KQUzDPI0Z6qi3NrOGUHrhyS2wQJMRj7fh4kdqAGcTs_EsPRISvHuqAhNZS9-vbUOFqKZ4pmMIgpxAILHcqkAHbs6CoS-PHrOjr9VjfaGYlo7pIX4KPGdgcDYP_vunV9icxFkhPz6cJw3XjYXlM6XXm4RzMLiS0A8qnztDfVA9F2TaFYwB');">
+                        </div>
+                        <div class="absolute bottom-0 w-full bg-black/60 text-white text-[10px] text-center py-1">Page 3
+                        </div>
+                    </div>
+                    <!-- Add More Placeholder -->
+                    <div
+                        class="snap-center shrink-0 w-24 aspect-[2/3] rounded-lg bg-slate-100 dark:bg-slate-800 border-2 border-dashed border-slate-300 dark:border-slate-600 flex flex-col items-center justify-center gap-1 text-slate-400">
+                        <span class="material-symbols-outlined text-[20px]">add</span>
+                        <span class="text-[10px]">Add PDF</span>
+                    </div>
+                </div>
+            </div>
+            <!-- Settings Accordion -->
+            <div class="px-4 mb-6">
+                <details
+                    class="group bg-white dark:bg-surface-dark rounded-xl border border-slate-200 dark:border-slate-700 overflow-hidden"
+                    open="">
+                    <summary
+                        class="flex items-center justify-between p-4 cursor-pointer list-none bg-slate-50 dark:bg-surface-dark">
+                        <div class="flex items-center gap-3">
+                            <span class="material-symbols-outlined text-primary">tune</span>
+                            <span class="font-semibold text-sm">Conversion Settings</span>
+                        </div>
+                        <span
+                            class="material-symbols-outlined text-slate-400 transition-transform group-open:rotate-180">expand_more</span>
+                    </summary>
+                    <div class="p-4 pt-2 border-t border-slate-100 dark:border-slate-700 space-y-5">
+                        <!-- Output Format -->
+                        <div>
+                            <label
+                                class="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-2 block">Output
+                                Format</label>
+                            <div class="flex bg-slate-100 dark:bg-slate-800 p-1 rounded-lg">
+                                <button
+                                    class="flex-1 py-2 rounded-md bg-white dark:bg-primary shadow-sm text-xs font-bold text-slate-800 dark:text-white transition-all">JPG</button>
+                                <button
+                                    class="flex-1 py-2 rounded-md hover:bg-white/50 dark:hover:bg-slate-700 text-xs font-medium text-slate-600 dark:text-slate-300 transition-all">PNG</button>
+                                <button
+                                    class="flex-1 py-2 rounded-md hover:bg-white/50 dark:hover:bg-slate-700 text-xs font-medium text-slate-600 dark:text-slate-300 transition-all">WEBP</button>
+                            </div>
+                        </div>
+                        <!-- Image Quality -->
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <label
+                                    class="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Image
+                                    Quality</label>
+                                <span class="text-xs font-bold text-primary">80%</span>
+                            </div>
+                            <input
+                                class="w-full h-2 bg-slate-200 dark:bg-slate-700 rounded-lg appearance-none cursor-pointer accent-primary"
+                                max="100" min="1" type="range" value="80" />
+                            <div class="flex justify-between text-[10px] text-slate-400 mt-1">
+                                <span>Low</span>
+                                <span>High</span>
+                            </div>
+                        </div>
+                        <!-- Page Range & DPI Grid -->
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label
+                                    class="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-2 block">Page
+                                    Range</label>
+                                <input
+                                    class="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg px-3 py-2 text-sm text-slate-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+                                    placeholder="e.g. 1-5, 8" type="text" />
+                            </div>
+                            <div>
+                                <label
+                                    class="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-2 block">DPI</label>
+                                <select
+                                    class="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg px-3 py-2 text-sm text-slate-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                                    <option>72 DPI (Screen)</option>
+                                    <option selected="">150 DPI (Med)</option>
+                                    <option>300 DPI (Print)</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </details>
+            </div>
+            <!-- Ad Placeholder -->
+            <div class="px-4 mb-8">
+                <div
+                    class="w-full h-[100px] bg-slate-200 dark:bg-slate-800 rounded-lg flex flex-col items-center justify-center border border-slate-300 dark:border-slate-700/50">
+                    <span class="text-xs text-slate-400 font-bold uppercase tracking-widest">Advertisement</span>
+                    <p class="text-[10px] text-slate-400 mt-1">AdSense Placeholder</p>
+                </div>
+            </div>
+        </main>
+        <!-- Floating CTA Area -->
+        <div class="fixed bottom-[70px] left-0 right-0 p-4 w-full max-w-md mx-auto z-10 pointer-events-none">
+            <button
+                class="pointer-events-auto w-full bg-primary hover:bg-blue-600 text-white font-bold h-14 rounded-xl shadow-lg shadow-blue-500/30 flex items-center justify-center gap-3 active:scale-[0.98] transition-all">
+                <span class="material-symbols-outlined">bolt</span>
+                Convert &amp; Download Images
+            </button>
+        </div>
+        <!-- Bottom Navigation -->
+        <nav
+            class="absolute bottom-0 w-full h-[60px] bg-background-light dark:bg-surface-dark border-t border-slate-200 dark:border-slate-700 flex items-center justify-around z-20">
+            <a class="flex flex-col items-center justify-center w-full h-full text-slate-500 dark:text-slate-400 hover:text-primary dark:hover:text-primary transition-colors"
+                href="#">
+                <span class="material-symbols-outlined text-[24px]">home</span>
+                <span class="text-[10px] mt-1 font-medium">Home</span>
+            </a>
+            <a class="flex flex-col items-center justify-center w-full h-full text-primary" href="#">
+                <span class="material-symbols-outlined text-[24px] filled">grid_view</span>
+                <span class="text-[10px] mt-1 font-bold">Tools</span>
+            </a>
+            <a class="flex flex-col items-center justify-center w-full h-full text-slate-500 dark:text-slate-400 hover:text-primary dark:hover:text-primary transition-colors"
+                href="#">
+                <span class="material-symbols-outlined text-[24px]">history</span>
+                <span class="text-[10px] mt-1 font-medium">History</span>
+            </a>
+            <a class="flex flex-col items-center justify-center w-full h-full text-slate-500 dark:text-slate-400 hover:text-primary dark:hover:text-primary transition-colors"
+                href="#">
+                <span class="material-symbols-outlined text-[24px]">person</span>
+                <span class="text-[10px] mt-1 font-medium">Profile</span>
+            </a>
+        </nav>
+    </div>
+</body>
+
+</html>

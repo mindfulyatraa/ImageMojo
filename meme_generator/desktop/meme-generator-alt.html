@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Meme Generator - ImageHub Pro</title>
+    <!-- Google Fonts & Material Symbols -->
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Impact&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <!-- Theme Config -->
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#0066cc",
+                        "secondary": "#00CC66",
+                        "background-light": "#f5f7f8",
+                        "background-dark": "#0f1923",
+                        "surface-dark": "#1b2128",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"],
+                        "meme": ["Impact", "sans-serif"],
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "2xl": "1rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+    <style>
+        /* Custom scrollbar hiding for horizontal scrollers */
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        /* Custom range slider styling */
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            height: 20px;
+            width: 20px;
+            border-radius: 50%;
+            background: #0066cc;
+            cursor: pointer;
+            margin-top: -8px;
+        }
+
+        input[type=range]::-webkit-slider-runnable-track {
+            width: 100%;
+            height: 4px;
+            cursor: pointer;
+            background: #374151;
+            border-radius: 2px;
+        }
+    </style>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+</head>
+
+<body class="bg-background-light dark:bg-background-dark font-display text-gray-900 dark:text-white antialiased">
+    <div
+        class="relative flex min-h-screen w-full flex-col overflow-x-hidden max-w-md mx-auto shadow-2xl bg-background-light dark:bg-background-dark border-x border-gray-800">
+        <!-- Top App Bar -->
+        <div
+            class="sticky top-0 z-50 flex items-center bg-background-dark/95 backdrop-blur-md p-4 pb-2 justify-between border-b border-gray-800">
+            <div
+                class="text-white flex size-12 shrink-0 items-center justify-center rounded-full hover:bg-white/5 transition-colors cursor-pointer">
+                <span class="material-symbols-outlined text-[24px]">arrow_back</span>
+            </div>
+            <h2 class="text-white text-lg font-bold leading-tight tracking-[-0.015em] flex-1 text-center">ImageHub Pro
+            </h2>
+            <div class="flex w-12 items-center justify-end">
+                <button
+                    class="flex items-center justify-center rounded-full size-12 hover:bg-white/5 transition-colors text-white">
+                    <span class="material-symbols-outlined text-[24px]">menu</span>
+                </button>
+            </div>
+        </div>
+        <!-- Main Content -->
+        <main class="flex-1 flex flex-col gap-6 p-4 pb-24">
+            <!-- Headline -->
+            <div>
+                <h1 class="text-white tracking-tight text-[28px] font-bold leading-tight">Meme Generator</h1>
+                <p class="text-gray-400 text-sm font-normal leading-normal mt-1">Create viral memes in seconds. Upload
+                    or choose a template.</p>
+            </div>
+            <!-- Live Preview Card -->
+            <div class="relative group">
+                <div
+                    class="absolute -top-3 left-1/2 -translate-x-1/2 z-10 bg-secondary px-3 py-0.5 rounded-full shadow-lg">
+                    <span class="text-[10px] font-bold uppercase tracking-wider text-black">Live Preview</span>
+                </div>
+                <div
+                    class="bg-surface-dark rounded-xl shadow-[0_4px_20px_rgba(0,0,0,0.4)] overflow-hidden border border-gray-800">
+                    <div class="relative w-full aspect-square bg-gray-800 overflow-hidden">
+                        <!-- Meme Image -->
+                        <div class="absolute inset-0 bg-cover bg-center"
+                            data-alt="A cat looking confused, classic meme template"
+                            style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAoDnFZMP1fdV12kyQq8x91bd48SwgWDXBNI7F9tbz2THFDnKjOpFO1YMy7G7MR2e-LKmnULT1cGzgs8ROGzJkJA4qcMtMlqJt6L2sVBQYYY0qlURbWVb7NqI7dACbMhoIHYohyL_y5-Tv02dA3-iYWBMPoShiqu9e_Wc_Yi7JRAWvf4zQQkHJIprSV1LtU1VRPrfi8a7WbKy-rd65AtO1V2JpMe3AVNdYrgix5wdYqFvhLD-F1isagKEQu0XN__o_Mwfmps7lhnoy3');">
+                        </div>
+                        <!-- Text Overlays -->
+                        <div class="absolute top-4 left-4 right-4 text-center pointer-events-none">
+                            <span class="font-meme text-4xl text-white uppercase tracking-wide"
+                                style="-webkit-text-stroke: 2px black; text-shadow: 2px 2px 0 #000;">WHEN THE
+                                CODE</span>
+                        </div>
+                        <div class="absolute bottom-4 left-4 right-4 text-center pointer-events-none">
+                            <span class="font-meme text-4xl text-white uppercase tracking-wide"
+                                style="-webkit-text-stroke: 2px black; text-shadow: 2px 2px 0 #000;">FINALLY
+                                WORKS</span>
+                        </div>
+                        <!-- Drag Hints (Visual only) -->
+                        <div
+                            class="absolute top-1/2 left-4 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity">
+                            <span class="material-symbols-outlined text-white drop-shadow-md">drag_indicator</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Template Carousel -->
+            <div class="flex flex-col gap-2">
+                <div class="flex items-center justify-between px-1">
+                    <span class="text-sm font-semibold text-white">Templates</span>
+                    <button class="text-xs text-primary font-medium">View All</button>
+                </div>
+                <div class="flex overflow-x-auto hide-scrollbar gap-3 pb-2 -mx-4 px-4 snap-x">
+                    <!-- Upload Button -->
+                    <button class="flex flex-col shrink-0 w-24 gap-2 snap-start">
+                        <div
+                            class="w-24 h-24 rounded-lg border-2 border-dashed border-gray-600 flex flex-col items-center justify-center bg-surface-dark hover:border-primary hover:bg-primary/10 transition-colors">
+                            <span class="material-symbols-outlined text-primary mb-1">add_photo_alternate</span>
+                            <span class="text-[10px] font-medium text-primary">Upload</span>
+                        </div>
+                    </button>
+                    <!-- Template 1 -->
+                    <button class="flex flex-col shrink-0 w-24 gap-2 snap-start group">
+                        <div class="w-24 h-24 rounded-lg bg-cover bg-center border-2 border-transparent group-hover:border-primary transition-all relative overflow-hidden"
+                            data-alt="Pug dog making a funny face"
+                            style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDCfS8Y-2l8CAqDSt1AkO9t0kHyVFGvRCQ48u9pFbRQaIqae8htyERc_pbzxhfVYvaAOjCKkz3x0WX6USXVEQF3deKhutMuHx7ASsaaEbTr2OvQHtnZNEzztp3-MWqjp8FyOGxsqqunn3PdjcYRP4Tod15fwJIB8rolXN-BRXE1JfDiZOVyg5ZIVilbepHyId1XCJZXHAN2u82kdez2pkJqWIlzM4iqC0GlaPOXSAg9HvnNLf_pUaCQRVLS8DLLfv7VSX6qU_cHrdAl');">
+                        </div>
+                    </button>
+                    <!-- Template 2 -->
+                    <button class="flex flex-col shrink-0 w-24 gap-2 snap-start group">
+                        <div class="w-24 h-24 rounded-lg bg-cover bg-center border-2 border-transparent group-hover:border-primary transition-all relative overflow-hidden"
+                            data-alt="Dog looking suspicious"
+                            style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDA8kz__-8HdstRWw4N8Uu_D0jqjVs-noChSDGZYH3D_kdvJjsulqJEls5jvlCjwu1xYi-Z2B0VQoHA6XHh4Nv6fMmqAdxMqP3adiNL6EAACT-JVR-wZGPoGMOHTBkW-wJAjv9GMFQaEZbxc3UvHme4hnsrcxHmT-FDxf-9mUtqrqdQcoq-nfNuNXOgtfl-FvQEetygkap_25_W9dUn_EJYnjpfShpNSwW7RwOmj6Ennz67IWvE1HGuSSiMjH5jv9r6P5NVxEfunJ3Q');">
+                        </div>
+                    </button>
+                    <!-- Template 3 -->
+                    <button class="flex flex-col shrink-0 w-24 gap-2 snap-start group">
+                        <div class="w-24 h-24 rounded-lg bg-cover bg-center border-2 border-transparent group-hover:border-primary transition-all relative overflow-hidden"
+                            data-alt="Cat looking very dramatic"
+                            style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuChOSB1CT_klmX02pZENWtrOB0kqLgoIGh3b_wmOEbAJ_W-LUFC0uW_8zQzulwHRqGgPmfG0vZGhWf6mzdF9lunF1aRkLrbK0PF1jYQynKgmi4uNewjVGhogGUo8yTDNyFMxVGdHqJqBrsoqzPPGKuwONmM7I70t5RV7eKYuCvvBSsl9sVuZWkGhhICf5HUzZ3g5pEzIVAFz-rUzg6RUZDUw_QfokxWEl5XUF1nN9x77Lyr9A0wJ6EhvlDW07BtiwxySPnLhuvRZWw9');">
+                        </div>
+                    </button>
+                    <!-- Template 4 -->
+                    <button class="flex flex-col shrink-0 w-24 gap-2 snap-start group">
+                        <div class="w-24 h-24 rounded-lg bg-cover bg-center border-2 border-transparent group-hover:border-primary transition-all relative overflow-hidden"
+                            data-alt="Cat butterfly meme template"
+                            style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCtZqllFNMDasVuBC7p9YN207JSmLaWB9CpWWl_68H7pGU-PQlUHqkrXOc_POhG0KO4CxDvYamLooiE8zr9v6JjyHTxhIT7vmAmrU5_J5VlXCWQshMKsxtbNnl2eakVncKKlrcMJtd1JT872cC9iNxshUgobgh1FbM9930JnpfQIFGANiCG-7HZan--Yz27dmtRlFK4GJuIcPseuxIRVJLNi5sIFfcs4AE3a1qfoA6TOsnDJY0XU3ToiWW6wJl4V7hRlG73Ef7w84af');">
+                        </div>
+                    </button>
+                </div>
+            </div>
+            <!-- Ad Placeholder 1 -->
+            <div
+                class="w-full h-[60px] bg-surface-dark border border-gray-800 rounded-lg flex flex-col items-center justify-center relative overflow-hidden">
+                <div
+                    class="absolute top-1 right-1 text-[8px] text-gray-500 uppercase border border-gray-700 px-1 rounded">
+                    Ad</div>
+                <span class="text-gray-600 text-xs">Advertisement Space</span>
+            </div>
+            <!-- Editor Controls -->
+            <div class="flex flex-col gap-4 bg-surface-dark p-4 rounded-xl border border-gray-800">
+                <div class="flex items-center gap-2 border-b border-gray-700 pb-3 mb-1">
+                    <span class="material-symbols-outlined text-primary">edit</span>
+                    <h3 class="text-white font-bold text-base">Edit Text</h3>
+                </div>
+                <!-- Text Inputs -->
+                <div class="flex flex-col gap-3">
+                    <div>
+                        <label class="text-xs font-medium text-gray-400 mb-1.5 block ml-1">Top Text</label>
+                        <input
+                            class="w-full bg-background-dark border border-gray-700 rounded-lg px-4 py-3 text-white focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all placeholder-gray-600"
+                            placeholder="Enter top text..." type="text" value="WHEN THE CODE" />
+                    </div>
+                    <div>
+                        <label class="text-xs font-medium text-gray-400 mb-1.5 block ml-1">Bottom Text</label>
+                        <input
+                            class="w-full bg-background-dark border border-gray-700 rounded-lg px-4 py-3 text-white focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all placeholder-gray-600"
+                            placeholder="Enter bottom text..." type="text" value="FINALLY WORKS" />
+                    </div>
+                </div>
+                <!-- Styling Controls -->
+                <div class="grid grid-cols-2 gap-4 mt-2">
+                    <!-- Font Size -->
+                    <div class="col-span-2">
+                        <div class="flex justify-between mb-2">
+                            <label class="text-xs font-medium text-gray-400">Text Size</label>
+                            <span class="text-xs font-bold text-white">42px</span>
+                        </div>
+                        <input class="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer" max="100"
+                            min="10" type="range" value="42" />
+                    </div>
+                    <!-- Text Color -->
+                    <div>
+                        <label class="text-xs font-medium text-gray-400 mb-2 block">Text Color</label>
+                        <div class="flex gap-2">
+                            <button
+                                class="w-8 h-8 rounded-full bg-white border-2 border-primary ring-2 ring-primary/30"></button>
+                            <button class="w-8 h-8 rounded-full bg-black border border-gray-600"></button>
+                            <button class="w-8 h-8 rounded-full bg-red-500 border border-gray-600"></button>
+                            <button class="w-8 h-8 rounded-full bg-yellow-400 border border-gray-600"></button>
+                        </div>
+                    </div>
+                    <!-- Alignment -->
+                    <div>
+                        <label class="text-xs font-medium text-gray-400 mb-2 block">Align</label>
+                        <div class="flex bg-background-dark rounded-lg p-1 border border-gray-700 w-fit">
+                            <button class="p-1 hover:bg-gray-700 rounded text-gray-400 hover:text-white"><span
+                                    class="material-symbols-outlined text-[20px]">format_align_left</span></button>
+                            <button class="p-1 bg-gray-700 rounded text-white shadow-sm"><span
+                                    class="material-symbols-outlined text-[20px]">format_align_center</span></button>
+                            <button class="p-1 hover:bg-gray-700 rounded text-gray-400 hover:text-white"><span
+                                    class="material-symbols-outlined text-[20px]">format_align_right</span></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Ad Placeholder 2 -->
+            <div
+                class="w-full h-[150px] bg-surface-dark border border-gray-800 rounded-lg flex flex-col items-center justify-center relative overflow-hidden bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-gray-800 to-background-dark">
+                <div
+                    class="absolute top-1 right-1 text-[8px] text-gray-500 uppercase border border-gray-700 px-1 rounded">
+                    Ad</div>
+                <div class="text-center p-4">
+                    <span class="material-symbols-outlined text-gray-600 text-4xl mb-2">ads_click</span>
+                    <p class="text-gray-500 text-sm font-medium">Premium Tools Available</p>
+                    <p class="text-gray-600 text-xs mt-1">Upgrade to ImageHub Pro+</p>
+                </div>
+            </div>
+            <div class="h-4"></div>
+        </main>
+        <!-- Fixed/Sticky Bottom Action Bar -->
+        <div
+            class="sticky bottom-0 z-40 bg-background-dark border-t border-gray-800 p-4 pb-6 shadow-[0_-4px_20px_rgba(0,0,0,0.3)]">
+            <div class="flex flex-col gap-3">
+                <!-- Format Selection -->
+                <div class="flex items-center justify-between px-1">
+                    <span class="text-xs font-medium text-gray-400">Output Format</span>
+                    <div class="flex bg-surface-dark rounded-lg p-1 border border-gray-700">
+                        <button class="px-3 py-1 bg-primary text-white text-xs font-bold rounded shadow-sm">JPG</button>
+                        <button
+                            class="px-3 py-1 text-gray-400 hover:text-white text-xs font-medium rounded transition-colors">PNG</button>
+                    </div>
+                </div>
+                <!-- Main CTA -->
+                <button
+                    class="w-full h-14 bg-primary hover:bg-blue-600 active:scale-[0.98] transition-all rounded-xl flex items-center justify-center gap-2 shadow-[0_0_15px_rgba(0,102,204,0.3)]">
+                    <span class="material-symbols-outlined text-white">download</span>
+                    <span class="text-white font-bold text-lg">Generate Meme &amp; Download</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Image Watermark Tool - ImageHub Pro</title>
+    <!-- Material Symbols -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#0066cc",
+                        "secondary": "#00CC66",
+                        "background-light": "#f5f7f8",
+                        "background-dark": "#0f1923",
+                        "surface-dark": "#1b2128",
+                        "border-dark": "#2d3748",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+    <style>
+        /* Custom range slider styling for WebKit */
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            height: 16px;
+            width: 16px;
+            border-radius: 50%;
+            background: #ffffff;
+            cursor: pointer;
+            margin-top: -6px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+        }
+
+        input[type=range]::-webkit-slider-runnable-track {
+            width: 100%;
+            height: 4px;
+            cursor: pointer;
+            background: #4a5568;
+            border-radius: 2px;
+        }
+
+        /* Custom scrollbar for dark mode sidebar */
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #1b2128;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #4a5568;
+            border-radius: 3px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #718096;
+        }
+    </style>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+</head>
+
+<body
+    class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-white font-display overflow-hidden h-screen flex flex-col">
+    <!-- TopAppBar -->
+    <header class="flex items-center bg-[#101418] border-b border-border-dark px-4 py-3 justify-between shrink-0 z-20">
+        <div class="flex items-center gap-3">
+            <button
+                class="text-white flex size-10 shrink-0 items-center justify-center hover:bg-white/10 rounded-full transition-colors">
+                <span class="material-symbols-outlined text-[24px]">menu</span>
+            </button>
+            <div class="flex items-center gap-2">
+                <div
+                    class="size-8 rounded-lg bg-gradient-to-br from-primary to-secondary flex items-center justify-center">
+                    <span class="material-symbols-outlined text-white text-[20px]">photo_library</span>
+                </div>
+                <h2 class="text-white text-lg font-bold leading-tight tracking-[-0.015em] hidden sm:block">ImageHub Pro
+                </h2>
+            </div>
+        </div>
+        <div class="flex items-center justify-end gap-4">
+            <button
+                class="hidden sm:flex h-9 items-center gap-2 rounded-lg bg-surface-dark px-3 text-sm font-medium text-white hover:bg-[#2d3748] transition">
+                <span class="material-symbols-outlined text-[18px]">grid_view</span>
+                All Tools
+            </button>
+            <div class="size-8 rounded-full bg-gradient-to-r from-blue-500 to-purple-500"
+                data-alt="User avatar gradient"></div>
+        </div>
+    </header>
+    <!-- Main Workspace -->
+    <main class="flex-1 flex flex-col lg:flex-row overflow-hidden relative">
+        <!-- Left Panel: Canvas / Preview Area -->
+        <section class="flex-1 relative bg-[#0a0e12] flex flex-col overflow-hidden">
+            <!-- Toolbar Overlay -->
+            <div class="absolute top-4 left-4 right-4 z-10 flex justify-between items-start pointer-events-none">
+                <div
+                    class="pointer-events-auto bg-black/60 backdrop-blur-md rounded-lg p-2 flex gap-2 border border-white/10">
+                    <button class="p-2 hover:bg-white/10 rounded text-white" title="Zoom In">
+                        <span class="material-symbols-outlined text-[20px]">add</span>
+                    </button>
+                    <button class="p-2 hover:bg-white/10 rounded text-white" title="Zoom Out">
+                        <span class="material-symbols-outlined text-[20px]">remove</span>
+                    </button>
+                    <button class="p-2 hover:bg-white/10 rounded text-white" title="Fit to Screen">
+                        <span class="material-symbols-outlined text-[20px]">fit_screen</span>
+                    </button>
+                </div>
+                <div class="pointer-events-auto">
+                    <button
+                        class="flex items-center gap-2 h-10 px-4 bg-surface-dark/80 backdrop-blur-md border border-white/10 hover:bg-surface-dark text-white text-sm font-bold rounded-lg shadow-lg transition-all">
+                        <span class="material-symbols-outlined text-[18px]">upload_file</span>
+                        <span class="hidden sm:inline">New Image</span>
+                    </button>
+                </div>
+            </div>
+            <!-- Canvas Area -->
+            <div class="flex-1 flex items-center justify-center p-4 sm:p-8 overflow-auto" id="canvas-container">
+                <!-- Image Wrapper -->
+                <div class="relative shadow-[0_20px_50px_rgba(0,0,0,0.5)] transition-all duration-300 group">
+                    <!-- The Main Image -->
+                    <img alt="Scenic landscape with mountains and lake used for previewing watermark"
+                        class="max-w-full max-h-[70vh] rounded-lg object-contain block"
+                        data-alt="Scenic landscape with mountains and lake used for previewing watermark"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuCdIHsMxxv_7aDOMYT4n4ey2XVOxQXCO7EogLCh0_7-625B7lTqMzeNrCJJ-B-PiSbIyDSAXT1N58HC0AWApXvUBUwKjDKghmMo6CEODaYg7YHseyxBd3XGe3_TSckzHseNukHMR8XMyNxx8R4o9yWjY-MHCor0QM_YD7uC5k7vVx1V4VBHYbeps7DJyV5pUWN8fGotuuetk9o1P1zHYp-7zqzbioHR89L0eyAoYv4f1JubjH7491bbrFKC1mYZyhYYqjxJQXl5YriC" />
+                    <!-- The Watermark Overlay (Simulated) -->
+                    <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+                        <div
+                            class="transform -rotate-12 select-none border-2 border-dashed border-primary/50 bg-black/30 backdrop-blur-sm px-6 py-4 rounded-xl">
+                            <p class="text-white/80 text-4xl font-bold tracking-widest uppercase font-display"
+                                style="text-shadow: 0 2px 10px rgba(0,0,0,0.5);">Confidential</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Mobile Only: Bottom Sheet Handle (Visual cue) -->
+            <div
+                class="lg:hidden h-6 bg-surface-dark w-full rounded-t-xl flex items-center justify-center shrink-0 border-t border-white/5">
+                <div class="w-12 h-1 bg-gray-600 rounded-full"></div>
+            </div>
+        </section>
+        <!-- Right Panel: Controls Sidebar -->
+        <aside
+            class="w-full lg:w-[380px] xl:w-[420px] bg-surface-dark border-l border-white/5 flex flex-col shrink-0 h-[45vh] lg:h-auto shadow-2xl z-20">
+            <!-- Sidebar Header -->
+            <div class="p-5 border-b border-white/5 bg-[#1b2128]">
+                <h1 class="text-white text-xl font-bold leading-tight">Watermark Settings</h1>
+                <p class="text-gray-400 text-sm mt-1">Customize your watermark style</p>
+            </div>
+            <!-- Scrollable Controls -->
+            <div class="flex-1 overflow-y-auto custom-scrollbar p-5 space-y-6">
+                <!-- Watermark Type Selector -->
+                <div class="flex p-1 bg-[#101418] rounded-lg">
+                    <button
+                        class="flex-1 flex items-center justify-center gap-2 py-2 px-4 rounded-md bg-primary text-white shadow-sm transition-all text-sm font-medium">
+                        <span class="material-symbols-outlined text-[18px]">text_fields</span>
+                        Text
+                    </button>
+                    <button
+                        class="flex-1 flex items-center justify-center gap-2 py-2 px-4 rounded-md text-gray-400 hover:text-white transition-all text-sm font-medium">
+                        <span class="material-symbols-outlined text-[18px]">image</span>
+                        Image
+                    </button>
+                </div>
+                <!-- Text Content Input -->
+                <div class="space-y-3">
+                    <label class="text-xs font-semibold text-gray-400 uppercase tracking-wider">Watermark Text</label>
+                    <div class="relative">
+                        <input
+                            class="w-full bg-[#101418] border border-[#2d3748] rounded-lg h-11 px-4 text-white focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors placeholder-gray-600"
+                            placeholder="Enter text..." type="text" value="Confidential" />
+                        <button class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-white">
+                            <span class="material-symbols-outlined text-[20px]">close</span>
+                        </button>
+                    </div>
+                </div>
+                <!-- Appearance Controls -->
+                <div class="space-y-5">
+                    <!-- Opacity -->
+                    <div class="space-y-2">
+                        <div class="flex justify-between">
+                            <label class="text-xs font-semibold text-gray-400 uppercase tracking-wider">Opacity</label>
+                            <span class="text-xs text-white font-mono">80%</span>
+                        </div>
+                        <input class="w-full h-1 bg-gray-700 rounded-lg appearance-none cursor-pointer accent-primary"
+                            max="100" min="0" type="range" value="80" />
+                    </div>
+                    <!-- Size -->
+                    <div class="space-y-2">
+                        <div class="flex justify-between">
+                            <label class="text-xs font-semibold text-gray-400 uppercase tracking-wider">Size</label>
+                            <span class="text-xs text-white font-mono">48px</span>
+                        </div>
+                        <input class="w-full h-1 bg-gray-700 rounded-lg appearance-none cursor-pointer accent-primary"
+                            max="120" min="12" type="range" value="48" />
+                    </div>
+                    <!-- Rotation -->
+                    <div class="space-y-2">
+                        <div class="flex justify-between">
+                            <label class="text-xs font-semibold text-gray-400 uppercase tracking-wider">Rotation</label>
+                            <span class="text-xs text-white font-mono">-12°</span>
+                        </div>
+                        <input class="w-full h-1 bg-gray-700 rounded-lg appearance-none cursor-pointer accent-primary"
+                            max="180" min="-180" type="range" value="-12" />
+                    </div>
+                </div>
+                <!-- Color & Font Row -->
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="space-y-2">
+                        <label class="text-xs font-semibold text-gray-400 uppercase tracking-wider">Color</label>
+                        <div
+                            class="h-10 w-full rounded-lg bg-[#101418] border border-[#2d3748] flex items-center px-2 cursor-pointer hover:border-gray-500">
+                            <div class="size-6 rounded bg-white shadow-sm border border-gray-200"></div>
+                            <span class="ml-2 text-sm text-gray-300">#FFFFFF</span>
+                        </div>
+                    </div>
+                    <div class="space-y-2">
+                        <label class="text-xs font-semibold text-gray-400 uppercase tracking-wider">Font</label>
+                        <select
+                            class="h-10 w-full rounded-lg bg-[#101418] border border-[#2d3748] text-white text-sm px-2 focus:outline-none focus:border-primary">
+                            <option>Inter</option>
+                            <option>Roboto</option>
+                            <option>Lato</option>
+                            <option>Montserrat</option>
+                        </select>
+                    </div>
+                </div>
+                <!-- Position Grid -->
+                <div class="space-y-3">
+                    <label class="text-xs font-semibold text-gray-400 uppercase tracking-wider">Position</label>
+                    <div class="flex gap-6 items-start">
+                        <!-- Grid -->
+                        <div class="grid grid-cols-3 gap-2 w-32 shrink-0">
+                            <button
+                                class="aspect-square rounded bg-[#2d3748] hover:bg-[#4a5568] transition-colors"></button>
+                            <button
+                                class="aspect-square rounded bg-[#2d3748] hover:bg-[#4a5568] transition-colors"></button>
+                            <button
+                                class="aspect-square rounded bg-[#2d3748] hover:bg-[#4a5568] transition-colors"></button>
+                            <button
+                                class="aspect-square rounded bg-[#2d3748] hover:bg-[#4a5568] transition-colors"></button>
+                            <button
+                                class="aspect-square rounded ring-2 ring-primary bg-primary/20 text-primary flex items-center justify-center">
+                                <span class="material-symbols-outlined text-[16px]">check</span>
+                            </button>
+                            <button
+                                class="aspect-square rounded bg-[#2d3748] hover:bg-[#4a5568] transition-colors"></button>
+                            <button
+                                class="aspect-square rounded bg-[#2d3748] hover:bg-[#4a5568] transition-colors"></button>
+                            <button
+                                class="aspect-square rounded bg-[#2d3748] hover:bg-[#4a5568] transition-colors"></button>
+                            <button
+                                class="aspect-square rounded bg-[#2d3748] hover:bg-[#4a5568] transition-colors"></button>
+                        </div>
+                        <!-- Helper Text -->
+                        <p class="text-xs text-gray-500 leading-relaxed mt-1">
+                            Click a square to quickly position the watermark, or drag it directly on the canvas.
+                        </p>
+                    </div>
+                </div>
+                <!-- Ad Placeholder -->
+                <div
+                    class="w-full h-[250px] bg-[#101418] border-2 border-dashed border-[#2d3748] rounded-xl flex flex-col items-center justify-center gap-2 mt-4 opacity-70 hover:opacity-100 transition-opacity">
+                    <span class="text-gray-500 font-bold tracking-widest text-xs uppercase">Advertisement</span>
+                    <span class="text-gray-600 text-xs">MREC 300x250</span>
+                </div>
+            </div>
+            <!-- Sticky Footer Actions -->
+            <div class="p-5 border-t border-white/5 bg-[#1b2128] space-y-4 z-30">
+                <!-- Format Selector -->
+                <div class="flex justify-between items-center">
+                    <span class="text-sm font-medium text-gray-300">Format:</span>
+                    <div class="flex rounded-md bg-[#101418] p-1">
+                        <button class="px-3 py-1 rounded text-xs font-bold text-white bg-primary shadow-sm">JPG</button>
+                        <button
+                            class="px-3 py-1 rounded text-xs font-medium text-gray-400 hover:text-white transition">PNG</button>
+                        <button
+                            class="px-3 py-1 rounded text-xs font-medium text-gray-400 hover:text-white transition">WEBP</button>
+                    </div>
+                </div>
+                <!-- Main Action Button -->
+                <button
+                    class="w-full h-12 bg-secondary hover:bg-[#00b359] text-white text-base font-bold rounded-lg shadow-lg shadow-green-900/20 flex items-center justify-center gap-2 transition-all transform active:scale-[0.98]">
+                    <span class="material-symbols-outlined">download</span>
+                    Add Watermark &amp; Download
+                </button>
+            </div>
+        </aside>
+    </main>
+</body>
+
+</html>

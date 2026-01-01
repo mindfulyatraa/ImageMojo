@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>ImageHub Pro - Background Remover</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#0066cc",
+                        "secondary": "#00CC66",
+                        "background-light": "#f5f7f8",
+                        "background-dark": "#0f1923",
+                        "surface-dark": "#1a2632",
+                        "surface-light": "#ffffff",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "2xl": "1rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+    <style>
+        .transparency-grid {
+            background-color: #e5e7eb;
+            background-image:
+                linear-gradient(45deg, #d1d5db 25%, transparent 25%),
+                linear-gradient(-45deg, #d1d5db 25%, transparent 25%),
+                linear-gradient(45deg, transparent 75%, #d1d5db 75%),
+                linear-gradient(-45deg, transparent 75%, #d1d5db 75%);
+            background-size: 20px 20px;
+            background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+        }
+
+        .dark .transparency-grid {
+            background-color: #1f2937;
+            background-image:
+                linear-gradient(45deg, #374151 25%, transparent 25%),
+                linear-gradient(-45deg, #374151 25%, transparent 25%),
+                linear-gradient(45deg, transparent 75%, #374151 75%),
+                linear-gradient(-45deg, transparent 75%, #374151 75%);
+        }
+
+        /* Hide scrollbar for cleaner mobile horizontal scroll */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+</head>
+
+<body
+    class="bg-background-light dark:bg-background-dark font-display text-gray-900 dark:text-gray-100 flex flex-col min-h-screen pb-24">
+    <!-- Top App Bar -->
+    <header
+        class="sticky top-0 z-50 bg-background-light/95 dark:bg-background-dark/95 backdrop-blur-md border-b border-gray-200 dark:border-gray-800">
+        <div class="flex items-center justify-between px-4 py-3">
+            <button
+                class="p-2 -ml-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-800 text-gray-600 dark:text-gray-300 transition-colors">
+                <span class="material-symbols-outlined text-2xl">menu</span>
+            </button>
+            <div class="flex items-center gap-2">
+                <div
+                    class="w-8 h-8 rounded-lg bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-white font-bold text-sm">
+                    IH</div>
+                <h1 class="text-lg font-bold tracking-tight">ImageHub <span class="text-primary">Pro</span></h1>
+            </div>
+            <button
+                class="p-2 -mr-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-800 text-gray-600 dark:text-gray-300 transition-colors">
+                <span class="material-symbols-outlined text-2xl">account_circle</span>
+            </button>
+        </div>
+    </header>
+    <!-- Main Content -->
+    <main class="flex-1 w-full max-w-md mx-auto px-4 py-6 flex flex-col gap-6">
+        <!-- Header Section -->
+        <div class="text-center space-y-2">
+            <h2 class="text-2xl font-bold text-gray-900 dark:text-white">Background Remover</h2>
+            <p class="text-sm text-gray-500 dark:text-gray-400">Upload an image to automatically remove the background.
+            </p>
+        </div>
+        <!-- Editor/Preview Card -->
+        <div
+            class="bg-surface-light dark:bg-surface-dark rounded-2xl shadow-sm border border-gray-200 dark:border-gray-800 overflow-hidden">
+            <!-- Toggle Controls -->
+            <div class="flex p-3 border-b border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-[#151e29]">
+                <div class="flex w-full bg-gray-200 dark:bg-background-dark rounded-lg p-1 relative">
+                    <div
+                        class="w-1/2 h-full absolute left-0 top-0 p-1 transition-transform duration-300 ease-in-out transform translate-x-full">
+                        <div
+                            class="w-full h-full bg-surface-light dark:bg-surface-dark rounded-md shadow-sm border border-gray-200 dark:border-gray-700">
+                        </div>
+                    </div>
+                    <button
+                        class="relative z-10 flex-1 py-1.5 text-sm font-medium text-gray-600 dark:text-gray-400 text-center rounded-md">Original</button>
+                    <button
+                        class="relative z-10 flex-1 py-1.5 text-sm font-medium text-primary dark:text-white text-center rounded-md">Processed</button>
+                </div>
+            </div>
+            <!-- Image Canvas -->
+            <div class="relative w-full aspect-[4/5] transparency-grid overflow-hidden group">
+                <div class="absolute inset-0 flex items-center justify-center p-4">
+                    <img alt="Portrait of a person with background removed"
+                        class="max-h-full max-w-full object-contain drop-shadow-xl"
+                        data-alt="Portrait of a woman used for background removal demonstration"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuAJ3a0FxikzHEYx7z9bmmfrFaykxmP6-EU5Aqko7zt78Yyo1RRwHcofwXJ7oGcuA_YFZaQoP6a45TmMWXsmkMlpocu4IhCBOzfdH3E3a7Kq-8x1-102uzj3aXO9oLhWARV_M43FDZF37PFVzIaDnoBKK5kk0E0NCU1XwQ_C4tUUo8LK7Px-Aq6wmtPJBhWG-LPntFDekWUn4HzUDn9ymPEh2QSKhywCEWNV3aHmRNHy0dZYOg8mExOzjGDpejKesDTJRwHGyW_6zu3Z" />
+                </div>
+                <!-- Zoom Hint -->
+                <div
+                    class="absolute bottom-4 right-4 bg-black/60 backdrop-blur-sm text-white text-xs px-2 py-1 rounded-full flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                    <span class="material-symbols-outlined text-sm">zoom_in</span> Pinch to zoom
+                </div>
+            </div>
+            <!-- Quick Actions Toolbar -->
+            <div
+                class="p-3 flex items-center justify-between border-t border-gray-200 dark:border-gray-800 bg-surface-light dark:bg-surface-dark">
+                <button
+                    class="flex flex-col items-center gap-1 p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 text-primary">
+                    <span class="material-symbols-outlined">auto_fix_high</span>
+                    <span class="text-[10px] font-medium">Auto</span>
+                </button>
+                <div class="w-px h-8 bg-gray-200 dark:bg-gray-700"></div>
+                <button
+                    class="flex flex-col items-center gap-1 p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-500 dark:text-gray-400">
+                    <span class="material-symbols-outlined">brush</span>
+                    <span class="text-[10px] font-medium">Restore</span>
+                </button>
+                <button
+                    class="flex flex-col items-center gap-1 p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-500 dark:text-gray-400">
+                    <span class="material-symbols-outlined">ink_eraser</span>
+                    <span class="text-[10px] font-medium">Erase</span>
+                </button>
+            </div>
+        </div>
+        <!-- Accordion Tools -->
+        <div class="space-y-3">
+            <!-- Background Section -->
+            <div
+                class="rounded-xl border border-gray-200 dark:border-gray-800 bg-surface-light dark:bg-surface-dark overflow-hidden">
+                <details class="group" open="">
+                    <summary
+                        class="flex cursor-pointer items-center justify-between p-4 font-medium text-gray-900 dark:text-white hover:bg-gray-50 dark:hover:bg-gray-800/50">
+                        <div class="flex items-center gap-2">
+                            <span class="material-symbols-outlined text-primary">wallpaper</span>
+                            <span>Background</span>
+                        </div>
+                        <span
+                            class="material-symbols-outlined transition-transform group-open:rotate-180">expand_more</span>
+                    </summary>
+                    <div class="border-t border-gray-200 dark:border-gray-800 p-4 pt-2">
+                        <div class="flex gap-3 overflow-x-auto no-scrollbar py-2">
+                            <!-- Transparent (Selected) -->
+                            <button
+                                class="shrink-0 group relative size-12 rounded-full border-2 border-primary bg-white overflow-hidden transparency-grid flex items-center justify-center">
+                                <span class="material-symbols-outlined text-gray-500">block</span>
+                                <div class="absolute inset-0 bg-primary/10"></div>
+                            </button>
+                            <!-- Colors -->
+                            <button
+                                class="shrink-0 size-12 rounded-full bg-white border border-gray-200 dark:border-gray-700"></button>
+                            <button
+                                class="shrink-0 size-12 rounded-full bg-black border border-gray-200 dark:border-gray-700"></button>
+                            <button class="shrink-0 size-12 rounded-full bg-red-500 border border-transparent"></button>
+                            <button
+                                class="shrink-0 size-12 rounded-full bg-blue-500 border border-transparent"></button>
+                            <button
+                                class="shrink-0 size-12 rounded-full bg-yellow-400 border border-transparent"></button>
+                            <!-- Upload BG -->
+                            <button
+                                class="shrink-0 size-12 rounded-full bg-gray-100 dark:bg-gray-800 border border-dashed border-gray-400 dark:border-gray-500 flex items-center justify-center text-gray-500 dark:text-gray-400">
+                                <span class="material-symbols-outlined">add_photo_alternate</span>
+                            </button>
+                        </div>
+                    </div>
+                </details>
+            </div>
+            <!-- Export Options Section -->
+            <div
+                class="rounded-xl border border-gray-200 dark:border-gray-800 bg-surface-light dark:bg-surface-dark overflow-hidden">
+                <details class="group">
+                    <summary
+                        class="flex cursor-pointer items-center justify-between p-4 font-medium text-gray-900 dark:text-white hover:bg-gray-50 dark:hover:bg-gray-800/50">
+                        <div class="flex items-center gap-2">
+                            <span class="material-symbols-outlined text-primary">save_as</span>
+                            <span>Output Format</span>
+                        </div>
+                        <span
+                            class="material-symbols-outlined transition-transform group-open:rotate-180">expand_more</span>
+                    </summary>
+                    <div class="border-t border-gray-200 dark:border-gray-800 p-4">
+                        <div class="flex gap-3">
+                            <label class="flex-1 cursor-pointer">
+                                <input checked="" class="peer sr-only" name="format" type="radio" />
+                                <div
+                                    class="flex items-center justify-center gap-2 rounded-lg border border-primary bg-primary/10 py-3 px-4 text-primary font-semibold peer-checked:bg-primary peer-checked:text-white transition-all">
+                                    <span class="text-sm">PNG</span>
+                                    <span class="text-[10px] font-normal opacity-80">(Transparent)</span>
+                                </div>
+                            </label>
+                            <label class="flex-1 cursor-pointer">
+                                <input class="peer sr-only" name="format" type="radio" />
+                                <div
+                                    class="flex items-center justify-center gap-2 rounded-lg border border-gray-200 dark:border-gray-700 bg-transparent py-3 px-4 text-gray-600 dark:text-gray-400 font-medium peer-checked:border-primary peer-checked:bg-primary peer-checked:text-white transition-all hover:bg-gray-50 dark:hover:bg-gray-800">
+                                    <span class="text-sm">JPG</span>
+                                    <span class="text-[10px] font-normal opacity-80">(White BG)</span>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+                </details>
+            </div>
+        </div>
+        <!-- AdSense Placeholder -->
+        <div
+            class="w-full h-[250px] bg-gray-100 dark:bg-[#151e29] border border-dashed border-gray-300 dark:border-gray-700 rounded-lg flex flex-col items-center justify-center gap-2">
+            <span class="text-xs uppercase tracking-wider text-gray-400 font-medium">Advertisement</span>
+            <div class="w-16 h-1 bg-gray-200 dark:bg-gray-700 rounded-full"></div>
+        </div>
+        <!-- Footer Links -->
+        <div class="grid grid-cols-2 gap-4 pt-4 pb-8">
+            <a class="flex items-center justify-center gap-2 p-3 rounded-lg bg-surface-light dark:bg-surface-dark border border-gray-200 dark:border-gray-800 text-sm font-medium text-gray-600 dark:text-gray-300 hover:border-primary/50 transition-colors"
+                href="#">
+                <span class="material-symbols-outlined text-primary text-lg">aspect_ratio</span>
+                Resize Image
+            </a>
+            <a class="flex items-center justify-center gap-2 p-3 rounded-lg bg-surface-light dark:bg-surface-dark border border-gray-200 dark:border-gray-800 text-sm font-medium text-gray-600 dark:text-gray-300 hover:border-primary/50 transition-colors"
+                href="#">
+                <span class="material-symbols-outlined text-primary text-lg">compress</span>
+                Compress Image
+            </a>
+        </div>
+    </main>
+    <!-- Sticky Bottom CTA -->
+    <div
+        class="fixed bottom-0 left-0 w-full p-4 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-xl border-t border-gray-200 dark:border-gray-800 z-40 safe-area-bottom">
+        <div class="max-w-md mx-auto flex gap-3">
+            <!-- New Upload Button (Small) -->
+            <button
+                class="flex items-center justify-center size-14 rounded-xl border border-gray-200 dark:border-gray-700 bg-surface-light dark:bg-surface-dark text-gray-600 dark:text-gray-300 shadow-sm hover:bg-gray-50 dark:hover:bg-gray-800">
+                <span class="material-symbols-outlined">add_a_photo</span>
+            </button>
+            <!-- Primary Action -->
+            <button
+                class="flex-1 h-14 bg-primary hover:bg-blue-600 text-white rounded-xl font-bold text-base shadow-lg shadow-primary/25 flex items-center justify-center gap-2 active:scale-[0.98] transition-all">
+                <span class="material-symbols-outlined">download</span>
+                Download HD
+            </button>
+        </div>
+    </div>
+</body>
+
+</html>

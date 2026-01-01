@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>ImageHub Pro - EXIF Viewer</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#0066cc",
+                        "secondary": "#00CC66",
+                        "background-light": "#f5f7f8",
+                        "background-dark": "#0f1923",
+                        "surface-dark": "#1b2128",
+                        "surface-darker": "#151a20",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "2xl": "1rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        /* Custom Scrollbar for the data table on tablet */
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 3px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+    </style>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+</head>
+
+<body
+    class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-white min-h-screen flex flex-col transition-colors duration-200">
+    <!-- Top Navigation Bar -->
+    <nav
+        class="sticky top-0 z-50 flex items-center bg-background-light dark:bg-background-dark border-b border-slate-200 dark:border-slate-800 p-4 justify-between h-16">
+        <div class="flex items-center gap-4">
+            <button
+                class="text-slate-900 dark:text-white flex size-10 shrink-0 items-center justify-center rounded-full hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors">
+                <span class="material-symbols-outlined">menu</span>
+            </button>
+            <div class="flex items-center gap-2">
+                <div
+                    class="size-8 rounded bg-gradient-to-br from-primary to-blue-400 flex items-center justify-center text-white font-bold">
+                    IH</div>
+                <h2
+                    class="text-slate-900 dark:text-white text-lg font-bold leading-tight tracking-tight hidden sm:block">
+                    ImageHub Pro</h2>
+            </div>
+        </div>
+        <div class="flex items-center gap-2">
+            <button
+                class="flex items-center justify-center size-10 rounded-full hover:bg-slate-200 dark:hover:bg-slate-800 text-slate-900 dark:text-white transition-colors">
+                <span class="material-symbols-outlined">search</span>
+            </button>
+            <div class="size-8 rounded-full bg-slate-300 dark:bg-slate-700 overflow-hidden" data-alt="User avatar"
+                style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBQLXD7q_xJTmlgL1cRujDm3LUEftBXu3W1BjpN1bwlwMuMh4sZFdBiyzWk4d0jSq3ZXoxloNlyozlINBnb1wA3Bj9RjucCMK1Sr_fchCfAMSCX6fSh02gq6uuy7TogK8vormztartgoL3PbQYRoDrCtoA_2Bv60q-Mjx77L22Wrn5SlSH_xGpAIIfm_D-Ne9xgnBlF9Gd30jxI3SkoWfoHCUOIBFPFc6-7cmk13hM_3d7sNcUONLDBMEleujYCmp-2pcdwMdDhsdC0'); background-size: cover; background-position: center;">
+            </div>
+        </div>
+    </nav>
+    <!-- Main Content Area -->
+    <main class="flex-1 w-full max-w-7xl mx-auto p-4 md:p-6 lg:p-8 flex flex-col gap-6">
+        <!-- Hero / Header Section -->
+        <header
+            class="flex flex-col md:flex-row md:items-end justify-between gap-4 pb-2 border-b border-slate-200 dark:border-slate-800/50">
+            <div>
+                <h1 class="text-3xl md:text-4xl font-bold tracking-tight text-slate-900 dark:text-white mb-2">EXIF
+                    Viewer</h1>
+                <p class="text-slate-500 dark:text-slate-400 text-base md:text-lg max-w-2xl">
+                    Extract and view hidden metadata from your photos instantly. Analyzed locally for privacy.
+                </p>
+            </div>
+            <!-- Quick Action for Tablet -->
+            <button
+                class="hidden md:flex items-center gap-2 text-primary hover:text-blue-400 font-medium transition-colors">
+                <span class="material-symbols-outlined text-[20px]">history</span>
+                Recent Uploads
+            </button>
+        </header>
+        <!-- Two Column Layout for Tablet/Desktop -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 md:gap-8 items-start">
+            <!-- LEFT COLUMN: Image Preview & Upload Controls (Takes 5/12 columns on large screens) -->
+            <div class="lg:col-span-5 flex flex-col gap-6 sticky top-24">
+                <!-- Active Image Card -->
+                <div
+                    class="bg-white dark:bg-surface-dark rounded-xl shadow-lg border border-slate-200 dark:border-slate-700/50 overflow-hidden group">
+                    <div class="relative aspect-[4/3] bg-slate-100 dark:bg-black/40 w-full overflow-hidden">
+                        <img alt="Mountain landscape with sunrise" class="w-full h-full object-cover"
+                            data-alt="Mountain landscape nature photography"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuBnfHq2G7gOWdQ4f0RZc18WVoT947wi8WmzAdH_Dcj8FRZT-O9FSPlsSQPbZ0SshdDpsKOMUGg0ufFzjpjd35siqujInqdV6vXk6GKirEiAFgTWuL78g36rZkYdGt3NVXCqyNag26h4b5mhYoS9svneeAa9VXsA4NqIO5SihtIatu5fxwK_jjLi0SGJAbly74blMPBs3Af7xnCCLWnuCTyUqa0Ph5Dg9rEuEETgg0zXkPzBnd_ieDUsNc13UNDy6jN3InlMoqWZcm5W" />
+                        <!-- Overlay Actions -->
+                        <div class="absolute top-3 right-3 flex gap-2">
+                            <span
+                                class="px-3 py-1 rounded-full bg-black/60 backdrop-blur-md text-white text-xs font-bold border border-white/10 flex items-center gap-1">
+                                <span class="material-symbols-outlined text-secondary text-[16px]">check_circle</span>
+                                EXIF Found
+                            </span>
+                        </div>
+                    </div>
+                    <div class="p-5">
+                        <div class="flex items-start justify-between gap-4 mb-4">
+                            <div>
+                                <h3 class="text-lg font-bold text-slate-900 dark:text-white truncate"
+                                    title="DSC_0923_Edited.jpg">DSC_0923_Edited.jpg</h3>
+                                <p class="text-slate-500 dark:text-slate-400 text-sm">24.5 MB • JPG • 6000 x 4000 px</p>
+                            </div>
+                            <button class="text-slate-400 hover:text-primary transition-colors" title="Download Image">
+                                <span class="material-symbols-outlined">download</span>
+                            </button>
+                        </div>
+                        <!-- Mini Histogram Placeholder -->
+                        <div class="h-16 w-full bg-slate-100 dark:bg-surface-darker rounded flex items-end justify-between px-1 pb-0 gap-[1px] opacity-70 mb-4"
+                            title="Histogram">
+                            <!-- Simulated bars -->
+                            <div class="w-full bg-primary/20 h-[30%] rounded-t-sm"></div>
+                            <div class="w-full bg-primary/30 h-[50%] rounded-t-sm"></div>
+                            <div class="w-full bg-primary/40 h-[80%] rounded-t-sm"></div>
+                            <div class="w-full bg-primary/60 h-[40%] rounded-t-sm"></div>
+                            <div class="w-full bg-primary/40 h-[60%] rounded-t-sm"></div>
+                            <div class="w-full bg-primary/30 h-[30%] rounded-t-sm"></div>
+                            <div class="w-full bg-primary/20 h-[20%] rounded-t-sm"></div>
+                        </div>
+                        <div class="flex gap-3">
+                            <button
+                                class="flex-1 h-10 flex items-center justify-center gap-2 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 font-medium text-sm hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors border border-transparent dark:border-slate-600">
+                                <span class="material-symbols-outlined text-[18px]">upload_file</span>
+                                New Image
+                            </button>
+                            <button
+                                class="flex-1 h-10 flex items-center justify-center gap-2 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 font-medium text-sm hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors border border-transparent dark:border-slate-600">
+                                <span class="material-symbols-outlined text-[18px]">delete</span>
+                                Clear
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Ad Placeholder (Sidebar on Desktop/Tablet) -->
+                <div
+                    class="hidden lg:flex items-center justify-center w-full h-[300px] bg-slate-200 dark:bg-surface-darker rounded-lg border-2 border-dashed border-slate-300 dark:border-slate-800 relative overflow-hidden">
+                    <div
+                        class="absolute inset-0 bg-gradient-to-br from-transparent to-slate-300/10 dark:to-white/5 pointer-events-none">
+                    </div>
+                    <span
+                        class="text-slate-400 dark:text-slate-600 text-sm font-semibold tracking-widest uppercase">Advertisement</span>
+                </div>
+            </div>
+            <!-- RIGHT COLUMN: Data Grid (Takes 7/12 columns) -->
+            <div class="lg:col-span-7 flex flex-col gap-6">
+                <!-- Toolbar -->
+                <div
+                    class="flex items-center justify-between bg-white dark:bg-surface-dark p-4 rounded-xl border border-slate-200 dark:border-slate-700/50 shadow-sm">
+                    <div class="flex items-center gap-2">
+                        <span class="material-symbols-outlined text-secondary">analytics</span>
+                        <span class="font-bold text-slate-900 dark:text-white">Metadata Report</span>
+                    </div>
+                    <button
+                        class="flex items-center gap-2 bg-primary hover:bg-blue-600 text-white px-4 py-2 rounded-lg font-bold text-sm transition-all shadow-lg shadow-blue-900/20 active:scale-95">
+                        <span class="material-symbols-outlined text-[18px]">content_copy</span>
+                        Copy Data
+                    </button>
+                </div>
+                <!-- Key Stats Grid (Visual Highlights) -->
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 md:gap-4">
+                    <div
+                        class="bg-white dark:bg-surface-dark p-4 rounded-xl border border-slate-200 dark:border-slate-700/50 flex flex-col items-center justify-center text-center gap-1 shadow-sm">
+                        <span class="material-symbols-outlined text-primary mb-1">shutter_speed</span>
+                        <span
+                            class="text-xs text-slate-500 dark:text-slate-400 uppercase font-bold tracking-wider">Shutter</span>
+                        <span class="text-lg md:text-xl font-bold text-slate-900 dark:text-white">1/250</span>
+                    </div>
+                    <div
+                        class="bg-white dark:bg-surface-dark p-4 rounded-xl border border-slate-200 dark:border-slate-700/50 flex flex-col items-center justify-center text-center gap-1 shadow-sm">
+                        <span class="material-symbols-outlined text-primary mb-1">shutter_speed</span>
+                        <span
+                            class="text-xs text-slate-500 dark:text-slate-400 uppercase font-bold tracking-wider">Aperture</span>
+                        <span class="text-lg md:text-xl font-bold text-slate-900 dark:text-white">f/2.8</span>
+                    </div>
+                    <div
+                        class="bg-white dark:bg-surface-dark p-4 rounded-xl border border-slate-200 dark:border-slate-700/50 flex flex-col items-center justify-center text-center gap-1 shadow-sm">
+                        <span class="material-symbols-outlined text-primary mb-1">iso</span>
+                        <span
+                            class="text-xs text-slate-500 dark:text-slate-400 uppercase font-bold tracking-wider">ISO</span>
+                        <span class="text-lg md:text-xl font-bold text-slate-900 dark:text-white">100</span>
+                    </div>
+                    <div
+                        class="bg-white dark:bg-surface-dark p-4 rounded-xl border border-slate-200 dark:border-slate-700/50 flex flex-col items-center justify-center text-center gap-1 shadow-sm">
+                        <span class="material-symbols-outlined text-primary mb-1">straighten</span>
+                        <span
+                            class="text-xs text-slate-500 dark:text-slate-400 uppercase font-bold tracking-wider">Focal
+                            Len</span>
+                        <span class="text-lg md:text-xl font-bold text-slate-900 dark:text-white">35mm</span>
+                    </div>
+                </div>
+                <!-- Main Data Tables -->
+                <div class="flex flex-col gap-6">
+                    <!-- Section: Camera -->
+                    <div
+                        class="bg-white dark:bg-surface-dark rounded-xl border border-slate-200 dark:border-slate-700/50 shadow-sm overflow-hidden">
+                        <div
+                            class="bg-slate-50 dark:bg-surface-darker px-5 py-3 border-b border-slate-200 dark:border-slate-700/50 flex items-center gap-2">
+                            <span class="material-symbols-outlined text-primary text-[20px]">photo_camera</span>
+                            <h3 class="font-bold text-slate-800 dark:text-slate-200 text-sm uppercase tracking-wider">
+                                Camera Equipment</h3>
+                        </div>
+                        <div class="divide-y divide-slate-100 dark:divide-slate-700/50">
+                            <div
+                                class="grid grid-cols-12 px-5 py-3 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
+                                <div class="col-span-4 text-sm text-slate-500 dark:text-slate-400 font-medium">Make
+                                </div>
+                                <div class="col-span-8 text-sm text-slate-900 dark:text-white font-semibold">Sony</div>
+                            </div>
+                            <div
+                                class="grid grid-cols-12 px-5 py-3 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
+                                <div class="col-span-4 text-sm text-slate-500 dark:text-slate-400 font-medium">Model
+                                </div>
+                                <div class="col-span-8 text-sm text-slate-900 dark:text-white font-semibold">ILCE-7M3
+                                    (A7 III)</div>
+                            </div>
+                            <div
+                                class="grid grid-cols-12 px-5 py-3 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
+                                <div class="col-span-4 text-sm text-slate-500 dark:text-slate-400 font-medium">Lens
+                                    Model</div>
+                                <div class="col-span-8 text-sm text-slate-900 dark:text-white font-semibold">FE 24-70mm
+                                    F2.8 GM</div>
+                            </div>
+                            <div
+                                class="grid grid-cols-12 px-5 py-3 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
+                                <div class="col-span-4 text-sm text-slate-500 dark:text-slate-400 font-medium">Software
+                                </div>
+                                <div class="col-span-8 text-sm text-slate-900 dark:text-white font-semibold">Adobe
+                                    Lightroom Classic 11.2 (Macintosh)</div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Section: Image Details -->
+                    <div
+                        class="bg-white dark:bg-surface-dark rounded-xl border border-slate-200 dark:border-slate-700/50 shadow-sm overflow-hidden">
+                        <div
+                            class="bg-slate-50 dark:bg-surface-darker px-5 py-3 border-b border-slate-200 dark:border-slate-700/50 flex items-center gap-2">
+                            <span class="material-symbols-outlined text-primary text-[20px]">tune</span>
+                            <h3 class="font-bold text-slate-800 dark:text-slate-200 text-sm uppercase tracking-wider">
+                                Shot Settings</h3>
+                        </div>
+                        <div class="divide-y divide-slate-100 dark:divide-slate-700/50">
+                            <div
+                                class="grid grid-cols-12 px-5 py-3 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
+                                <div class="col-span-4 text-sm text-slate-500 dark:text-slate-400 font-medium">Exposure
+                                    Prog.</div>
+                                <div class="col-span-8 text-sm text-slate-900 dark:text-white font-semibold">Manual
+                                </div>
+                            </div>
+                            <div
+                                class="grid grid-cols-12 px-5 py-3 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
+                                <div class="col-span-4 text-sm text-slate-500 dark:text-slate-400 font-medium">Metering
+                                    Mode</div>
+                                <div class="col-span-8 text-sm text-slate-900 dark:text-white font-semibold">Pattern
+                                </div>
+                            </div>
+                            <div
+                                class="grid grid-cols-12 px-5 py-3 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
+                                <div class="col-span-4 text-sm text-slate-500 dark:text-slate-400 font-medium">Flash
+                                </div>
+                                <div class="col-span-8 text-sm text-slate-900 dark:text-white font-semibold">Did not
+                                    fire, compulsory mode</div>
+                            </div>
+                            <div
+                                class="grid grid-cols-12 px-5 py-3 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
+                                <div class="col-span-4 text-sm text-slate-500 dark:text-slate-400 font-medium">Color
+                                    Space</div>
+                                <div class="col-span-8 text-sm text-slate-900 dark:text-white font-semibold">sRGB</div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Section: Dates & Location -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Dates -->
+                        <div
+                            class="bg-white dark:bg-surface-dark rounded-xl border border-slate-200 dark:border-slate-700/50 shadow-sm overflow-hidden h-full">
+                            <div
+                                class="bg-slate-50 dark:bg-surface-darker px-5 py-3 border-b border-slate-200 dark:border-slate-700/50 flex items-center gap-2">
+                                <span class="material-symbols-outlined text-primary text-[20px]">calendar_today</span>
+                                <h3
+                                    class="font-bold text-slate-800 dark:text-slate-200 text-sm uppercase tracking-wider">
+                                    Dates</h3>
+                            </div>
+                            <div class="p-5 flex flex-col gap-4">
+                                <div>
+                                    <p class="text-xs text-slate-500 dark:text-slate-400 uppercase font-bold mb-1">
+                                        Original Date</p>
+                                    <p class="text-base text-slate-900 dark:text-white font-semibold">June 14, 2023</p>
+                                    <p class="text-sm text-slate-500">14:32:05</p>
+                                </div>
+                                <div class="h-px bg-slate-100 dark:bg-slate-700"></div>
+                                <div>
+                                    <p class="text-xs text-slate-500 dark:text-slate-400 uppercase font-bold mb-1">
+                                        Digitized Date</p>
+                                    <p class="text-base text-slate-900 dark:text-white font-semibold">June 15, 2023</p>
+                                    <p class="text-sm text-slate-500">09:15:22</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Location -->
+                        <div
+                            class="bg-white dark:bg-surface-dark rounded-xl border border-slate-200 dark:border-slate-700/50 shadow-sm overflow-hidden h-full">
+                            <div
+                                class="bg-slate-50 dark:bg-surface-darker px-5 py-3 border-b border-slate-200 dark:border-slate-700/50 flex items-center gap-2">
+                                <span class="material-symbols-outlined text-primary text-[20px]">location_on</span>
+                                <h3
+                                    class="font-bold text-slate-800 dark:text-slate-200 text-sm uppercase tracking-wider">
+                                    GPS Location</h3>
+                            </div>
+                            <div class="relative w-full h-32 bg-slate-200 dark:bg-slate-800">
+                                <div class="absolute inset-0 opacity-60" data-alt="Abstract map view texture"
+                                    data-location="Iceland"
+                                    style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAWxLpR4CE9ozhSlKAX6XXFF9-awozvF5LlwYla4aYmJk2MqZ-sVQo_M1JS6Y10y9VpNYDSUNRRrcY35WdxATjFFQ7PJwmLBe1hPAPykccTg7SWXr0x6NZ5ZfL12spKolte3A581YdxRd3qH8WQM45Cf0mPHTrkzRnY1JlC66IbkeSy_YW7gf7H5B80hx2iBg2UOu7W4WgTdARrC2wENGiXoZ1qQI3CtyBq4g-6koYAjI4nyCO8sH6QWW9pK16_LDzbH9kRJUHCJ-fp'); background-size: cover; background-position: center;">
+                                </div>
+                                <div class="absolute inset-0 flex items-center justify-center">
+                                    <a class="bg-white/90 dark:bg-black/80 backdrop-blur text-slate-900 dark:text-white px-3 py-1.5 rounded-full text-xs font-bold shadow-lg flex items-center gap-1 hover:scale-105 transition-transform"
+                                        href="#">
+                                        Open Map <span class="material-symbols-outlined text-[14px]">open_in_new</span>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="p-4 grid grid-cols-2 gap-4">
+                                <div>
+                                    <p class="text-xs text-slate-500 dark:text-slate-400 font-medium">Latitude</p>
+                                    <p class="text-sm text-slate-900 dark:text-white font-mono">64.9631° N</p>
+                                </div>
+                                <div>
+                                    <p class="text-xs text-slate-500 dark:text-slate-400 font-medium">Longitude</p>
+                                    <p class="text-sm text-slate-900 dark:text-white font-mono">19.0208° W</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Mobile/Tablet Ad Placeholder (Visible on mobile/tablet stack) -->
+                <div
+                    class="lg:hidden w-full h-[200px] mt-4 bg-slate-200 dark:bg-surface-darker rounded-lg border-2 border-dashed border-slate-300 dark:border-slate-800 flex items-center justify-center relative overflow-hidden">
+                    <span
+                        class="text-slate-400 dark:text-slate-600 text-sm font-semibold tracking-widest uppercase">Advertisement</span>
+                </div>
+            </div>
+        </div>
+        <div class="h-12"></div>
+    </main>
+    <!-- Footer -->
+    <footer class="border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-background-dark py-8">
+        <div
+            class="max-w-7xl mx-auto px-4 md:px-8 text-center md:text-left flex flex-col md:flex-row justify-between items-center gap-4">
+            <p class="text-slate-500 dark:text-slate-400 text-sm">© 2023 ImageHub Pro. All rights reserved.</p>
+            <div class="flex gap-6 text-sm font-medium text-slate-600 dark:text-slate-300">
+                <a class="hover:text-primary" href="#">Privacy Policy</a>
+                <a class="hover:text-primary" href="#">Terms of Service</a>
+                <a class="hover:text-primary" href="#">Contact</a>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>

@@ -5,36 +5,67 @@
 <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>ImageMojo Pro - Tablet View</title>
+    <title>ImageMojo Pro - Tablet</title>
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
-        rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;display=swap"
-        rel="stylesheet" />
-    <link
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
-        rel="stylesheet" />
+    <!-- Theme Configuration -->
     <script id="tailwind-config">
         tailwind.config = {
             darkMode: "class",
             theme: {
                 extend: {
                     colors: {
-                        "primary": "#6600cc",
+                        "primary": "#6605c7",
                         "background-light": "#f7f5f8",
                         "background-dark": "#190f23",
-                        "surface-dark": "#241830", // Custom surface color for cards in dark mode
+                        "surface-dark": "#241a30",
                         "surface-light": "#ffffff",
                     },
                     fontFamily: {
                         "display": ["Inter", "sans-serif"]
                     },
-                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "2xl": "1rem", "full": "9999px" },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
                 },
             },
         }
     </script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap"
+        rel="stylesheet" />
+    <!-- Material Symbols -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <style>
+        /* Custom Scrollbar for a cleaner look */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #190f23;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #332742;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #6605c7;
+        }
+
+        .glass-header {
+            background: rgba(25, 15, 35, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+    </style>
     <style>
         body {
             min-height: max(884px, 100dvh);
@@ -43,302 +74,362 @@
 </head>
 
 <body
-    class="bg-background-light dark:bg-background-dark font-display text-gray-900 dark:text-white antialiased transition-colors duration-200">
-    <!-- Header -->
+    class="bg-background-light dark:bg-background-dark font-display min-h-screen flex flex-col antialiased selection:bg-primary selection:text-white">
+    <!-- Sticky Header -->
     <header
-        class="sticky top-0 z-50 border-b border-gray-200 dark:border-white/10 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        class="sticky top-0 z-50 w-full glass-header border-b border-white/5 shadow-lg shadow-black/20 transition-all duration-300">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div class="flex h-16 items-center justify-between">
                 <!-- Logo -->
-                <div class="flex items-center gap-2">
-                    <div class="flex size-10 items-center justify-center rounded-lg bg-primary text-white">
-                        <span class="material-symbols-outlined text-[24px]">photo_library</span>
+                <div class="flex items-center gap-3">
+                    <div
+                        class="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-purple-800 text-white shadow-lg shadow-primary/30">
+                        <span class="material-symbols-outlined text-[24px]">auto_fix_high</span>
                     </div>
-                    <span class="text-xl font-bold tracking-tight text-gray-900 dark:text-white">ImageMojo Pro</span>
+                    <span class="text-xl font-bold tracking-tight text-gray-900 dark:text-white">ImageMojo <span
+                            class="text-primary">Pro</span></span>
                 </div>
-                <!-- Nav Links (Visible on tablet) -->
-                <nav class="hidden md:flex items-center gap-8">
-                    <a class="text-sm font-semibold text-primary" href="#">Home</a>
-                    <a class="text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary transition-colors"
+                <!-- Desktop/Tablet Nav -->
+                <nav
+                    class="hidden md:flex items-center gap-1 bg-surface-dark/50 p-1 rounded-full border border-white/5">
+                    <a class="rounded-full px-4 py-1.5 text-sm font-medium text-white bg-primary shadow-sm transition-colors"
+                        href="#">Home</a>
+                    <a class="rounded-full px-4 py-1.5 text-sm font-medium text-gray-400 hover:text-white hover:bg-white/5 transition-colors"
                         href="#">Tools</a>
-                    <a class="text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary transition-colors"
+                    <a class="rounded-full px-4 py-1.5 text-sm font-medium text-gray-400 hover:text-white hover:bg-white/5 transition-colors"
                         href="#">Blog</a>
+                    <a class="rounded-full px-4 py-1.5 text-sm font-medium text-gray-400 hover:text-white hover:bg-white/5 transition-colors"
+                        href="#">Feedback</a>
                 </nav>
-                <!-- Actions -->
-                <div class="flex items-center gap-4">
-                    <button
-                        class="hidden md:flex items-center gap-2 text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-primary">
-                        <span>Feedback</span>
-                    </button>
-                    <button
-                        class="rounded-lg bg-primary px-4 py-2 text-sm font-bold text-white hover:bg-primary/90 transition-colors shadow-lg shadow-primary/25">
-                        Sign In
-                    </button>
-                </div>
+                <!-- Mobile Menu Button (Tablet Small Breakpoint) -->
+                <button
+                    class="md:hidden flex h-10 w-10 items-center justify-center rounded-lg text-gray-400 hover:bg-white/5 hover:text-white">
+                    <span class="material-symbols-outlined">menu</span>
+                </button>
             </div>
         </div>
     </header>
-    <!-- Main Content -->
-    <main class="relative w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
+    <main class="flex-grow w-full overflow-x-hidden">
         <!-- Hero Section -->
-        <div class="relative flex flex-col items-center justify-center text-center max-w-3xl mx-auto mb-12">
-            <!-- Abstract gradient blob behind hero -->
-            <div class="absolute -top-20 left-1/2 -translate-x-1/2 w-[300px] h-[300px] bg-primary/20 blur-[100px] rounded-full pointer-events-none"
-                data-alt="Abstract purple glow background"></div>
-            <h1
-                class="relative text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-gray-900 dark:text-white mb-6">
-                Master Your Images with <span
-                    class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-purple-400">ImageMojo
-                    Pro</span>
-            </h1>
-            <p class="relative text-lg md:text-xl text-gray-600 dark:text-gray-300 mb-8 max-w-2xl">
-                Access 25+ free tools to convert, edit, and optimize your photos instantly. No sign-up required.
-            </p>
-            <!-- Search Bar -->
-            <div class="relative w-full max-w-xl">
-                <div
-                    class="flex w-full items-center rounded-xl bg-white dark:bg-surface-dark border border-gray-200 dark:border-white/10 shadow-xl shadow-primary/5 focus-within:ring-2 focus-within:ring-primary/50 focus-within:border-primary transition-all overflow-hidden">
-                    <div class="flex h-14 w-14 items-center justify-center text-gray-400">
-                        <span class="material-symbols-outlined">search</span>
+        <section class="relative overflow-hidden pt-12 pb-16 lg:pt-20 lg:pb-20">
+            <!-- Background Glows -->
+            <div
+                class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full max-w-4xl opacity-20 pointer-events-none">
+                <div class="absolute top-10 left-10 w-72 h-72 bg-primary rounded-full blur-[120px]"></div>
+                <div class="absolute bottom-10 right-10 w-72 h-72 bg-purple-500 rounded-full blur-[120px]"></div>
+            </div>
+            <div class="relative mx-auto max-w-4xl px-4 text-center sm:px-6 lg:px-8">
+                <h1
+                    class="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-white mb-6 leading-tight">
+                    Free Online <span
+                        class="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-primary">Image
+                        Tools</span> Platform
+                </h1>
+                <p class="mx-auto mt-4 max-w-2xl text-lg text-gray-400">
+                    Edit, convert, and optimize your images in seconds. No installation required.
+                </p>
+                <!-- Search Bar -->
+                <div class="mx-auto mt-10 max-w-2xl">
+                    <div class="relative group">
+                        <div class="absolute inset-y-0 left-0 flex items-center pl-5 pointer-events-none">
+                            <span
+                                class="material-symbols-outlined text-gray-500 group-focus-within:text-primary transition-colors">search</span>
+                        </div>
+                        <input
+                            class="block w-full rounded-full border-0 bg-surface-dark py-4 pl-14 pr-5 text-white shadow-lg ring-1 ring-white/10 placeholder:text-gray-500 focus:ring-2 focus:ring-primary focus:bg-[#2a1f35] sm:text-base sm:leading-6 transition-all duration-200"
+                            placeholder="Search for a tool (e.g., 'Compress', 'Crop')..." type="text" />
+                        <div class="absolute inset-y-0 right-2 flex items-center">
+                            <button
+                                class="rounded-full bg-primary p-2 text-white hover:bg-primary/90 shadow-lg shadow-primary/20 transition-transform active:scale-95">
+                                <span class="material-symbols-outlined text-[20px]">arrow_forward</span>
+                            </button>
+                        </div>
                     </div>
-                    <input
-                        class="h-14 w-full bg-transparent border-none text-base text-gray-900 dark:text-white placeholder-gray-400 focus:ring-0"
-                        placeholder="Search for a tool (e.g., Resize, Compress)..." type="text" />
-                    <button
-                        class="mr-2 rounded-lg bg-primary/10 px-4 py-2 text-sm font-semibold text-primary hover:bg-primary/20 transition-colors">
-                        Search
-                    </button>
                 </div>
-                <div class="mt-4 flex items-center justify-center gap-2 text-sm text-gray-500 dark:text-gray-400">
-                    <span class="material-symbols-outlined text-[18px] text-green-500">check_circle</span>
-                    <span>Used by 10,000+ designers daily</span>
+                <!-- Trust Stats -->
+                <div class="mt-10 flex flex-wrap justify-center gap-4 sm:gap-8">
+                    <div
+                        class="flex items-center gap-2 rounded-full bg-white/5 px-4 py-2 ring-1 ring-white/10 backdrop-blur-sm">
+                        <span class="material-symbols-outlined text-green-400 text-[20px]">check_circle</span>
+                        <span class="text-sm font-medium text-white">100% Free</span>
+                    </div>
+                    <div
+                        class="flex items-center gap-2 rounded-full bg-white/5 px-4 py-2 ring-1 ring-white/10 backdrop-blur-sm">
+                        <span class="material-symbols-outlined text-blue-400 text-[20px]">bolt</span>
+                        <span class="text-sm font-medium text-white">Instant &amp; No Sign-up</span>
+                    </div>
+                    <div
+                        class="flex items-center gap-2 rounded-full bg-white/5 px-4 py-2 ring-1 ring-white/10 backdrop-blur-sm">
+                        <span class="material-symbols-outlined text-purple-400 text-[20px]">all_inclusive</span>
+                        <span class="text-sm font-medium text-white">Unlimited Files</span>
+                    </div>
                 </div>
             </div>
-        </div>
-        <!-- AdSense Leaderboard Placeholder -->
-        <div class="mb-12 w-full">
-            <div
-                class="relative flex h-24 w-full flex-col items-center justify-center rounded-xl border-2 border-dashed border-gray-300 dark:border-white/10 bg-gray-50 dark:bg-white/5">
-                <span class="text-xs font-medium uppercase tracking-wider text-gray-400">Advertisement</span>
-                <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/diagonal-stripes-light.png')] opacity-10"
-                    data-alt="Subtle diagonal stripe pattern for ad placeholder"></div>
-                <div class="h-full w-full absolute top-0 left-0 bg-gradient-to-r from-transparent via-white/5 to-transparent skew-x-12"
-                    data-alt="Shine effect overlay"></div>
+        </section>
+        <!-- Tools Grid Section -->
+        <section class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pb-20">
+            <h2 class="sr-only">Available Tools</h2>
+            <div class="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-2 xl:gap-6">
+                <!-- Tool Card 1: Compressor -->
+                <a class="group relative flex items-start gap-5 rounded-xl border border-white/5 bg-surface-dark p-5 shadow-lg transition-all duration-300 hover:border-primary/50 hover:shadow-primary/10 hover:-translate-y-1 active:scale-[0.99]"
+                    href="#">
+                    <div
+                        class="flex h-14 w-14 shrink-0 items-center justify-center rounded-lg bg-[#3a2e47] text-purple-300 group-hover:bg-primary group-hover:text-white transition-colors duration-300">
+                        <span class="material-symbols-outlined text-[32px]">compress</span>
+                    </div>
+                    <div class="flex flex-1 flex-col">
+                        <h3 class="text-lg font-bold text-white group-hover:text-primary transition-colors">Image
+                            Compressor</h3>
+                        <p class="mt-1 text-sm text-gray-400 leading-relaxed">Reduce file size significantly while
+                            maintaining the best quality.</p>
+                    </div>
+                    <div class="self-center">
+                        <span
+                            class="material-symbols-outlined text-gray-600 group-hover:text-primary transition-colors">arrow_forward_ios</span>
+                    </div>
+                </a>
+                <!-- Tool Card 2: Resize -->
+                <a class="group relative flex items-start gap-5 rounded-xl border border-white/5 bg-surface-dark p-5 shadow-lg transition-all duration-300 hover:border-primary/50 hover:shadow-primary/10 hover:-translate-y-1 active:scale-[0.99]"
+                    href="#">
+                    <div
+                        class="flex h-14 w-14 shrink-0 items-center justify-center rounded-lg bg-[#3a2e47] text-blue-300 group-hover:bg-blue-600 group-hover:text-white transition-colors duration-300">
+                        <span class="material-symbols-outlined text-[32px]">aspect_ratio</span>
+                    </div>
+                    <div class="flex flex-1 flex-col">
+                        <h3 class="text-lg font-bold text-white group-hover:text-blue-400 transition-colors">Image
+                            Resizer</h3>
+                        <p class="mt-1 text-sm text-gray-400 leading-relaxed">Resize images by pixel dimensions or
+                            percentage quickly.</p>
+                    </div>
+                    <div class="self-center">
+                        <span
+                            class="material-symbols-outlined text-gray-600 group-hover:text-blue-400 transition-colors">arrow_forward_ios</span>
+                    </div>
+                </a>
+                <!-- Tool Card 3: Crop -->
+                <a class="group relative flex items-start gap-5 rounded-xl border border-white/5 bg-surface-dark p-5 shadow-lg transition-all duration-300 hover:border-primary/50 hover:shadow-primary/10 hover:-translate-y-1 active:scale-[0.99]"
+                    href="#">
+                    <div
+                        class="flex h-14 w-14 shrink-0 items-center justify-center rounded-lg bg-[#3a2e47] text-green-300 group-hover:bg-green-600 group-hover:text-white transition-colors duration-300">
+                        <span class="material-symbols-outlined text-[32px]">crop</span>
+                    </div>
+                    <div class="flex flex-1 flex-col">
+                        <h3 class="text-lg font-bold text-white group-hover:text-green-400 transition-colors">Crop Image
+                        </h3>
+                        <p class="mt-1 text-sm text-gray-400 leading-relaxed">Cut out unwanted parts of your images with
+                            a custom aspect ratio.</p>
+                    </div>
+                    <div class="self-center">
+                        <span
+                            class="material-symbols-outlined text-gray-600 group-hover:text-green-400 transition-colors">arrow_forward_ios</span>
+                    </div>
+                </a>
+                <!-- Tool Card 4: Convert -->
+                <a class="group relative flex items-start gap-5 rounded-xl border border-white/5 bg-surface-dark p-5 shadow-lg transition-all duration-300 hover:border-primary/50 hover:shadow-primary/10 hover:-translate-y-1 active:scale-[0.99]"
+                    href="#">
+                    <div
+                        class="flex h-14 w-14 shrink-0 items-center justify-center rounded-lg bg-[#3a2e47] text-pink-300 group-hover:bg-pink-600 group-hover:text-white transition-colors duration-300">
+                        <span class="material-symbols-outlined text-[32px]">transform</span>
+                    </div>
+                    <div class="flex flex-1 flex-col">
+                        <h3 class="text-lg font-bold text-white group-hover:text-pink-400 transition-colors">Convert to
+                            JPG</h3>
+                        <p class="mt-1 text-sm text-gray-400 leading-relaxed">Turn PNG, WEBP, or GIF files into standard
+                            JPG format instantly.</p>
+                    </div>
+                    <div class="self-center">
+                        <span
+                            class="material-symbols-outlined text-gray-600 group-hover:text-pink-400 transition-colors">arrow_forward_ios</span>
+                    </div>
+                </a>
+                <!-- Advertisement Placeholder -->
+                <div class="col-span-1 md:col-span-2 my-4">
+                    <div
+                        class="flex flex-col items-center justify-center rounded-xl border-2 border-dashed border-white/10 bg-white/5 p-6">
+                        <span
+                            class="mb-2 text-xs font-semibold uppercase tracking-widest text-gray-500">Advertisement</span>
+                        <div class="h-[90px] w-full max-w-[728px] rounded bg-white/10 flex items-center justify-center"
+                            data-alt="Abstract gradient placeholder for advertisement space">
+                            <span class="text-sm text-gray-500">Ad Space (728x90)</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Tool Card 5: Background Remover -->
+                <a class="group relative flex items-start gap-5 rounded-xl border border-white/5 bg-surface-dark p-5 shadow-lg transition-all duration-300 hover:border-primary/50 hover:shadow-primary/10 hover:-translate-y-1 active:scale-[0.99]"
+                    href="#">
+                    <div
+                        class="flex h-14 w-14 shrink-0 items-center justify-center rounded-lg bg-[#3a2e47] text-yellow-300 group-hover:bg-yellow-600 group-hover:text-white transition-colors duration-300">
+                        <span class="material-symbols-outlined text-[32px]">magic_button</span>
+                    </div>
+                    <div class="flex flex-1 flex-col">
+                        <h3 class="text-lg font-bold text-white group-hover:text-yellow-400 transition-colors">
+                            Background Remover</h3>
+                        <p class="mt-1 text-sm text-gray-400 leading-relaxed">AI-powered tool to remove background from
+                            images automatically.</p>
+                    </div>
+                    <div class="self-center">
+                        <span
+                            class="material-symbols-outlined text-gray-600 group-hover:text-yellow-400 transition-colors">arrow_forward_ios</span>
+                    </div>
+                </a>
+                <!-- Tool Card 6: Meme Maker -->
+                <a class="group relative flex items-start gap-5 rounded-xl border border-white/5 bg-surface-dark p-5 shadow-lg transition-all duration-300 hover:border-primary/50 hover:shadow-primary/10 hover:-translate-y-1 active:scale-[0.99]"
+                    href="#">
+                    <div
+                        class="flex h-14 w-14 shrink-0 items-center justify-center rounded-lg bg-[#3a2e47] text-teal-300 group-hover:bg-teal-600 group-hover:text-white transition-colors duration-300">
+                        <span class="material-symbols-outlined text-[32px]">sentiment_very_satisfied</span>
+                    </div>
+                    <div class="flex flex-1 flex-col">
+                        <h3 class="text-lg font-bold text-white group-hover:text-teal-400 transition-colors">Meme
+                            Generator</h3>
+                        <p class="mt-1 text-sm text-gray-400 leading-relaxed">Add text to images and create viral memes
+                            in seconds.</p>
+                    </div>
+                    <div class="self-center">
+                        <span
+                            class="material-symbols-outlined text-gray-600 group-hover:text-teal-400 transition-colors">arrow_forward_ios</span>
+                    </div>
+                </a>
+                <!-- Tool Card 7: Watermark -->
+                <a class="group relative flex items-start gap-5 rounded-xl border border-white/5 bg-surface-dark p-5 shadow-lg transition-all duration-300 hover:border-primary/50 hover:shadow-primary/10 hover:-translate-y-1 active:scale-[0.99]"
+                    href="#">
+                    <div
+                        class="flex h-14 w-14 shrink-0 items-center justify-center rounded-lg bg-[#3a2e47] text-red-300 group-hover:bg-red-600 group-hover:text-white transition-colors duration-300">
+                        <span class="material-symbols-outlined text-[32px]">branding_watermark</span>
+                    </div>
+                    <div class="flex flex-1 flex-col">
+                        <h3 class="text-lg font-bold text-white group-hover:text-red-400 transition-colors">Watermark
+                            Image</h3>
+                        <p class="mt-1 text-sm text-gray-400 leading-relaxed">Protect your work by adding text or logo
+                            watermarks easily.</p>
+                    </div>
+                    <div class="self-center">
+                        <span
+                            class="material-symbols-outlined text-gray-600 group-hover:text-red-400 transition-colors">arrow_forward_ios</span>
+                    </div>
+                </a>
+                <!-- Tool Card 8: Rotate -->
+                <a class="group relative flex items-start gap-5 rounded-xl border border-white/5 bg-surface-dark p-5 shadow-lg transition-all duration-300 hover:border-primary/50 hover:shadow-primary/10 hover:-translate-y-1 active:scale-[0.99]"
+                    href="#">
+                    <div
+                        class="flex h-14 w-14 shrink-0 items-center justify-center rounded-lg bg-[#3a2e47] text-indigo-300 group-hover:bg-indigo-600 group-hover:text-white transition-colors duration-300">
+                        <span class="material-symbols-outlined text-[32px]">rotate_right</span>
+                    </div>
+                    <div class="flex flex-1 flex-col">
+                        <h3 class="text-lg font-bold text-white group-hover:text-indigo-400 transition-colors">Rotate
+                            Image</h3>
+                        <p class="mt-1 text-sm text-gray-400 leading-relaxed">Rotate your photos clockwise or
+                            counter-clockwise instantly.</p>
+                    </div>
+                    <div class="self-center">
+                        <span
+                            class="material-symbols-outlined text-gray-600 group-hover:text-indigo-400 transition-colors">arrow_forward_ios</span>
+                    </div>
+                </a>
+                <!-- Tool Card 9: Color Picker -->
+                <a class="group relative flex items-start gap-5 rounded-xl border border-white/5 bg-surface-dark p-5 shadow-lg transition-all duration-300 hover:border-primary/50 hover:shadow-primary/10 hover:-translate-y-1 active:scale-[0.99]"
+                    href="#">
+                    <div
+                        class="flex h-14 w-14 shrink-0 items-center justify-center rounded-lg bg-[#3a2e47] text-orange-300 group-hover:bg-orange-600 group-hover:text-white transition-colors duration-300">
+                        <span class="material-symbols-outlined text-[32px]">palette</span>
+                    </div>
+                    <div class="flex flex-1 flex-col">
+                        <h3 class="text-lg font-bold text-white group-hover:text-orange-400 transition-colors">Color
+                            Picker</h3>
+                        <p class="mt-1 text-sm text-gray-400 leading-relaxed">Extract colors from your images and get
+                            HEX/RGB codes.</p>
+                    </div>
+                    <div class="self-center">
+                        <span
+                            class="material-symbols-outlined text-gray-600 group-hover:text-orange-400 transition-colors">arrow_forward_ios</span>
+                    </div>
+                </a>
+                <!-- Tool Card 10: Blur -->
+                <a class="group relative flex items-start gap-5 rounded-xl border border-white/5 bg-surface-dark p-5 shadow-lg transition-all duration-300 hover:border-primary/50 hover:shadow-primary/10 hover:-translate-y-1 active:scale-[0.99]"
+                    href="#">
+                    <div
+                        class="flex h-14 w-14 shrink-0 items-center justify-center rounded-lg bg-[#3a2e47] text-cyan-300 group-hover:bg-cyan-600 group-hover:text-white transition-colors duration-300">
+                        <span class="material-symbols-outlined text-[32px]">blur_on</span>
+                    </div>
+                    <div class="flex flex-1 flex-col">
+                        <h3 class="text-lg font-bold text-white group-hover:text-cyan-400 transition-colors">Blur Image
+                        </h3>
+                        <p class="mt-1 text-sm text-gray-400 leading-relaxed">Apply blur effects to hide sensitive
+                            information or creating style.</p>
+                    </div>
+                    <div class="self-center">
+                        <span
+                            class="material-symbols-outlined text-gray-600 group-hover:text-cyan-400 transition-colors">arrow_forward_ios</span>
+                    </div>
+                </a>
             </div>
-        </div>
-        <!-- Category Tabs -->
-        <div class="mb-8 overflow-x-auto">
-            <div class="flex items-center gap-2 md:justify-center min-w-max px-1">
+            <div class="mt-12 text-center">
                 <button
-                    class="rounded-full bg-primary px-6 py-2.5 text-sm font-medium text-white shadow-lg shadow-primary/25 transition-all">
-                    All Tools
-                </button>
-                <button
-                    class="rounded-full bg-white dark:bg-surface-dark border border-gray-200 dark:border-white/10 px-6 py-2.5 text-sm font-medium text-gray-600 dark:text-gray-300 hover:border-primary/50 hover:text-primary transition-all">
-                    Convert
-                </button>
-                <button
-                    class="rounded-full bg-white dark:bg-surface-dark border border-gray-200 dark:border-white/10 px-6 py-2.5 text-sm font-medium text-gray-600 dark:text-gray-300 hover:border-primary/50 hover:text-primary transition-all">
-                    Edit
-                </button>
-                <button
-                    class="rounded-full bg-white dark:bg-surface-dark border border-gray-200 dark:border-white/10 px-6 py-2.5 text-sm font-medium text-gray-600 dark:text-gray-300 hover:border-primary/50 hover:text-primary transition-all">
-                    Optimize
-                </button>
-                <button
-                    class="rounded-full bg-white dark:bg-surface-dark border border-gray-200 dark:border-white/10 px-6 py-2.5 text-sm font-medium text-gray-600 dark:text-gray-300 hover:border-primary/50 hover:text-primary transition-all">
-                    AI Tools
+                    class="inline-flex items-center gap-2 rounded-full border border-white/10 bg-surface-dark px-8 py-3 text-sm font-medium text-white shadow-lg transition-all hover:bg-white/5 hover:scale-105 hover:border-primary/50">
+                    <span class="material-symbols-outlined">apps</span>
+                    View All 25 Tools
                 </button>
             </div>
-        </div>
-        <!-- Tools Grid -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            <!-- Tool Card 1 -->
-            <a class="group relative flex flex-col rounded-2xl bg-white dark:bg-surface-dark p-6 border border-gray-200 dark:border-white/5 shadow-sm hover:shadow-xl hover:shadow-primary/10 hover:border-primary/30 transition-all duration-300"
-                href="#">
-                <div
-                    class="mb-4 flex size-12 items-center justify-center rounded-xl bg-blue-50 dark:bg-blue-500/10 text-blue-600 dark:text-blue-400 group-hover:bg-blue-600 group-hover:text-white transition-colors duration-300">
-                    <span class="material-symbols-outlined text-[28px]">compress</span>
-                </div>
-                <h3 class="mb-2 text-lg font-bold text-gray-900 dark:text-white">Compress JPEG</h3>
-                <p class="mb-4 text-sm text-gray-500 dark:text-gray-400 line-clamp-2">Reduce file size while maintaining
-                    the best quality for your photos.</p>
-                <div class="mt-auto flex items-center text-sm font-semibold text-primary">
-                    Try Now <span
-                        class="material-symbols-outlined ml-1 text-[16px] transition-transform group-hover:translate-x-1">arrow_forward</span>
-                </div>
-            </a>
-            <!-- Tool Card 2 -->
-            <a class="group relative flex flex-col rounded-2xl bg-white dark:bg-surface-dark p-6 border border-gray-200 dark:border-white/5 shadow-sm hover:shadow-xl hover:shadow-primary/10 hover:border-primary/30 transition-all duration-300"
-                href="#">
-                <div
-                    class="mb-4 flex size-12 items-center justify-center rounded-xl bg-purple-50 dark:bg-purple-500/10 text-purple-600 dark:text-purple-400 group-hover:bg-primary group-hover:text-white transition-colors duration-300">
-                    <span class="material-symbols-outlined text-[28px]">aspect_ratio</span>
-                </div>
-                <h3 class="mb-2 text-lg font-bold text-gray-900 dark:text-white">Resize Image</h3>
-                <p class="mb-4 text-sm text-gray-500 dark:text-gray-400 line-clamp-2">Change image dimensions by
-                    percentage or pixels easily.</p>
-                <div class="mt-auto flex items-center text-sm font-semibold text-primary">
-                    Try Now <span
-                        class="material-symbols-outlined ml-1 text-[16px] transition-transform group-hover:translate-x-1">arrow_forward</span>
-                </div>
-            </a>
-            <!-- Tool Card 3 -->
-            <a class="group relative flex flex-col rounded-2xl bg-white dark:bg-surface-dark p-6 border border-gray-200 dark:border-white/5 shadow-sm hover:shadow-xl hover:shadow-primary/10 hover:border-primary/30 transition-all duration-300"
-                href="#">
-                <div
-                    class="mb-4 flex size-12 items-center justify-center rounded-xl bg-green-50 dark:bg-green-500/10 text-green-600 dark:text-green-400 group-hover:bg-green-600 group-hover:text-white transition-colors duration-300">
-                    <span class="material-symbols-outlined text-[28px]">crop</span>
-                </div>
-                <h3 class="mb-2 text-lg font-bold text-gray-900 dark:text-white">Crop Image</h3>
-                <p class="mb-4 text-sm text-gray-500 dark:text-gray-400 line-clamp-2">Cut out the parts you don't need
-                    and adjust aspect ratio.</p>
-                <div class="mt-auto flex items-center text-sm font-semibold text-primary">
-                    Try Now <span
-                        class="material-symbols-outlined ml-1 text-[16px] transition-transform group-hover:translate-x-1">arrow_forward</span>
-                </div>
-            </a>
-            <!-- In-feed Ad (Tablet optimized to take 1 cell) -->
-            <div
-                class="flex flex-col items-center justify-center rounded-2xl border-2 border-dashed border-gray-300 dark:border-white/10 bg-gray-50 dark:bg-white/5 p-6 text-center">
-                <span class="mb-2 text-xs font-medium uppercase tracking-wider text-gray-400">Advertisement</span>
-                <p class="text-sm text-gray-500">Your Ad Here</p>
-            </div>
-            <!-- Tool Card 4 -->
-            <a class="group relative flex flex-col rounded-2xl bg-white dark:bg-surface-dark p-6 border border-gray-200 dark:border-white/5 shadow-sm hover:shadow-xl hover:shadow-primary/10 hover:border-primary/30 transition-all duration-300"
-                href="#">
-                <div
-                    class="mb-4 flex size-12 items-center justify-center rounded-xl bg-pink-50 dark:bg-pink-500/10 text-pink-600 dark:text-pink-400 group-hover:bg-pink-600 group-hover:text-white transition-colors duration-300">
-                    <span class="material-symbols-outlined text-[28px]">transform</span>
-                </div>
-                <h3 class="mb-2 text-lg font-bold text-gray-900 dark:text-white">Convert to PNG</h3>
-                <p class="mb-4 text-sm text-gray-500 dark:text-gray-400 line-clamp-2">Turn your JPG, WEBP, or GIF images
-                    into high-quality PNGs.</p>
-                <div class="mt-auto flex items-center text-sm font-semibold text-primary">
-                    Try Now <span
-                        class="material-symbols-outlined ml-1 text-[16px] transition-transform group-hover:translate-x-1">arrow_forward</span>
-                </div>
-            </a>
-            <!-- Tool Card 5 -->
-            <a class="group relative flex flex-col rounded-2xl bg-white dark:bg-surface-dark p-6 border border-gray-200 dark:border-white/5 shadow-sm hover:shadow-xl hover:shadow-primary/10 hover:border-primary/30 transition-all duration-300"
-                href="#">
-                <div
-                    class="mb-4 flex size-12 items-center justify-center rounded-xl bg-indigo-50 dark:bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 group-hover:bg-indigo-600 group-hover:text-white transition-colors duration-300">
-                    <span class="material-symbols-outlined text-[28px]">auto_fix_high</span>
-                </div>
-                <h3 class="mb-2 text-lg font-bold text-gray-900 dark:text-white">Background Remover</h3>
-                <p class="mb-4 text-sm text-gray-500 dark:text-gray-400 line-clamp-2">Automatically remove backgrounds
-                    using AI technology.</p>
-                <div class="mt-auto flex items-center text-sm font-semibold text-primary">
-                    Try Now <span
-                        class="material-symbols-outlined ml-1 text-[16px] transition-transform group-hover:translate-x-1">arrow_forward</span>
-                </div>
-            </a>
-            <!-- Tool Card 6 -->
-            <a class="group relative flex flex-col rounded-2xl bg-white dark:bg-surface-dark p-6 border border-gray-200 dark:border-white/5 shadow-sm hover:shadow-xl hover:shadow-primary/10 hover:border-primary/30 transition-all duration-300"
-                href="#">
-                <div
-                    class="mb-4 flex size-12 items-center justify-center rounded-xl bg-orange-50 dark:bg-orange-500/10 text-orange-600 dark:text-orange-400 group-hover:bg-orange-600 group-hover:text-white transition-colors duration-300">
-                    <span class="material-symbols-outlined text-[28px]">palette</span>
-                </div>
-                <h3 class="mb-2 text-lg font-bold text-gray-900 dark:text-white">Color Picker</h3>
-                <p class="mb-4 text-sm text-gray-500 dark:text-gray-400 line-clamp-2">Extract dominant colors and
-                    palettes from any image.</p>
-                <div class="mt-auto flex items-center text-sm font-semibold text-primary">
-                    Try Now <span
-                        class="material-symbols-outlined ml-1 text-[16px] transition-transform group-hover:translate-x-1">arrow_forward</span>
-                </div>
-            </a>
-            <!-- Tool Card 7 -->
-            <a class="group relative flex flex-col rounded-2xl bg-white dark:bg-surface-dark p-6 border border-gray-200 dark:border-white/5 shadow-sm hover:shadow-xl hover:shadow-primary/10 hover:border-primary/30 transition-all duration-300"
-                href="#">
-                <div
-                    class="mb-4 flex size-12 items-center justify-center rounded-xl bg-teal-50 dark:bg-teal-500/10 text-teal-600 dark:text-teal-400 group-hover:bg-teal-600 group-hover:text-white transition-colors duration-300">
-                    <span class="material-symbols-outlined text-[28px]">rotate_right</span>
-                </div>
-                <h3 class="mb-2 text-lg font-bold text-gray-900 dark:text-white">Rotate Image</h3>
-                <p class="mb-4 text-sm text-gray-500 dark:text-gray-400 line-clamp-2">Rotate your images 90 degrees or
-                    flip them horizontally.</p>
-                <div class="mt-auto flex items-center text-sm font-semibold text-primary">
-                    Try Now <span
-                        class="material-symbols-outlined ml-1 text-[16px] transition-transform group-hover:translate-x-1">arrow_forward</span>
-                </div>
-            </a>
-            <!-- Tool Card 8 -->
-            <a class="group relative flex flex-col rounded-2xl bg-white dark:bg-surface-dark p-6 border border-gray-200 dark:border-white/5 shadow-sm hover:shadow-xl hover:shadow-primary/10 hover:border-primary/30 transition-all duration-300"
-                href="#">
-                <div
-                    class="mb-4 flex size-12 items-center justify-center rounded-xl bg-red-50 dark:bg-red-500/10 text-red-600 dark:text-red-400 group-hover:bg-red-600 group-hover:text-white transition-colors duration-300">
-                    <span class="material-symbols-outlined text-[28px]">branding_watermark</span>
-                </div>
-                <h3 class="mb-2 text-lg font-bold text-gray-900 dark:text-white">Watermark Maker</h3>
-                <p class="mb-4 text-sm text-gray-500 dark:text-gray-400 line-clamp-2">Protect your visual content by
-                    adding custom watermarks.</p>
-                <div class="mt-auto flex items-center text-sm font-semibold text-primary">
-                    Try Now <span
-                        class="material-symbols-outlined ml-1 text-[16px] transition-transform group-hover:translate-x-1">arrow_forward</span>
-                </div>
-            </a>
-        </div>
-        <!-- Bottom Ad Banner -->
-        <div class="mt-12 w-full">
-            <div
-                class="relative flex h-24 w-full flex-col items-center justify-center rounded-xl border-2 border-dashed border-gray-300 dark:border-white/10 bg-gray-50 dark:bg-white/5">
-                <span class="text-xs font-medium uppercase tracking-wider text-gray-400">Advertisement</span>
-                <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/diagonal-stripes-light.png')] opacity-10"
-                    data-alt="Subtle diagonal stripe pattern for ad placeholder"></div>
-            </div>
-        </div>
+        </section>
     </main>
     <!-- Footer -->
-    <footer class="border-t border-gray-200 dark:border-white/10 bg-white dark:bg-background-dark py-12">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+    <footer class="border-t border-white/5 bg-surface-dark/50">
+        <div class="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 gap-8 md:grid-cols-4 lg:grid-cols-4">
                 <div class="col-span-1 md:col-span-1">
                     <div class="flex items-center gap-2 mb-4">
-                        <div class="flex size-8 items-center justify-center rounded-lg bg-primary text-white">
-                            <span class="material-symbols-outlined text-[20px]">photo_library</span>
-                        </div>
-                        <span class="text-lg font-bold text-gray-900 dark:text-white">ImageMojo Pro</span>
+                        <span class="material-symbols-outlined text-primary text-[24px]">filter_vintage</span>
+                        <span class="text-lg font-bold text-white">ImageMojo Pro</span>
                     </div>
-                    <p class="text-sm text-gray-500 dark:text-gray-400">
-                        The ultimate free online image tool platform for designers and developers.
+                    <p class="text-sm text-gray-400">
+                        The ultimate free online image utility platform. Fast, secure, and easy to use on any device.
                     </p>
                 </div>
                 <div>
-                    <h4 class="text-sm font-bold uppercase tracking-wider text-gray-900 dark:text-white mb-4">Tools</h4>
-                    <ul class="space-y-2 text-sm text-gray-500 dark:text-gray-400">
-                        <li><a class="hover:text-primary" href="#">Compress</a></li>
-                        <li><a class="hover:text-primary" href="#">Resize</a></li>
-                        <li><a class="hover:text-primary" href="#">Convert</a></li>
-                        <li><a class="hover:text-primary" href="#">Editor</a></li>
+                    <h3 class="text-sm font-semibold uppercase tracking-wider text-gray-300">Tools</h3>
+                    <ul class="mt-4 space-y-2">
+                        <li><a class="text-sm text-gray-500 hover:text-primary transition-colors"
+                                href="#">Compressor</a></li>
+                        <li><a class="text-sm text-gray-500 hover:text-primary transition-colors" href="#">Converter</a>
+                        </li>
+                        <li><a class="text-sm text-gray-500 hover:text-primary transition-colors" href="#">Resizer</a>
+                        </li>
+                        <li><a class="text-sm text-gray-500 hover:text-primary transition-colors" href="#">Editor</a>
+                        </li>
                     </ul>
                 </div>
                 <div>
-                    <h4 class="text-sm font-bold uppercase tracking-wider text-gray-900 dark:text-white mb-4">Company
-                    </h4>
-                    <ul class="space-y-2 text-sm text-gray-500 dark:text-gray-400">
-                        <li><a class="hover:text-primary" href="#">About Us</a></li>
-                        <li><a class="hover:text-primary" href="#">Blog</a></li>
-                        <li><a class="hover:text-primary" href="#">Contact</a></li>
-                        <li><a class="hover:text-primary" href="#">Privacy Policy</a></li>
+                    <h3 class="text-sm font-semibold uppercase tracking-wider text-gray-300">Company</h3>
+                    <ul class="mt-4 space-y-2">
+                        <li><a class="text-sm text-gray-500 hover:text-primary transition-colors" href="#">About Us</a>
+                        </li>
+                        <li><a class="text-sm text-gray-500 hover:text-primary transition-colors" href="#">Blog</a></li>
+                        <li><a class="text-sm text-gray-500 hover:text-primary transition-colors" href="#">Contact</a>
+                        </li>
+                        <li><a class="text-sm text-gray-500 hover:text-primary transition-colors" href="#">Privacy
+                                Policy</a></li>
                     </ul>
                 </div>
                 <div>
-                    <h4 class="text-sm font-bold uppercase tracking-wider text-gray-900 dark:text-white mb-4">Stay
-                        Updated</h4>
-                    <div class="flex gap-2">
-                        <input
-                            class="w-full rounded-lg bg-gray-100 dark:bg-white/5 border-none px-3 py-2 text-sm text-gray-900 dark:text-white placeholder-gray-500 focus:ring-1 focus:ring-primary"
-                            placeholder="Email address" type="email" />
-                        <button class="rounded-lg bg-primary px-3 py-2 text-white hover:bg-primary/90">
-                            <span class="material-symbols-outlined text-[20px]">send</span>
-                        </button>
+                    <h3 class="text-sm font-semibold uppercase tracking-wider text-gray-300">Connect</h3>
+                    <div class="mt-4 flex gap-4">
+                        <a class="flex h-10 w-10 items-center justify-center rounded-full bg-white/5 text-gray-400 hover:bg-primary hover:text-white transition-all"
+                            href="#">
+                            <span class="material-symbols-outlined text-[20px]">alternate_email</span>
+                        </a>
+                        <a class="flex h-10 w-10 items-center justify-center rounded-full bg-white/5 text-gray-400 hover:bg-primary hover:text-white transition-all"
+                            href="#">
+                            <span class="material-symbols-outlined text-[20px]">share</span>
+                        </a>
+                        <a class="flex h-10 w-10 items-center justify-center rounded-full bg-white/5 text-gray-400 hover:bg-primary hover:text-white transition-all"
+                            href="#">
+                            <span class="material-symbols-outlined text-[20px]">rss_feed</span>
+                        </a>
                     </div>
                 </div>
             </div>
-            <div class="mt-12 border-t border-gray-200 dark:border-white/10 pt-8 text-center text-sm text-gray-400">
-                © 2026 ImageMojo Pro. All rights reserved.
+            <div class="mt-12 border-t border-white/5 pt-8 text-center md:text-left">
+                <p class="text-xs text-gray-500">© 2024 ImageMojo Pro. All rights reserved.</p>
             </div>
         </div>
     </footer>

@@ -9,11 +9,9 @@
     <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
         rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
-        rel="stylesheet" />
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 
-    <script id="tailwind-config">
+    <script>
         tailwind.config = {
             darkMode: "class",
             theme: {
@@ -25,10 +23,6 @@
                         "background-dark": "#190f23",
                         "surface-dark": "#251b30",
                         "surface-darker": "#1f1627",
-                    },
-                    fontFamily: {
-                        "display": ["Inter", "sans-serif"],
-                        "sans": ["Inter", "sans-serif"],
                     },
                 },
             },
@@ -54,27 +48,11 @@
             background: #ffffff;
             border: 2px solid #6605c7;
             cursor: pointer;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
-        }
-
-        input[type=range]::-moz-range-thumb {
-            height: 20px;
-            width: 20px;
-            border-radius: 50%;
-            background: #ffffff;
-            border: 2px solid #6605c7;
-            cursor: pointer;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+            margin-top: -8px;
+            /* Correct alignment */
         }
 
         input[type=range]::-webkit-slider-runnable-track {
-            width: 100%;
-            height: 4px;
-            background: #4a4a4a;
-            border-radius: 2px;
-        }
-
-        input[type=range]::-moz-range-track {
             width: 100%;
             height: 4px;
             background: #4a4a4a;
@@ -85,38 +63,31 @@
 
 <body class="bg-background-dark text-white font-sans min-h-screen flex flex-col">
 
-    <!-- Header -->
     <header class="sticky top-0 z-40 w-full backdrop-blur-md bg-background-dark/90 border-b border-white/5">
         <div class="flex items-center justify-between px-4 py-3 max-w-lg mx-auto w-full">
             <div class="flex items-center gap-2">
                 <div
                     class="flex items-center justify-center w-8 h-8 rounded-lg bg-gradient-to-br from-primary to-purple-400 text-white">
-                    <span class="material-symbols-outlined text-[20px]">photo_camera</span>
+                    📷
                 </div>
                 <h1 class="text-lg font-bold">ImageMojo <span class="text-primary">Pro</span></h1>
             </div>
-            <button class="p-2 hover:bg-white/5 rounded-full">
-                <span class="material-symbols-outlined">menu</span>
-            </button>
         </div>
     </header>
 
-    <!-- Main Content -->
     <main class="flex-1 flex flex-col w-full max-w-lg mx-auto pb-32 px-4">
-        <!-- Title -->
         <div class="pt-6 pb-2">
             <h2 class="text-3xl font-bold mb-1">Image Optimizer</h2>
             <p class="text-gray-400 text-sm">Compress, resize and convert images locally.</p>
         </div>
 
-        <!-- Upload Zone -->
         <div class="py-4">
             <div id="dropZone" class="relative group cursor-pointer">
                 <div
                     class="flex flex-col items-center justify-center gap-4 rounded-2xl border-2 border-dashed border-primary/30 bg-surface-dark px-6 py-10 hover:border-primary/60 transition-colors">
                     <div
                         class="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center text-primary text-3xl">
-                        <span class="material-symbols-outlined text-[32px]">cloud_upload</span>
+                        ☁️
                     </div>
                     <div class="text-center">
                         <p class="text-base font-bold mb-1">Upload Image</p>
@@ -131,93 +102,71 @@
             </div>
         </div>
 
-        <!-- Settings -->
-        <div class="space-y-6">
-            <!-- Quality Slider -->
+        <div class="space-y-6" id="settingsPanel" style="opacity: 0.5; pointer-events: none;">
             <div class="bg-surface-dark rounded-xl p-5 border border-white/5">
                 <div class="flex justify-between items-center mb-4">
                     <h3 class="font-bold">Compression</h3>
                     <span class="text-sm text-primary bg-primary/10 px-2 py-0.5 rounded" id="qualityValue">80%</span>
                 </div>
-                <input type="range" min="0" max="100" value="80" id="qualitySlider" class="w-full" />
+                <input type="range" min="1" max="100" value="80" id="qualitySlider" class="w-full" />
                 <div class="flex justify-between mt-2 text-xs text-gray-500">
                     <span>Smaller Size</span>
                     <span>Better Quality</span>
                 </div>
             </div>
 
-            <!-- Format Selector -->
             <div class="bg-surface-dark rounded-xl p-5 border border-white/5">
                 <h3 class="font-bold text-sm mb-3">Output Format</h3>
                 <div class="flex gap-2">
-                    <button onclick="setFormat('jpg')"
+                    <button onclick="setFormat('image/jpeg')"
                         class="flex-1 py-2 text-xs font-medium rounded-lg bg-primary text-white format-btn"
-                        data-format="jpg">JPG</button>
-                    <button onclick="setFormat('png')"
+                        data-format="image/jpeg">JPG</button>
+                    <button onclick="setFormat('image/png')"
                         class="flex-1 py-2 text-xs font-medium rounded-lg text-gray-400 hover:text-white bg-surface-darker format-btn"
-                        data-format="png">PNG</button>
-                    <button onclick="setFormat('webp')"
+                        data-format="image/png">PNG</button>
+                    <button onclick="setFormat('image/webp')"
                         class="flex-1 py-2 text-xs font-medium rounded-lg text-gray-400 hover:text-white bg-surface-darker format-btn"
-                        data-format="webp">WEBP</button>
-                    <button onclick="setFormat('original')"
-                        class="flex-1 py-2 text-xs font-medium rounded-lg text-gray-400 hover:text-white bg-surface-darker format-btn"
-                        data-format="original">Original</button>
+                        data-format="image/webp">WEBP</button>
                 </div>
             </div>
 
-            <!-- Toggles -->
-            <div class="bg-surface-dark rounded-xl p-4 border border-white/5 space-y-3">
-                <label class="flex items-center justify-between cursor-pointer">
-                    <div>
-                        <p class="text-sm font-medium">Lossless Optimization</p>
-                        <p class="text-xs text-gray-500">Best quality, larger size</p>
-                    </div>
-                    <input type="checkbox" id="losslessToggle" class="w-6 h-6 cursor-pointer" />
-                </label>
-
-                <label class="flex items-center justify-between cursor-pointer border-t border-white/5 pt-3">
-                    <div>
-                        <p class="text-sm font-medium">Remove Metadata (EXIF)</p>
-                        <p class="text-xs text-gray-500">Strip GPS & Camera info</p>
-                    </div>
-                    <input type="checkbox" id="exifToggle" class="w-6 h-6 cursor-pointer" checked />
-                </label>
-            </div>
-
-            <!-- Resize -->
             <div class="bg-surface-dark rounded-xl p-5 border border-white/5">
                 <div class="flex justify-between mb-3">
                     <h3 class="font-bold text-sm">Resize Image</h3>
-                    <button onclick="toggleLock()" id="lockBtn" class="text-primary hover:text-white">
-                        <span class="material-symbols-outlined">lock</span>
-                    </button>
+                    <button onclick="toggleLock()" id="lockBtn"
+                        class="text-gray-400 hover:text-white transition">🔓</button>
                 </div>
                 <div class="flex gap-3">
-                    <input type="number" id="widthInput" placeholder="Width"
-                        class="flex-1 bg-surface-darker border border-white/10 rounded-lg py-2.5 px-3 text-sm text-white focus:outline-none focus:border-primary" />
-                    <input type="number" id="heightInput" placeholder="Height"
-                        class="flex-1 bg-surface-darker border border-white/10 rounded-lg py-2.5 px-3 text-sm text-white focus:outline-none focus:border-primary" />
+                    <div class="flex-1">
+                        <label class="text-xs text-gray-500 mb-1 block">Width</label>
+                        <input type="number" id="widthInput"
+                            class="w-full bg-surface-darker border border-white/10 rounded-lg py-2.5 px-3 text-sm text-white focus:outline-none focus:border-primary" />
+                    </div>
+                    <div class="flex-1">
+                        <label class="text-xs text-gray-500 mb-1 block">Height</label>
+                        <input type="number" id="heightInput"
+                            class="w-full bg-surface-darker border border-white/10 rounded-lg py-2.5 px-3 text-sm text-white focus:outline-none focus:border-primary" />
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- Preview -->
         <div class="mt-8 mb-8">
             <h3 class="text-sm font-bold text-gray-400 uppercase mb-3">Live Preview</h3>
             <div class="bg-surface-dark rounded-xl overflow-hidden border border-white/5">
-                <div class="relative h-48 bg-gray-800 flex items-center justify-center">
-                    <img id="previewImage" src="" alt="Preview" class="max-h-full max-w-full object-contain"
+                <div class="relative h-48 bg-gray-800 flex items-center justify-center p-4">
+                    <img id="previewImage" src="" alt="Preview" class="max-h-full max-w-full object-contain shadow-lg"
                         style="display: none;" />
                     <p id="noImageText" class="text-gray-500 text-sm">No image selected</p>
                 </div>
                 <div class="grid grid-cols-3 divide-x divide-white/5 bg-surface-darker p-4">
                     <div class="flex flex-col items-center gap-1">
                         <span class="text-xs text-gray-500 uppercase">Original</span>
-                        <span id="originalSize" class="text-sm font-medium">-</span>
+                        <span id="originalSizeDisplay" class="text-sm font-medium">-</span>
                     </div>
                     <div class="flex flex-col items-center gap-1">
                         <span class="text-xs text-gray-500 uppercase">Optimized</span>
-                        <span id="optimizedSize" class="text-sm font-bold">-</span>
+                        <span id="optimizedSize" class="text-sm font-bold text-primary">-</span>
                     </div>
                     <div class="flex flex-col items-center gap-1">
                         <span class="text-xs text-gray-500 uppercase">Savings</span>
@@ -228,209 +177,229 @@
         </div>
     </main>
 
-    <!-- Action Button -->
     <div
         class="fixed bottom-0 left-0 right-0 z-50 p-4 bg-gradient-to-t from-background-dark via-background-dark to-transparent pt-12">
         <div class="max-w-lg mx-auto">
-            <button onclick="downloadImage()"
-                class="w-full flex items-center justify-center gap-2 bg-primary hover:bg-primary-dark text-white font-bold py-3.5 px-6 rounded-xl shadow-xl transition-all">
+            <button onclick="downloadImage()" id="downloadBtn" disabled
+                class="w-full flex items-center justify-center gap-2 bg-gray-600 cursor-not-allowed text-white font-bold py-3.5 px-6 rounded-xl shadow-xl transition-all">
                 <span>Optimize & Download</span>
-                <span class="material-symbols-outlined">download</span>
+                <span>⬇️</span>
             </button>
         </div>
     </div>
 
     <script>
-        let originalImage = null;
-        let originalSize = 0;
-        let currentFormat = 'jpg';
-        let isLocked = false;
-        let originalWidth = 0;
-        let originalHeight = 0;
-        let optimizedBlob = null;
+        // --- Variables ---
+        let originalImage = null; // Asli image object
+        let originalFile = null;  // Asli file data
+        let currentFormat = 'image/jpeg'; // Default format
+        let isLocked = false;     // Aspect ratio lock status
+        let aspectRatio = 0;      // Width/Height ratio
 
-        // Helper to format bytes
-        function formatBytes(bytes, decimals = 1) {
-            if (!+bytes) return '0 B';
-            const k = 1024;
-            const dm = decimals < 0 ? 0 : decimals;
-            const sizes = ['B', 'KB', 'MB', 'GB'];
-            const i = Math.floor(Math.log(bytes) / Math.log(k));
-            return `${parseFloat((bytes / Math.pow(k, i)).toFixed(dm))} ${sizes[i]}`;
-        }
+        // --- Elements ---
+        const fileInput = document.getElementById('fileInput');
+        const widthInput = document.getElementById('widthInput');
+        const heightInput = document.getElementById('heightInput');
+        const qualitySlider = document.getElementById('qualitySlider');
+        const downloadBtn = document.getElementById('downloadBtn');
+        const settingsPanel = document.getElementById('settingsPanel');
 
-        // File Input
-        document.getElementById('fileInput').addEventListener('change', (e) => {
+        // --- 1. Image Upload Logic ---
+        fileInput.addEventListener('change', (e) => {
             const file = e.target.files[0];
             if (!file) return;
 
-            originalSize = file.size;
-            document.getElementById('originalSize').textContent = formatBytes(originalSize);
+            originalFile = file;
+            // UI Format buttons reset
+            if (file.type === 'image/png') setFormat('image/png');
+            else if (file.type === 'image/webp') setFormat('image/webp');
+            else setFormat('image/jpeg');
 
             const reader = new FileReader();
             reader.onload = (event) => {
                 const img = new Image();
                 img.onload = () => {
                     originalImage = img;
-                    originalWidth = img.width;
-                    originalHeight = img.height;
 
+                    // Set Inputs
+                    widthInput.value = img.width;
+                    heightInput.value = img.height;
+                    aspectRatio = img.width / img.height;
+
+                    // UI Updates
                     document.getElementById('previewImage').src = event.target.result;
                     document.getElementById('previewImage').style.display = 'block';
                     document.getElementById('noImageText').style.display = 'none';
+                    document.getElementById('originalSizeDisplay').textContent = formatBytes(file.size);
 
-                    document.getElementById('widthInput').value = img.width;
-                    document.getElementById('heightInput').value = img.height;
+                    // Enable Controls
+                    settingsPanel.style.opacity = "1";
+                    settingsPanel.style.pointerEvents = "auto";
+                    downloadBtn.disabled = false;
+                    downloadBtn.classList.remove('bg-gray-600', 'cursor-not-allowed');
+                    downloadBtn.classList.add('bg-primary', 'hover:bg-primary-dark');
 
-                    updateSizes();
+                    updateSizes(); // Calculate initial optimization
                 };
                 img.src = event.target.result;
             };
             reader.readAsDataURL(file);
         });
 
-        // Drag & Drop
+        // Drag & Drop Styling
         const dropZone = document.getElementById('dropZone');
-        dropZone.addEventListener('dragover', (e) => {
-            e.preventDefault();
-            dropZone.classList.add('border-primary');
-        });
-
-        dropZone.addEventListener('dragleave', () => {
-            dropZone.classList.remove('border-primary');
-        });
-
+        dropZone.addEventListener('dragover', (e) => { e.preventDefault(); dropZone.classList.add('border-primary'); });
+        dropZone.addEventListener('dragleave', () => { dropZone.classList.remove('border-primary'); });
         dropZone.addEventListener('drop', (e) => {
             e.preventDefault();
             dropZone.classList.remove('border-primary');
-            const files = e.dataTransfer.files;
-            if (files.length) {
-                document.getElementById('fileInput').files = files;
-                document.getElementById('fileInput').dispatchEvent(new Event('change'));
+            if (e.dataTransfer.files.length) {
+                fileInput.files = e.dataTransfer.files;
+                fileInput.dispatchEvent(new Event('change'));
             }
         });
 
+        // --- 2. Settings Logic ---
+
         // Quality Slider
-        document.getElementById('qualitySlider').addEventListener('input', (e) => {
+        qualitySlider.addEventListener('input', (e) => {
             document.getElementById('qualityValue').textContent = e.target.value + '%';
-            updateSizes();
+            updateSizes(); // Slider hilane par size update karo
         });
 
         // Format Selection
         function setFormat(format) {
             currentFormat = format;
             document.querySelectorAll('.format-btn').forEach(btn => {
-                btn.classList.remove('bg-primary', 'text-white');
-                btn.classList.add('text-gray-400', 'bg-surface-darker');
+                if (btn.dataset.format === format) {
+                    btn.classList.add('bg-primary', 'text-white');
+                    btn.classList.remove('text-gray-400', 'bg-surface-darker');
+                } else {
+                    btn.classList.remove('bg-primary', 'text-white');
+                    btn.classList.add('text-gray-400', 'bg-surface-darker');
+                }
             });
-            event.target.classList.add('bg-primary', 'text-white');
-            event.target.classList.remove('text-gray-400', 'bg-surface-darker');
             updateSizes();
         }
 
-        // Lock Aspect Ratio
+        // Aspect Ratio Lock
         function toggleLock() {
             isLocked = !isLocked;
-            const lockBtn = document.getElementById('lockBtn');
-            if (isLocked) {
-                lockBtn.classList.replace('text-gray-400', 'text-primary');
-                // Using innerHTML to switch icon
-                lockBtn.innerHTML = '<span class="material-symbols-outlined">lock</span>';
-            } else {
-                lockBtn.classList.replace('text-primary', 'text-primary'); // Keep primary for active, or maybe gray if unlocked? 
-                // Actually the user code showed lock for locked, maybe open lock for open?
-                // User code had emoji 🔐 vs 🔒. I'll stick to Material Symbols lock vs lock_open_right
-                lockBtn.innerHTML = '<span class="material-symbols-outlined">lock_open</span>';
+            const btn = document.getElementById('lockBtn');
+            btn.textContent = isLocked ? '🔐' : '🔓';
+            btn.classList.toggle('text-primary');
+
+            if (isLocked && originalImage) {
+                // Lock karte hi height ko correct karo width ke hisab se
+                aspectRatio = originalImage.width / originalImage.height;
+                heightInput.value = Math.round(widthInput.value / aspectRatio);
+                updateSizes();
             }
         }
 
         // Resize Inputs
-        document.getElementById('widthInput').addEventListener('input', (e) => {
-            if (isLocked && originalWidth > 0) {
-                const ratio = originalHeight / originalWidth;
-                document.getElementById('heightInput').value = Math.round(e.target.value * ratio);
+        widthInput.addEventListener('input', () => {
+            if (isLocked && aspectRatio) {
+                heightInput.value = Math.round(widthInput.value / aspectRatio);
             }
             updateSizes();
         });
 
-        document.getElementById('heightInput').addEventListener('input', (e) => {
-            if (isLocked && originalHeight > 0) {
-                const ratio = originalWidth / originalHeight;
-                document.getElementById('widthInput').value = Math.round(e.target.value * ratio);
+        heightInput.addEventListener('input', () => {
+            if (isLocked && aspectRatio) {
+                widthInput.value = Math.round(heightInput.value * aspectRatio);
             }
             updateSizes();
         });
 
+        // --- 3. Core Logic (Processing) ---
 
-        // Update Sizes & Preview Blob
-        function updateSizes() {
+        // Helper to format bytes (KB/MB)
+        function formatBytes(bytes) {
+            if (bytes === 0) return '0 B';
+            const k = 1024;
+            const sizes = ['B', 'KB', 'MB', 'GB'];
+            const i = Math.floor(Math.log(bytes) / Math.log(k));
+            return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+        }
+
+        // Main processing function (Reusable)
+        function processImage(callback) {
             if (!originalImage) return;
 
-            const quality = parseInt(document.getElementById('qualitySlider').value) / 100;
-            // Lossless isn't easily done in JS canvas, ignoring for simple simulation or mapping to quality=1.0
-            // but canvas always recompresses. 
-
             const canvas = document.createElement('canvas');
-            const width = parseInt(document.getElementById('widthInput').value) || originalWidth;
-            const height = parseInt(document.getElementById('heightInput').value) || originalHeight;
-
-            canvas.width = width;
-            canvas.height = height;
-
             const ctx = canvas.getContext('2d');
-            ctx.drawImage(originalImage, 0, 0, width, height);
 
-            let mimeType = 'image/jpeg';
-            if (currentFormat === 'png') mimeType = 'image/png';
-            if (currentFormat === 'webp') mimeType = 'image/webp';
-            if (currentFormat === 'original') {
-                // Try to detect original mime from file input if possible, else default to jpeg?
-                // Simplification: default to jpeg or use logic to match original filename extension if preserved.
-                // For now, let's assume 'original' means maintain input format if supported by canvas export, else jpeg.
-                mimeType = 'image/jpeg';
-            }
+            // Nayi width aur height lo
+            const w = parseInt(widthInput.value) || originalImage.width;
+            const h = parseInt(heightInput.value) || originalImage.height;
 
+            canvas.width = w;
+            canvas.height = h;
+
+            // Canvas par image draw karo (Resize yahi hota hai)
+            ctx.drawImage(originalImage, 0, 0, w, h);
+
+            // Quality convert (0.1 to 1.0)
+            const quality = parseInt(qualitySlider.value) / 100;
+
+            // Canvas se Blob banao (Compress yahi hota hai)
             canvas.toBlob((blob) => {
+                callback(blob);
+            }, currentFormat, quality);
+        }
+
+        // Update Size Text on UI
+        function updateSizes() {
+            processImage((blob) => {
                 if (!blob) return;
-                optimizedBlob = blob;
-                const optimizedSize = blob.size;
 
-                document.getElementById('optimizedSize').textContent = formatBytes(optimizedSize);
+                // Update Optimized Size Text
+                document.getElementById('optimizedSize').textContent = formatBytes(blob.size);
 
-                const savings = originalSize - optimizedSize;
-                const savingsPercent = Math.round((savings / originalSize) * 100);
+                // Calculate Savings
+                const savings = originalFile.size - blob.size;
+                const percent = Math.round((savings / originalFile.size) * 100);
 
                 const savingsEl = document.getElementById('savingsSize');
                 if (savings > 0) {
-                    savingsEl.textContent = `-${savingsPercent}%`;
-                    savingsEl.className = 'text-sm font-bold text-green-400';
+                    savingsEl.textContent = `-${percent}%`;
+                    savingsEl.className = "text-sm font-bold text-green-400";
                 } else {
-                    savingsEl.textContent = `+${Math.abs(savingsPercent)}%`;
-                    savingsEl.className = 'text-sm font-bold text-red-400';
+                    savingsEl.textContent = `+${Math.abs(percent)}%`; // Agar size badh gaya
+                    savingsEl.className = "text-sm font-bold text-red-400";
                 }
-
-            }, mimeType, quality);
+            });
         }
 
+        // --- 4. Download Function ---
         function downloadImage() {
-            if (!optimizedBlob) {
-                alert('Please upload an image first.');
-                return;
-            }
+            if (!originalImage) return;
 
-            const url = URL.createObjectURL(optimizedBlob);
-            const a = document.createElement('a');
-            a.href = url;
+            const btn = document.getElementById('downloadBtn');
+            const oldText = btn.innerHTML;
+            btn.innerHTML = '<span>Processing...</span>'; // User feedback
 
-            let ext = 'jpg';
-            if (currentFormat === 'png') ext = 'png';
-            if (currentFormat === 'webp') ext = 'webp';
+            processImage((blob) => {
+                // Blob se URL create karo
+                const url = URL.createObjectURL(blob);
+                const link = document.createElement('a');
 
-            a.download = `optimized-image.${ext}`;
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-            URL.revokeObjectURL(url);
+                // Extension decide karo
+                let ext = 'jpg';
+                if (currentFormat === 'image/png') ext = 'png';
+                if (currentFormat === 'image/webp') ext = 'webp';
+
+                link.download = `optimized-imagehub.${ext}`;
+                link.href = url;
+                document.body.appendChild(link);
+                link.click(); // Auto click logic
+                document.body.removeChild(link);
+
+                // Cleanup
+                URL.revokeObjectURL(url);
+                btn.innerHTML = oldText;
+            });
         }
     </script>
 
